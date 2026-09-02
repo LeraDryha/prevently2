@@ -6,81 +6,131 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Prevently — робочі матеріали</title>
 <style>
-  :root {
-    --bg: #faf7f5; --surface: #fff; --text: #2b2724; --muted: #6f6560;
-    --line: #e8e0da; --accent: #b4674d;
+  :root{
+    --bg:#0d0f13; --surface:#14171d; --surface-2:#191d24; --line:#252b34;
+    --text:#e8eaee; --muted:#98a1b0; --dim:#6b7482;
+    --accent:#7cd4b4; --warm:#e8a87c;
+    --radius:10px;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1c1917; --surface: #262220; --text: #ede8e4; --muted: #a39a94;
-      --line: #38322e; --accent: #e0937a;
-    }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; padding: 2.5rem 1.25rem 4rem;
-    background: var(--bg); color: var(--text);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  .wrap{max-width:920px; margin:0 auto; padding:0 20px}
+
+  header.hero{padding:64px 0 40px; border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--accent); font-size:13px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; margin:0 0 14px}
+  h1{margin:0 0 14px; font-size:clamp(28px,5vw,40px); line-height:1.15; letter-spacing:-.02em; font-weight:700}
+  .lede{margin:0; color:var(--muted); font-size:17px; max-width:62ch}
+
+  section{padding:48px 0; border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:0}
+  h2{margin:0 0 6px; font-size:20px; letter-spacing:-.015em}
+  .sub{color:var(--muted); margin:0 0 24px; font-size:15px; max-width:62ch}
+
+  .cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  a.card{
+    display:block; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius); padding:17px 18px; text-decoration:none; color:inherit;
   }
-  main { max-width: 46rem; margin: 0 auto; }
-  h1 { font-size: 1.75rem; margin: 0 0 .5rem; letter-spacing: -.01em; }
-  .lead { color: var(--muted); margin: 0 0 2.5rem; }
-  h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em;
-       color: var(--muted); margin: 2.5rem 0 .75rem; font-weight: 600; }
-  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
-  li a {
-    display: block; padding: .875rem 1rem; background: var(--surface);
-    border: 1px solid var(--line); border-radius: .625rem;
-    color: inherit; text-decoration: none;
+  a.card:hover{border-color:var(--accent); background:var(--surface-2)}
+  a.card:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+  a.card.soon{opacity:.55}
+  a.card.soon:hover{border-color:var(--line); background:var(--surface)}
+  .card .h{font-weight:650; color:#fff; margin:0 0 8px; font-size:15px}
+  .card p{font-size:14px; color:var(--muted); margin:0}
+  .tag{
+    display:inline-block; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+    font-weight:600; padding:3px 8px; border-radius:100px; margin-left:8px; vertical-align:2px;
   }
-  li a:hover, li a:focus-visible { border-color: var(--accent); }
-  li a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  .name { font-weight: 600; }
-  .desc { color: var(--muted); font-size: .875rem; }
-  footer { margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line);
-           color: var(--muted); font-size: .8125rem; }
-  footer a { color: var(--accent); }
+  .tag.ready{color:var(--accent); background:rgba(124,212,180,.1)}
+  .tag.wip{color:var(--dim); background:rgba(255,255,255,.04)}
+
+  .box{border:1px solid var(--line); border-left:3px solid var(--warm); background:var(--surface);
+       border-radius:var(--radius); padding:18px 20px; margin:32px 0 0}
+  .box .t{font-weight:650; color:#fff; margin:0 0 6px; font-size:15px}
+  .box p{color:var(--muted); font-size:15px; margin:0}
+
+  footer{padding:28px 0 56px; color:var(--dim); font-size:13.5px}
+  a{color:var(--accent)}
 </style>
 </head>
 <body>
-<main>
+
+<header class="hero wrap">
+  <p class="eyebrow">Внутрішні матеріали</p>
   <h1>Prevently</h1>
-  <p class="lead">
-    Робочі матеріали для команди. Персоналізовані плани профілактичних
-    чекапів для жінок від 18 років.
+  <p class="lede">
+    Персоналізовані плани профілактичних чекапів для жінок від 18 років.
+    Головний принцип — не призначати зайвого: тільки ті обстеження,
+    які справді потрібні, з поясненням навіщо кожне.
   </p>
+</header>
 
-  <h2>Матеріали</h2>
-  <ul>
-    <li><a href="https://github.com/LeraDryha/prevently2/blob/main/research/research.md">
-      <span class="name">Дослідження</span><br>
-      <span class="desc">Аудиторія, гіпотези, медичні джерела, конкуренти</span></a></li>
-    <li><a href="https://github.com/LeraDryha/prevently2/tree/main/wireframes">
-      <span class="name">Вайрфрейми</span><br>
-      <span class="desc">Структура екранів і ключові потоки</span></a></li>
-    <li><a href="https://github.com/LeraDryha/prevently2/tree/main/concept">
-      <span class="name">Концепція</span><br>
-      <span class="desc">Візуальний напрям і його обґрунтування</span></a></li>
-    <li><a href="https://github.com/LeraDryha/prevently2/tree/main/design-system">
-      <span class="name">Дизайн-система</span><br>
-      <span class="desc">Принципи, патерни, доступність, мова інтерфейсу</span></a></li>
-  </ul>
+<main class="wrap">
 
+<section>
+  <h2>Дослідження</h2>
+  <p class="sub">Ринок, конкуренти, аудиторія, медичні джерела.</p>
+  <div class="cards">
+    <a class="card" href="research/research.html">
+      <p class="h">Дослідження ринку<span class="tag ready">готово</span></p>
+      <p>Три групи конкурентів, порівняння за осями, 18 скріншотів, відкриті питання до PM</p>
+    </a>
+    <a class="card" href="https://github.com/LeraDryha/prevently2/blob/main/research/research.md">
+      <p class="h">research.md</p>
+      <p>Джерело даних, повні посилання, гіпотези для перевірки</p>
+    </a>
+  </div>
+</section>
+
+<section>
+  <h2>Дизайн</h2>
+  <p class="sub">Від структури екранів до передачі в розробку. Наповнюється послідовно.</p>
+  <div class="cards">
+    <a class="card soon" href="https://github.com/LeraDryha/prevently2/tree/main/wireframes">
+      <p class="h">Вайрфрейми<span class="tag wip">у роботі</span></p>
+      <p>Онбординг, опитувальник, червоні прапорці, план</p>
+    </a>
+    <a class="card soon" href="https://github.com/LeraDryha/prevently2/tree/main/concept">
+      <p class="h">Концепція<span class="tag wip">у роботі</span></p>
+      <p>Візуальний напрям: тепло, що не читається як несерйозність</p>
+    </a>
+    <a class="card soon" href="https://github.com/LeraDryha/prevently2/tree/main/design-system">
+      <p class="h">Дизайн-система<span class="tag wip">у роботі</span></p>
+      <p>Принципи, патерни, доступність, мова інтерфейсу</p>
+    </a>
+  </div>
+</section>
+
+<section>
   <h2>Контекст</h2>
-  <ul>
-    <li><a href="https://github.com/LeraDryha/prevently2/blob/main/CLAUDE.md">
-      <span class="name">Бриф</span><br>
-      <span class="desc">Ключові рішення, структура плану, правила медичного контенту</span></a></li>
-    <li><a href="https://github.com/LeraDryha/prevently2">
-      <span class="name">Репозиторій</span><br>
-      <span class="desc">github.com/LeraDryha/prevently2</span></a></li>
-  </ul>
+  <p class="sub">Навіщо продукт існує і за якими правилами робиться.</p>
+  <div class="cards">
+    <a class="card" href="https://github.com/LeraDryha/prevently2/blob/main/CLAUDE.md">
+      <p class="h">Бриф</p>
+      <p>Ключові рішення, структура плану, правила медичного контенту, метрики</p>
+    </a>
+    <a class="card" href="https://github.com/LeraDryha/prevently2">
+      <p class="h">Репозиторій</p>
+      <p>github.com/LeraDryha/prevently2 — приватний</p>
+    </a>
+  </div>
 
-  <footer>
-    Внутрішні матеріали на етапі дослідження. Медичний контент ще не проходив
-    рецензію лікаря — не використовувати як медичну пораду й не поширювати
-    за межі команди.
-  </footer>
+  <div class="box">
+    <p class="t">Матеріали не рецензовані лікарем</p>
+    <p>Медичний контент на цьому етапі — робочі чернетки. Не використовувати
+    як медичну пораду й не поширювати за межі команди.</p>
+  </div>
+</section>
+
 </main>
+
+<footer class="wrap">
+  Prevently · робочі матеріали, оновлено 2 вересня 2026
+</footer>
+
 </body>
 </html>
