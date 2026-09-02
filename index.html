@@ -113,6 +113,10 @@
   .empty p{color:var(--muted); max-width:46ch; margin:0 auto 14px; font-size:15px}
   .empty ul{display:inline-block; text-align:left; color:var(--muted); font-size:14.5px; margin:6px 0 0}
 
+  .src{margin:18px 0 0; font-size:13.5px; color:var(--dim)}
+  .src a{text-decoration:none; border-bottom:1px solid var(--primary-line)}
+  .src a:hover{border-bottom-color:var(--primary)}
+  .src .ext{font-size:11px; color:var(--dim)}
   footer{margin-top:48px; padding-top:22px; border-top:1px solid var(--line); color:var(--dim); font-size:13.5px}
 
   @media (max-width:900px){
@@ -173,6 +177,7 @@
     <p class="lede">Продукт збирає анамнез так, як це робить лікар у кабінеті, і повертає перелік лише справді потрібних обстежень — із поясненням, навіщо кожне і чому решти немає.</p>
     <div class="meta"><span class="chip">Жінки 18+</span><span class="chip">Україна</span><span class="chip">Mobile-first</span><span class="chip">Дані лише на пристрої</span></div>
   </header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md — бриф продукту</a> <span class="ext">↗</span></p>
 
   <section class="block">
     <h2>Ключова задача</h2>
@@ -216,6 +221,7 @@
     <p class="lede">Хто вже відповідає на питання «які обстеження мені потрібні», наскільки обґрунтовано вони це роблять — і які інтерфейсні рішення з цього випливають.</p>
     <div class="meta"><span class="chip">2 вересня 2026</span><span class="chip">18 продуктів</span><span class="chip">18 скрінів</span><span class="chip">Кабінетний аналіз</span></div>
   </header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/research/research.md" target="_blank" rel="noopener">research/research.md</a> <span class="ext">↗</span></p>
 
   <section class="block">
     <h2 id="r-summary"><span class="num">01</span>Стисло</h2>
@@ -485,6 +491,7 @@
 <div class="view" id="v-wireframes">
   <header class="top"><p class="eyebrow">Розділ 02 · Вайрфрейми</p><h1>Схеми екранів</h1>
     <p class="lede">Структура екранів опитувальника й плану до візуального оформлення.</p></header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/README.md" target="_blank" rel="noopener">wireframes/README.md</a> <span class="ext">↗</span></p>
   <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
     <p>Тут з'являться схеми екранів. Патерни вже обрані в дослідженні, тож основа є:</p>
     <ul><li>Візард — одне питання на екран</li><li>Екран-підсумок відповідей перед планом</li><li>Картки з розкриттям для плану</li><li>Пріоритетний екран червоного прапорця</li></ul></div>
@@ -493,6 +500,7 @@
 <div class="view" id="v-concept">
   <header class="top"><p class="eyebrow">Розділ 03 · Концепція</p><h1>Візуальний напрям</h1>
     <p class="lede">Тон, настрій, ключові екрани в кольорі.</p></header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/concept/README.md" target="_blank" rel="noopener">concept/README.md</a> <span class="ext">↗</span></p>
   <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
     <p>З брифу відомо: тепла, людяна подача — м'які кольори, менш «медично». Головний конфлікт, який доведеться вирішити тут: теплота не має послаблювати доказовість.</p></div>
 </div>
@@ -500,6 +508,7 @@
 <div class="view" id="v-tokens">
   <header class="top"><p class="eyebrow">Розділ 04 · Токени</p><h1>Кольори, типографіка, відступи</h1>
     <p class="lede">Базові значення дизайн-системи.</p></header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/tokens/README.md" target="_blank" rel="noopener">tokens/README.md</a> <span class="ext">↗</span></p>
   <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
     <p>Знадобляться окремі токени для рівнів певності рекомендації та для станів пункту плану — це не декор, а носій сенсу.</p></div>
 </div>
@@ -507,6 +516,7 @@
 <div class="view" id="v-components">
   <header class="top"><p class="eyebrow">Розділ 05 · Компоненти</p><h1>Елементи інтерфейсу</h1>
     <p class="lede">Складові, з яких збираються екрани.</p></header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/components/README.md" target="_blank" rel="noopener">components/README.md</a> <span class="ext">↗</span></p>
   <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
     <p>Ключовий компонент уже відомий із дослідження:</p>
     <ul><li>Картка рекомендації з розкриттям підстави</li><li>Група «розглянуто, але не увійшло»</li><li>Крок опитувальника</li><li>Плашка червоного прапорця</li></ul></div>
@@ -515,6 +525,7 @@
 <div class="view" id="v-design-system">
   <header class="top"><p class="eyebrow">Розділ 06 · Дизайн-система</p><h1>Правила складання</h1>
     <p class="lede">Як компоненти поєднуються, стани, доступність.</p></header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/design-system/README.md" target="_blank" rel="noopener">design-system/README.md</a> <span class="ext">↗</span></p>
   <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
     <p>Ціль доступності з брифу — WCAG 2.2 AA.</p></div>
 </div>
@@ -522,6 +533,7 @@
 <div class="view" id="v-handoff">
   <header class="top"><p class="eyebrow">Розділ 07 · Передача в розробку</p><h1>Специфікації</h1>
     <p class="lede">Те, що йде розробнику.</p></header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/handoff/README.md" target="_blank" rel="noopener">handoff/README.md</a> <span class="ext">↗</span></p>
   <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
     <p>Найважливіше тут — формат правила рекомендації: він зв'язує опитувальник, двошаровий план, джерела з рівнями доказовості, шар НСЗУ і еталонні кейси.</p></div>
 </div>
