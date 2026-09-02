@@ -3,134 +3,585 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>Prevently — робочі матеріали</title>
+<title>Prevently — робоче простір проєкту</title>
 <style>
   :root{
-    --bg:#0d0f13; --surface:#14171d; --surface-2:#191d24; --line:#252b34;
-    --text:#e8eaee; --muted:#98a1b0; --dim:#6b7482;
-    --accent:#7cd4b4; --warm:#e8a87c;
-    --radius:10px;
+    --page:#faf8f9; --surface:#ffffff; --line:#ece5e8; --line-soft:#f4eef1;
+    --text:#1b1719; --muted:#6d636a; --dim:#9a9198;
+    --primary:#C15182; --primary-dark:#a3416d; --primary-soft:#fbeef4; --primary-line:#f0cfdf;
+    --amber:#b0703a; --red:#b4453f; --green:#2f7d5f;
+    --sidebar:264px; --radius:10px;
   }
   *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--text);
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--page); color:var(--text);
     font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:920px; margin:0 auto; padding:0 20px}
+    -webkit-font-smoothing:antialiased}
 
-  header.hero{padding:64px 0 40px; border-bottom:1px solid var(--line)}
-  .eyebrow{color:var(--accent); font-size:13px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; margin:0 0 14px}
-  h1{margin:0 0 14px; font-size:clamp(28px,5vw,40px); line-height:1.15; letter-spacing:-.02em; font-weight:700}
-  .lede{margin:0; color:var(--muted); font-size:17px; max-width:62ch}
+  /* ---------- sidebar ---------- */
+  aside{position:fixed; inset:0 auto 0 0; width:var(--sidebar); background:var(--surface);
+    border-right:1px solid var(--line); padding:26px 0; overflow-y:auto; z-index:100}
+  .brand{padding:0 22px 20px; border-bottom:1px solid var(--line-soft); margin-bottom:16px}
+  .brand .name{font-size:19px; font-weight:700; letter-spacing:-.01em; color:var(--primary); margin:0}
+  .brand .sub{font-size:12.5px; color:var(--dim); margin:3px 0 0}
+  nav ul{list-style:none; margin:0; padding:0 12px}
+  nav li{margin-bottom:1px}
+  nav a{display:flex; align-items:center; gap:9px; padding:9px 11px; border-radius:8px;
+    color:var(--muted); text-decoration:none; font-size:14.5px; transition:background .12s,color .12s}
+  nav a:hover{background:var(--page); color:var(--text)}
+  nav a.active{background:var(--primary-soft); color:var(--primary-dark); font-weight:600}
+  nav a .dot{width:6px; height:6px; border-radius:50%; background:var(--line); flex:none}
+  nav a.done .dot{background:var(--primary)}
+  nav a.active .dot{background:var(--primary)}
+  .subnav{margin:2px 0 8px 30px; padding:0; list-style:none; display:none}
+  .subnav.show{display:block}
+  .subnav a{font-size:13.5px; padding:5px 10px; color:var(--dim)}
+  .subnav a:hover{color:var(--primary-dark); background:transparent}
+  .navgroup{padding:16px 22px 7px; font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); font-weight:600}
 
-  section{padding:48px 0; border-bottom:1px solid var(--line)}
-  section:last-of-type{border-bottom:0}
-  h2{margin:0 0 6px; font-size:20px; letter-spacing:-.015em}
-  .sub{color:var(--muted); margin:0 0 24px; font-size:15px; max-width:62ch}
+  #burger{display:none; position:fixed; top:14px; left:14px; z-index:120; width:42px; height:42px;
+    border-radius:9px; border:1px solid var(--line); background:var(--surface); cursor:pointer;
+    font-size:19px; line-height:1; color:var(--text)}
+  #scrim{display:none; position:fixed; inset:0; background:rgba(27,23,25,.35); z-index:99}
 
-  .cards{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-  a.card{
-    display:block; background:var(--surface); border:1px solid var(--line);
-    border-radius:var(--radius); padding:17px 18px; text-decoration:none; color:inherit;
-  }
-  a.card:hover{border-color:var(--accent); background:var(--surface-2)}
-  a.card:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-  a.card.soon{opacity:.55}
-  a.card.soon:hover{border-color:var(--line); background:var(--surface)}
-  .card .h{font-weight:650; color:#fff; margin:0 0 8px; font-size:15px}
+  /* ---------- content ---------- */
+  main{margin-left:var(--sidebar); padding:0 40px 80px}
+  .inner{max-width:880px; margin:0 auto}
+  .view{display:none} .view.active{display:block}
+
+  header.top{padding:52px 0 30px; border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--primary); font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:700; margin:0 0 12px}
+  h1{margin:0 0 12px; font-size:clamp(26px,4.4vw,36px); line-height:1.15; letter-spacing:-.022em}
+  .lede{margin:0; color:var(--muted); font-size:16.5px; max-width:62ch}
+  .meta{margin-top:20px; display:flex; gap:8px; flex-wrap:wrap}
+  .chip{font-size:12.5px; color:var(--muted); background:var(--surface); border:1px solid var(--line); padding:4px 11px; border-radius:100px}
+
+  section.block{padding:44px 0; border-bottom:1px solid var(--line)}
+  section.block:last-child{border-bottom:0}
+  h2{margin:0 0 8px; font-size:clamp(21px,3vw,26px); letter-spacing:-.015em; scroll-margin-top:24px}
+  h2 .num{color:var(--primary); font-weight:400; margin-right:9px}
+  .sub{color:var(--muted); margin:0 0 26px; max-width:62ch}
+  h3{margin:34px 0 12px; font-size:16.5px}
+  h4{margin:22px 0 9px; font-size:14px; color:var(--muted); font-weight:650; text-transform:uppercase; letter-spacing:.05em}
+  p{margin:0 0 13px} p:last-child{margin-bottom:0}
+  a{color:var(--primary)} a:hover{color:var(--primary-dark)}
+  strong{font-weight:650}
+  ul{margin:0 0 13px; padding-left:20px} li{margin-bottom:7px}
+
+  .scroll{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface)}
+  table{border-collapse:collapse; width:100%; font-size:14px; min-width:560px}
+  th,td{padding:11px 13px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line-soft)}
+  th{background:#fcfafb; color:var(--muted); font-weight:650; font-size:12px; letter-spacing:.045em; text-transform:uppercase; white-space:nowrap}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#fdfafb}
+  td.n,th.n{text-align:center; width:44px; white-space:nowrap}
+  tr.us td{background:var(--primary-soft)}
+  tr.us td:first-child{box-shadow:inset 3px 0 0 var(--primary)}
+  .s1{color:#b4453f;font-weight:650} .s2{color:#b0703a;font-weight:650} .s3{color:#8a7c2e;font-weight:650}
+  .s4{color:#5a8449;font-weight:650} .s5{color:#2f7d5f;font-weight:650}
+  .tot{font-weight:700}
+
+  .box{border:1px solid var(--line); border-left:3px solid var(--primary); background:var(--surface);
+    border-radius:var(--radius); padding:17px 19px; margin:20px 0}
+  .box.warm{border-left-color:var(--amber)} .box.red{border-left-color:var(--red)}
+  .box .t{font-weight:700; margin:0 0 5px; font-size:15px}
+  .box p{color:var(--muted); font-size:15px}
+
+  .cards{display:grid; gap:13px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); margin:18px 0}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 17px}
+  .card .h{font-weight:650; margin:0 0 7px; font-size:15px}
   .card p{font-size:14px; color:var(--muted); margin:0}
-  .tag{
-    display:inline-block; font-size:11px; letter-spacing:.06em; text-transform:uppercase;
-    font-weight:600; padding:3px 8px; border-radius:100px; margin-left:8px; vertical-align:2px;
+  .card .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--primary); display:block; margin-bottom:7px; font-weight:650}
+
+  .grid{display:grid; gap:15px; grid-template-columns:repeat(auto-fill,minmax(185px,1fr)); margin-top:18px}
+  figure{margin:0; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden}
+  figure a{display:block; line-height:0}
+  figure img{width:100%; height:215px; object-fit:cover; object-position:top center; display:block; background:#f2eef0}
+  figcaption{padding:10px 12px; font-size:12.5px; color:var(--muted); line-height:1.45}
+  figcaption b{display:block; color:var(--text); font-size:13px; margin-bottom:2px; font-weight:650}
+  .tag{display:inline-block; margin-top:6px; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--red); border:1px solid rgba(180,69,63,.35); border-radius:100px; padding:2px 8px}
+
+  .badge{display:inline-block; font-size:11.5px; font-weight:650; padding:3px 10px; border-radius:100px; letter-spacing:.02em}
+  .badge.done{background:var(--primary-soft); color:var(--primary-dark)}
+  .badge.none{background:#f2eff0; color:var(--dim)}
+
+  .empty{background:var(--surface); border:1px dashed var(--primary-line); border-radius:var(--radius);
+    padding:36px 28px; text-align:center; margin-top:26px}
+  .empty .ic{font-size:28px; display:block; margin-bottom:12px}
+  .empty h3{margin:0 0 8px; font-size:17px}
+  .empty p{color:var(--muted); max-width:46ch; margin:0 auto 14px; font-size:15px}
+  .empty ul{display:inline-block; text-align:left; color:var(--muted); font-size:14.5px; margin:6px 0 0}
+
+  footer{margin-top:48px; padding-top:22px; border-top:1px solid var(--line); color:var(--dim); font-size:13.5px}
+
+  @media (max-width:900px){
+    aside{transform:translateX(-100%); transition:transform .22s ease; width:280px}
+    aside.open{transform:none; box-shadow:0 0 40px rgba(27,23,25,.18)}
+    #burger{display:block} #scrim.show{display:block}
+    main{margin-left:0; padding:70px 20px 60px}
   }
-  .tag.ready{color:var(--accent); background:rgba(124,212,180,.1)}
-  .tag.wip{color:var(--dim); background:rgba(255,255,255,.04)}
-
-  .box{border:1px solid var(--line); border-left:3px solid var(--warm); background:var(--surface);
-       border-radius:var(--radius); padding:18px 20px; margin:32px 0 0}
-  .box .t{font-weight:650; color:#fff; margin:0 0 6px; font-size:15px}
-  .box p{color:var(--muted); font-size:15px; margin:0}
-
-  footer{padding:28px 0 56px; color:var(--dim); font-size:13.5px}
-  a{color:var(--accent)}
 </style>
 </head>
 <body>
 
-<header class="hero wrap">
-  <p class="eyebrow">Внутрішні матеріали</p>
-  <h1>Prevently</h1>
-  <p class="lede">
-    Персоналізовані плани профілактичних чекапів для жінок від 18 років.
-    Головний принцип — не призначати зайвого: тільки ті обстеження,
-    які справді потрібні, з поясненням навіщо кожне.
-  </p>
-</header>
+<button id="burger" aria-label="Меню">☰</button>
+<div id="scrim"></div>
 
-<main class="wrap">
-
-<section>
-  <h2>Дослідження</h2>
-  <p class="sub">Ринок, конкуренти, аудиторія, медичні джерела.</p>
-  <div class="cards">
-    <a class="card" href="research/research.html">
-      <p class="h">Дослідження ринку<span class="tag ready">готово</span></p>
-      <p>Три групи конкурентів, порівняння за осями, 18 скріншотів, відкриті питання до PM</p>
-    </a>
-    <a class="card" href="https://github.com/LeraDryha/prevently2/blob/main/research/research.md">
-      <p class="h">research.md</p>
-      <p>Джерело даних, повні посилання, гіпотези для перевірки</p>
-    </a>
+<aside id="sidebar">
+  <div class="brand">
+    <p class="name">Prevently</p>
+    <p class="sub">Робочий простір проєкту</p>
   </div>
-</section>
+  <nav>
+    <ul>
+      <li><a href="#overview" data-v="overview"><span class="dot"></span>Огляд</a></li>
+    </ul>
+    <div class="navgroup">Розділи роботи</div>
+    <ul>
+      <li>
+        <a href="#research" data-v="research" class="done"><span class="dot"></span>Дослідження</a>
+        <ul class="subnav" id="sub-research">
+          <li><a href="#r-summary">Стисло</a></li>
+          <li><a href="#r-competitors">Конкуренти</a></li>
+          <li><a href="#r-screens">Скріни</a></li>
+          <li><a href="#r-benchmark">Бенчмарк</a></li>
+          <li><a href="#r-patterns">Патерни</a></li>
+          <li><a href="#r-conclusions">Висновки</a></li>
+          <li><a href="#r-next">Що ще перевірити</a></li>
+          <li><a href="#r-status">Статус</a></li>
+        </ul>
+      </li>
+      <li><a href="#wireframes" data-v="wireframes"><span class="dot"></span>Вайрфрейми</a></li>
+      <li><a href="#concept" data-v="concept"><span class="dot"></span>Концепція</a></li>
+      <li><a href="#tokens" data-v="tokens"><span class="dot"></span>Токени</a></li>
+      <li><a href="#components" data-v="components"><span class="dot"></span>Компоненти</a></li>
+      <li><a href="#design-system" data-v="design-system"><span class="dot"></span>Дизайн-система</a></li>
+      <li><a href="#handoff" data-v="handoff"><span class="dot"></span>Передача в розробку</a></li>
+    </ul>
+  </nav>
+</aside>
 
-<section>
-  <h2>Дизайн</h2>
-  <p class="sub">Від структури екранів до передачі в розробку. Наповнюється послідовно.</p>
-  <div class="cards">
-    <a class="card soon" href="https://github.com/LeraDryha/prevently2/tree/main/wireframes">
-      <p class="h">Вайрфрейми<span class="tag wip">у роботі</span></p>
-      <p>Онбординг, опитувальник, червоні прапорці, план</p>
-    </a>
-    <a class="card soon" href="https://github.com/LeraDryha/prevently2/tree/main/concept">
-      <p class="h">Концепція<span class="tag wip">у роботі</span></p>
-      <p>Візуальний напрям: тепло, що не читається як несерйозність</p>
-    </a>
-    <a class="card soon" href="https://github.com/LeraDryha/prevently2/tree/main/design-system">
-      <p class="h">Дизайн-система<span class="tag wip">у роботі</span></p>
-      <p>Принципи, патерни, доступність, мова інтерфейсу</p>
-    </a>
-  </div>
-</section>
+<main>
+<div class="inner">
 
-<section>
-  <h2>Контекст</h2>
-  <p class="sub">Навіщо продукт існує і за якими правилами робиться.</p>
-  <div class="cards">
-    <a class="card" href="https://github.com/LeraDryha/prevently2/blob/main/CLAUDE.md">
-      <p class="h">Бриф</p>
-      <p>Ключові рішення, структура плану, правила медичного контенту, метрики</p>
-    </a>
-    <a class="card" href="https://github.com/LeraDryha/prevently2">
-      <p class="h">Репозиторій</p>
-      <p>github.com/LeraDryha/prevently2 — приватний</p>
-    </a>
-  </div>
+<!-- ============ ОГЛЯД ============ -->
+<div class="view" id="v-overview">
+  <header class="top">
+    <p class="eyebrow">Огляд</p>
+    <h1>Персоналізовані плани профілактичних чекапів</h1>
+    <p class="lede">Продукт збирає анамнез так, як це робить лікар у кабінеті, і повертає перелік лише справді потрібних обстежень — із поясненням, навіщо кожне і чому решти немає.</p>
+    <div class="meta"><span class="chip">Жінки 18+</span><span class="chip">Україна</span><span class="chip">Mobile-first</span><span class="chip">Дані лише на пристрої</span></div>
+  </header>
 
-  <div class="box">
-    <p class="t">Матеріали не рецензовані лікарем</p>
-    <p>Медичний контент на цьому етапі — робочі чернетки. Не використовувати
-    як медичну пораду й не поширювати за межі команди.</p>
-  </div>
-</section>
+  <section class="block">
+    <h2>Ключова задача</h2>
+    <div class="box">
+      <p class="t">Дати жінці обґрунтовану підставу зробити те небагато, що їй справді потрібно — і спокійно не робити решти.</p>
+      <p>Друга половина важливіша за першу. Пояснення «чому цього немає у плані» — не додаткова фіча, а половина продукту: без нього коротший список неможливо відрізнити від недбалого.</p>
+    </div>
+  </section>
 
+  <section class="block">
+    <h2>Де що лежить</h2>
+    <p class="sub">Кожен розділ відповідає папці в репозиторії. Зміст живе в markdown усередині папки — ця сторінка лише показує його.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Розділ</th><th>Що всередині</th><th>Стан</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Дослідження</strong></td><td>Конкуренти, бенчмарк, UX-патерни, 18 скрінів</td><td><span class="badge done">зроблено</span></td></tr>
+        <tr><td>Вайрфрейми</td><td>Схеми екранів опитувальника і плану</td><td><span class="badge none">не почато</span></td></tr>
+        <tr><td>Концепція</td><td>Візуальний напрям, тон, ключові екрани</td><td><span class="badge none">не почато</span></td></tr>
+        <tr><td>Токени</td><td>Кольори, типографіка, відступи</td><td><span class="badge none">не почато</span></td></tr>
+        <tr><td>Компоненти</td><td>Картка рекомендації, крок опитувальника, плашки</td><td><span class="badge none">не почато</span></td></tr>
+        <tr><td>Дизайн-система</td><td>Правила складання, стани, доступність</td><td><span class="badge none">не почато</span></td></tr>
+        <tr><td>Передача в розробку</td><td>Специфікації, формат правила рекомендації</td><td><span class="badge none">не почато</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2>Що блокує далі</h2>
+    <div class="box red">
+      <p class="t">Інтерв'ю з користувачками не проводились</p>
+      <p>Головна ставка брифу — опитувальник на 15–25 питань, коли ринок привчив до трьох полів. Поки цю гіпотезу не перевірено на живих людях, будувати повну адаптивну логіку й медичний контент під неї ризиковано.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ============ ДОСЛІДЖЕННЯ ============ -->
+<div class="view" id="v-research">
+  <header class="top">
+    <p class="eyebrow">Розділ 01 · Дослідження</p>
+    <h1>Конкуренти, бенчмарк і патерни</h1>
+    <p class="lede">Хто вже відповідає на питання «які обстеження мені потрібні», наскільки обґрунтовано вони це роблять — і які інтерфейсні рішення з цього випливають.</p>
+    <div class="meta"><span class="chip">2 вересня 2026</span><span class="chip">18 продуктів</span><span class="chip">18 скрінів</span><span class="chip">Кабінетний аналіз</span></div>
+  </header>
+
+  <section class="block">
+    <h2 id="r-summary"><span class="num">01</span>Стисло</h2>
+    <h4>Що визначили</h4>
+    <ul>
+      <li><strong>Прямих конкурентів немає.</strong> Українського цифрового сервісу з персоналізованим планом для жінок 18+ не існує — ні комерційного, ні державного.</li>
+      <li><strong>Найближчий гравець — держава.</strong> «Скринінг здоров'я 40+»: безоплатний, у Дії, 565+ тис. пройшли. Але 40+, обидві статі, фокус на ССЗ і діабеті.</li>
+      <li><strong>Головний вимір — обґрунтованість пункту плану.</strong> Рівень «пояснити, чому щось НЕ увійшло» не займає ніхто, навіть еталони.</li>
+      <li><strong>Ринок бере 2–3 поля на вході.</strong> Навіть MyHealthfinder. Наші 15–25 питань — аномалія.</li>
+      <li><strong>Комерція монетизує збільшення обсягу тестів.</strong> Скорочення обсягу монетизує тільки держава.</li>
+    </ul>
+    <h4>Що вирішили на цьому етапі</h4>
+    <ul>
+      <li>Вимір, за яким змагаємось: обґрунтованість пункту плану.</li>
+      <li>Патерн входу — <strong>візард</strong>. Патерн виходу — <strong>картки з розкриттям</strong>.</li>
+      <li>Три механізми в MVP: «що розглянули і не включили», атрибуція пункту до відповідей, словесні рівні певності.</li>
+      <li>Відхилено свідомо: єдина оцінка 0–100, розмовний інтерфейс, дашборд.</li>
+    </ul>
+    <div class="box red">
+      <p class="t">Гепи, не покриті цим дослідженням</p>
+      <p>Жодної розмови з реальною користувачкою — усе нижче кабінетне. Готовність платити не досліджена. Не перевірено, чи є український гравець поза індексацією (закрита бета, застосунок без вебу). Бачили лендинг «Скринінгу 40+», але не сам результат. Прайси не зібрані в цифрах. Retention-механіки конкурентів не вивчались.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 id="r-competitors"><span class="num">02</span>Конкуренти</h2>
+    <p class="sub">Класифікація за строгими критеріями, щоб список можна було перевіряти, а не поповнювати на відчуття.</p>
+    <ul>
+      <li><strong>ХАРД</strong> — усі три ознаки: той самий продукт, та сама аудиторія (жінки 18+), ринок України.</li>
+      <li><strong>СОФТ</strong> — інший продукт, але те саме питання: «які обстеження мені потрібні і коли».</li>
+      <li><strong>АСПІРАЦІЙНІ</strong> — міжнародні еталони в категорії персоналізованої доказової профілактики.</li>
+    </ul>
+    <div class="box red">
+      <p class="t">ХАРД-група порожня</p>
+      <p>Перевірено двома незалежними пошуковими заходами. Це не привід радіти: порожня ніша інколи порожня тому, що її складно монетизувати.</p>
+    </div>
+
+    <h3>Найближчий до ХАРД — частковий збіг</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Продукт</th><th>Збіг за критеріями</th><th>Що вивчити</th></tr></thead>
+      <tbody><tr><td><strong>МОЗ «Скринінг 40+»</strong></td>
+        <td>Продукт ✓ — анкета → оцінка ризику → рекомендації, нагадування в Дії. Ринок ✓. <strong>Аудиторія ✗</strong> — 40+, обидві статі</td>
+        <td>Безоплатний перелік як джерело для шару НСЗУ; формулювання оцінки ризику; механіка нагадувань</td></tr></tbody>
+    </table></div>
+
+    <h3>СОФТ — інший продукт, те саме питання</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Продукт</th><th>Чому тут</th><th>Чого уникаємо</th></tr></thead>
+      <tbody>
+        <tr><td><strong>ДІЛА</strong></td><td>Відповідає пакетом замість плану; смуги 18–24 … 70+</td><td>Модель «більше аналізів = більше виручки»</td></tr>
+        <tr><td><strong>Synevo</strong></td><td>Те саме, широка присутність по країні</td><td>Продаж набору замість обґрунтування</td></tr>
+        <tr><td><strong>Smart Medical / Medical Plaza</strong></td><td>Преміум-чекапи; вживають формулювання «персоналізований план профілактики»</td><td>Порожню «персоналізацію» без доказової бази</td></tr>
+        <tr><td><strong>Tia</strong></td><td>Жіноча клініка (США) з контентом «які скринінги у 20–30»</td><td>Прив'язку до власної клінічної мережі</td></tr>
+        <tr><td><strong>Function Health / Superpower</strong></td><td>150–160 біомаркерів, $349–365/рік. Те саме питання, максималістська відповідь</td><td>Логіку «виміряй усе»</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>АСПІРАЦІЙНІ — міжнародні еталони</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Продукт</th><th>Чому тут</th><th>Що вивчити</th></tr></thead>
+      <tbody>
+        <tr><td><strong>MyHealthfinder</strong></td><td>Найближчий еталон: вік, стать, вагітність → рекомендації з USPSTF, ACIP, HRSA</td><td>Мінімальний вхід → корисний вихід; «питання, які поставити лікарю»</td></tr>
+        <tr><td><strong>Prevention TaskForce</strong></td><td>Селектор за віком, статтю й факторами ризику. Аудиторія — клініцисти</td><td>Модель даних правил і показ рівня доказовості</td></tr>
+        <tr><td><strong>NHS Health Check</strong></td><td>Державна цифрова профілактика в масштабі</td><td>Комунікація ризику; формат звіту; межа скерування</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Референси — не конкуренти</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Продукт</th><th>Чому НЕ конкурент</th><th>Для чого корисний</th></tr></thead>
+      <tbody>
+        <tr><td>Flo</td><td>Трекер циклу</td><td>Онбординг, що заробляє довіру на 20+ інтимних питань</td></tr>
+        <tr><td>Clue</td><td>Те саме, що Flo</td><td>Строгість і теплота водночас; комунікація приватності</td></tr>
+        <tr><td>Ada Health</td><td>Оцінка симптомів — це діагностика</td><td>Контент-операції, червоні прапорці, межа «до лікаря»</td></tr>
+        <tr><td>Ovul</td><td>Гормональний трекер із пристроєм</td><td>Локальний go-to-market в Україні</td></tr>
+        <tr><td>Canadian Task Force</td><td>Не продукт, а орган настанов</td><td>Інфографіки «на 1000 людей» — абсолютні числа</td></tr>
+        <tr><td>Mayo Clinic / Healthwise</td><td>Контент-видавці</td><td>Редакційний процес і читабельність</td></tr>
+        <tr><td>Helsi</td><td>Інфраструктура запису поверх eHealth</td><td>До чого українка вже звикла в цифровій медицині</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Порівняння за осями</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Продукт</th><th>Аудиторія</th><th>Основа</th><th>Ключовий механізм</th><th>Довіра</th><th>Монетизація</th></tr></thead>
+      <tbody>
+        <tr><td><strong>МОЗ 40+</strong></td><td>40+, обидві статі</td><td>Державний протокол</td><td>Анкета → ризик → скерування + 2000 грн</td><td>Держава; 565+ тис. пройшли</td><td>Бюджет, безоплатно</td></tr>
+        <tr><td><strong>ДІЛА</strong></td><td>Жінки 18–70+</td><td>Лабораторний прайс</td><td>Вікова смуга → готовий набір</td><td>«Міжнародні стандарти» <em>без посилань</em></td><td>Продаж пакета</td></tr>
+        <tr><td><strong>Synevo</strong></td><td>Жінки</td><td>Лабораторний прайс</td><td>Фіксований пакет</td><td>Мережа й обладнання</td><td>Продаж пакета</td></tr>
+        <tr><td><strong>Smart Medical</strong></td><td>Преміум-сегмент</td><td>Клінічний прайс</td><td>Пакет + консультація</td><td>Клініка, лікарі</td><td>Продаж чекапу</td></tr>
+        <tr><td><strong>Tia</strong></td><td>Жінки 20–40, США</td><td>Клінічна практика</td><td>Контент за віком → запис</td><td>Жіноча клінічна експертиза</td><td>Візити / членство</td></tr>
+        <tr><td><strong>Function Health</strong></td><td>Дорослі, США</td><td>160+ біомаркерів</td><td>2 забори → дашборд → ретест</td><td>Mark Hyman, Quest</td><td>$365/рік</td></tr>
+        <tr><td><strong>Superpower</strong></td><td>Дорослі, США</td><td>150+ біомаркерів</td><td>Базова лінія → протокол → ретест</td><td>«Top doctors», Quest</td><td>$349/рік</td></tr>
+        <tr><td><strong>MyHealthfinder</strong></td><td>Усі, США</td><td>USPSTF + ACIP + HRSA</td><td>3 поля → список у 4 рівнях впевненості</td><td>Держава, але <em>без грейдів і джерел</em> у результаті</td><td>Немає</td></tr>
+        <tr><td><strong>Prevention TaskForce</strong></td><td>Клініцисти</td><td>Настанови USPSTF</td><td>Фільтр → рекомендації з грейдом</td><td>Грейд A/B/C/D + дата перегляду</td><td>Немає</td></tr>
+        <tr><td><strong>NHS Health Check</strong></td><td>40–74, Англія</td><td>Державна програма ССЗ</td><td>Анкета → звіт про ризик → план</td><td>NHS</td><td>Немає</td></tr>
+        <tr class="us"><td><strong>Prevently</strong></td><td>Жінки 18+, Україна</td><td>USPSTF + ACOG/ACS + WHO</td><td>Адаптивний анамнез → двошаровий план → перерахунок</td><td>Рецензент + джерело і рівень доказовості на пункт</td><td>Безкоштовно в MVP</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2 id="r-screens"><span class="num">03</span>Скріни</h2>
+    <p class="sub">Playwright, мобільний вьюпорт 390×844, повна висота. Екрани за акаунтом підписані плашкою на самому зображенні. Клік відкриває оригінал.</p>
+    <div class="grid">
+      <figure><a href="research/screens/01-moz-screening40-landing.png"><img src="research/screens/01-moz-screening40-landing.png" alt="МОЗ Скринінг 40+"></a><figcaption><b>МОЗ «Скринінг 40+»</b>Лендинг: три кроки, статистика</figcaption></figure>
+      <figure><a href="research/screens/02-dila-checkup-female.png"><img src="research/screens/02-dila-checkup-female.png" alt="ДІЛА"></a><figcaption><b>ДІЛА</b>Перемикач вікових смуг 18–24 … 70+</figcaption></figure>
+      <figure><a href="research/screens/03-synevo-checkup-female.png"><img src="research/screens/03-synevo-checkup-female.png" alt="Synevo"></a><figcaption><b>Synevo</b>«Все під контролем для жінок»</figcaption></figure>
+      <figure><a href="research/screens/04-smartmedical-premium-checkup.png"><img src="research/screens/04-smartmedical-premium-checkup.png" alt="Smart Medical"></a><figcaption><b>Smart Medical Center</b>Преміум-чекап</figcaption></figure>
+      <figure><a href="research/screens/05-tia-screenings-20s-30s.png"><img src="research/screens/05-tia-screenings-20s-30s.png" alt="Tia"></a><figcaption><b>Tia</b>Скринінги у 20–30 років</figcaption></figure>
+      <figure><a href="research/screens/06-functionhealth-landing.png"><img src="research/screens/06-functionhealth-landing.png" alt="Function Health"></a><figcaption><b>Function Health</b>160+ тестів, $365/рік</figcaption></figure>
+      <figure><a href="research/screens/07-superpower-landing.png"><img src="research/screens/07-superpower-landing.png" alt="Superpower"></a><figcaption><b>Superpower</b>150+ тестів, $349/рік</figcaption></figure>
+      <figure><a href="research/screens/08-myhealthfinder-start.png"><img src="research/screens/08-myhealthfinder-start.png" alt="MyHealthfinder"></a><figcaption><b>MyHealthfinder</b>Форма: вік, стать, вагітність</figcaption></figure>
+      <figure><a href="research/screens/11-myhealthfinder-results-age25.png"><img src="research/screens/11-myhealthfinder-results-age25.png" alt="MyHealthfinder 25"></a><figcaption><b>MyHealthfinder — 25 років</b>Чотири рівні впевненості</figcaption></figure>
+      <figure><a href="research/screens/12-myhealthfinder-results-age45.png"><img src="research/screens/12-myhealthfinder-results-age45.png" alt="MyHealthfinder 45"></a><figcaption><b>MyHealthfinder — 45 років</b>Вікова дельта</figcaption></figure>
+      <figure><a href="research/screens/13-uspstf-grades-ab-list.png"><img src="research/screens/13-uspstf-grades-ab-list.png" alt="USPSTF"></a><figcaption><b>USPSTF</b>Грейд і дата перегляду на кожній позиції</figcaption></figure>
+      <figure><a href="research/screens/09-epss-prevention-taskforce.png"><img src="research/screens/09-epss-prevention-taskforce.png" alt="Prevention TaskForce"></a><figcaption><b>Prevention TaskForce</b>Точка входу</figcaption></figure>
+      <figure><a href="research/screens/10-nhs-digital-prevention.png"><img src="research/screens/10-nhs-digital-prevention.png" alt="NHS"></a><figcaption><b>NHS</b>Digital prevention services</figcaption></figure>
+      <figure><a href="research/screens/16-nhs-healthcheck-gated.png"><img src="research/screens/16-nhs-healthcheck-gated.png" alt="NHS Health Check"></a><figcaption><b>NHS Health Check</b>Вхід до перевірки</figcaption></figure>
+      <figure><a href="research/screens/14-functionhealth-gated.png"><img src="research/screens/14-functionhealth-gated.png" alt="Function Health signup"></a><figcaption><b>Function Health</b>Реєстрація<span class="tag">доступ обмежений</span></figcaption></figure>
+      <figure><a href="research/screens/15-superpower-gated.png"><img src="research/screens/15-superpower-gated.png" alt="Superpower signup"></a><figcaption><b>Superpower</b>Реєстрація<span class="tag">доступ обмежений</span></figcaption></figure>
+      <figure><a href="research/screens/17-tia-booking-gated.png"><img src="research/screens/17-tia-booking-gated.png" alt="Tia booking"></a><figcaption><b>Tia</b>Запис у клініку<span class="tag">доступ обмежений</span></figcaption></figure>
+      <figure><a href="research/screens/18-moz-diia-gated.png"><img src="research/screens/18-moz-diia-gated.png" alt="Дія"></a><figcaption><b>Дія</b>Послуга живе в застосунку<span class="tag">доступ обмежений</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 id="r-benchmark"><span class="num">04</span>Бенчмарк</h2>
+    <p class="sub">Головний вимір: чи може продукт показати, на якій підставі обстеження увійшло у план — і на якій підставі інше не увійшло.</p>
+
+    <h3>Вісім критеріїв, шкала 1–5</h3>
+    <div class="scroll"><table>
+      <thead><tr><th class="n">Код</th><th>Критерій</th><th>1 бал</th><th>5 балів</th></tr></thead>
+      <tbody>
+        <tr><td class="n">К1</td><td>Атомарність підстави</td><td>Методологія у футері</td><td>Підстава біля конкретного пункту</td></tr>
+        <tr><td class="n">К2</td><td>Названість джерела</td><td>«Експерти рекомендують»</td><td>Конкретне джерело з назвою</td></tr>
+        <tr><td class="n">К3</td><td>Видима сила доказу</td><td>Усе однаково впевнено</td><td>Рівень певності або вага фактора видимі</td></tr>
+        <tr><td class="n">К4</td><td>Персональна прив'язка</td><td>Однакова видача для всіх</td><td>Видно, які мої відповіді дали цей пункт</td></tr>
+        <tr><td class="n">К5</td><td>Обґрунтування відсутності</td><td>Про невключене мовчання</td><td>Сказано, що розглянуто й чому не увійшло</td></tr>
+        <tr><td class="n">К6</td><td>Свіжість</td><td>Дати немає</td><td>Дата перегляду біля пункту</td></tr>
+        <tr><td class="n">К7</td><td>Перевірюваність</td><td>До першоджерела не дійти</td><td>Клік — і ви в оригіналі</td></tr>
+        <tr><td class="n">К8</td><td>Зрозумілість без фахівця</td><td>Потрібна освіта в темі</td><td>Читається будь-ким</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Еталони поза нашою категорією</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Продукт</th><th>Ніша</th><th class="n">К1</th><th class="n">К2</th><th class="n">К3</th><th class="n">К4</th><th class="n">К5</th><th class="n">К6</th><th class="n">К7</th><th class="n">К8</th><th class="n">Σ</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Credit Karma</strong></td><td>Особисті фінанси</td><td class="n s5">5</td><td class="n s4">4</td><td class="n s5">5</td><td class="n s5">5</td><td class="n s3">3</td><td class="n s4">4</td><td class="n s3">3</td><td class="n s5">5</td><td class="n tot">34</td></tr>
+        <tr><td><strong>Cochrane</strong></td><td>Доказова медицина</td><td class="n s5">5</td><td class="n s5">5</td><td class="n s5">5</td><td class="n s1">1</td><td class="n s4">4</td><td class="n s5">5</td><td class="n s5">5</td><td class="n s3">3</td><td class="n tot">33</td></tr>
+        <tr><td><strong>Wirecutter</strong></td><td>Споживчі огляди</td><td class="n s5">5</td><td class="n s4">4</td><td class="n s3">3</td><td class="n s1">1</td><td class="n s5">5</td><td class="n s5">5</td><td class="n s3">3</td><td class="n s5">5</td><td class="n tot">31</td></tr>
+        <tr><td><strong>Yuka</strong></td><td>Сканер продуктів</td><td class="n s5">5</td><td class="n s4">4</td><td class="n s5">5</td><td class="n s2">2</td><td class="n s3">3</td><td class="n s2">2</td><td class="n s3">3</td><td class="n s5">5</td><td class="n tot">29</td></tr>
+        <tr><td><strong>Wikipedia</strong></td><td>Знання</td><td class="n s5">5</td><td class="n s5">5</td><td class="n s2">2</td><td class="n s1">1</td><td class="n s2">2</td><td class="n s4">4</td><td class="n s5">5</td><td class="n s3">3</td><td class="n tot">27</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="box"><p class="t">Головне зі зведення</p>
+      <p>Жоден продукт не поєднує К4 з К3+К7. Credit Karma персоналізує, але модель закрита. Cochrane бездоганний у доказах і сліпий до людини. Поєднання персоналізації з простежуваністю не займене — і саме воно є нашою позицією.</p></div>
+
+    <h3>Три механізми в MVP</h3>
+    <div class="cards">
+      <div class="card"><span class="lbl">від Wirecutter</span><p class="h">«Що розглянули і не включили»</p><p>Не «мамографії немає», а «мамографію розглянуто: не рекомендована до 40 без обтяженої сімейної історії». Найдешевший спосіб довести об'єктивність — показати невидиму роботу.</p></div>
+      <div class="card"><span class="lbl">від Credit Karma</span><p class="h">Атрибуція пункту до відповідей</p><p>«Через ваш вік 35+ і куріння в анамнезі». Єдине, що робить 15–25 питань відчутно вартими зусиль.</p></div>
+      <div class="card"><span class="lbl">від Cochrane</span><p class="h">Словесні рівні певності</p><p>«Рекомендовано всім жінкам вашого віку» проти «варто обговорити, доказів середньої якості». Грейд лишається деталлю під розкриттям.</p></div>
+    </div>
+
+    <div class="box red"><p class="t">Не спрацює: єдина оцінка 0–100, як у Yuka</p>
+      <p>Yuka оцінює продукт — банка супу однакова для всіх. Ми оцінюємо ситуацію людини, і число описувало б її саму. У нас немає осі «добре — погано»: план на п'ять пунктів не гірший за план на два. Довелося б вигадати шкалу, якої в предметі немає. Плюс межа безпеки: число про здоров'я читається як діагноз.</p></div>
+  </section>
+
+  <section class="block">
+    <h2 id="r-patterns"><span class="num">05</span>Патерни</h2>
+    <p class="sub">Патерн входу вирішує, чи людина дійде. Патерн виходу вирішує, чи вона повірить.</p>
+
+    <h3>Вхід — як людина проходить опитувальник</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Патерн</th><th>Як працює</th><th>Ламається</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Візард</strong></td><td>Одне питання на екран, галуження сховане</td><td>Не видно кінця; важко повернутись і виправити</td></tr>
+        <tr><td><strong>Довга форма</strong></td><td>Видно повний обсяг, вільний порядок</td><td>На мобільному; після 10–15 полів — бюрократія</td></tr>
+        <tr><td><strong>Розмовний інтерфейс</strong></td><td>Діалог, темп задає розмова</td><td>Найповільніший; відповіді не редагуються</td></tr>
+        <tr><td><strong>Спершу результат</strong></td><td>Мінімальний вхід → чорновий план → уточнення</td><td>Чорновий результат вводить в оману</td></tr>
+        <tr><td><strong>Каталог</strong></td><td>Людина сама гортає теми за віком</td><td>Вимагає знати, чого не знаєш</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box"><p class="t">Обрано: візард</p><p>Галуження на 5 блоків непомітне лише тут. Акушерсько-гінекологічні питання по одному на екран не читаються як допит. Червоні прапорці можуть перервати потік у будь-якій точці. Доведеться добудувати екран-підсумок перед планом — інакше патерн конфліктує з вимогою редагувати відповіді.</p></div>
+    <div class="box warm"><p class="t">Другий, за умови</p><p>«Спершу результат» — якщо північна зірка покаже, що люди не доходять. З обмеженням: чорновий план лише з базового шару.</p></div>
+    <div class="box red"><p class="t">Не підходить: розмовний інтерфейс</p><p>Попри спокусу метафори «як лікар у кабінеті». Ламає редагування, ламає темп і ламає юридичну позицію: чат із висновком читається як діагноз незалежно від дисклеймерів.</p></div>
+
+    <h3>Вихід — як виглядає план після опитувальника</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Патерн</th><th>Принцип організації</th><th>Ламається</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Документ-звіт</strong></td><td>Як текст, від початку до кінця</td><td>Нічого не зробити; стану немає</td></tr>
+        <tr><td><strong>Часова лінія</strong></td><td>За часом — коли</td><td>Дві точки на осі читаються як порожнеча</td></tr>
+        <tr><td><strong>Чекліст зі станами</strong></td><td>За дією — що робити</td><td>Пункт раз на півроку висить мертвим</td></tr>
+        <tr><td><strong>Дашборд</strong></td><td>За станом — як я</td><td>Потрібні величини й шкала «добре — погано»</td></tr>
+        <tr><td><strong>Картки з розкриттям</strong></td><td>За пунктом і глибиною підстави</td><td>Понад 20 карток — стіна заголовків</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box"><p class="t">Обрано: картки з розкриттям</p><p>Обґрунтування отримує власне місце біля кожного пункту — і саме тут вимірна метрика розгортання «чому цього немає». Дворівнева структура плану лягає на групи карток, а «розглянуто, але не увійшло» стає третьою групою. Порожній план виглядає як ретельна робота, а не як поламаний застосунок.</p></div>
+    <div class="box warm"><p class="t">Другий, за умови</p><p>Чекліст зі станами — коли з'являться нагадування. Правильний хід не «обрати одне», а закласти стан у картку від початку.</p></div>
+    <div class="box red"><p class="t">Не підходить: дашборд</p><p>Бриф уже відхилив його ядро — єдину оцінку 0–100. Показувати нічого, бо результати обстежень поза межами продукту. Це патерн Function Health і Superpower, чия логіка протилежна нашій.</p></div>
+    <p><strong>Документ-звіт нікуди не дівається — він стає PDF.</strong> Те, що погано працює як екран, ідеально працює як роздруківка для лікаря.</p>
+  </section>
+
+  <section class="block">
+    <h2 id="r-conclusions"><span class="num">06</span>Висновки</h2>
+    <h3>Три спільні патерни ринку</h3>
+    <ul>
+      <li><strong>Вхід усюди мінімальний — вік і стать.</strong> Наш опитувальник на 15–25 питань це або головна перевага, або головна причина відсіву.</li>
+      <li><strong>Ніхто не поєднує «чи потрібно» зі «скільки коштує».</strong> Державні мовчать про гроші, лабораторії — про потребу.</li>
+      <li><strong>Комерція заробляє на збільшенні обсягу.</strong> Життєздатної комерційної моделі на скороченні серед знайдених немає.</li>
+    </ul>
+    <h3>Три відмінності</h3>
+    <ul>
+      <li><strong>Рівень доказовості показують тільки клініцистам.</strong> Навіть MyHealthfinder у результаті не показує ні грейда, ні джерела, ні дати.</li>
+      <li><strong>Градація впевненості — лише в MyHealthfinder.</strong> Чотири блоки замість плоского списку.</li>
+      <li><strong>Життєвий цикл майже відсутній.</strong> «Позначила пройдене → план перерахувався» не робить жоден зі знайдених.</li>
+    </ul>
+    <div class="box warm"><p class="t">Головний ризик — не приватний конкурент, а держава</p>
+      <p>Якщо «Скринінг 40+» розширять на молодші групи, наша пропозиція для 40+ звузиться до жіночо-специфічної частини. Тому фокус на 18–39 і гінекологічно-мамологічному вимірі — не ніша, а захищена позиція.</p></div>
+    <div class="box warm"><p class="t">Найближча міжнародна аналогія вже існує і безкоштовна</p>
+      <p>MyHealthfinder робить рівно те, що ми. Сама ідея не є перевагою — перевагою може бути тільки локалізація під Україну і жіноча глибина.</p></div>
+    <h3>Три відкриті питання до PM</h3>
+    <ul>
+      <li><strong>Як монетизуємо продукт, чия обіцянка — зменшити витрати користувачки?</strong></li>
+      <li><strong>Чи витримає аудиторія 15–25 питань, коли ринок привчив до трьох полів?</strong></li>
+      <li><strong>Чим за п'ять секунд доводимо різницю з ДІЛА?</strong> Вони кажуть «індивідуальний підхід» нашими словами і мають 230+ відділень.</li>
+    </ul>
+  </section>
+
+  <section class="block">
+    <h2 id="r-next"><span class="num">07</span>Що ще перевірити</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Що</th><th>Навіщо</th><th>Складність</th></tr></thead>
+      <tbody>
+        <tr><td>Пройти «Скринінг 40+» до результату</td><td>Побачити формат державних рекомендацій — єдиний бенчмарк на нашому ринку</td><td>Потрібна людина 40+ і Дія.Картка</td></tr>
+        <tr><td>Прайси ДІЛА і Synevo за віковими пакетами</td><td>Основа шару «безкоштовно / платно»</td><td>Низька, ручний збір</td></tr>
+        <tr><td>Першоджерело НСЗУ по жіночих скринінгах</td><td>Зараз спираємось на переказ, а не на документ</td><td>Середня</td></tr>
+        <tr><td><strong>5–8 інтерв'ю з жінками 25–40</strong></td><td>Головна ставка брифу: чи витримають 15–25 питань</td><td>Висока, але блокує решту</td></tr>
+        <tr><td>Тест гіпотези порожнього плану на 18–25</td><td>Чи сприймається базовий шар як цінність</td><td>Середня</td></tr>
+        <tr><td>Юридична перевірка меж</td><td>Де межа між інформаційним продуктом і медвиробом</td><td>Потрібен юрист</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2 id="r-status"><span class="num">08</span>Статус роботи</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>Розділ</th><th>Стан</th><th>Коли</th></tr></thead>
+      <tbody>
+        <tr><td>Конкуренти: класифікація і порівняння</td><td><span class="badge done">зроблено</span></td><td>02.09.2026</td></tr>
+        <tr><td>Скріни продуктів, 18 екранів</td><td><span class="badge done">зроблено</span></td><td>02.09.2026</td></tr>
+        <tr><td>Бенчмарк: вимір і еталони</td><td><span class="badge done">зроблено</span></td><td>02.09.2026</td></tr>
+        <tr><td>UX-патерни: вхід і вихід</td><td><span class="badge done">зроблено</span></td><td>02.09.2026</td></tr>
+        <tr><td>Інтерв'ю з користувачками</td><td><span class="badge none">не почато</span></td><td>блокує рішення про опитувальник</td></tr>
+        <tr><td>Прайси й дані НСЗУ</td><td><span class="badge none">не почато</span></td><td>—</td></tr>
+        <tr><td>Retention-механіки конкурентів</td><td><span class="badge none">не почато</span></td><td>—</td></tr>
+      </tbody>
+    </table></div>
+    <footer>Першоджерело з повними посиланнями — <a href="research/research.md">research/research.md</a></footer>
+  </section>
+</div>
+
+<!-- ============ ПОРОЖНІ РОЗДІЛИ ============ -->
+<div class="view" id="v-wireframes">
+  <header class="top"><p class="eyebrow">Розділ 02 · Вайрфрейми</p><h1>Схеми екранів</h1>
+    <p class="lede">Структура екранів опитувальника й плану до візуального оформлення.</p></header>
+  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
+    <p>Тут з'являться схеми екранів. Патерни вже обрані в дослідженні, тож основа є:</p>
+    <ul><li>Візард — одне питання на екран</li><li>Екран-підсумок відповідей перед планом</li><li>Картки з розкриттям для плану</li><li>Пріоритетний екран червоного прапорця</li></ul></div>
+</div>
+
+<div class="view" id="v-concept">
+  <header class="top"><p class="eyebrow">Розділ 03 · Концепція</p><h1>Візуальний напрям</h1>
+    <p class="lede">Тон, настрій, ключові екрани в кольорі.</p></header>
+  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
+    <p>З брифу відомо: тепла, людяна подача — м'які кольори, менш «медично». Головний конфлікт, який доведеться вирішити тут: теплота не має послаблювати доказовість.</p></div>
+</div>
+
+<div class="view" id="v-tokens">
+  <header class="top"><p class="eyebrow">Розділ 04 · Токени</p><h1>Кольори, типографіка, відступи</h1>
+    <p class="lede">Базові значення дизайн-системи.</p></header>
+  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
+    <p>Знадобляться окремі токени для рівнів певності рекомендації та для станів пункту плану — це не декор, а носій сенсу.</p></div>
+</div>
+
+<div class="view" id="v-components">
+  <header class="top"><p class="eyebrow">Розділ 05 · Компоненти</p><h1>Елементи інтерфейсу</h1>
+    <p class="lede">Складові, з яких збираються екрани.</p></header>
+  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
+    <p>Ключовий компонент уже відомий із дослідження:</p>
+    <ul><li>Картка рекомендації з розкриттям підстави</li><li>Група «розглянуто, але не увійшло»</li><li>Крок опитувальника</li><li>Плашка червоного прапорця</li></ul></div>
+</div>
+
+<div class="view" id="v-design-system">
+  <header class="top"><p class="eyebrow">Розділ 06 · Дизайн-система</p><h1>Правила складання</h1>
+    <p class="lede">Як компоненти поєднуються, стани, доступність.</p></header>
+  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
+    <p>Ціль доступності з брифу — WCAG 2.2 AA.</p></div>
+</div>
+
+<div class="view" id="v-handoff">
+  <header class="top"><p class="eyebrow">Розділ 07 · Передача в розробку</p><h1>Специфікації</h1>
+    <p class="lede">Те, що йде розробнику.</p></header>
+  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
+    <p>Найважливіше тут — формат правила рекомендації: він зв'язує опитувальник, двошаровий план, джерела з рівнями доказовості, шар НСЗУ і еталонні кейси.</p></div>
+</div>
+
+</div>
 </main>
 
-<footer class="wrap">
-  Prevently · робочі матеріали, оновлено 2 вересня 2026
-</footer>
+<script>
+(function(){
+  var links = document.querySelectorAll('nav a[data-v]');
+  var views = document.querySelectorAll('.view');
+  var sidebar = document.getElementById('sidebar');
+  var scrim = document.getElementById('scrim');
 
+  function show(name, scrollTo){
+    var found = false;
+    views.forEach(function(v){
+      var on = v.id === 'v' + '-' + name;
+      v.classList.toggle('active', on);
+      if(on) found = true;
+    });
+    if(!found){ return show('overview'); }
+    links.forEach(function(a){ a.classList.toggle('active', a.dataset.v === name); });
+    var sub = document.getElementById('sub-research');
+    if(sub) sub.classList.toggle('show', name === 'research');
+    if(scrollTo){
+      var t = document.getElementById(scrollTo);
+      if(t){ t.scrollIntoView({behavior:'smooth', block:'start'}); return; }
+    }
+    window.scrollTo({top:0, behavior:'auto'});
+  }
+
+  function closeNav(){ sidebar.classList.remove('open'); scrim.classList.remove('show'); }
+
+  links.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var n = a.dataset.v;
+      history.replaceState(null, '', '#' + n);
+      show(n); closeNav();
+    });
+  });
+
+  document.querySelectorAll('.subnav a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var id = a.getAttribute('href').slice(1);
+      show('research', id); closeNav();
+    });
+  });
+
+  document.getElementById('burger').addEventListener('click', function(){
+    sidebar.classList.toggle('open');
+    scrim.classList.toggle('show', sidebar.classList.contains('open'));
+  });
+  scrim.addEventListener('click', closeNav);
+
+  var h = (location.hash || '#overview').slice(1);
+  show(h.indexOf('r-') === 0 ? 'research' : h, h.indexOf('r-') === 0 ? h : null);
+})();
+</script>
 </body>
 </html>
