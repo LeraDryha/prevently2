@@ -231,7 +231,7 @@
       <li><strong>Прямих конкурентів немає.</strong> Українського цифрового сервісу з персоналізованим планом для жінок 18+ не існує — ні комерційного, ні державного.</li>
       <li><strong>Найближчий гравець — держава.</strong> «Скринінг здоров'я 40+»: безоплатний, у Дії, 565+ тис. пройшли. Але 40+, обидві статі, фокус на ССЗ і діабеті.</li>
       <li><strong>Головний вимір — обґрунтованість пункту плану.</strong> Рівень «пояснити, чому щось НЕ увійшло» не займає ніхто, навіть еталони.</li>
-      <li><strong>Ринок бере 2–3 поля на вході.</strong> Навіть MyHealthfinder. Наші 15–25 питань — аномалія.</li>
+      <li><strong>Глибина входу залежить від формату.</strong> Веб-інструменти беруть 2–3 поля, застосунки збирають повний анамнез — Aura, HealthCaters і Flo просять 14+ питань. Наші 15–25 — норма для застосунку.</li>
       <li><strong>Комерція монетизує збільшення обсягу тестів.</strong> Скорочення обсягу монетизує тільки держава.</li>
     </ul>
     <h4>Що вирішили на цьому етапі</h4>
@@ -355,6 +355,11 @@
       <figure><a href="research/screens/26-purovitalis-quiz-q2.png"><img loading="lazy" decoding="async" src="research/screens/26-purovitalis-quiz-q2.png" alt="Квіз Purovitalis — 2"></a><figcaption><b>Квіз Purovitalis — 2</b>Симптоми, мультивибір</figcaption></figure>
       <figure><a href="research/screens/27-purovitalis-quiz-q3.png"><img loading="lazy" decoding="async" src="research/screens/27-purovitalis-quiz-q3.png" alt="Квіз Purovitalis — 3"></a><figcaption><b>Квіз Purovitalis — 3</b>Рівень стресу</figcaption></figure>
       <figure><a href="research/screens/28-purovitalis-aura-gated.png"><img loading="lazy" decoding="async" src="research/screens/28-purovitalis-aura-gated.png" alt="Purovitalis Aura"></a><figcaption><b>Purovitalis Aura</b>Потрібен акаунт і застосунок<span class="tag">доступ обмежений</span></figcaption></figure>
+      <figure><a href="research/screens/29-purovitalis-aura-onboarding-anamnesis.png"><img loading="lazy" decoding="async" src="research/screens/29-purovitalis-aura-onboarding-anamnesis.png" alt="Aura — онбординг"></a><figcaption><b>Aura — онбординг</b>Етнічність, вага, медична історія пошуком</figcaption></figure>
+      <figure><a href="research/screens/30-purovitalis-aura-onboarding-family-history.png"><img loading="lazy" decoding="async" src="research/screens/30-purovitalis-aura-onboarding-family-history.png" alt="Aura — сімейна історія"></a><figcaption><b>Aura — сімейна історія</b>З варіантом «I am adopted»</figcaption></figure>
+      <figure><a href="research/screens/31-healthcaters-onboarding-menopause-height.png"><img loading="lazy" decoding="async" src="research/screens/31-healthcaters-onboarding-menopause-height.png" alt="HealthCaters — статус"></a><figcaption><b>HealthCaters — статус</b>Вагітність, менопауза, зріст</figcaption></figure>
+      <figure><a href="research/screens/32-healthcaters-onboarding-breast-risk.png"><img loading="lazy" decoding="async" src="research/screens/32-healthcaters-onboarding-breast-risk.png" alt="HealthCaters — ризик"></a><figcaption><b>HealthCaters — ризик</b>Генетичний тест і біопсія грудей</figcaption></figure>
+      <figure><a href="research/screens/33-healthcaters-onboarding-conditions-family.png"><img loading="lazy" decoding="async" src="research/screens/33-healthcaters-onboarding-conditions-family.png" alt="HealthCaters — анамнез"></a><figcaption><b>HealthCaters — анамнез</b>Власні стани і стани родичів</figcaption></figure>
     </div>
   </section>
 
@@ -405,43 +410,67 @@
 
   <section class="block">
     <h2 id="r-wave2"><span class="num">05</span>Друга хвиля</h2>
-    <p class="sub">Flo, HealthCaters і Purovitalis Aura — за списком від власниці продукту, 3 вересня 2026.</p>
+    <p class="sub">Flo, HealthCaters і Purovitalis Aura, 3 вересня 2026. Публічні сторінки — Playwright, онбординг застосунків — за скрінами від власниці продукту.</p>
+
+    <div class="box red">
+      <p class="t">Виправлення попереднього висновку</p>
+      <p>У першій редакції я стверджував, що Aura збирає лише скан обличчя і що анамнез не збирає ніхто. <strong>Це було хибно.</strong> Я бачив тільки публічні лендинги; онбординг живе за встановленням застосунку, і я подав відсутність доступу як відсутність факту. Насправді <strong>обидва продукти збирають повний анамнез</strong>, за структурою близький до нашого.</p>
+    </div>
+
+    <div class="cards">
+      <div class="card"><span class="lbl">Purovitalis Aura</span><p class="h">Що збирає</p>
+        <p>Етнічність · вага · медична історія пошуком по великому словнику · наявні стани (діабет, гіперліпідемія, гіпертензія) · сімейна історія з варіантами «I am adopted» і «Family History Unknown». Візард, прогрес угорі, підпис «дані захищені» на кожному екрані.</p></div>
+      <div class="card"><span class="lbl">HealthCaters</span><p class="h">Що збирає</p>
+        <p>Вагітність / менопауза / постменопауза · зріст · генетичний тест на рак грудей · біопсія грудей · власні стани мультивибором · стани родичів першої лінії. Питання про тест і біопсію — типові входи моделей ризику раку грудей.</p></div>
+    </div>
 
     <div class="box warm">
-      <p class="t">Уточнення до гіпотези про Aura</p>
-      <p>Передбачався збір анамнезу — насправді там <strong>сканування обличчя</strong> 30–60 секунд, з якого AI виводить 50+ біомаркерів і біологічний вік. Анамнезоподібний квіз у Purovitalis існує окремо, але його вихід — <strong>план добавок</strong>, а не обстежень: ціль, симптоми, рівень стресу. Медичної історії, сімейного анамнезу й джерел немає.</p>
+      <p class="t">Що це змінює</p>
+      <p><strong>Глибина анамнезу не є нашою відмінністю</strong> — ринок це вже робить і випускає, отже головна ставка брифу про 15–25 питань значною мірою підтверджена. <strong>Наша «захищена позиція» слабша</strong>, ніж я стверджував: HealthCaters уже питає про менопаузу й ризик раку грудей. Різниця лишається в каналі і ринку, але не в темі. <strong>Тому вимір «обґрунтованість пункту плану» стає єдиною реальною відмінністю</strong> — жоден із них не показує ні джерела, ні рівня доказовості, ні пояснення, чому щось не увійшло.</p>
     </div>
+
+    <h3>Три механізми, які варто взяти</h3>
+    <ul>
+      <li><strong>«Не знаю» як повноцінна відповідь.</strong> Aura дає «I am adopted» і «Family History Unknown», HealthCaters — «Unknown» до біопсії. Без цього ми змушуємо вгадувати, а вгадана відповідь у медичній логіці гірша за відсутню. У нашому брифі цього немає.</li>
+      <li><strong>Пошук по словнику замість довгого списку.</strong> Обидва так вирішують проблему сотні станів — наш блок медичної історії впреться в те саме.</li>
+      <li><strong>Приватність як постійний підпис, а не разовий екран.</strong> Aura повторює «дані захищені» на кожному кроці. Для продукту, чия головна обіцянка — локальність даних, це дешевий і сильний хід.</li>
+    </ul>
 
     <div class="scroll"><table>
       <thead><tr><th>Продукт</th><th>Аудиторія</th><th>Основа</th><th>Ключовий механізм</th><th>Довіра</th><th>Монетизація</th></tr></thead>
       <tbody>
-        <tr><td><strong>Flo</strong></td><td>Жінки, глобально; 420 млн</td><td>100+ лікарів + контент; цикл як вхідні дані</td><td>Трекінг → прогнози. Symptom Checker: «інформація для впевненої розмови з лікарем»</td><td>Масштаб, рецензія лікарів, позиція про приватність</td><td>Підписка, freemium</td></tr>
-        <tr><td><strong>HealthCaters</strong></td><td><strong>Роботодавець</strong>, не людина</td><td>Біометрія 30+ маркерів на місці, без лікаря і лабораторії</td><td>Скринінг на роботі → результати в застосунку → гайд + скерування. Для HR — агрегована аналітика</td><td>Дані в Німеччині, GDPR; 45+ компаній, 97% задоволеності</td><td>€39–89 на працівника на рік</td></tr>
-        <tr><td><strong>Purovitalis Aura</strong></td><td>Longevity-сегмент, ЄС</td><td>Скан обличчя + AI: 50+ біомаркерів, біологічний вік</td><td>Face scan &lt;2 хв → біологічний вік → «turn insights into action»</td><td>Наукоподібна риторика, кількість біомаркерів</td><td><strong>Добавки.</strong> Застосунок — верхівка воронки</td></tr>
+        <tr><td><strong>Flo</strong></td><td>Жінки, глобально; 420 млн</td><td>100+ лікарів рецензують контент</td><td>Онбординг 14+ питань → трекінг → прогнози. Symptom Checker: «впевнена розмова з лікарем»</td><td>Масштаб, рецензія лікарів, позиція про приватність</td><td>Підписка, freemium</td></tr>
+        <tr><td><strong>HealthCaters</strong></td><td><strong>Роботодавець</strong> платить, працівник користується</td><td>Біометрія 30+ маркерів <strong>плюс анамнез</strong></td><td>Візард (анамнез, жіночий статус, ризик раку грудей) → скринінг → результати → скерування</td><td>Дані в Німеччині, GDPR; 45+ компаній</td><td>€39–89 на працівника на рік</td></tr>
+        <tr><td><strong>Purovitalis Aura</strong></td><td>Longevity-сегмент, ЄС</td><td>Скан обличчя + AI <strong>плюс повний анамнез</strong></td><td>Візард (етнічність, вага, медична й сімейна історія) + face scan → біологічний вік</td><td>«Дані захищені» на кожному екрані</td><td><strong>Добавки.</strong> Застосунок — верхівка воронки</td></tr>
         <tr class="us"><td><strong>Prevently</strong></td><td>Жінки 18+, Україна</td><td>USPSTF + ACOG/ACS + WHO</td><td>Адаптивний анамнез → двошаровий план → перерахунок</td><td>Рецензент + джерело і рівень доказовості на пункт</td><td>Безкоштовно в MVP</td></tr>
       </tbody>
     </table></div>
 
     <h3>Три спільні патерни</h3>
     <ul>
-      <li><strong>Персоналізація скрізь є воронкою, а не самоціллю.</strong> Flo веде в підписку, HealthCaters — у контракт із роботодавцем, Aura — у добавки. Продукт, який нічого не продає, на цьому ринку виняток.</li>
-      <li><strong>Вхід максимально дешевий.</strong> Скан менше двох хвилин, квіз на три-п'ять кліків. Анамнез не збирає ніхто — наші 15–25 питань лишаються аномалією і після другої хвилі.</li>
-      <li><strong>«Персоналізовано» без джерел.</strong> Навіть Flo зі 100+ лікарями подає це як бейдж довіри, а не як посилання біля пункту.</li>
+      <li><strong>Візард — галузевий стандарт.</strong> Одне питання на екран, прогрес угорі, можливість повернутись. Наш обраний патерн підтверджено ринком, а не лише міркуванням.</li>
+      <li><strong>Персоналізація є воронкою.</strong> Flo веде в підписку, HealthCaters — у контракт, Aura — у добавки. Продукт, який нічого не продає, тут виняток.</li>
+      <li><strong>Глибокий анамнез — і жодного джерела.</strong> Усі троє питають багато, але жоден не показує, на якій підставі рекомендує.</li>
     </ul>
 
     <h3>Три відмінності</h3>
     <ul>
-      <li><strong>Хто платить.</strong> HealthCaters єдиний, де платить роботодавець — модель, яку ми не розглядали взагалі.</li>
-      <li><strong>Що беруть на вході.</strong> Flo — поведінку в часі, HealthCaters — виміряну біометрію, Aura — обличчя. Ми єдині, хто ставить на <strong>історію</strong>, а не на вимірювання.</li>
-      <li><strong>Що на виході.</strong> Flo — підготовка до розмови, Aura — біологічний вік і добавки, HealthCaters — результати плюс скерування, і це найближче до плану.</li>
+      <li><strong>Хто платить.</strong> HealthCaters єдиний, де платить роботодавець.</li>
+      <li><strong>Що роблять з анамнезом.</strong> HealthCaters — у модель ризику й скринінг, Aura — у біологічний вік і добавки, Flo — у прогноз циклу. Ми єдині, хто веде його в <strong>перелік обстежень із джерелами</strong>.</li>
+      <li><strong>Обробка невідомого.</strong> Обидва дають «не знаю» окремою відповіддю. У нашому брифі цього немає — це прогалина, а не відмінність.</li>
     </ul>
 
     <h3>Три відкриті питання до PM</h3>
     <ul>
-      <li><strong>Чи розглядаємо B2B-канал?</strong> HealthCaters доводить, що за профілактику може платити роботодавець — можлива відповідь на питання монетизації.</li>
+      <li><strong>Чи розглядаємо B2B-канал?</strong> HealthCaters доводить, що за жіночу профілактику може платити роботодавець.</li>
+      <li><strong>Що лишається нашим, якщо глибина анамнезу вже не відмінність?</strong> Відповідь поки одна — обґрунтованість пункту.</li>
       <li><strong>Що робимо, якщо Flo піде в профілактику?</strong> 420 млн користувачів і обіцянка, сформульована майже нашими словами.</li>
-      <li><strong>Чим живемо, коли безкоштовність закінчиться?</strong> Усі три продають щось своє. Ми не продаємо нічого — і поки не маємо, чим це замінити.</li>
     </ul>
+
+    <div class="box">
+      <p class="t">Обмеження методу — на майбутнє</p>
+      <p>Playwright дістає лише публічний веб. Онбординг, дашборди й усе за реєстрацією лишаються невидимими. Правило на наступні раунди: <strong>із заблокованого екрана не робимо висновку про продукт</strong> — позначаємо «не перевірено» і шукаємо інший шлях.</p>
+    </div>
   </section>
 
   <section class="block">
@@ -484,7 +513,7 @@
     <h2 id="r-conclusions"><span class="num">07</span>Висновки</h2>
     <h3>Три спільні патерни ринку</h3>
     <ul>
-      <li><strong>Вхід усюди мінімальний — вік і стать.</strong> Наш опитувальник на 15–25 питань це або головна перевага, або головна причина відсіву.</li>
+      <li><strong>Глибина входу визначається форматом.</strong> Веб-інструменти беруть 2–3 поля, застосунки — повний анамнез. Наш опитувальник не аномальний, але й глибина анамнезу не є нашою відмінністю <em>(виправлено 03.09.2026)</em>.</li>
       <li><strong>Ніхто не поєднує «чи потрібно» зі «скільки коштує».</strong> Державні мовчать про гроші, лабораторії — про потребу.</li>
       <li><strong>Комерція заробляє на збільшенні обсягу.</strong> Життєздатної комерційної моделі на скороченні серед знайдених немає.</li>
     </ul>
