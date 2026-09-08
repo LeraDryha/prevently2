@@ -119,6 +119,48 @@
   .src .ext{font-size:11px; color:var(--dim)}
   footer{margin-top:48px; padding-top:22px; border-top:1px solid var(--line); color:var(--dim); font-size:13.5px}
 
+  /* ---------- люди і роботи ---------- */
+  .persona{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px 20px; margin:16px 0}
+  .persona.primary{border-color:var(--primary-line); box-shadow:inset 3px 0 0 var(--primary)}
+  .persona .ph{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:2px}
+  .persona .pn{font-size:17px; font-weight:700; margin:0; letter-spacing:-.01em}
+  .persona .pw{font-size:13px; color:var(--muted)}
+  .persona .pctx{font-size:14.5px; color:var(--muted); margin:6px 0 0}
+  .pgrid{display:grid; gap:15px; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); margin-top:15px}
+  .pgrid h5{margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.07em;
+    color:var(--primary); font-weight:650}
+  .pgrid p{font-size:13.5px; color:var(--muted); margin:0}
+  .pgrid ul{font-size:13.5px; color:var(--muted); margin:0; padding-left:16px}
+  .pgrid li{margin-bottom:5px}
+  blockquote.q{margin:15px 0 0; padding:13px 16px; background:var(--primary-soft);
+    border-radius:8px; font-size:14.5px; color:var(--text)}
+  blockquote.q cite{display:block; margin-top:7px; font-size:12.5px; color:var(--muted); font-style:normal}
+
+  .job{border-left:3px solid var(--line); padding:2px 0 2px 15px; margin:16px 0}
+  .job.main{border-left-color:var(--primary)}
+  .job.hyp{border-left-color:var(--amber)}
+  .job.off{border-left-color:var(--line); opacity:.75}
+  .job .jt{font-size:11.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--dim);
+    font-weight:650; margin:0 0 5px}
+  .job .jb{margin:0; font-size:15.5px; line-height:1.55}
+  .job.main .jb{font-size:17px; font-weight:600; line-height:1.5}
+  .job.off .jb{text-decoration:line-through; color:var(--muted)}
+  .job .jm{margin:7px 0 0; font-size:13.5px; color:var(--muted)}
+
+  .mk{display:inline-block; font-size:11px; font-weight:650; padding:2px 8px; border-radius:100px;
+    letter-spacing:.02em; white-space:nowrap; vertical-align:middle}
+  .mk.data{background:#e9f3ed; color:var(--green)}
+  .mk.int{background:var(--primary-soft); color:var(--primary-dark)}
+  .mk.ind{background:#f3f0f1; color:var(--muted)}
+  .mk.hyp{background:#fbf1e5; color:var(--amber)}
+  .mk.q{background:#fbeceb; color:var(--red)}
+  .legend{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); margin:16px 0 0}
+  .legend div{font-size:13.5px; color:var(--muted)}
+  .imp{font-weight:700; font-size:15px}
+  .imp3{color:#2f7d5f} .imp2{color:#b0703a} .imp1{color:var(--dim)}
+  td .ev{display:block; font-size:12px; color:var(--dim); margin-top:3px; line-height:1.4}
+
   @media (max-width:900px){
     aside{transform:translateX(-100%); transition:transform .22s ease; width:280px}
     aside.open{transform:none; box-shadow:0 0 40px rgba(27,23,25,.18)}
@@ -155,6 +197,17 @@
           <li><a href="#r-conclusions">Висновки</a></li>
           <li><a href="#r-next">Що ще перевірити</a></li>
           <li><a href="#r-status">Статус</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#people" data-v="people" class="done"><span class="dot"></span>Люди і роботи</a>
+        <ul class="subnav" id="sub-people">
+          <li><a href="#p-legend">Як читати позначки</a></li>
+          <li><a href="#p-personas">Персони</a></li>
+          <li><a href="#p-jobs">Ієрархія робіт</a></li>
+          <li><a href="#p-matrix">JTBD-матриця</a></li>
+          <li><a href="#p-core">Ядро MVP</a></li>
+          <li><a href="#p-unknown">Чого не знаємо</a></li>
         </ul>
       </li>
       <li><a href="#wireframes" data-v="wireframes"><span class="dot"></span>Вайрфрейми</a></li>
@@ -194,7 +247,8 @@
     <div class="scroll"><table>
       <thead><tr><th>Розділ</th><th>Що всередині</th><th>Стан</th></tr></thead>
       <tbody>
-        <tr><td><strong>Дослідження</strong></td><td>Конкуренти, бенчмарк, UX-патерни, 18 скрінів</td><td><span class="badge done">зроблено</span></td></tr>
+        <tr><td><strong>Дослідження</strong></td><td>Конкуренти, бенчмарк, UX-патерни, 33 скріни, доресерч у три раунди</td><td><span class="badge done">зроблено</span></td></tr>
+        <tr><td><strong>Люди і роботи</strong></td><td>Опитування на 362 відповіді, 5 інтерв'ю, 4 персони, JTBD-матриця</td><td><span class="badge done">зроблено</span></td></tr>
         <tr><td>Вайрфрейми</td><td>Схеми екранів опитувальника і плану</td><td><span class="badge none">не почато</span></td></tr>
         <tr><td>Концепція</td><td>Візуальний напрям, тон, ключові екрани</td><td><span class="badge none">не почато</span></td></tr>
         <tr><td>Токени</td><td>Кольори, типографіка, відступи</td><td><span class="badge none">не почато</span></td></tr>
@@ -208,8 +262,12 @@
   <section class="block">
     <h2>Що блокує далі</h2>
     <div class="box red">
-      <p class="t">Інтерв'ю з користувачками не проводились</p>
-      <p>Головна ставка брифу — опитувальник на 15–25 питань, коли ринок привчив до трьох полів. Поки цю гіпотезу не перевірено на живих людях, будувати повну адаптивну логіку й медичний контент під неї ризиковано.</p>
+      <p class="t">Половина продукту не перевірена на жодній українці</p>
+      <p>Опитування й інтерв'ю показали, що ключова задача сформульована правильно: 40,5% жінок зупиняє недовіра до призначень. Але <strong>чи читається «чому цього немає» як цінність — не питали ні разу</strong>. Зовнішні докази знайшлися з обох боків: у ScreenMen цей шар прийняли добре, а на скороченні скринінгу відповіли петиціями на 70 000+ підписів. Перевіряється це найдешевше з усього — коридорним тестом на макеті.</p>
+    </div>
+    <div class="box warm">
+      <p class="t">Формат: 82% просять додаток, 6,9% — чек-лист у браузері</p>
+      <p>Найбільше розходження між даними й брифом. Це заявлена перевага, а не поведінка, і «в додатку» часто означає просто «зручно на телефоні» — але цифра надто низька, щоб пояснити її формулюванням питання.</p>
     </div>
   </section>
 </div>
@@ -568,6 +626,387 @@
   </section>
 </div>
 
+<!-- ============ ЛЮДИ І РОБОТИ ============ -->
+<div class="view" id="v-people">
+  <header class="top">
+    <p class="eyebrow">Розділ 02 · Люди і роботи</p>
+    <h1>Персони та jobs to be done</h1>
+    <p class="lede">Хто ці жінки, що вони насправді намагаються зробити — і які з цих робіт ринок уже виконує без нас. Зібрано з опитування, глибинних інтерв'ю та кабінетного аналізу; кожне твердження має позначку, наскільки воно підкріплене.</p>
+    <div class="meta"><span class="chip">362 відповіді</span><span class="chip">5 інтерв'ю</span><span class="chip">4 персони</span><span class="chip">11 робіт</span><span class="chip">Оновлено 08.09.2026</span></div>
+  </header>
+  <p class="src">Джерела розділу:
+    <a href="https://github.com/LeraDryha/prevently2/blob/main/research/personas.md" target="_blank" rel="noopener">research/personas.md</a> <span class="ext">↗</span> ·
+    <a href="https://github.com/LeraDryha/prevently2/blob/main/research/jtbd.md" target="_blank" rel="noopener">research/jtbd.md</a> <span class="ext">↗</span>
+  </p>
+
+  <section class="block">
+    <h2 id="p-legend"><span class="num">01</span>Як читати позначки</h2>
+    <p class="sub">Без них твердження виглядають надійнішими, ніж є. Опитування зібрано навесні 2025, інтерв'ю — лютий–квітень 2025; дані старші за рік.</p>
+    <div class="legend">
+      <div><span class="mk data">опит</span> — цифра з опитування. База: жінки з України, n=274</div>
+      <div><span class="mk int">інт</span> — сказано в інтерв'ю, з п'яти респонденток</div>
+      <div><span class="mk ind">непряме</span> — висновок із поведінки конкурента, не людини</div>
+      <div><span class="mk hyp">гіпотеза</span> — правдоподібне продовження даних, не перевірене</div>
+      <div><span class="mk q">[?]</span> — даних немає взагалі. Не заповнюємо здогадкою</div>
+    </div>
+    <div class="box warm">
+      <p class="t">Зсув вибірки, який треба тримати в голові</p>
+      <p>Зручнісна вибірка з мережі власниці продукту: цифрово грамотні містянки, здебільшого креативні та ІТ-професії. 89% — це 18–39 років. Це найлегша аудиторія для нашого продукту, а не середня.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 id="p-personas"><span class="num">02</span>Персони</h2>
+    <p class="sub">Не вигадані портрети, а поведінкові типи з даних. Вони перетинаються — недовіра й незнання збігаються у 37 респонденток, — тому це лінзи для рішень, а не сегменти для розподілу аудиторії. Числа поруч є вагами, а не розмірами ринку.</p>
+
+    <div class="persona primary">
+      <div class="ph">
+        <p class="pn">П1 · Перевіряльниця</p>
+        <span class="badge done">primary</span>
+        <span class="pw">111 із 274 — 40,5%</span>
+      </div>
+      <p class="pctx">Ходить до лікаря регулярно й виходить із кабінету зі списком призначень, частину яких вважає зайвою. <strong>«Перевіряє» не означає «гуглить»:</strong> з трьох носійок профілю в інтерв'ю незалежно шукає лише одна, ще одна перевіряє через свого лікаря, третя спирається на почуте. Серед П1 гуглять 34,2%, а від лікаря дізнаються 66,7% — альтернативи в неї немає.</p>
+      <div class="pgrid">
+        <div>
+          <h5>Jobs</h5>
+          <ul>
+            <li>Відсіяти зайве з уже призначеного</li>
+            <li>Не платити за те, що не потрібно</li>
+            <li>Прийти в кабінет підготовленою</li>
+            <li>Мати спокій щодо того, чого <em>не</em> зробила <span class="mk data">виправлено</span></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Болі</h5>
+          <ul>
+            <li>Немає нейтрального джерела: лабораторія продає, лікар теж сторона</li>
+            <li>Гуглення не масштабується</li>
+            <li>Незгоду нікуди подіти — вона не сперечається вголос</li>
+            <li>Культурна норма проти неї: повне обстеження = «мною зайнялися»</li>
+          </ul>
+        </div>
+        <div>
+          <h5>Переконує</h5>
+          <ul>
+            <li>Конкретні факти й цифри від названого джерела <span class="mk int">1 з 5</span></li>
+            <li>Явна позначка, де доказів немає <span class="mk int">1 з 5</span></li>
+            <li>Сарафанне радіо — 55,5% <span class="mk data">опит</span></li>
+            <li>Джерело й грейд біля пункту <span class="mk hyp">не тестувалось</span></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Відлякує</h5>
+          <ul>
+            <li>Будь-що, що читається як продаж</li>
+            <li>Рефлекс «тести — це безпечно»: скепсис спрямований на продаж, не на тестування</li>
+            <li>Підозра, що скорочення робиться заради економії</li>
+            <li>Заміна лікаря застосунком</li>
+          </ul>
+        </div>
+      </div>
+      <blockquote class="q">«Дуже часто лікарі виписують купу аналізів, купу безпалєзних мазілок, обов'язково зі своїм підписом… <strong>я завжди думаю: не треба мене намахувати, я перевірю чи це взагалі не фуфломіцини</strong>»<cite>Р5, 29 років, інтерв'ю 15.04.2025</cite></blockquote>
+      <div class="box">
+        <p class="t">Чому primary — і де тут ризик</p>
+        <p>Тільки їй потрібна друга половина ключової задачі: для неї відсутність рекомендації і є продуктом. Її бар'єр не знімає ніхто на ринку. <strong>Але</strong> в дослідженні ставлення до рідшого скринінгу найсильніше опиралися саме найзалученіші — тобто вона ж. Це не спростовує вибір, а піднімає ціну помилки в подачі.</p>
+      </div>
+    </div>
+
+    <div class="persona">
+      <div class="ph">
+        <p class="pn">П2 · Системна, але наосліп</p>
+        <span class="badge none">secondary</span>
+        <span class="pw">80 із 274 — 29,2%</span>
+      </div>
+      <p class="pctx">Обстеження проходить, і навіть регулярно — 64,6% із них робили щось за останній рік, — але без розуміння логіки. Це не параліч від незнання, а дія навмання.</p>
+      <div class="pgrid">
+        <div><h5>Jobs</h5><ul><li>Зрозуміти логіку, а не отримати список</li><li>Відсіяти дороге зі стандартного набору</li><li>Перестати щоразу починати з нуля</li></ul></div>
+        <div><h5>Болі</h5><ul><li>Джерела суперечать одне одному</li><li>Розібратися самій — надто дорого за зусиллям</li><li>Результати розкидані <span class="mk int">3 з 5</span></li></ul></div>
+        <div><h5>Переконує</h5><ul><li>Зв'язок «моя ситуація → цей пункт»</li><li>Градація впевненості замість плоского списку</li></ul></div>
+        <div><h5>Відлякує</h5><ul><li>Медична мова: її бар'єр — біологія, не мотивація</li><li>Обіцянка пояснити результати, яку ми не виконаємо</li></ul></div>
+      </div>
+      <blockquote class="q">«Підвищення рівня грамотності було б класно, щоб я розуміла, які є залежності від тих аналізів які я здаю — <strong>чи потрібно мені той феритин здавати кожні пів року</strong> — не знаю»<cite>Р3, 32 роки, інтерв'ю 16.04.2025</cite></blockquote>
+    </div>
+
+    <div class="persona">
+      <div class="ph">
+        <p class="pn">П3 · Перше коло</p>
+        <span class="badge none">secondary</span>
+        <span class="pw">56 із 274 — 20,4%</span>
+      </div>
+      <p class="pctx">18–24 роки. Виходить з-під батьківського медичного контролю й уперше сама вирішує, що робити зі своїм здоров'ям. Три бар'єри з чотирьох у неї вищі за середні — крім страху діагнозу, який найнижчий. Для неї план майже цілком складається з базового шару.</p>
+      <div class="pgrid">
+        <div><h5>Бар'єри проти середніх</h5><ul><li>Вартість — <strong>71,4%</strong> проти 63,1%</li><li>Недовіра до лікарів — <strong>50,0%</strong> проти 40,5%</li><li>Не знаю, що проходити — <strong>44,6%</strong> проти 29,2%</li><li>Страх знайти погане — 14,3%, найнижчий</li></ul></div>
+        <div><h5>Jobs</h5><ul><li>Зрозуміти, що взагалі належить у її віці</li><li>Вкластися в гроші, яких мало</li><li>Не наражатися на осуд у кабінеті</li><li>Вбудувати це в календар — 73,2%</li></ul></div>
+        <div><h5>Переконує</h5><ul><li>Пояснення, навіщо питають <span class="mk ind">непряме</span></li><li>PDF — 30,4% проти 14,3% у старших</li><li>Освітній контент — 41,1%, єдина група, де він не останній</li></ul></div>
+        <div><h5>Відлякує</h5><ul><li>Тон дорослого, який пояснює</li><li>Порожнеча замість пояснення <span class="mk q">[?]</span></li></ul></div>
+      </div>
+      <blockquote class="q">«В якийсь момент я стала перевіряти — <strong>бо втомилася від такого ставлення до тебе як до ідіотки</strong>»<cite>Р5, про свій шлях, що почався у 18–19</cite></blockquote>
+    </div>
+
+    <div class="persona">
+      <div class="ph">
+        <p class="pn">П4 · Вірить, але не дійшла</p>
+        <span class="badge none">secondary</span>
+        <span class="pw">51 із 274 — 18,6%</span>
+      </div>
+      <p class="pctx"><strong>Виправлено 08.09.2026.</strong> Спершу я описав її стоп-фактори як матеріальні — ціна й час. Дані кажуть протилежне: вона скаржиться на них <em>менше</em> за середню жінку. Вона вірить на словах, але внутрішнього приводу не має.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Показник</th><th class="n">П4</th><th class="n">База</th></tr></thead>
+        <tbody>
+          <tr><td>Вартість як бар'єр</td><td class="n">52,9%</td><td class="n">63,1%</td></tr>
+          <tr><td>Відсутність часу як бар'єр</td><td class="n">39,2%</td><td class="n">45,6%</td></tr>
+          <tr><td>Турбота про себе як мотив</td><td class="n">39,2%</td><td class="n">67,9%</td></tr>
+          <tr><td>«Профілактично не обстежуюсь»</td><td class="n">39,2%</td><td class="n">17,9%</td></tr>
+          <tr><td>Страх знайти щось погане</td><td class="n">25,5%</td><td class="n">17,9%</td></tr>
+        </tbody>
+      </table></div>
+      <blockquote class="q">«Чи боюсь я, звісно. Але, нажаль, думаю, що <strong>я ще молода, можливо пізніше схожу на огляд</strong> і взагалі зі мною таке ніколи не трапиться»<cite>вільна відповідь опитування, 25–39, Україна</cite></blockquote>
+      <div class="box red">
+        <p class="t">Чесно про неї</p>
+        <p>Ми даємо їй план, а не гроші й не час. Найімовірніше, ми її не конвертуємо — і це варто визнати відразу, а не проєктувати під неї. Вона тут, щоб не приписувати продукту вплив, якого він не має.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 id="p-jobs"><span class="num">03</span>Ієрархія робіт</h2>
+    <p class="sub">Формат: «Коли [ситуація], я хочу [мотивація], щоб [результат]». У формулюваннях немає назв функцій і нашої термінології — перевірено за трьома осями окремо, дев'ять формулювань після першої перевірки довелося переписати.</p>
+
+    <h4>Main job</h4>
+    <div class="job main">
+      <p class="jt">MAIN · П1 40,5% · ринок не закриває</p>
+      <p class="jb">Коли мені призначили більше, ніж я вважаю потрібним, і я не можу відрізнити необхідне від зайвого, я хочу розуміти, що з цього справді стосується мене, щоб піти спокійною і за те, що зробила, і за те, чого не робила.</p>
+      <p class="jm">Дві половини результату нерівні: друга важча й рідкісніша. Доресерч додав опору — головна робота відбувається <strong>після</strong> візиту, а не в кабінеті.</p>
+    </div>
+
+    <h4>Related jobs</h4>
+    <div class="job">
+      <p class="jt">R1 · Зрозуміти логіку, а не отримати відповідь</p>
+      <p class="jb">Коли я чую різні рекомендації з різних джерел, я хочу розуміти, від чого залежить потреба саме в моєму випадку, щоб перестати вирішувати навмання.</p>
+    </div>
+    <div class="job">
+      <p class="jt">R2 · Витратити обмежений ресурс на те, що змінює справу</p>
+      <p class="jb">Коли переді мною перелік, за який треба заплатити, я хочу вкласти обмежені гроші й час у те, що справді щось змінює, щоб ця витрата була для мене виправданою.</p>
+      <p class="jm">Напруга: жінки формулюють це як <strong>порівняння цін</strong>, а продукт свідомо не називає конкретних цін.</p>
+    </div>
+    <div class="job">
+      <p class="jt">R3 · Увійти в кабінет як сторона, а не як об'єкт</p>
+      <p class="jb">Коли я йду до лікаря, я хочу прийти з власним розумінням своєї ситуації, щоб рішення ухвалювали разом зі мною, а не за мене.</p>
+      <p class="jm"><strong>Доресерч підрізав цю роботу.</strong> Незгоду вголос не висловлюють 31–46% пацієнтів. Бажання рівного ставлення лишається, але прогрес відбувається не в кабінеті, а після нього.</p>
+    </div>
+    <div class="job">
+      <p class="jt">R4a · Не починати шлях спочатку</p>
+      <p class="jb">Коли я знову дійшла до лікаря, я хочу спиратися на те, що вже зробила, щоб не починати шлях спочатку.</p>
+    </div>
+    <div class="job">
+      <p class="jt">R4b · Помітити зміну вчасно</p>
+      <p class="jb">Коли в мене змінюється вік чи обставини, я хочу помітити це вчасно, щоб не дізнатися про пропущене запізно.</p>
+      <p class="jm">Була одним job'ом разом із R4a — різні тригери, різні персони й різні цифри, які доводилось усереднювати.</p>
+    </div>
+    <div class="job">
+      <p class="jt">R5 · Зрозуміти, що зі мною відбувається за цифрами</p>
+      <p class="jb">Коли я отримую результати, я хочу зрозуміти, що вони означають саме для мене, щоб знати, чи щось у мені змінилось, і жити далі без цього питання.</p>
+      <p class="jm">Найвищий попит із усіх робіт — і саме її продукт свідомо не виконує.</p>
+    </div>
+
+    <h4>Emotional jobs</h4>
+    <div class="job">
+      <p class="jt">E1 · Перестати відчувати, що на мені заробляють</p>
+      <p class="jb">Коли мені призначають те, чого я не розумію, я хочу відчувати, що мене не використовують, щоб кожен візит не коштував мені ще й підозри.</p>
+    </div>
+    <div class="job">
+      <p class="jt">E2 · Спокій замість фонової тривоги</p>
+      <p class="jb">Коли я ловлю себе на думці «а раптом там щось є», я хочу перестати носити це питання в фоні, щоб воно не тривало весь рік.</p>
+      <p class="jm">Межа: <strong>менша кількість обстежень сама по собі тривогу не знімає</strong>. Знімає її пояснена підстава.</p>
+    </div>
+
+    <h4>Social jobs</h4>
+    <div class="job">
+      <p class="jt">S1 · Щоб зі мною говорили як з людиною, яка розуміє</p>
+      <p class="jb">Коли я в кабінеті, я хочу, щоб зі мною говорили як з людиною, яка розуміє, що відбувається з її тілом, щоб не почуватися дурною за те, що прийшла.</p>
+      <p class="jm">Робота, якої не було в брифі. Найемоційніше місце в усіх інтерв'ю <span class="mk int">4 з 5</span></p>
+    </div>
+    <div class="job">
+      <p class="jt">S2 · Спертися на когось, кому довіряю особисто</p>
+      <p class="jb">Коли я вирішую щось про своє здоров'я, я хочу спертися на когось, кому довіряю особисто, щоб могти собі вірити, коли вирішую.</p>
+    </div>
+
+    <h4>Гіпотези <span class="mk hyp">не підкріплені даними</span></h4>
+    <div class="job hyp">
+      <p class="jt">H2 · Мати чим поділитися з мамою чи сестрою</p>
+      <p class="jb">Коли близька людина питає, з чого їй почати, я хочу передати їй щось надійне, щоб не переказувати чутки.</p>
+      <p class="jm">47,8% відзначили «додати членів родини» — але це вибір із переліку функцій, а не описана потреба.</p>
+    </div>
+    <div class="job hyp">
+      <p class="jt">H4 · Розібратися до того, як щось станеться</p>
+      <p class="jb">Коли я бачу, що сталося з кимось із рідних, я хочу перевірити себе, щоб не повторити їхній шлях.</p>
+      <p class="jm">Дані радше <strong>проти</strong>: 62,8% мали такий досвід, і це не підвищує інтерес до сервісу — 55,2% проти 56,5%.</p>
+    </div>
+    <div class="job off">
+      <p class="jt">H3 · відхилено 08.09.2026</p>
+      <p class="jb">Коли лікар називає обстеження, у потрібності якого я сумніваюсь, я хочу зрозуміти, чи це справді про мене, щоб мій сумнів не перетворився на сварку.</p>
+      <p class="jm"><strong>Сварки немає, бо немає розмови.</strong> Реальний сценарій — погодитись у кабінеті, не зробити, розібратися самій. Замінено на «перестати тривожитись через те, чого не зробила».</p>
+    </div>
+
+    <h4>Питання до рішення, не job</h4>
+    <div class="box warm">
+      <p class="t">Коли мені кажуть, що зараз мені майже нічого не потрібно, я хочу відчути, що це результат роботи, а не її відсутність</p>
+      <p>Помилка категорії: ситуація тут настає лише <strong>після того, як наш продукт видав результат</strong> — такого моменту в житті жінки без нас не існує. Це питання до юзабіліті рішення, і перевіряється воно на макеті, а не в житті людей. Докази знайшлися <strong>з обох боків</strong>: у ScreenMen шар «чого не треба» прийняли добре; на скороченні скринінгу — 70 000+ підписів проти. Різниця в дії: там знання <em>додавали</em>, тут належне <em>забирали</em>.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 id="p-matrix"><span class="num">04</span>JTBD-матриця</h2>
+    <p class="sub">Важливість: <span class="imp imp3">3</span> визначальна · <span class="imp imp2">2</span> суттєва · <span class="imp imp1">1</span> периферійна · <span class="mk q">[?]</span> даних немає. Частка рахувалась усередині підвибірки персони, поріг 60/35. <strong>Пороги обрані довільно</strong> — при 50/30 склад ядра змінюється, тому це впорядкування, а не шкала.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Job</th><th class="n">П1</th><th class="n">П2</th><th class="n">П3</th><th class="n">П4</th><th>Функція</th><th>Конкуренти</th></tr></thead>
+      <tbody>
+        <tr class="us">
+          <td><strong>MAIN</strong> Розуміти, що з призначеного справді про мене<span class="ev">індикатор: «без зайвих призначень»</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">73,0%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">80,0%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">71,4%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">52,9%</span></td>
+          <td>Двошаровий план · «розглянули і не включили» · джерело та грейд біля пункту</td>
+          <td>Показ джерел — <strong>ніхто</strong>. Але пояснення невключеного <em>займали</em>: Choosing Wisely і ScreenMen</td>
+        </tr>
+        <tr>
+          <td><strong>R1</strong> Зрозуміти логіку<span class="ev">індикатор: «не знаю, що проходити»</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">33,3%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">за визначенням</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">44,6%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">39,2%</span></td>
+          <td>Атрибуція пункту до відповідей · словесні рівні певності</td>
+          <td>Частково: MyHealthfinder ділить видачу на 4 рівні впевненості</td>
+        </tr>
+        <tr>
+          <td><strong>R2</strong> Обмежений ресурс на те, що змінює справу<span class="ev">індикатор: вартість</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">65,8%, час 33,3%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">66,2%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">71,4%, знижки 73,2%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">52,9%</span></td>
+          <td>Скорочений перелік · позначка «безкоштовно / платно»</td>
+          <td>Ніхто не поєднує «чи потрібно» зі «скільки коштує»</td>
+        </tr>
+        <tr>
+          <td><strong>R3</strong> Увійти в кабінет як сторона<span class="ev">підрізано доресерчем</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">інт 3 з 5</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">інт Р3</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">інт Р5</span></td>
+          <td class="n"><span class="mk q">[?]</span></td>
+          <td>Експорт у PDF — <strong>зв'язок припущений, не перевірений</strong></td>
+          <td>Закривають двоє: Flo Symptom Checker і MyHealthfinder</td>
+        </tr>
+        <tr>
+          <td><strong>R4a</strong> Не починати шлях спочатку<span class="ev">індикатор: «пройшла частину»</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">42,3%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">48,8%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">50,0%</span></td>
+          <td class="n"><span class="imp imp1">1</span><span class="ev">0% за визначенням</span></td>
+          <td>Позначка «пройдено» з датою</td>
+          <td><strong>Ніхто.</strong> «Позначила пройдене → перерахувалось» не робить жоден</td>
+        </tr>
+        <tr>
+          <td><strong>R4b</strong> Помітити зміну вчасно<span class="ev">індикатор: планування як мотиватор</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">35,1%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">43,8%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">календар 73,2%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">43,1%</span></td>
+          <td>Перерахунок дати. <strong>Нагадувань у MVP немає</strong></td>
+          <td>Частково: МОЗ через Дію, Function і Superpower — ретест</td>
+        </tr>
+        <tr>
+          <td><strong>R5</strong> Зрозуміти, що означають цифри<span class="ev">індикатор: зберігання результатів</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">85,6%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">90,0%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">85,7%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">68,6%</span></td>
+          <td><strong>Немає.</strong> Свідомо поза межами продукту</td>
+          <td>Закривають майже всі: Function, Superpower, ДІЛА, HealthCaters</td>
+        </tr>
+        <tr class="us">
+          <td><strong>E1</strong> Перестати відчувати, що на мені заробляють<span class="ev">індикатор: недовіра до лікарів</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">за визначенням</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">46,2%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">50,0%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">49,0%</span></td>
+          <td>Джерело й грейд · відсутність монетизації: нам нічого продавати</td>
+          <td><strong>Ніхто.</strong> Superpower радить до $400 добавок на місяць, які сам і продає</td>
+        </tr>
+        <tr>
+          <td><strong>E2</strong> Спокій замість тривоги<span class="ev">індикатор: страх як мотив / бар'єр</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">47,7% / 18,0%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">інт Р3</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">50,0% / 14,3%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">інверсія: 27,5% / 25,5%</span></td>
+          <td>«Розглянули і не включили» · спокійний тон · абсолютні числа</td>
+          <td>Продають, але через максималізм: Function і Superpower</td>
+        </tr>
+        <tr>
+          <td><strong>S1</strong> Щоб говорили як з людиною<span class="ev">лише інтерв'ю</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">інт</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">інт Р2</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">інт Р5</span></td>
+          <td class="n"><span class="mk q">[?]</span></td>
+          <td>Тон інтерфейсу · «обговоріть», ніколи «вам потрібно»</td>
+          <td>Ніхто прямо. Flo і Clue — референс тону</td>
+        </tr>
+        <tr>
+          <td><strong>S2</strong> Спертися на когось, кому довіряю<span class="ev">індикатор: порада друзів</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">58,6%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">66,2%</span></td>
+          <td class="n"><span class="imp imp3">3</span><span class="ev">67,9%</span></td>
+          <td class="n"><span class="imp imp2">2</span><span class="ev">51,0%</span></td>
+          <td>Лікар-рецензент · названі настанови</td>
+          <td>Закривають масштабом та іменем: Flo, Function, ДІЛА</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2 id="p-core"><span class="num">05</span>Ядро MVP і кандидати на виліт</h2>
+    <p class="sub">Критерій: важлива для primary <em>і</em> не закрита ринком. Строго йому відповідають лише дві роботи — тому третю добираємо з поясненням, а не мовчки.</p>
+    <div class="cards">
+      <div class="card"><span class="lbl">Ядро · 1</span><p class="h">MAIN — розуміти, що з призначеного про мене</p><p>Важлива для трьох персон із чотирьох, не виконана жодним гравцем. Це і є ключова задача продукту.</p></div>
+      <div class="card"><span class="lbl">Ядро · 2</span><p class="h">E1 — перестати відчувати, що на мені заробляють</p><p>Найзахищеніша позиція: жоден комерційний гравець не виконає цю роботу, не втративши виручку. Дістається безкоштовно, доки ми нічого не продаємо.</p></div>
+      <div class="card"><span class="lbl">Ядро · 3 — ставка</span><p class="h">R4a — не починати шлях спочатку</p><p>Після поділу R4 утратила числове обґрунтування: жодна з двох не дотягує до 3. Лишена як ставка — єдина інша територія з нульовим покриттям ринку.</p></div>
+    </div>
+    <h4>Функції-кандидати на виліт</h4>
+    <div class="scroll"><table>
+      <thead><tr><th>Функція</th><th>Який job закриває</th><th>Вердикт</th></tr></thead>
+      <tbody>
+        <tr><td>Експорт / імпорт JSON-копії</td><td>Жодного зі списку — але про втрату даних ми не питали взагалі</td><td>Слабкий кандидат: прогалина в опитувальнику, а не відсутність потреби</td></tr>
+        <tr><td>Освітні сторінки під SEO</td><td>Жодного — з обмеженням: питання анкети було про переконування у важливості, не про пояснення обґрунтування</td><td>Кандидат на виліт як переконувальний контент</td></tr>
+        <tr><td>Кілька профілів</td><td>Тільки гіпотезу H2</td><td>Правильно, що v2 — не піднімати, доки H2 не перевірена</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box red">
+      <p class="t">Найбільша свідома відмова продукту</p>
+      <p>R5 «зрозуміти, що означають цифри» має найвищий сумарний попит з усіх робіт — 85–90% у трьох персонах із чотирьох — і закривається майже всіма конкурентами, а ми не виконуємо її зовсім. Це найімовірніше місце, де користувачка вирішить, що ми неповні.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2 id="p-unknown"><span class="num">06</span>Чого ми не знаємо</h2>
+    <p class="sub">Прогалини, які впливають на дизайн-рішення. Позначка <span class="mk q">[?]</span> означає, що даних немає взагалі — і ми не заповнюємо їх здогадкою.</p>
+    <ul>
+      <li><strong>Чи читається «чому цього немає» як цінність саме в українок.</strong> Є зовнішній доказ механізму (ScreenMen) і зовнішній доказ спротиву (петиції проти скорочення скринінгу). Свого немає.</li>
+      <li><strong>Чи сприймається порожній план 18–25 як результат, а не як провал.</strong> <span class="mk q">[?]</span> Персона П3 стоїть майже цілком на цій гіпотезі.</li>
+      <li><strong>Що саме читається як сигнал довіри</strong> — рецензія лікаря, назва настанови чи рівень доказовості. <span class="mk q">[?]</span></li>
+      <li><strong>Готовність платити.</strong> <span class="mk q">[?]</span> Не питали.</li>
+      <li><strong>Точка відсіву в опитувальнику.</strong> <span class="mk q">[?]</span> При тому, що це північна зірка.</li>
+      <li><strong>Ставлення до приватності й локального зберігання.</strong> <span class="mk q">[?]</span> Не питали — при тому, що це головна архітектурна обіцянка.</li>
+      <li><strong>Контекст війни.</strong> Одна згадка на всі джерела. Впливу на медичну поведінку не вимірювали.</li>
+      <li><strong>Чи діє «тихе невиконання» на обстеженнях так само, як на ліках.</strong> <span class="mk q">[?]</span> Усі прямі свідчення стосуються рецептів.</li>
+    </ul>
+    <div class="box">
+      <p class="t">Найдешевша перевірка, яка лишилась</p>
+      <p>Відгуки Prevently в App Store — найпряміше джерело на питання про короткий результат. Через вебфетч недоступні, бо магазин віддає їх лише через API; витягти можна з App Store Connect.</p>
+    </div>
+  </section>
+</div>
+
 <!-- ============ ПОРОЖНІ РОЗДІЛИ ============ -->
 <div class="view" id="v-wireframes">
   <header class="top"><p class="eyebrow">Розділ 02 · Вайрфрейми</p><h1>Схеми екранів</h1>
@@ -638,8 +1077,9 @@
     });
     if(!found){ return show('overview'); }
     links.forEach(function(a){ a.classList.toggle('active', a.dataset.v === name); });
-    var sub = document.getElementById('sub-research');
-    if(sub) sub.classList.toggle('show', name === 'research');
+    document.querySelectorAll('.subnav').forEach(function(u){
+      u.classList.toggle('show', u.id === 'sub-' + name);
+    });
     if(scrollTo){
       var t = document.getElementById(scrollTo);
       if(t){ t.scrollIntoView({behavior:'smooth', block:'start'}); return; }
@@ -662,7 +1102,7 @@
     a.addEventListener('click', function(e){
       e.preventDefault();
       var id = a.getAttribute('href').slice(1);
-      show('research', id); closeNav();
+      show(a.closest('.subnav').id.replace('sub-',''), id); closeNav();
     });
   });
 
@@ -673,7 +1113,8 @@
   scrim.addEventListener('click', closeNav);
 
   var h = (location.hash || '#overview').slice(1);
-  show(h.indexOf('r-') === 0 ? 'research' : h, h.indexOf('r-') === 0 ? h : null);
+  var deep = h.indexOf('r-') === 0 ? 'research' : (h.indexOf('p-') === 0 ? 'people' : null);
+  show(deep || h, deep ? h : null);
 })();
 </script>
 </body>
