@@ -26,7 +26,7 @@ ACOG/ACS і WHO та адаптовані під доступність обст
 
 | Папка | Що всередині | Стан |
 |---|---|---|
-| [`research/`](research/) | [`research.md`](research/research.md) — аудиторія, конкуренти, медичні джерела, висновки. [`personas.md`](research/personas.md) — чотири персони на даних опитування (362) та 5 інтерв'ю. [`jtbd.md`](research/jtbd.md) — main job, related, emotional і social. [`screens/`](research/screens/) — референси | 🟡 каркас |
+| [`research/`](research/) | [`research.md`](research/research.md) — аудиторія, конкуренти, медичні джерела, висновки. [`personas.md`](research/personas.md) — чотири персони на даних опитування (362) та 5 інтерв'ю. [`jtbd.md`](research/jtbd.md) — main job, related, emotional і social + матриця робіт і персон. [`screens/`](research/screens/) — референси | 🟡 каркас |
 | [`wireframes/`](wireframes/) | Структура екранів і потоки без кольору: онбординг, опитувальник, план, червоні прапорці | ⚪ порожньо |
 | [`concept/`](concept/) | Візуальний напрям: мудборди, пошук стилю, обґрунтування | ⚪ порожньо |
 | [`tokens/`](tokens/) | Кольори, типографіка, відступи, радіуси — JSON як джерело правди | ⚪ порожньо |
