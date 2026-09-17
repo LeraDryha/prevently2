@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prevently — інформаційна архітектура</title>
+<style>
+  :root{
+    --page:#faf8f9; --surface:#ffffff; --line:#ece5e8; --line-soft:#f4eef1;
+    --text:#1b1719; --muted:#6d636a; --dim:#9a9198;
+    --primary:#C15182; --primary-dark:#a3416d; --primary-soft:#fbeef4; --primary-line:#f0cfdf;
+    --amber:#b0703a; --red:#b4453f; --green:#2f7d5f;
+    --sidebar:264px; --radius:10px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--page); color:var(--text);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  aside{position:fixed; inset:0 auto 0 0; width:var(--sidebar); background:var(--surface);
+    border-right:1px solid var(--line); padding:26px 0; overflow-y:auto; z-index:100}
+  .brand{padding:0 22px 20px; border-bottom:1px solid var(--line-soft); margin-bottom:16px}
+  .brand .name{font-size:19px; font-weight:700; letter-spacing:-.01em; color:var(--primary); margin:0}
+  .brand .sub{font-size:12.5px; color:var(--dim); margin:3px 0 0}
+  nav ul{list-style:none; margin:0; padding:0 12px}
+  nav li{margin-bottom:1px}
+  nav a{display:flex; align-items:center; gap:9px; padding:9px 11px; border-radius:8px;
+    color:var(--muted); text-decoration:none; font-size:14.5px; transition:background .12s,color .12s}
+  nav a:hover{background:var(--page); color:var(--text)}
+  nav a.active{background:var(--primary-soft); color:var(--primary-dark); font-weight:600}
+  nav a .dot{width:6px; height:6px; border-radius:50%; background:var(--line); flex:none}
+  nav a.done .dot,nav a.active .dot{background:var(--primary)}
+  .subnav{margin:2px 0 8px 30px; padding:0; list-style:none}
+  .subnav a{font-size:13.5px; padding:5px 10px; color:var(--dim)}
+  .subnav a:hover{color:var(--primary-dark); background:transparent}
+  .navgroup{padding:16px 22px 7px; font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); font-weight:600}
+  #burger{display:none; position:fixed; top:14px; left:14px; z-index:120; width:42px; height:42px;
+    border-radius:9px; border:1px solid var(--line); background:var(--surface); cursor:pointer;
+    font-size:19px; line-height:1; color:var(--text)}
+  #scrim{display:none; position:fixed; inset:0; background:rgba(27,23,25,.35); z-index:99}
+  main{margin-left:var(--sidebar); padding:0 40px 80px}
+  .inner{max-width:920px; margin:0 auto}
+  header.top{padding:52px 0 30px; border-bottom:1px solid var(--line)}
+  .eyebrow{color:var(--primary); font-size:12px; letter-spacing:.12em; text-transform:uppercase; font-weight:700; margin:0 0 12px}
+  h1{margin:0 0 12px; font-size:clamp(26px,4.4vw,36px); line-height:1.15; letter-spacing:-.022em}
+  .lede{margin:0; color:var(--muted); font-size:16.5px; max-width:64ch}
+  .meta{margin-top:20px; display:flex; gap:8px; flex-wrap:wrap}
+  .chip{font-size:12.5px; color:var(--muted); background:var(--surface); border:1px solid var(--line); padding:4px 11px; border-radius:100px}
+  section.block{padding:44px 0; border-bottom:1px solid var(--line)}
+  section.block:last-child{border-bottom:0}
+  h2{margin:0 0 8px; font-size:clamp(21px,3vw,26px); letter-spacing:-.015em; scroll-margin-top:24px}
+  h2 .num{color:var(--primary); font-weight:400; margin-right:9px}
+  .sub{color:var(--muted); margin:0 0 26px; max-width:64ch}
+  h3{margin:34px 0 12px; font-size:16.5px; scroll-margin-top:24px}
+  h4{margin:22px 0 9px; font-size:14px; color:var(--muted); font-weight:650; text-transform:uppercase; letter-spacing:.05em}
+  p{margin:0 0 13px} p:last-child{margin-bottom:0}
+  a{color:var(--primary)} a:hover{color:var(--primary-dark)}
+  strong,b{font-weight:650}
+  ul{margin:0 0 13px; padding-left:20px} li{margin-bottom:7px}
+  .scroll{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface)}
+  table{border-collapse:collapse; width:100%; font-size:14px}
+  th,td{padding:11px 13px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line-soft)}
+  th{background:#fcfafb; color:var(--muted); font-weight:650; font-size:12px; letter-spacing:.045em; text-transform:uppercase; white-space:nowrap}
+  tbody tr:last-child td{border-bottom:0}
+  td.n,th.n{text-align:center; width:52px; white-space:nowrap}
+  .box{border:1px solid var(--line); border-left:3px solid var(--primary); background:var(--surface);
+    border-radius:var(--radius); padding:17px 19px; margin:20px 0}
+  .box.warm{border-left-color:var(--amber)} .box.red{border-left-color:var(--red)}
+  .box .t{font-weight:700; margin:0 0 5px; font-size:15px}
+  .box p{color:var(--muted); font-size:15px}
+  .cards{display:grid; gap:13px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); margin:18px 0}
+  .card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 17px}
+  .card .h{font-weight:650; margin:0 0 7px; font-size:15px}
+  .card p{font-size:14px; color:var(--muted); margin:0}
+  .card .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--primary); display:block; margin-bottom:7px; font-weight:650}
+  footer{margin-top:48px; padding-top:22px; border-top:1px solid var(--line); color:var(--dim); font-size:13.5px}
+
+  /* ---------- дерево ---------- */
+  .tg{margin:0 0 10px; border-left:2px solid var(--primary-line); padding-left:18px}
+  .tgh{font-weight:650; font-size:15px; margin:22px 0 10px; letter-spacing:-.01em}
+  .tgh .obj{font-weight:400; font-size:12.5px; color:var(--dim); margin-left:8px}
+  .tscr{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:13px 15px; margin:0 0 8px}
+  .tscr.orphan{border-style:dashed; border-color:var(--primary-line); background:#fdf9fb}
+  .tsn{font-weight:650; font-size:15px; display:flex; gap:10px; align-items:baseline; flex-wrap:wrap}
+  .tsn .q{font-weight:400; font-size:12.5px; color:var(--dim)}
+  .who{margin-left:auto; font-size:11.5px; color:var(--dim); white-space:nowrap; font-weight:400}
+  .who b{color:var(--primary-dark)}
+  .tsj{margin-top:7px; display:flex; gap:5px; flex-wrap:wrap}
+  a.job,span.job{display:inline-block; font-size:11.5px; font-weight:650; letter-spacing:.02em;
+    background:var(--primary-soft); color:var(--primary-dark); border:1px solid var(--primary-line);
+    padding:2px 9px; border-radius:100px; text-decoration:none}
+  a.job:hover{background:var(--primary); color:#fff; border-color:var(--primary)}
+  .job.none{background:#f7f3f5; color:var(--red); border-color:rgba(180,69,63,.3)}
+  .tsec{margin:7px 0 0 14px; padding-left:12px; border-left:2px solid var(--line);
+    display:flex; gap:7px; align-items:baseline; flex-wrap:wrap; font-size:13.5px}
+  .tsec .secn{color:var(--muted)}
+  .tsnote{margin:9px 0 0; font-size:13.5px; color:var(--muted); line-height:1.55}
+
+  /* ---------- flows ---------- */
+  .flow{margin:0 0 34px}
+  .flow h3{margin:30px 0 8px; display:flex; align-items:baseline; gap:10px}
+  .flow h3 .fc{font-size:11.5px; font-weight:700; letter-spacing:.06em; color:#fff;
+    background:var(--primary); padding:3px 9px; border-radius:100px}
+  .jq{margin:0 0 14px; padding:0 0 0 14px; border-left:3px solid var(--primary-line);
+    color:var(--muted); font-size:14.5px; font-style:italic}
+  .mwrap{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px; overflow-x:auto}
+  .mwrap pre.mermaid{margin:0; text-align:center}
+  .mwrap pre.mermaid svg{max-width:none}
+  .mhint{margin:8px 0 0; font-size:12.5px; color:var(--dim)}
+  .legend{display:flex; gap:16px; flex-wrap:wrap; margin:16px 0 0; font-size:13px; color:var(--muted)}
+  .legend span{display:flex; align-items:center; gap:7px}
+  .sw{width:15px; height:15px; border-radius:4px; border:1px solid}
+  .sw.scr{background:#e8eefa; border-color:#3b5b8c} .sw.st{background:#f6f1e3; border-color:#8a7a4e}
+  .sw.ok{background:#e2f1e4; border-color:#2e7d32} .sw.dd{background:#fae6e6; border-color:#c62828}
+  .sw.qr{background:#f0e6f7; border-color:#7b3fa0}
+
+  /* ---------- матриця ---------- */
+  table.mx{font-size:13.5px; min-width:880px}
+  table.mx td:first-child,table.mx th:first-child{position:sticky; left:0; background:var(--surface); z-index:2; min-width:290px}
+  table.mx th:first-child{background:#fcfafb}
+  table.mx th.oc{background:#fdf2f5; color:var(--red)}
+  table.mx td.oc{background:#fefafb}
+  table.mx tr.orow td{background:#fdf2f5}
+  table.mx tr.orow td:first-child{background:#fdf2f5; box-shadow:inset 3px 0 0 var(--red)}
+  .tick{color:var(--green); font-weight:700; font-size:15px}
+  .tick.part{color:var(--amber); font-size:13px}
+
+  @media (max-width:900px){
+    aside{transform:translateX(-100%); transition:transform .2s} aside.open{transform:none}
+    #burger{display:block} main{margin-left:0; padding:64px 18px 60px}
+    .who{margin-left:0}
+  }
+</style>
+</head>
+<body>
+<button id="burger" aria-label="Меню">☰</button>
+<div id="scrim"></div>
+<aside>
+  <div class="brand">
+    <p class="name">Prevently</p>
+    <p class="sub">Робочий простір проєкту</p>
+  </div>
+  <nav>
+    <ul><li><a href="index.html#overview"><span class="dot"></span>Огляд</a></li></ul>
+    <div class="navgroup">Розділи роботи</div>
+    <ul>
+      <li><a href="index.html#research" class="done"><span class="dot"></span>Дослідження</a></li>
+      <li><a href="index.html#people" class="done"><span class="dot"></span>Люди і роботи</a></li>
+      <li>
+        <a href="ia.html" class="active"><span class="dot"></span>Інформаційна архітектура</a>
+        <ul class="subnav">
+          <li><a href="#ia-tree">Дерево екранів</a></li>
+          <li><a href="#ia-nav">Навігація і глибина</a></li>
+          <li><a href="#ia-flows">User flows</a></li>
+          <li><a href="#ia-matrix">Матриця трасування</a></li>
+          <li><a href="#ia-open">Що лишається відкритим</a></li>
+        </ul>
+      </li>
+      <li><a href="index.html#wireframes"><span class="dot"></span>Вайрфрейми</a></li>
+      <li><a href="index.html#concept"><span class="dot"></span>Концепція</a></li>
+      <li><a href="index.html#tokens"><span class="dot"></span>Токени</a></li>
+      <li><a href="index.html#components"><span class="dot"></span>Компоненти</a></li>
+      <li><a href="index.html#design-system"><span class="dot"></span>Дизайн-система</a></li>
+      <li><a href="index.html#handoff"><span class="dot"></span>Передача в розробку</a></li>
+    </ul>
+  </nav>
+</aside>
+<main><div class="inner">
+
+<header class="top">
+  <p class="eyebrow">Інформаційна архітектура</p>
+  <h1>Вісім екранів, чотири flow, одна матриця покриття</h1>
+  <p class="lede">Екрани виведені з робіт, які жінка наймає продукт виконати, а не з розділів сайту.
+  Біля кожного екрана стоїть job, який його породжує: екран без job’а тут вважається дефектом,
+  а не нейтральним фактом.</p>
+  <div class="meta">
+    <span class="chip">8 екранів</span>
+    <span class="chip">11 робіт у матриці</span>
+    <span class="chip">1 тап до main job на поверненні</span>
+    <span class="chip">оновлено 17.09.2026</span>
+  </div>
+</header>
+
+<section class="block">
+  <h2 id="ia-tree"><span class="num">01</span>Дерево екранів</h2>
+  <p class="sub">Групи — це намір людини в конкретний момент, не розділи меню. <b>P</b> — потрібен
+  primary-персоні (П1 Перевіряльниця), <b>S</b> — secondary. Job’и клікаються: ведуть в «Люди і роботи».</p>
+  <div class="tg">
+<div class="tgh">Довіритися перше, ніж розповідати про себе</div>
+<div class="tscr">
+<div class="tsn">Вхід<span class="who"><b>P</b> · S (П3, П4)</span></div>
+<div class="tsj"><a class="job" href="index.html#p-jobs" title="Перестати відчувати, що на мені заробляють">E1</a><a class="job" href="index.html#p-jobs" title="Спиратися на когось, кому довіряю особисто">S2</a></div>
+<p class="tsnote">Об’єкт: жоден. Екран існує, щоб показати, що нам нема чого продавати, і назвати джерела — до того, як просити 15–25 відповідей.</p>
+</div>
+</div>
+<div class="tg">
+<div class="tgh">Розповісти про себе <span class="obj">об’єкт: Анамнез</span></div>
+<div class="tscr">
+<div class="tsn">Питання <span class="q">візард, одне питання на екран</span><span class="who"><b>P</b> · S (П2, П3)</span></div>
+<div class="tsj"><a class="job" href="index.html#p-jobs" title="Розуміти, що з призначеного справді про мене">MAIN</a><a class="job" href="index.html#p-jobs" title="Зрозуміти логіку, а не отримати відповідь">R1</a><a class="job" href="index.html#p-jobs" title="Щоб зі мною говорили як з людиною, яка розуміє">S1</a></div>
+<p class="tsnote">Стани: автозбереження прогресу · error «локальне сховище недоступне» — перевірка до входу в опитувальник, не після двадцятого питання.</p>
+</div>
+<div class="tscr">
+<div class="tsn">Підсумок відповідей<span class="who">S (П2) · <b>P</b></span></div>
+<div class="tsj"><a class="job" href="index.html#p-jobs" title="Не починати шлях спочатку">R4a</a><a class="job" href="index.html#p-jobs" title="Розуміти, що з призначеного справді про мене">MAIN</a></div>
+<p class="tsnote">Без нього візард конфліктує з вимогою редагувати окрему відповідь. Стани: loading обрахунку · error. Кожна відповідь веде до пунктів плану, які вона породила — зворотний бік атрибуції.</p>
+</div>
+<div class="tscr orphan">
+<div class="tsn">Тривожний симптом<span class="who"><b>P</b> · S (усі)</span></div>
+<div class="tsj"><span class="job none">job’а немає · СИРОТА</span></div>
+<p class="tsnote">Job’а немає — це безпекова межа: скринінг призначений для безсимптомних. Перериває потік у будь-якій точці. Стани: кілька прапорців одночасно · повторний показ не приглушується.</p>
+</div>
+</div>
+<div class="tg">
+<div class="tgh">Дізнатися, що з цього справді про мене <span class="obj">об’єкт: План</span></div>
+<div class="tscr">
+<div class="tsn">План<span class="who"><b>P</b> · S (усі)</span></div>
+<div class="tsj"><a class="job" href="index.html#p-jobs" title="Розуміти, що з призначеного справді про мене">MAIN</a><a class="job" href="index.html#p-jobs" title="Перестати відчувати, що на мені заробляють">E1</a></div>
+<div class="tsec"><span class="secn">Базовий шар</span><a class="job" href="index.html#p-jobs" title="Розуміти, що з призначеного справді про мене">MAIN</a><span class="who">S (П3) · P</span></div>
+<div class="tsec"><span class="secn">Ризик-орієнтовані</span><a class="job" href="index.html#p-jobs" title="Розуміти, що з призначеного справді про мене">MAIN</a><a class="job" href="index.html#p-jobs" title="Витратити обмежений ресурс на те, що змінює справу">R2</a><span class="who">P · S (усі)</span></div>
+<div class="tsec"><span class="secn">Розглянули і не включили ⚠</span><a class="job" href="index.html#p-jobs" title="Розуміти, що з призначеного справді про мене">MAIN</a><a class="job" href="index.html#p-jobs" title="Перестати відчувати, що на мені заробляють">E1</a><a class="job" href="index.html#p-jobs" title="Замінити фонову тривогу на спокій, а не на впевненість">E2</a><span class="who">P</span></div>
+<p class="tsnote">PDF — не екран, а друга форма Плану. Картка пункту — не третій рівень дерева, а розкриття всередині Плану.</p>
+</div>
+</div>
+<div class="tg">
+<div class="tgh">Тримати план живим у часі <span class="obj">об’єкт: Відмітка про проходження</span></div>
+<div class="tscr">
+<div class="tsn">Позначити пройденим <span class="q">обстеження + дата</span><span class="who">S (П2) · <b>P</b></span></div>
+<div class="tsj"><a class="job" href="index.html#p-jobs" title="Не починати шлях спочатку">R4a</a></div>
+<p class="tsnote">Вирішено: лишається екраном, а не станом картки — несе введення дати, валідацію і стан помилки збереження. Приблизна дата (місяць або сезон) — повноцінне значення, округлення в безпечний бік.</p>
+</div>
+<div class="tscr">
+<div class="tsn">Історія проходжень<span class="who">S (П2)</span></div>
+<div class="tsj"><a class="job" href="index.html#p-jobs" title="Не починати шлях спочатку">R4a</a></div>
+<p class="tsnote">Вирішено: відмітки накопичуються в історію, план лишається похідною. Стани: empty до першої відмітки · loading · error.</p>
+</div>
+</div>
+<div class="tg">
+<div class="tgh">Перевірити нас так само, як лікаря <span class="obj">об’єкт: Джерело, Рецензент</span></div>
+<div class="tscr">
+<div class="tsn">Про підхід <span class="q">джерела, рецензент, межі</span><span class="who"><b>P</b> · S (П2)</span></div>
+<div class="tsj"><a class="job" href="index.html#p-jobs" title="Спиратися на когось, кому довіряю особисто">S2</a><a class="job" href="index.html#p-jobs" title="Перестати відчувати, що на мені заробляють">E1</a><a class="job" href="index.html#p-jobs" title="Зрозуміти логіку, а не отримати відповідь">R1</a></div>
+<p class="tsnote">Тут же «чого ми не робимо»: без явної межі П2 прочитає її як неповноту.</p>
+</div>
+</div>
+  <div class="box warm">
+    <p class="t">Глибина свідомо мінімальна — два рівні</p>
+    <p>Картка пункту, розкриття підстави й окрема сторінка обстеження лишаються розкриттями
+    всередині екрана, а не рівнями. Третій рівень додається по одному й з причиною.</p>
+  </div>
+</section>
+
+<section class="block">
+  <h2 id="ia-nav"><span class="num">02</span>Навігація і глибина</h2>
+  <p class="sub">Три пункти, кожен — вхід у job-кластер. Навігація з’являється разом із Планом:
+  у візарді видимий вихід ламає патерн, а редагування забезпечує не меню, а Підсумок.</p>
+  <div class="cards">
+<div class="card"><span class="lbl">MAIN · E1</span><p class="h">План</p><p>Єдине, по що людина прийшла. Стартова точка кожного повернення.</p></div>
+<div class="card"><span class="lbl">R4a · R1</span><p class="h">Мої відповіді</p><p>Не «налаштування профілю», а те, <b>від чого порахований план</b>. Тут же перехід «відповідь → пункти плану». Ризик не ховаємо: R4a у ядрі — ставка, не висновок із даних.</p></div>
+<div class="card"><span class="lbl">S2 · E1</span><p class="h">Про підхід</p><p>Для primary це не футер. Вона перевіряє нас так само, як лікаря: якщо джерел не видно, вона йде.</p></div>
+</div>
+  <h3>Скільки тапів до main job</h3>
+  <p>Тап — навігаційний вибір. Відповідь на питання опитувальника не навігація, а введення:
+  20 питань не роблять план глибиною 20.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Сценарій</th><th class="n">Тапів</th><th>Де job закривається</th></tr></thead>
+    <tbody>
+      <tr><td><b>Повернення</b> — основний сценарій</td><td class="n"><b>1</b></td>
+          <td>Вхід розв’язується в План → розгорнула «Розглянули і не включили»</td></tr>
+      <tr><td>Перший візит</td><td class="n">3</td>
+          <td>Вхід → Підсумок → План → розгортання секції</td></tr>
+      <tr><td>E1 — джерело й рівень доказовості</td><td class="n">2</td><td>План → підстава → джерело</td></tr>
+      <tr><td>R4a — позначити пройденим</td><td class="n">2</td><td>Картка → дата й підтвердження</td></tr>
+      <tr><td>S2 — хто це рецензував</td><td class="n">1</td><td>Про підхід</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box red">
+    <p class="t">Ціна, яку ця метрика не міряє</p>
+    <p>«3 тапи» — про навігаційну глибину, і вона свідомо не включає 15–25 питань, тобто головний
+    бар’єр для П3 і П4. Точка відсіву в опитувальнику не виміряна жодного разу.</p>
+  </div>
+</section>
+
+<section class="block">
+  <h2 id="ia-flows"><span class="num">03</span>User flows</h2>
+  <p class="sub">Чотири роботи: MAIN плюс E1 і R4a (разом вони складають ядро MVP) і R1 як наступна
+  в черзі. Колір гілки кодує відповідь, а не її якість: «так, є тривожний симптом» — зелена гілка
+  й погана новина. Кілька червоних гілок навмисно ведуть в успіх.</p>
+  <div class="legend">
+    <span><i class="sw scr"></i>екран</span>
+    <span><i class="sw st"></i>стан: empty, loading, error</span>
+    <span><i class="sw ok"></i>успіх</span>
+    <span><i class="sw dd"></i>тупик</span>
+    <span><i class="sw qr"></i>якісний ризик: застрягли ми, не людина</span>
+  </div>
+  <div class="flow">
+<h3 id="f-main"><span class="fc">MAIN</span> Розуміти, що з призначеного справді про мене</h3>
+<blockquote class="jq">Коли мені призначили більше, ніж я вважаю потрібним, і я не можу відрізнити необхідне від зайвого, я хочу розуміти, що з цього справді стосується мене, щоб піти спокійною і за те, що зробила, і за те, чого не робила.</blockquote>
+<div class="mwrap"><pre class="mermaid">flowchart TD
+    start("Вийшла від лікаря зі списком призначень")
+    start --> entry["Вхід"]
+    entry --> d1{"Видно джерела і те, що нам нема чого продавати?"}
+    d1 -->|ні| dead1{{"Тупик: пішла, не почавши"}}
+    d1 -->|так| quiz["Питання"]
+    quiz --> sSave(["Стан: автозбереження прогресу"])
+    sSave --> d2{"Відповіла про тривожний симптом?"}
+    d2 -->|так| flag["Тривожний симптом"]
+    d2 -->|ні| d3{"Дійшла до кінця опитувальника?"}
+    flag --> d4{"Звернулася до лікаря зараз?"}
+    d4 -->|так| okDoc(("Успіх межі безпеки"))
+    d4 -->|ні| sGuard(["Стан: попередження прогорнуто, спрацював запобіжник"])
+    sGuard --> d3
+    d3 -->|так| summary["Підсумок відповідей"]
+    d3 -->|ні| dead2{{"Тупик: кинула на середині, прогрес є, плану немає"}}
+    dead2 -->|повернулась сама| sResume(["Стан: Відновлення незавершеного опитувальника"])
+    sResume --> quiz
+    summary --> sLoad(["Loading: обрахунок плану на пристрої"])
+    sLoad --> d5{"Локальні дані на місці?"}
+    d5 -->|так| plan["План"]
+    d5 -->|ні| sErr(["Error: локальні дані втрачено"])
+    sErr --> dead3{{"Тупик: заповнювати заново"}}
+    plan --> d6{"Є ризик-орієнтовані пункти?"}
+    d6 -->|так| sect[["Секція: Розглянули і не включили"]]
+    d6 -->|ні| sShort(["Стан: короткий план, це не empty"])
+    sShort --> sect
+    sect --> d7{"Знайшла те, що їй призначили?"}
+    d7 -->|так| sBasis(["Стан: підстава невключення видима одразу"])
+    d7 -->|ні| dead4{{"Тупик: призначеного немає ні в плані, ні серед невключених"}}
+    sBasis --> okMain(("Успіх: спокій за обидві половини"))
+
+    classDef trig fill:#f7f7f7,stroke:#888,color:#222
+    classDef screen fill:#e8eefa,stroke:#3b5b8c,color:#12233d
+    classDef section fill:#dde7f7,stroke:#3b5b8c,color:#12233d
+    classDef state fill:#f6f1e3,stroke:#8a7a4e,color:#2a2415
+    classDef ok fill:#e2f1e4,stroke:#2e7d32,color:#12301a
+    classDef dead fill:#fae6e6,stroke:#c62828,color:#3d1414
+    class start trig
+    class entry,quiz,flag,summary,plan screen
+    class sect section
+    class sSave,sGuard,sLoad,sErr,sShort,sBasis,sResume state
+    class okDoc,okMain ok
+    class dead1,dead2,dead3,dead4 dead
+    linkStyle 3,6,9,12,18,22,26 stroke:#2e7d32,stroke-width:2px
+    linkStyle 2,7,10,13,19,23,27 stroke:#c62828,stroke-width:2px</pre></div>
+<p class="mhint">Широкі діаграми прокручуються всередині рамки по горизонталі.</p>
+</div>
+<div class="flow">
+<h3 id="f-e1"><span class="fc">E1</span> Перестати відчувати, що на мені заробляють</h3>
+<blockquote class="jq">Коли мені призначають те, чого я не розумію, я хочу відчувати, що мене не використовують, щоб кожен візит не коштував мені ще й підозри.</blockquote>
+<div class="mwrap"><pre class="mermaid">flowchart TD
+    start("Сумнів: чи не заробляють на мені")
+    start --> plan["План"]
+    plan --> card[["Картка пункту"]]
+    card --> d1{"Розгорнула підставу?"}
+    d1 -->|так| sAttr(["Стан: атрибуція до її відповідей"])
+    d1 -->|ні| dead1{{"Тупик: список без підстав, не відрізнити від ДІЛА"}}
+    sAttr --> d2{"Настанова для її ситуації існує?"}
+    d2 -->|так| sSrc(["Стан: джерело, рівень доказовості, дата перегляду"])
+    d2 -->|ні| sNoData(["Empty: настанови немає, кажемо про це прямо"])
+    sNoData --> sAction(["Стан: конкретне питання лікарю замість голого «даних немає»"])
+    sAction --> d3{"Прочитала межу як чесність?"}
+    d3 -->|так| okHonest(("Успіх: межу видно, мотиву немає"))
+    d3 -->|ні| dead2{{"Тупик: прочитано як неповноту"}}
+    sSrc --> d4{"Перевіряє далі, хто це рецензував?"}
+    d4 -->|так| about["Про підхід"]
+    d4 -->|ні| okE1(("Успіх: нам нема чого продавати"))
+    about --> d5{"Рецензент названий: імʼя, спеціальність, дата?"}
+    d5 -->|так| okE1
+    d5 -->|ні| qrisk1>"Якісний ризик: міжнародні стандарти без імені"]
+
+    classDef trig fill:#f7f7f7,stroke:#888,color:#222
+    classDef screen fill:#e8eefa,stroke:#3b5b8c,color:#12233d
+    classDef section fill:#dde7f7,stroke:#3b5b8c,color:#12233d
+    classDef state fill:#f6f1e3,stroke:#8a7a4e,color:#2a2415
+    classDef ok fill:#e2f1e4,stroke:#2e7d32,color:#12301a
+    classDef dead fill:#fae6e6,stroke:#c62828,color:#3d1414
+    classDef qualrisk fill:#f0e6f7,stroke:#7b3fa0,color:#2e1a3d
+    class start trig
+    class plan,about screen
+    class card section
+    class sAttr,sSrc,sNoData,sAction state
+    class okHonest,okE1 ok
+    class dead1,dead2 dead
+    class qrisk1 qualrisk
+    linkStyle 3,6,10,13,16 stroke:#2e7d32,stroke-width:2px
+    linkStyle 4,7,11,14,17 stroke:#c62828,stroke-width:2px</pre></div>
+<p class="mhint">Широкі діаграми прокручуються всередині рамки по горизонталі.</p>
+</div>
+<div class="flow">
+<h3 id="f-r4a"><span class="fc">R4a</span> Не починати шлях спочатку</h3>
+<blockquote class="jq">Коли я знову дійшла до лікаря, я хочу спиратися на те, що вже зробила, щоб не починати шлях спочатку.</blockquote>
+<div class="mwrap"><pre class="mermaid">flowchart TD
+    start("Пройшла обстеження або змінились обставини")
+    start --> plan["План"]
+    plan --> d1{"Треба позначити пройдене?"}
+    d1 -->|так| card[["Картка пункту"]]
+    d1 -->|ні| summary["Підсумок відповідей"]
+    card --> mark["Позначити пройденим"]
+    mark --> d2{"Памʼятає дату проходження?"}
+    d2 -->|так| sRecalc(["Стан: наступна дата перерахована від реальної"])
+    d2 -->|ні| sApprox(["Стан: приблизна дата, місяць або сезон"])
+    sApprox --> sRound(["Стан: консервативний перерахунок від найранішої межі"])
+    sRound --> d3
+    sRecalc --> d3{"Відмітка збереглася на пристрої?"}
+    d3 -->|так| sMarked(["Стан: пункт пройдено, з датою"])
+    d3 -->|ні| sErr(["Error: запис не зберігся"])
+    sErr --> sUnsaved(["Стан: видима позначка «не збережено», відмітку можна повторити"])
+    sUnsaved --> mark
+    sMarked --> okMark(("Успіх: шлях не починається спочатку"))
+    summary --> d4{"Є відповідь, яка більше не правдива?"}
+    d4 -->|так| quiz["Питання"]
+    d4 -->|ні| dead3{{"Тупик: життя змінилось, а питання під це немає"}}
+    quiz --> sRecalc2(["Стан: перерахунок без повного переопитування"])
+    sRecalc2 --> okEdit(("Успіх: план наздогнав життя"))
+    plan --> d5{"Хоче побачити, що вже зроблено?"}
+    d5 -->|так| hist["Історія проходжень"]
+    d5 -->|ні| okPlan(("Успіх: далі живе з планом"))
+    hist --> d6{"Є хоч одна відмітка?"}
+    d6 -->|так| okHist(("Успіх: видно, на що спиратися"))
+    d6 -->|ні| sEmpty(["Empty: тут з'явиться позначене — поверніться сюди після першої відмітки в Плані"])
+    sEmpty --> plan
+
+    classDef trig fill:#f7f7f7,stroke:#888,color:#222
+    classDef screen fill:#e8eefa,stroke:#3b5b8c,color:#12233d
+    classDef section fill:#dde7f7,stroke:#3b5b8c,color:#12233d
+    classDef state fill:#f6f1e3,stroke:#8a7a4e,color:#2a2415
+    classDef ok fill:#e2f1e4,stroke:#2e7d32,color:#12301a
+    classDef dead fill:#fae6e6,stroke:#c62828,color:#3d1414
+    class start trig
+    class plan,summary,mark,quiz,hist screen
+    class card section
+    class sRecalc,sRecalc2,sMarked,sErr,sEmpty,sApprox,sRound,sUnsaved state
+    class okMark,okEdit,okPlan,okHist ok
+    class dead3 dead
+    linkStyle 2,6,11,17,22,25 stroke:#2e7d32,stroke-width:2px
+    linkStyle 3,7,12,18,23,26 stroke:#c62828,stroke-width:2px</pre></div>
+<p class="mhint">Широкі діаграми прокручуються всередині рамки по горизонталі.</p>
+</div>
+<div class="flow">
+<h3 id="f-r1"><span class="fc">R1</span> Зрозуміти логіку, а не отримати відповідь</h3>
+<blockquote class="jq">Коли я чую різні рекомендації з різних джерел, я хочу розуміти, від чого залежить потреба саме в моєму випадку, щоб перестати вирішувати навмання.</blockquote>
+<div class="mwrap"><pre class="mermaid">flowchart TD
+    start("Чує різні рекомендації з різних джерел")
+    start --> entry["Вхід"]
+    entry --> quiz["Питання"]
+    quiz --> d1{"Зрозуміло, навіщо це питають?"}
+    d1 -->|так| sWhy(["Стан: підпис навіщо ми це питаємо"])
+    d1 -->|ні| dead1{{"Тупик: читається як допит"}}
+    sWhy --> d2{"Знає відповідь?"}
+    d2 -->|так| summary["Підсумок відповідей"]
+    d2 -->|ні| sUnknown(["Стан: не знаю як повноцінна відповідь"])
+    sUnknown --> summary
+    summary --> d3{"Скористалась переходом «відповідь до пунктів»?"}
+    d3 -->|так| okLink(("Успіх: видно залежність"))
+    d3 -->|ні| plan["План"]
+    plan --> card[["Картка пункту"]]
+    card --> d4{"Видно, які відповіді дали цей пункт?"}
+    d4 -->|так| sAttr(["Стан: через ваш вік 35+ і куріння"])
+    d4 -->|ні| qrisk1>"Якісний ризик: плоский список, 20 питань не окупились"]
+    sAttr --> d5{"Видно, наскільки впевнена рекомендація?"}
+    d5 -->|так| sGrade(["Стан: словесний рівень певності"])
+    d5 -->|ні| qrisk2>"Якісний ризик: усе подано однаково впевнено"]
+    sGrade --> okR1(("Успіх: розуміє, від чого залежить потреба"))
+
+    classDef trig fill:#f7f7f7,stroke:#888,color:#222
+    classDef screen fill:#e8eefa,stroke:#3b5b8c,color:#12233d
+    classDef section fill:#dde7f7,stroke:#3b5b8c,color:#12233d
+    classDef state fill:#f6f1e3,stroke:#8a7a4e,color:#2a2415
+    classDef ok fill:#e2f1e4,stroke:#2e7d32,color:#12301a
+    classDef dead fill:#fae6e6,stroke:#c62828,color:#3d1414
+    classDef qualrisk fill:#f0e6f7,stroke:#7b3fa0,color:#2e1a3d
+    class start trig
+    class entry,quiz,summary,plan screen
+    class card section
+    class sWhy,sUnknown,sAttr,sGrade state
+    class okLink,okR1 ok
+    class dead1 dead
+    class qrisk1,qrisk2 qualrisk
+    linkStyle 3,6,10,14,17 stroke:#2e7d32,stroke-width:2px
+    linkStyle 4,7,11,15,18 stroke:#c62828,stroke-width:2px</pre></div>
+<p class="mhint">Широкі діаграми прокручуються всередині рамки по горизонталі.</p>
+</div>
+</section>
+
+<section class="block">
+  <h2 id="ia-matrix"><span class="num">04</span>Матриця трасування</h2>
+  <p class="sub">Рядки — усі одинадцять робіт, стовпці — усі екрани, включно з тими, що вже визнані
+  сиротами. ✓ ставиться, якщо екран <b>несе</b> зміст, якого вимагає робота, а не просто лежить
+  на шляху. <span class="tick part">✓⚠</span> — часткове покриття.</p>
+  <div class="scroll"><table class="mx"><thead><tr><th>Job</th>
+<th class="n">Вхід</th>
+<th class="n">Питання</th>
+<th class="n">Підсум.</th>
+<th class="n oc">Симптом</th>
+<th class="n">План</th>
+<th class="n">Позн.</th>
+<th class="n">Історія</th>
+<th class="n">Підхід</th>
+<th class="n oc">Приват.</th>
+<th class="n oc">Юр.</th>
+<th class="n oc">Копія</th>
+<th class="n oc">Освіта</th>
+<th class="n oc">Профіль</th>
+</tr></thead><tbody>
+<tr class=""><td><b>MAIN</b> Що з призначеного справді про мене</td>
+<td class="n"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>R1</b> Зрозуміти логіку</td>
+<td class="n"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>R2</b> Обмежений ресурс — на те, що змінює справу</td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick part" title="часткове покриття">✓⚠</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>R3</b> Увійти в кабінет як сторона</td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick part" title="часткове покриття">✓⚠</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>R4a</b> Не починати шлях спочатку</td>
+<td class="n"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class="orow"><td><b>R4b</b> Помітити зміну вчасно</td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class="orow"><td><b>R5</b> Зрозуміти, що зі мною за цифрами</td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>E1</b> Перестати відчувати, що на мені заробляють</td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>E2</b> Спокій замість фонової тривоги</td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>S1</b> Щоб говорили як з людиною, яка розуміє</td>
+<td class="n"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+<tr class=""><td><b>S2</b> Спертися на когось, кому довіряю</td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n oc"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n"></td>
+<td class="n"></td>
+<td class="n"><span class="tick">✓</span></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+<td class="n oc"></td>
+</tr>
+</tbody></table></div>
+  <p class="sub" style="margin-top:14px">Рожевим підсвічені <b>сироти</b>: шість стовпців без жодного ✓
+  і два рядки без носія. 7 стовпців із 13 несуть роботу, 9 рядків з 11 мають носія.</p>
+  <div class="cards">
+    <div class="card"><span class="lbl">Стовпець-сирота</span><p class="h">Тривожний симптом</p>
+      <p>Job’а немає й не буде: ніхто не наймає продукт, щоб він сказав іти до лікаря. Але без нього
+      продукт пропонує скринінг жінці з кров’янистими виділеннями в постменопаузі. Перевіряється
+      запобіжником, не покриттям.</p></div>
+    <div class="card"><span class="lbl">Рядок-сирота</span><p class="h">R4b · Помітити зміну вчасно</p>
+      <p>Нагадувань у MVP немає — дані лише на пристрої, слати нікуди. Роботу виконують гугл-календар,
+      сезон і випадковий тригер, тобто не ми.</p></div>
+    <div class="card"><span class="lbl">Рядок-сирота</span><p class="h">R5 · Що означають цифри</p>
+      <p>Найвищий попит з усіх робіт — 85–90% у трьох персонах — і свідома відмова. Розшифровка
+      лишається за межами назавжди; «безперервність» чекає рішення власниці.</p></div>
+    <div class="card"><span class="lbl">Видалити</span><p class="h">Чотири екрани</p>
+      <p>Приватність окремим екраном (сильніше працює підписом на кроках), освітні сторінки
+      (це маркетинг), експорт копії та профіль близької людини — у backlog до появи даних.</p></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2 id="ia-open"><span class="num">05</span>Що лишається відкритим</h2>
+  <p class="sub">Чотири питання, які не вирішуються дизайном.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Питання</th><th>Чому це не дизайнерське рішення</th></tr></thead>
+    <tbody>
+      <tr><td><b>Пошук за призначеним обстеженням</b></td>
+          <td>Жінка приходить із конкретним призначенням, а секція «не включили» показує невключене
+          з нашої логіки. Якщо її аналізу немає в жодному переліку, продукт мовчить рівно там, де мав
+          відповісти. Рішення — новий екран проти обсягу MVP.</td></tr>
+      <tr><td><b>Версія медичного контенту</b></td>
+          <td>Настанови оновлюються. Заморожений план із банером проти автоперерахунку з видимим
+          слідом зміни. Варіант «не версіонувати» несумісний з E1 у ядрі.</td></tr>
+      <tr><td><b>«Безперервність» результатів</b></td>
+          <td>Зберігати без інтерпретації — не діагностика і меж приватності не порушує. Але це
+          вхід у тему, від якої продукт свідомо відмовився.</td></tr>
+      <tr><td><b>Експорт / імпорт копії</b></td>
+          <td>Єдиний механізм відновлення при втраті локальних даних. Job’а немає — але про втрату
+          даних не питали взагалі.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="src" style="margin-top:22px">Первинні документи:
+    <a href="https://github.com/LeraDryha/prevently2/blob/main/sitemap.md">sitemap.md</a> ·
+    <a href="https://github.com/LeraDryha/prevently2/blob/main/flows.md">flows.md</a> ·
+    <a href="https://github.com/LeraDryha/prevently2/blob/main/research/jtbd.md">jtbd.md</a>
+  </p>
+  <footer>Prevently · інформаційна архітектура · оновлено 17.09.2026</footer>
+</section>
+</div></main>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad:true,
+    theme:'base',
+    themeVariables:{
+      background:'#ffffff', primaryColor:'#e8eefa', primaryTextColor:'#12233d',
+      primaryBorderColor:'#3b5b8c', lineColor:'#9a9198', secondaryColor:'#f6f1e3',
+      tertiaryColor:'#fbeef4', fontFamily:'-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif',
+      fontSize:'14px'
+    },
+    flowchart:{curve:'basis', padding:14, useMaxWidth:false}
+  });
+  var b=document.getElementById('burger'), a=document.querySelector('aside'), s=document.getElementById('scrim');
+  function t(o){a.classList.toggle('open',o); s.style.display=o?'block':'none'}
+  b.addEventListener('click',function(){t(!a.classList.contains('open'))});
+  s.addEventListener('click',function(){t(false)});
+  document.querySelectorAll('aside a').forEach(function(l){l.addEventListener('click',function(){t(false)})});
+</script>
+</body>
+</html>
