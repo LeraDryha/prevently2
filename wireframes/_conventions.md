@@ -102,9 +102,7 @@
 | [План](_screens.md#4--план) | `plan.html` | `plan-empty.html` · `plan-error.html` · `plan-loading.html` · `plan-alert.html` · `plan-short.html` |
 | [Пошук обстеження](_screens.md#5--пошук-обстеження) | `search.html` | `search-empty.html` |
 
-**Разом 15 сторінок екранів** плюс спільний `_wireframe.css`. Намальовано **12**;
-лишились три стани поза таблицею чотирьох — `plan-alert.html`, `plan-short.html`
-і `questions-resume.html`. Окремого `index.html`
+**Разом 15 сторінок екранів** плюс спільний `_wireframe.css`. Намальовано **всі 15**. Окремого `index.html`
 у папці немає й не потрібно: перелік екранів — це
 [підменю робочого простору](../index.html#wireframes).
 

@@ -24,20 +24,22 @@
 
 ## Стан на 23.09.2026
 
-Намальовано 12 сторінок — усі п'ять екранів головного flow зі станами з
+Намальовано всі 15 сторінок — усі п'ять екранів головного flow зі станами з
 [таблиці](_screens.md#стани):
 
 | Екран | Базова | Стани |
 |---|---|---|
 | Вхід | [`entry.html`](entry.html) | станів немає |
-| Питання | [`questions.html`](questions.html) | [`-error`](questions-error.html) |
+| Питання | [`questions.html`](questions.html) | [`-error`](questions-error.html) · [`-resume`](questions-resume.html) |
 | Підсумок відповідей | [`summary.html`](summary.html) | [`-loading`](summary-loading.html) · [`-error`](summary-error.html) |
-| План | [`plan.html`](plan.html) | [`-empty`](plan-empty.html) · [`-error`](plan-error.html) · [`-loading`](plan-loading.html) |
+| План | [`plan.html`](plan.html) | [`-empty`](plan-empty.html) · [`-error`](plan-error.html) · [`-loading`](plan-loading.html) · [`-alert`](plan-alert.html) · [`-short`](plan-short.html) |
 | Пошук обстеження | [`search.html`](search.html) | [`-empty`](search-empty.html) |
 
-Лишились три стани **поза** таблицею чотирьох, тому їх не малювали разом з рештою:
-`plan-alert.html` (алерт тривожного симптому), `plan-short.html` (короткий план
-для 18–25) і `questions-resume.html` (відновлення незавершеного опитувальника).
+Три з них — стани **поза** таблицею чотирьох, і кожен існує зі своєї причини:
+[`plan-alert.html`](plan-alert.html) — безпекова межа, у якої немає й не буде job'а;
+[`plan-short.html`](plan-short.html) — основний випадок для
+[П3](../research/personas.md#п3--перше-коло), і свідомо **не** порожній стан;
+[`questions-resume.html`](questions-resume.html) — те, що робить автозбереження видимим.
 
 **Іменування:** `<назва>.html` для базового екрана, `<назва>-<стан>.html` для кожного
 стану, латиницею — [повний перелік файлів](_conventions.md#4--файли-й-іменування).

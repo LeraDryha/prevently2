@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Питання — відновлення</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Питання — відновлення незавершеного</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="questions.html">базовий</a>
+  <a href="questions-error.html">помилка</a>
+  <span class="here" aria-current="page">відновлення</span>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/questions-resume.html</code></dd>
+    <dt>Екран</dt><dd>«Питання» — <a href="../sitemap.md#дерево">sitemap, група «Розповісти про себе»</a></dd>
+    <dt>Job</dt><dd>Ті самі, що в базовій: <a href="../research/jtbd.md#main-job">MAIN</a> · <a href="../research/jtbd.md#r1--зрозуміти-логіку-а-не-отримати-відповідь">R1</a> · <a href="../research/jtbd.md#s1--щоб-зі-мною-говорили-як-з-людиною-яка-розуміє">S1</a></dd>
+    <dt>Стан</dt><dd><b>Відновлення.</b> Поза таблицею чотирьох. <a href="../sitemap.md#що-тут-стан-а-не-екран">Автозбереження — це продовження, а не нова подія</a>, тому стан, а не окремий екран</dd>
+    <dt>Місце у flow</dt><dd>Вузол <code>sResume</code> у <a href="../flows.md#main--розуміти-що-з-призначеного-справді-про-мене">MAIN</a>: <code>dead2</code> «кинула на середині» → ребро «повернулась сама» → сюди → назад у Питання. <b>Ребро підписане саме так навмисно:</b> <a href="../CLAUDE.md#ключові-рішення">активних нагадувань у MVP немає</a>, і продукт не має чим покликати її назад</dd>
+    <dt>Вихід</dt><dd>Два, і обидва явні: «Продовжити з питання 7» або «Почати заново» з попередженням, що попередні відповіді буде видалено</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px; таб-бара тут немає, тож під контент лишається <b>726 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Питання»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Продовжимо?</h1>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-r">
+      <h2 id="h-r">Ви зупинились на питанні 7 з 19</h2>
+      <p class="lead">Блок 2 з 5 — спосіб життя. Відповіді збереглися на цьому пристрої,
+      нічого перезаповнювати не треба.</p>
+      <p class="progress" aria-hidden="true"><span style="width:38%"></span></p>
+      <a class="btnlink" href="questions.html">Продовжити з питання 7</a>
+    </section>
+
+    <section aria-labelledby="h-over">
+      <h2 id="h-over">Хочете почати заново?</h2>
+      <p class="lead">Попередні шість відповідей буде видалено з цього пристрою.
+      Це не можна скасувати.</p>
+      <a class="btnlink" href="questions.html">Почати заново</a>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="local">Відповіді зберігаються тільки на цьому пристрої. Ми їх не бачимо
+    й нікуди не надсилаємо.</p>
+  </footer>
+
+  </div>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Зони і головна дія кожної</h2>
+
+  <div class="wf-sticker"><b>«Ви зупинились на питанні 7 з 19»</b>
+    <span class="act">зрозуміти, скільки вже позаду</span>
+    <span class="why">Конкретне число замість «продовжити». Після паузи головне питання — «скільки я вже зробила і скільки лишилось», і відповідь має бути в заголовку.</span></div>
+
+  <div class="wf-sticker"><b>Блок, а не тільки номер</b>
+    <span class="act">згадати, про що йшлося</span>
+    <span class="why">«Блок 2 з 5 — спосіб життя». Номер питання не нагадує контекст; назва блоку нагадує.</span></div>
+
+  <div class="wf-sticker"><b>«Нічого перезаповнювати не треба»</b>
+    <span class="act">не боятися, що прогрес зник</span>
+    <span class="why">Найімовірніший страх при поверненні. <a href="../CLAUDE.md#дефолти-ухвалені-без-окремого-обговорення">Автозбереження є саме тому, що втрата на середині неприйнятна</a> — і сказати про це треба словами, а не самим фактом.</span></div>
+
+  <div class="wf-sticker"><b>Прогрес видимий</b>
+    <span class="act">побачити, а не прочитати</span>
+    <span class="why">Та сама смуга, що в опитувальнику. Стан не міняє каркас — <a href="_conventions.md#6--стани">це правило, яке робить стани станами</a>.</span></div>
+
+  <div class="wf-sticker"><b>«Почати заново» з попередженням</b>
+    <span class="act">не стерти прогрес випадково</span>
+    <span class="why">Дія названа з наслідком: «попередні шість відповідей буде видалено, це не можна скасувати». Єдина незворотна дія на екрані — і єдина, яка мусить попереджати.</span></div>
+
+  <div class="wf-sticker"><b>Підпис про локальність</b>
+    <span class="act">довіряти так само, як на першому кроці</span>
+    <span class="why">Стоїть і тут: це <a href="../sitemap.md#глобальне--видно-завжди">крок опитувальника</a>, а не окремий екран. Пропустити його означало б зробити виняток там, де правило «на кожному кроці».</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>
