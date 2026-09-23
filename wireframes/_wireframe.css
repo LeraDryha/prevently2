@@ -336,6 +336,21 @@ button {
 }
 button.secondary { background: #ffffff; }
 
+/* Дія, що веде на ще не намальований екран: виглядає так само, але не клікабельна */
+.btnlink.off {
+  color: #aaaaaa;
+  border-color: #cccccc;
+  background: #f7f7f7;
+  cursor: default;
+}
+.wf-device > nav li span.off {
+  display: flex; align-items: center; justify-content: center;
+  height: 100%; padding: 0 6px; text-align: center;
+  font-size: 13px; color: #aaaaaa;
+  border-right: 1px solid #dddddd;
+}
+.wf-device > nav li:last-child span.off { border-right: 0; }
+
 /* Перехід на інший екран: посилання, не кнопка (див. _conventions.md) */
 .btnlink {
   display: inline-block;
