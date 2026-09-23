@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: План — порожній</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>План — порожній стан</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="plan.html">успіх</a>
+  <span class="here" aria-current="page">порожній</span>
+  <a href="plan-error.html">помилка</a>
+  <a href="plan-loading.html">завантаження</a>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/plan-empty.html</code></dd>
+    <dt>Екран</dt><dd>«План» — <a href="_screens.md">_screens.md, екран 4</a></dd>
+    <dt>Стан</dt><dd><b>Порожній.</b> Порожній <b>від дій</b>, не від вмісту: усі пункти позначені пройденими, і зараз робити нічого не треба. <a href="_screens.md">_screens.md</a> досі каже, що в Плану empty-стану немає, — і це правда про <b>вміст</b>: <a href="../CLAUDE.md#структура-плану">базовий шар є завжди</a>. Цей стан не суперечить йому, а уточнює</dd>
+    <dt>Персона</dt><dd>П1 Перевіряльниця, 36 років. Повернення через рік після того, як усе пройшла</dd>
+    <dt>Вихід</dt><dd>Не глухий кут: три виходи в секції «Що можна зробити зараз» — Пошук обстеження (<code>d8</code> у <a href="../flows.md#r4a--не-починати-шлях-спочатку">R4a</a>), Історія проходжень (<code>d5</code> там же) і PDF</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «План»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Ваш чекап</h1>
+    <p>Оновлено 23 вересня 2026 · порахований за вашими відповідями</p>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-done">
+      <h2 id="h-done">Зараз робити нічого не треба</h2>
+      <p class="lead">Ви позначили пройденим усе, що було у вашому плані. Це не порожній
+      план — це план, у якому все актуальне вже зроблено.</p>
+      <article>
+        <h3>Найближче — цитологія з ВПЛ-тестом</h3>
+        <p>До березня 2028 року. Ми порахували цю дату від вашої відмітки: ви пройшли
+        її 14 березня 2026.</p>
+        <p class="when">Решта пунктів має ще довші інтервали — вони нижче, разом із датами.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-base">
+      <h2 id="h-base">Базовий шар</h2>
+      <p class="lead">Показано всім жінкам незалежно від ризиків.</p>
+      <article>
+        <h3>Огляд у гінеколога</h3>
+        <p class="when">Раз на рік · наступний — до вересня 2027</p>
+        <p class="state">Стан: пройдено 18 вересня 2026</p>
+        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      </article>
+      <article>
+        <h3>Огляд у стоматолога</h3>
+        <p class="when">Раз на рік · наступний — до березня 2027</p>
+        <p class="state">Стан: пройдено 12 березня 2026</p>
+        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-risk">
+      <h2 id="h-risk">Ризик-орієнтовані скринінги</h2>
+      <p class="lead">Залежать від віку, анамнезу й факторів ризику.</p>
+      <article>
+        <h3>Цитологія з ВПЛ-тестом</h3>
+        <p class="when">Раз на 5 років · наступна — до березня 2028</p>
+        <p class="state">Стан: пройдено 14 березня 2026</p>
+        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      </article>
+      <article>
+        <h3>Вимірювання артеріального тиску</h3>
+        <p class="when">Раз на рік · наступне — до вересня 2027</p>
+        <p class="state">Стан: пройдено 18 вересня 2026</p>
+        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-next">
+      <h2 id="h-next">Що можна зробити зараз</h2>
+      <div class="gate">
+        <p>Лікар призначив те, чого тут немає?</p>
+        <a class="btnlink" href="search.html">Знайти обстеження за назвою</a>
+      </div>
+      <div class="gate">
+        <p>Подивитись, що вже зроблено й коли:</p>
+        <a class="btnlink" href="history.html">Історія проходжень</a>
+      </div>
+      <div class="gate">
+        <p>Узяти план до лікаря:</p>
+        <button type="button" class="secondary">Завантажити PDF</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html" aria-current="page">План</a></li>
+      <li><a href="summary.html">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Що показує цей стан</h2>
+
+  <div class="wf-sticker"><b>«Зараз робити нічого не треба»</b>
+    <span class="act">зрозуміти, що це результат, а не збій</span>
+    <span class="why">Порожньо тут від дій, не від вмісту. Формулювання не хвалить за «менше обстежень»: <a href="../research/jtbd.md#найризикованіші-опори">подавати «менше» як користь не можна</a>.</span></div>
+
+  <div class="wf-sticker"><b>Найближча дата</b>
+    <span class="act">дізнатися, коли знову щось буде</span>
+    <span class="why">Без неї «нічого не треба» читається як «продукт більше не потрібен». Дата порахована від її ж відмітки — це і є механіка R4a.</span></div>
+
+  <div class="wf-sticker"><b>Секції лишаються на місці</b>
+    <span class="act">побачити, що план не зник</span>
+    <span class="why">Ті самі чотири зони, що в стані «успіх». Пункти нікуди не поділись — у них інший стан і інша дія: «Змінити відмітку» замість «Позначити пройденим».</span></div>
+
+  <div class="wf-sticker"><b>«Що можна зробити зараз»</b>
+    <span class="act">вийти в Пошук, Історію або PDF</span>
+    <span class="why">Три виходи замість глухого кута. Пошук тут особливо доречний: якщо жінка прийшла із призначенням, її питання не закривається тим, що план порожній.</span></div>
+
+  <div class="wf-sticker"><b>Таб-бар лишається</b>
+    <span class="act">перейти в «Мої відповіді» або «Про підхід»</span>
+    <span class="why">«Мої відповіді» — головний вихід для цього стану: якщо життя змінилось, план перерахується і порожнеча зникне.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

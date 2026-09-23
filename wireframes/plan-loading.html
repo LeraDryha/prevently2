@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: План — завантаження</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>План — стан завантаження</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="plan.html">успіх</a>
+  <a href="plan-empty.html">порожній</a>
+  <a href="plan-error.html">помилка</a>
+  <span class="here" aria-current="page">завантаження</span>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/plan-loading.html</code></dd>
+    <dt>Екран</dt><dd>«План» — <a href="_screens.md">_screens.md, екран 4</a></dd>
+    <dt>Стан</dt><dd><b>Завантаження.</b> Перерахунок після зміни відповіді або відмітки. Дзеркальний до <code>summary-loading.html</code></dd>
+    <dt>Звідки у flows</dt><dd>Вузол <code>sLoad</code> «Loading: обрахунок плану на пристрої» у <a href="../flows.md#main--розуміти-що-з-призначеного-справді-про-мене">MAIN</a></dd>
+    <dt>Вихід</dt><dd>Виходу немає й не треба: стан минущий, з нього виходять <b>успіх</b> або <b>помилка</b> — обидва сусідні сторінки. Кнопки «скасувати» немає: обрахунок триває секунди й не робить нічого незворотного</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «План»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Ваш чекап</h1>
+    <p>Рахуємо план за вашими відповідями…</p>
+  </header>
+
+  <main aria-busy="true">
+
+    <section aria-labelledby="h-base">
+      <h2 id="h-base">Базовий шар</h2>
+      <p class="lead">Показано всім жінкам незалежно від ризиків.</p>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:62%"></span>
+        <span class="sk" style="width:100%"></span>
+        <span class="sk" style="width:86%"></span>
+        <span class="sk" style="width:44%"></span>
+      </article>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:54%"></span>
+        <span class="sk" style="width:100%"></span>
+        <span class="sk" style="width:72%"></span>
+        <span class="sk" style="width:44%"></span>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-risk">
+      <h2 id="h-risk">Ризик-орієнтовані скринінги</h2>
+      <p class="lead">Залежать від віку, анамнезу й факторів ризику.</p>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:70%"></span>
+        <span class="sk" style="width:100%"></span>
+        <span class="sk" style="width:92%"></span>
+        <span class="sk" style="width:40%"></span>
+      </article>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:48%"></span>
+        <span class="sk" style="width:96%"></span>
+        <span class="sk" style="width:80%"></span>
+        <span class="sk" style="width:40%"></span>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-excl">
+      <h2 id="h-excl">Розглянули і не включили у ваш чекап</h2>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:66%"></span>
+        <span class="sk" style="width:100%"></span>
+        <span class="sk" style="width:100%"></span>
+        <span class="sk" style="width:58%"></span>
+      </article>
+    </section>
+
+    <p class="sr-note">Рахуємо на вашому пристрої. Це кілька секунд.</p>
+
+  </main>
+
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html" aria-current="page">План</a></li>
+      <li><a href="summary.html">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Що показує цей стан</h2>
+
+  <div class="wf-sticker"><b>Заголовки секцій уже на місці</b>
+    <span class="act">бачити, що саме зараз з’явиться</span>
+    <span class="why">Три секції відомі заздалегідь — вони не залежать від обрахунку. Заглушка на їх місці зайва: каркас, який не змінюється, краще показати одразу.</span></div>
+
+  <div class="wf-sticker"><b>Заглушки формою повторюють картку</b>
+    <span class="act">упізнати майбутній вміст, а не «сірі смуги»</span>
+    <span class="why">Чотири рядки різної довжини — назва, опис, періодичність, дія. Якщо заглушка не збігається з формою картки, поява плану читається як стрибок.</span></div>
+
+  <div class="wf-sticker"><b>Скільки заглушок</b>
+    <span class="act">не пообіцяти більше, ніж буде</span>
+    <span class="why">Дві в базовому шарі, дві в ризик-орієнтованих, одна в невключених. Кількість узята з реального плану цієї персони: <a href="../CLAUDE.md#запобіжники">запобіжник про кількість пунктів</a> діє й на заглушки — інакше ми малюємо очікування, яких не виконаємо.</span></div>
+
+  <div class="wf-sticker"><b>Підпис «рахуємо на вашому пристрої»</b>
+    <span class="act">зрозуміти, чому це взагалі триває</span>
+    <span class="why">Обрахунок локальний, і це <a href="../CLAUDE.md#приватність--тверді-межі">не технічна деталь, а обіцянка</a>. Секунда очікування — доречний момент, щоб її нагадати.</span></div>
+
+  <div class="wf-sticker"><b>aria-busy, а не спінер</b>
+    <span class="act">дати зрозуміти стан і без зору</span>
+    <span class="why"><code>&lt;main aria-busy="true"&gt;</code>, заглушки приховані від зчитувача. <a href="../CLAUDE.md#дефолти-ухвалені-без-окремого-обговорення">WCAG 2.2 AA</a> починається в каркасі, а не на етапі дизайну.</span></div>
+
+  <div class="wf-sticker"><b>Таб-бар не блокується</b>
+    <span class="act">піти звідси, якщо чекати не хочеться</span>
+    <span class="why">Навігація лишається робочою: обрахунок нічого не блокує й нічого незворотного не робить.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>
