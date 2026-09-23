@@ -38,6 +38,10 @@
   .subnav.show{display:block}
   .subnav a{font-size:13.5px; padding:5px 10px; color:var(--dim)}
   .subnav a:hover{color:var(--primary-dark); background:transparent}
+  .subnav a.on{color:var(--primary-dark); font-weight:650}
+  .subnav .soon{display:block; font-size:13.5px; padding:5px 10px; color:var(--line)}
+  .subnav ul{list-style:none; margin:0 0 2px 14px; padding:0; border-left:1px solid var(--line)}
+  .subnav ul a, .subnav ul .soon{font-size:12.5px; padding:3px 10px}
   .navgroup{padding:16px 22px 7px; font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); font-weight:600}
 
   #burger{display:none; position:fixed; top:14px; left:14px; z-index:120; width:42px; height:42px;
@@ -220,7 +224,25 @@
         </ul>
       </li>
       <li><a href="ia.html" class="done"><span class="dot"></span>Інформаційна архітектура</a></li>
-      <li><a href="#wireframes" data-v="wireframes" class="wip"><span class="dot"></span>Вайрфрейми</a></li>
+      <li>
+        <a href="#wireframes" data-v="wireframes" class="wip"><span class="dot"></span>Вайрфрейми</a>
+        <ul class="subnav" id="sub-wireframes">
+          <li><span class="soon">Вхід</span></li>
+          <li><span class="soon">Питання</span>
+            <ul><li><span class="soon">помилка</span></li><li><span class="soon">відновлення</span></li></ul></li>
+          <li><span class="soon">Підсумок відповідей</span>
+            <ul><li><span class="soon">завантаження</span></li><li><span class="soon">помилка</span></li></ul></li>
+          <li><a href="#wireframes" class="on" data-wf="wireframes/plan.html#embed">План</a>
+            <ul>
+              <li><span class="soon">завантаження</span></li>
+              <li><span class="soon">помилка</span></li>
+              <li><span class="soon">алерт</span></li>
+              <li><span class="soon">короткий</span></li>
+            </ul></li>
+          <li><span class="soon">Пошук обстеження</span>
+            <ul><li><span class="soon">порожній</span></li></ul></li>
+        </ul>
+      </li>
       <li><a href="#concept" data-v="concept"><span class="dot"></span>Концепція</a></li>
       <li><a href="#tokens" data-v="tokens"><span class="dot"></span>Токени</a></li>
       <li><a href="#components" data-v="components"><span class="dot"></span>Компоненти</a></li>
@@ -1029,7 +1051,7 @@
     <h2>Макети</h2>
     <p class="sub">Відкриваються прямо тут. Анотації зон живуть поруч із макетом, а не в ньому — інакше неможливо подивитись на екран очима людини, яка ніяких підписів не бачить.</p>
     <div class="cards">
-      <div class="card"><span class="lbl">Готово · базовий стан</span><p class="h"><a href="wireframes/plan.html">План →</a></p>
+      <div class="card"><span class="lbl">Готово · базовий стан</span><p class="h">План</p>
         <p>Головний екран продукту: звідси primary-персона починає головний job, і тут-таки він закривається. Чотири секції, три стани пункту, підстава з джерелом під розкриттям. Він же — стан «успіх».</p></div>
       <div class="card"><span class="lbl">Далі</span><p class="h">Вхід · Питання · Підсумок · Пошук</p>
         <p>Плюс сторінки станів: алерт тривожного симптому, короткий план, порожній пошук, помилки й завантаження. Разом 14 сторінок.</p></div>
@@ -1037,8 +1059,7 @@
 
     <div class="wfembed">
       <iframe src="wireframes/plan.html#embed" title="Вайрфрейм екрана «План» у мокапі телефону" loading="lazy"></iframe>
-      <p class="cap"><span><strong>План</strong> — прокрутіть усередині телефона. Пунктир унизу — межа першого екрана: усе нижче треба догортати.</span>
-        <a href="wireframes/plan.html">Відкрити з анотаціями зон <span class="ext">↗</span></a></p>
+      <p class="cap"><span><strong>План</strong> — прокрутіть усередині телефона. Пунктир унизу — межа першого екрана: усе нижче треба догортати.</span></p>
     </div>
   </section>
 
@@ -1171,6 +1192,17 @@
   document.querySelectorAll('.subnav a').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
+      var wf = a.dataset.wf;
+      if(wf){
+        var frame = document.querySelector('.wfembed iframe');
+        if(frame){ frame.setAttribute('src', wf); }
+        a.closest('.subnav').querySelectorAll('a').forEach(function(x){ x.classList.remove('on'); });
+        a.classList.add('on');
+        show('wireframes'); closeNav();
+        var box = document.querySelector('.wfembed');
+        if(box){ box.scrollIntoView({behavior:'smooth', block:'start'}); }
+        return;
+      }
       var id = a.getAttribute('href').slice(1);
       show(a.closest('.subnav').id.replace('sub-',''), id); closeNav();
     });

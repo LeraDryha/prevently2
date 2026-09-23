@@ -22,7 +22,6 @@ body {
 
 #embed:target { padding: 0; }
 #embed:target .wf-meta,
-#embed:target .wf-tree,
 #embed:target .wf-notes { display: none; }
 #embed:target .wf-stage { justify-content: center; max-width: none; }
 
@@ -41,76 +40,12 @@ body {
 .wf-meta code { background: #f2f2f2; padding: 1px 4px; }
 
 .wf-stage {
-  max-width: 1340px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
-  gap: 32px;
+  gap: 40px;
   align-items: flex-start;
   flex-wrap: wrap;
-}
-
-/* --- Навігаційне дерево: службове, однакове на кожній сторінці --- */
-
-.wf-tree {
-  flex: 0 0 236px;
-  position: sticky;
-  top: 24px;
-  font-size: 12px;
-  border-right: 1px solid #dddddd;
-  padding-right: 20px;
-}
-.wf-tree .tt {
-  margin: 0 0 12px;
-  font-size: 11px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #888888;
-}
-.wf-tree ul { list-style: none; margin: 0; padding: 0; }
-.wf-tree li { margin: 0; }
-
-.wf-tree .t1 > li { margin-bottom: 14px; }
-.wf-tree .gname {
-  display: block;
-  color: #666666;
-  line-height: 1.35;
-  margin-bottom: 5px;
-}
-.wf-tree .t2 { margin-left: 10px; border-left: 1px solid #dddddd; padding-left: 10px; }
-.wf-tree .t3 { margin-left: 8px; border-left: 1px solid #e6e6e6; padding-left: 10px; margin-top: 3px; }
-.wf-tree .t2 > li { margin-bottom: 7px; }
-.wf-tree .t3 > li { margin-bottom: 2px; }
-
-.wf-tree .scr,
-.wf-tree .st { display: block; line-height: 1.35; }
-.wf-tree .scr { color: #333333; }
-.wf-tree .st { color: #777777; font-size: 11.5px; }
-.wf-tree code { display: block; color: #999999; font-size: 10.5px; }
-
-.wf-tree a.scr { text-decoration: none; }
-.wf-tree a.scr:hover { text-decoration: underline; }
-.wf-tree .here { font-weight: 700; color: #111111; }
-.wf-tree .here::before { content: "\2192\00a0"; }
-.wf-tree .soon { color: #999999; }
-.wf-tree .soon code { color: #bbbbbb; }
-.wf-tree .out,
-.wf-tree .out .gname { color: #aaaaaa; font-style: italic; }
-.wf-tree .note { color: #aaaaaa; font-size: 11px; }
-
-.wf-tree .lg {
-  margin: 18px 0 0;
-  padding-top: 12px;
-  border-top: 1px solid #dddddd;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  font-size: 11px;
-  color: #999999;
-}
-
-@media (max-width: 1100px) {
-  .wf-tree { position: static; flex: 1 1 100%; border-right: 0; border-bottom: 1px solid #dddddd;
-             padding-right: 0; padding-bottom: 18px; }
 }
 
 /* --- Мокап телефону: службовий корпус, не продукт ---
