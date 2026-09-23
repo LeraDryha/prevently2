@@ -32,6 +32,7 @@
   nav a.active{background:var(--primary-soft); color:var(--primary-dark); font-weight:600}
   nav a .dot{width:6px; height:6px; border-radius:50%; background:var(--line); flex:none}
   nav a.done .dot{background:var(--primary)}
+  nav a.wip .dot{background:var(--amber)}
   nav a.active .dot{background:var(--primary)}
   .subnav{margin:2px 0 8px 30px; padding:0; list-style:none; display:none}
   .subnav.show{display:block}
@@ -105,6 +106,7 @@
   .badge{display:inline-block; font-size:11.5px; font-weight:650; padding:3px 10px; border-radius:100px; letter-spacing:.02em}
   .badge.done{background:var(--primary-soft); color:var(--primary-dark)}
   .badge.none{background:#f2eff0; color:var(--dim)}
+  .badge.wip{background:#f7efe7; color:var(--amber)}
 
   .empty{background:var(--surface); border:1px dashed var(--primary-line); border-radius:var(--radius);
     padding:36px 28px; text-align:center; margin-top:26px}
@@ -211,7 +213,7 @@
         </ul>
       </li>
       <li><a href="ia.html" class="done"><span class="dot"></span>Інформаційна архітектура</a></li>
-      <li><a href="#wireframes" data-v="wireframes"><span class="dot"></span>Вайрфрейми</a></li>
+      <li><a href="#wireframes" data-v="wireframes" class="wip"><span class="dot"></span>Вайрфрейми</a></li>
       <li><a href="#concept" data-v="concept"><span class="dot"></span>Концепція</a></li>
       <li><a href="#tokens" data-v="tokens"><span class="dot"></span>Токени</a></li>
       <li><a href="#components" data-v="components"><span class="dot"></span>Компоненти</a></li>
@@ -250,7 +252,7 @@
       <tbody>
         <tr><td><strong>Дослідження</strong></td><td>Конкуренти, бенчмарк, UX-патерни, 33 скріни, доресерч у три раунди</td><td><span class="badge done">зроблено</span></td></tr>
         <tr><td><strong>Люди і роботи</strong></td><td>Опитування на 362 відповіді, 5 інтерв'ю, 4 персони, JTBD-матриця</td><td><span class="badge done">зроблено</span></td></tr>
-        <tr><td>Вайрфрейми</td><td>Схеми екранів опитувальника і плану</td><td><span class="badge none">не почато</span></td></tr>
+        <tr><td><strong>Вайрфрейми</strong></td><td>Замовлення на 5 екранів, правила макетів, перший екран — План</td><td><span class="badge wip">у роботі</span></td></tr>
         <tr><td>Концепція</td><td>Візуальний напрям, тон, ключові екрани</td><td><span class="badge none">не почато</span></td></tr>
         <tr><td>Токени</td><td>Кольори, типографіка, відступи</td><td><span class="badge none">не почато</span></td></tr>
         <tr><td>Компоненти</td><td>Картка рекомендації, крок опитувальника, плашки</td><td><span class="badge none">не почато</span></td></tr>
@@ -1008,14 +1010,68 @@
   </section>
 </div>
 
-<!-- ============ ПОРОЖНІ РОЗДІЛИ ============ -->
+<!-- ============ ВАЙРФРЕЙМИ ============ -->
 <div class="view" id="v-wireframes">
   <header class="top"><p class="eyebrow">Розділ 02 · Вайрфрейми</p><h1>Схеми екранів</h1>
-    <p class="lede">Структура екранів опитувальника й плану до візуального оформлення.</p></header>
+    <p class="lede">Структура екранів опитувальника й плану до візуального оформлення. Сіре, без кольору й типографіки: макет має доводити, що на екрані є і що чому підпорядковане, — не те, що він гарний.</p>
+    <div class="meta"><span class="chip">5 екранів у замовленні</span><span class="chip">14 сторінок зі станами</span><span class="chip">1 намальовано</span><span class="chip">Телефон 390&times;844</span></div>
+  </header>
   <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/README.md" target="_blank" rel="noopener">wireframes/README.md</a> <span class="ext">↗</span></p>
-  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
-    <p>Тут з'являться схеми екранів. Патерни вже обрані в дослідженні, тож основа є:</p>
-    <ul><li>Візард — одне питання на екран</li><li>Екран-підсумок відповідей перед планом</li><li>Картки з розкриттям для плану</li><li>Пріоритетний екран червоного прапорця</li></ul></div>
+
+  <section class="block">
+    <h2>Макети</h2>
+    <p class="sub">Відкриваються прямо тут. Анотації зон живуть поруч із макетом, а не в ньому — інакше неможливо подивитись на екран очима людини, яка ніяких підписів не бачить.</p>
+    <div class="cards">
+      <div class="card"><span class="lbl">Готово · базовий стан</span><p class="h"><a href="wireframes/plan.html">План →</a></p>
+        <p>Головний екран продукту: звідси primary-персона починає головний job, і тут-таки він закривається. Чотири секції, три стани пункту, підстава з джерелом під розкриттям. Він же — стан «успіх».</p></div>
+      <div class="card"><span class="lbl">Далі</span><p class="h">Вхід · Питання · Підсумок · Пошук</p>
+        <p>Плюс сторінки станів: алерт тривожного симптому, короткий план, порожній пошук, помилки й завантаження. Разом 14 сторінок.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Що вирішено до макетів</h2>
+    <p class="sub">Замовлення й правила написані <strong>до</strong> першого екрана навмисно: інакше він задав би конвенції явочним порядком.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Документ</th><th>Що в ньому</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/_screens.md" target="_blank" rel="noopener"><strong>_screens.md</strong> <span class="ext">↗</span></a></td>
+            <td><strong>Що малюємо.</strong> П'ять екранів головного flow: у кожного job із jtbd.md, місце в діаграмі MAIN і перелік реальних станів. Екран без job'а або без місця у flow не береться</td></tr>
+        <tr><td><a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/_conventions.md" target="_blank" rel="noopener"><strong>_conventions.md</strong> <span class="ext">↗</span></a></td>
+            <td><strong>Як малюємо.</strong> Деталізація, семантична розмітка, справжній текст із домену, іменування файлів, будова сторінки, правило станів</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2>Три рішення, які видно в розмітці</h2>
+    <div class="cards">
+      <div class="card"><span class="lbl">Метрика в розмітці</span><p class="h">Секція «не включили» — details/summary</p>
+        <p>Механізм згортання живе в HTML, а не в скрипті: <strong>сама подія розгортання і є підтримувальною метрикою №1</strong>. Підстава всередині картки при цьому не згортається — інакше головна робота коштувала б четвертий тап.</p></div>
+      <div class="card"><span class="lbl">Межа медичного контенту</span><p class="h">Джерела позначені «не вивірено»</p>
+        <p>Настанова, рівень доказовості й дата в макеті — ще не факт. Правило «нічого не вигадувати» стосується й чернетки, тому позначка знімається тільки після рецензента.</p></div>
+      <div class="card"><span class="lbl">Не наша секція</span><p class="h">«Додано вами» — пунктир і нуль джерел</p>
+        <p>Ні підстави, ні рівня доказовості, ні слова «рекомендовано». Щоб план візуально не благословляв те, чого ми не оцінювали.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Що знайшов мокап телефону</h2>
+    <div class="box warm">
+      <p class="t">Головна робота лежить за два прогортування</p>
+      <p>Корпус 390&times;844 з адресною смугою браузера показав те, чого не видно на плоскій рамці: до межі першого екрана поміщається <strong>тільки шапка, навігація і базовий шар</strong> — тобто те, що показано всім і залежить від жінки найменше.</p>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>Секція</th><th>Відступ</th><th>Екранів вниз</th></tr></thead>
+      <tbody>
+        <tr><td>Базовий шар</td><td>233 px</td><td>видно одразу</td></tr>
+        <tr><td>Ризик-орієнтовані скринінги</td><td>1048 px</td><td>1,2</td></tr>
+        <tr><td><strong>Розглянули і не включили</strong></td><td>1807 px</td><td><strong>2,1</strong></td></tr>
+        <tr><td>Додано вами</td><td>2764 px</td><td>3,3</td></tr>
+      </tbody>
+    </table></div>
+    <p class="sub">Метрика «розгорнули пояснення» міряє тап, але до секції спершу треба доїхати — і цих двох прогортувань не бачить жодна метрика: підрахунок тапів рахує навігаційні вибори, а не скрол. Знахідка записана в анотації макета й <strong>не виправлена</strong>: порядок секцій іде з дерева sitemap, і міняти його — рішення власниці.</p>
+  </section>
 </div>
 
 <div class="view" id="v-concept">
