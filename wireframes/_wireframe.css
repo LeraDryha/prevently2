@@ -1,0 +1,224 @@
+/* Спільні стилі вайрфреймів. Тільки сіре: без кольору, шрифтів, іконок і тіней.
+   Правила — wireframes/_conventions.md. Власних стилів у сторінках немає. */
+
+* { box-sizing: border-box; }
+
+/* Жодного кольору, зокрема дефолтного синього в посиланнях */
+a { color: #222222; }
+
+body {
+  /* Системний шрифт ОС — не вибраний нами і не підключений. Типографіка — потім. */
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 24px 16px 64px;
+  background: #ffffff;
+  color: #333333;
+  line-height: 1.45;
+}
+
+/* --- Службова обгортка: не частина екрана --- */
+
+.wf-meta {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #cccccc;
+}
+.wf-meta h1 { margin: 0 0 4px; font-size: 20px; }
+.wf-meta dl { margin: 12px 0 0; display: grid; grid-template-columns: 160px 1fr; gap: 4px 16px; }
+.wf-meta dt { color: #666666; font-size: 13px; }
+.wf-meta dd { margin: 0; font-size: 13px; }
+.wf-meta code { background: #f2f2f2; padding: 1px 4px; }
+
+.wf-stage {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* --- Мокап телефону: службовий корпус, не продукт ---
+   Заокруглення тут дозволені: вони описують пристрій, а не наш інтерфейс.
+   Усе, що всередині .wf-device, лишається пласким. Розмір — 390x844,
+   логічний екран типового телефона. */
+
+.wf-phone {
+  flex: 0 0 auto;
+  width: 412px;              /* 390 екран + 11 рамка з кожного боку */
+  padding: 11px;
+  border: 1px solid #888888;
+  border-radius: 38px;
+  background: #ebebeb;
+}
+
+.wf-phone-screen {
+  position: relative;
+  width: 390px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* Динамічний острівець — форма пристрою, не елемент інтерфейсу */
+.wf-notch {
+  position: absolute;
+  top: 9px; left: 50%; transform: translateX(-50%);
+  width: 104px; height: 24px;
+  border-radius: 12px;
+  background: #d8d8d8;
+  z-index: 2;
+}
+
+/* Системний рядок телефона: не наш інтерфейс */
+.wf-status {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+  font-size: 12px;
+  color: #666666;
+  background: #f2f2f2;
+}
+.wf-status .bars { display: flex; gap: 3px; align-items: flex-end; }
+.wf-status .bars i { display: block; width: 3px; background: #aaaaaa; }
+.wf-status .bars i:nth-child(1) { height: 5px; }
+.wf-status .bars i:nth-child(2) { height: 8px; }
+.wf-status .bars i:nth-child(3) { height: 11px; }
+
+/* Адресний рядок браузера: продукт відкривають у браузері, і ця смуга не наша */
+.wf-browser {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: #f2f2f2;
+  border-bottom: 1px solid #cccccc;
+}
+.wf-browser .urlbar {
+  flex: 1;
+  height: 30px;
+  border: 1px solid #bbbbbb;
+  border-radius: 15px;
+  background: #ffffff;
+}
+
+/* Межа першого екрана: 844px від верху фізичного екрана.
+   Нижче — те, до чого треба догортати. */
+.wf-fold {
+  position: absolute;
+  left: 0; right: 0;
+  top: 844px;
+  border-top: 1px dashed #888888;
+  z-index: 2;
+  pointer-events: none;
+}
+.wf-fold::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 7px; transform: translateX(-50%);
+  width: 134px; height: 4px;
+  border-radius: 2px;
+  background: #bbbbbb;
+}
+
+/* --- Екран: усередині лише продукт --- */
+
+.wf-device {
+  width: 390px;
+  border: 0;
+  background: #ffffff;
+  padding: 0;
+}
+
+/* --- Анотації: поруч з екраном, не в ньому --- */
+
+.wf-notes { flex: 1 1 320px; min-width: 300px; }
+.wf-notes h2 { font-size: 15px; margin: 0 0 12px; }
+.wf-notes ol { margin: 0; padding-left: 22px; }
+.wf-notes li { margin-bottom: 16px; font-size: 13px; }
+.wf-notes b { display: block; }
+.wf-notes .act { color: #555555; }
+.wf-notes .act::before { content: "Головна дія: "; color: #888888; }
+.wf-notes .why { display: block; color: #777777; margin-top: 2px; }
+
+/* --- Екран --- */
+
+.wf-device > header { padding: 16px; border-bottom: 1px solid #cccccc; }
+.wf-device > header h1 { margin: 0 0 4px; font-size: 19px; }
+.wf-device > header p { margin: 0; font-size: 12px; color: #666666; }
+
+.wf-device > nav { border-bottom: 1px solid #cccccc; background: #f7f7f7; }
+.wf-device > nav ul { margin: 0; padding: 0; list-style: none; display: flex; }
+.wf-device > nav li { flex: 1; }
+.wf-device > nav a {
+  display: block; padding: 10px 6px; text-align: center;
+  font-size: 13px; color: #333333; text-decoration: none;
+  border-right: 1px solid #dddddd;
+}
+.wf-device > nav li:last-child a { border-right: 0; }
+.wf-device > nav a[aria-current="page"] { background: #e4e4e4; font-weight: 700; }
+
+.wf-device > main { padding: 0; }
+.wf-device > main > section { padding: 16px; border-bottom: 1px solid #cccccc; }
+.wf-device h2 { margin: 0 0 6px; font-size: 15px; }
+.wf-device .lead { margin: 0 0 14px; font-size: 12px; color: #666666; }
+
+article {
+  border: 1px solid #cccccc;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+article:last-of-type { margin-bottom: 0; }
+article h3 { margin: 0 0 6px; font-size: 14px; }
+article p { margin: 0 0 8px; font-size: 13px; }
+article .when { font-size: 13px; }
+article .cost { font-size: 12px; color: #555555; border: 1px solid #dddddd; display: inline-block; padding: 1px 6px; }
+article .state { font-size: 12px; color: #555555; margin: 8px 0 8px; }
+
+.basis { border-left: 3px solid #bbbbbb; padding-left: 10px; margin: 10px 0; }
+.basis p { margin: 0 0 4px; font-size: 13px; }
+.basis p:last-child { margin-bottom: 0; }
+.basis .conf { color: #666666; font-size: 12px; }
+.condition { font-size: 13px; margin: 0 0 8px; }
+.condition b { font-weight: 700; }
+
+details { border-top: 1px solid #dddddd; margin-top: 10px; padding-top: 8px; }
+details > summary { font-size: 12px; color: #555555; cursor: pointer; }
+details .src { font-size: 12px; color: #555555; margin: 8px 0 0; }
+.unverified { color: #888888; }
+
+.sect-inclusion > summary { list-style: none; }
+.sect-inclusion > summary::-webkit-details-marker { display: none; }
+.sect-inclusion > summary h2 { display: inline; }
+.sect-inclusion > summary .hint { display: block; font-size: 12px; color: #666666; margin-top: 4px; }
+
+.not-ours { border-style: dashed; }
+.not-ours .mark { font-size: 12px; color: #666666; margin: 0 0 8px; }
+
+.gate { margin: 14px 0 0; font-size: 13px; }
+.gate p { margin: 0 0 6px; }
+
+button {
+  font: inherit; font-size: 13px;
+  background: #eeeeee; color: #222222;
+  border: 1px solid #888888;
+  padding: 7px 12px;
+}
+button.secondary { background: #ffffff; }
+
+/* Перехід на інший екран: посилання, не кнопка (див. _conventions.md) */
+.btnlink {
+  display: inline-block;
+  font-size: 13px;
+  color: #222222;
+  background: #ffffff;
+  border: 1px solid #888888;
+  padding: 7px 12px;
+  text-decoration: none;
+}
+
+.wf-device > footer { padding: 16px; background: #f7f7f7; }
+.wf-device > footer p { margin: 0 0 12px; font-size: 12px; color: #555555; }
