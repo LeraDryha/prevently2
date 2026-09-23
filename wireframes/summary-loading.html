@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Підсумок — завантаження</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Підсумок відповідей — стан завантаження</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="summary.html">базовий</a>
+  <a href="summary-error.html">помилка</a>
+  <span class="here" aria-current="page">завантаження</span>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/summary-loading.html</code></dd>
+    <dt>Екран</dt><dd>«Підсумок відповідей» — <a href="../sitemap.md#дерево">sitemap, група «Розповісти про себе»</a>. У меню той самий екран називається «Мої відповіді» — <a href="../sitemap.md#неточність-у-назвах">одна сутність, дві назви для двох контекстів</a></dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#r4a--не-починати-шлях-спочатку">R4a</a> — «спиратися на те, що вже зробила, щоб не починати шлях спочатку» · <a href="../research/jtbd.md#main-job">MAIN</a></dd>
+    <dt>Стан</dt><dd><b>Завантаження.</b> Обрахунок плану на пристрої — вузол <code>sLoad</code> у <a href="../flows.md#main--розуміти-що-з-призначеного-справді-про-мене">MAIN</a>. Дзеркальний до <code>plan-loading.html</code></dd>
+    <dt>Що саме вантажиться</dt><dd>Не відповіді — вони вже на екрані, — а <b>план</b>. Тому заглушки стоять тільки в зоні дії, а список відповідей лишається читабельним</dd>
+    <dt>Вихід</dt><dd>Виходу немає й не треба: стан минущий, з нього виходять успіх (План) або помилка. Кнопки «скасувати» немає — обрахунок триває секунди й не робить нічого незворотного</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Підсумок відповідей»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Ваші відповіді</h1>
+    <p>Від цього порахований план. Змінилось життя — змініть відповідь, і план
+    перерахується.</p>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-b1">
+      <h2 id="h-b1">Вік і демографія</h2>
+      <article>
+        <h3>Скільки вам років</h3>
+        <p class="answer">36</p>
+        <p class="derived">Дало у плані: <b>2 пункти</b> — цитологія, тиск</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-b2">
+      <h2 id="h-b2">Спосіб життя</h2>
+      <article>
+        <h3>Ви курите зараз або курили раніше</h3>
+        <p class="answer">Кинула</p>
+        <p class="derived">Дало у плані: <b>1 невключений пункт</b> — низькодозова КТ легень,
+        з умовою «з 50 років при стажі 20 пачко-років»</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+      <article>
+        <h3>Алкоголь</h3>
+        <p class="answer">Рідко, кілька разів на рік</p>
+        <p class="derived">Дало у плані: <b>нічого</b> — і це теж результат</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-b4">
+      <h2 id="h-b4">Сімейна історія</h2>
+      <article>
+        <h3>Рак грудей у мами, сестри або доньки</h3>
+        <p class="answer">Ні</p>
+        <p class="derived">Дало у плані: <b>1 невключений пункт</b> — мамографія,
+        з умовою «з 40 років»</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-b5">
+      <h2 id="h-b5">Акушерсько-гінекологічний анамнез</h2>
+      <article>
+        <h3>Коли востаннє робили цитологію</h3>
+        <p class="answer">Березень 2026</p>
+        <p class="derived">Дало у плані: наступна дата — <b>до березня 2028</b></p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-go" aria-busy="true">
+      <h2 id="h-go">Рахуємо план</h2>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:58%"></span>
+        <span class="sk" style="width:100%"></span>
+        <span class="sk" style="width:76%"></span>
+      </article>
+      <p class="sr-note">Рахуємо на вашому пристрої, за відповідями вище. Це кілька секунд.</p>
+    </section>
+
+  </main>
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html">План</a></li>
+      <li><a href="summary.html" aria-current="page">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Зони і головна дія кожної</h2>
+
+  <div class="wf-sticker"><b>Відповіді лишаються видимими</b>
+    <span class="act">читати їх, поки план рахується</span>
+    <span class="why">Заглушки стоять тільки там, де справді чекаємо. Затягнути в скелет увесь екран означало б приховати те, що вже готове.</span></div>
+
+  <div class="wf-sticker"><b>Заглушка на місці дії</b>
+    <span class="act">бачити, де з’явиться результат</span>
+    <span class="why">Три рядки замість кнопки «Показати план»: очікування прив’язане до конкретного місця, а не розлите по екрану.</span></div>
+
+  <div class="wf-sticker"><b>«Рахуємо на вашому пристрої»</b>
+    <span class="act">зрозуміти, чому це взагалі триває</span>
+    <span class="why">Той самий підпис, що в <a href="plan-loading.html">завантаженні Плану</a>. Секунда очікування — доречний момент нагадати, що обрахунок локальний.</span></div>
+
+  <div class="wf-sticker"><b>aria-busy на секції, не на всьому</b>
+    <span class="act">почути стан і без зору</span>
+    <span class="why">Зчитувач повідомляє про зайнятість саме тієї частини, що чекає. <a href="../CLAUDE.md#дефолти-ухвалені-без-окремого-обговорення">WCAG 2.2 AA</a> починається в каркасі.</span></div>
+
+  <div class="wf-sticker"><b>Таб-бар не блокується</b>
+    <span class="act">піти звідси, якщо чекати не хочеться</span>
+    <span class="why">Обрахунок нічого не блокує й нічого незворотного не робить.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Пошук обстеження</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Пошук обстеження — успіх</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <span class="here" aria-current="page">успіх</span>
+  <a href="search-empty.html">порожній</a>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/search.html</code></dd>
+    <dt>Екран</dt><dd>«Пошук обстеження» — <a href="../sitemap.md#дерево">sitemap, група «Знайти те, що призначили»</a>. Контекстний екран поза меню</dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#main-job">MAIN</a> — <a href="../sitemap.md#матриця">✓⚠, часткове покриття</a> · <a href="../research/jtbd.md#e1--перестати-відчувати-що-на-мені-заробляють">E1</a></dd>
+    <dt>Стан</dt><dd><b>Успіх</b> — і це базова сторінка: за <a href="_conventions.md#6--стани">конвенціями</a> окремої <code>-success</code> не буває. Пошук — <a href="_screens.md#стани">єдиний екран із власним «вийшло»</a>: виданий вердикт плюс підтвердження додавання</dd>
+    <dt>Місце у flow</dt><dd>Гілка «ні» рішення 7 MAIN. Далі рішення 8 («є в довіднику?») розводить два вердикти, рішення 9 («це призначив лікар?») веде в додавання власного пункту — вузол <code>okTogether</code></dd>
+    <dt>Показаний вердикт</dt><dd>Один із трьох: <b>«розглянули і не включили»</b>. Два інші — «є у вашому плані» і «не оцінювали» — <a href="../CLAUDE.md#правила-роботи-з-медичним-контентом">окремі стани результату</a>; «не оцінювали» показано на сторінці <a href="search-empty.html">порожнього стану</a>, «є у плані» окремої сторінки не має, бо в <a href="_screens.md#стани">таблиці станів</a> його немає</dd>
+    <dt>Вихід</dt><dd>«Додати до списку» (дія) або «повернутись до плану» (перехід). Обидва — після побаченого вердикту, і це навмисно: <a href="../sitemap.md#12--користувацький-пункт">пошук є обов'язковими воротами</a> до секції «Додано вами»</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Пошук обстеження»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Знайти обстеження</h1>
+    <p>Вам щось призначили, а в плані цього немає? Введіть назву з папірця.</p>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-f">
+      <h2 id="h-f">Пошук за назвою</h2>
+      <form role="search">
+        <label for="q">Назва обстеження</label>
+        <input type="search" id="q" name="q" value="мамографія">
+        <button type="button">Знайти</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="h-r">
+      <h2 id="h-r">Мамографія</h2>
+      <article>
+        <p class="verdict">Розглянули і не включили <b>у ваш чекап</b></p>
+        <p>Мамографію не рекомендують до 40 років без обтяженої сімейної історії.
+        За вашими відповідями раку грудей у мами, сестри чи доньки не було.</p>
+        <p class="condition"><b>З'явиться у вашому плані:</b> з 40 років. Раніше — якщо
+        рак грудей виявлять у родички першої лінії.</p>
+        <details>
+          <summary>Джерело і рівень доказовості</summary>
+          <p class="src">USPSTF, Breast Cancer: Screening · рівень B (для 40–74 років) ·
+          переглянуто 2024 <span class="unverified">[не вивірено рецензентом]</span></p>
+        </details>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-add">
+      <h2 id="h-add">Це призначив лікар?</h2>
+      <p class="lead">Ми не заперечуємо лікарю — ми говоримо тільки про чекап. Якщо
+      мамографію призначили вам особисто, додайте її до списку, щоб усе було в одному
+      місці. Вона стане у секцію «Додано вами»: без нашого вердикту й без джерела,
+      бо це не наша рекомендація.</p>
+      <button type="button">Додати до списку</button>
+      <p class="lead"><a href="plan.html">Ні, питання закрите — повернутись до плану</a></p>
+    </section>
+
+  </main>
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html" aria-current="page">План</a></li>
+      <li><a href="summary.html">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Зони і головна дія кожної</h2>
+
+  <div class="wf-sticker"><b>Поле пошуку</b>
+    <span class="act">ввести назву з папірця</span>
+    <span class="why">Справжній <code>&lt;input type="search"&gt;</code> у <code>&lt;form role="search"&gt;</code>. Вхід сюди тільки контекстний — <a href="../sitemap.md#контекстне--зявляється-в-потоці">з меню його немає</a>, інакше відповідь на запит перетворилась би на гортання каталогу.</span></div>
+
+  <div class="wf-sticker"><b>«…у ваш чекап»</b>
+    <span class="act">не прочитати це як заперечення лікаря</span>
+    <span class="why">Три слова, які не можна впустити. <a href="../CLAUDE.md#правила-роботи-з-медичним-контентом">«Не рекомендоване вам» без цього уточнення</a> читається як спір із лікарем, а ми не сторона в тій розмові.</span></div>
+
+  <div class="wf-sticker"><b>Підстава не згорнута</b>
+    <span class="act">одразу побачити, чому саме</span>
+    <span class="why">Те саме рішення, що в Плані: підстава і є змістом картки. Під розкриттям — тільки джерело з грейдом і датою.</span></div>
+
+  <div class="wf-sticker"><b>«З’явиться у вашому плані»</b>
+    <span class="act">дізнатися, коли це стане про неї</span>
+    <span class="why">Перетворює відсутність на знання. Без цього рядка вердикт читається як відмова.</span></div>
+
+  <div class="wf-sticker"><b>«Це призначив лікар?»</b>
+    <span class="act">додати до списку, не отримавши поради</span>
+    <span class="why">«Додайте до списку, щоб усе було в одному місці», <a href="../CLAUDE.md#правила-роботи-з-медичним-контентом">ніколи «звісно робіть»</a>: ми ведемо облік, а не даємо медичну пораду.</span></div>
+
+  <div class="wf-sticker"><b>Додавання тільки звідси</b>
+    <span class="act">не отримати мовчазне схвалення</span>
+    <span class="why">Пошук — <a href="../sitemap.md#12--користувацький-пункт">обов’язкові ворота</a> до «Додано вами». Якби додавати можна було напряму з Плану, наше мовчання читалося б як схвалення.</span></div>
+
+  <div class="wf-sticker"><b>Вихід «питання закрите»</b>
+    <span class="act">піти, нічого не додаючи</span>
+    <span class="why">Червона гілка рішення 9, яка веде в успіх: не додати — теж нормальний результат.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

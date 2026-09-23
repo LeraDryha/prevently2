@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Підсумок — помилка</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Підсумок відповідей — стан помилки</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="summary.html">базовий</a>
+  <span class="here" aria-current="page">помилка</span>
+  <a href="summary-loading.html">завантаження</a>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/summary-error.html</code></dd>
+    <dt>Екран</dt><dd>«Підсумок відповідей» — <a href="../sitemap.md#дерево">sitemap, група «Розповісти про себе»</a>. У меню той самий екран називається «Мої відповіді» — <a href="../sitemap.md#неточність-у-назвах">одна сутність, дві назви для двох контекстів</a></dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#r4a--не-починати-шлях-спочатку">R4a</a> — «спиратися на те, що вже зробила, щоб не починати шлях спочатку» · <a href="../research/jtbd.md#main-job">MAIN</a></dd>
+    <dt>Стан</dt><dd><b>Помилка.</b> <a href="../sitemap.md#дерево">«Не порахувалось — спробувати ще раз»</a>, дослівно з дерева екранів. Дзеркальний до <code>plan-error.html</code></dd>
+    <dt>Чим відрізняється від помилки Плану</dt><dd>Тут відповіді <b>на місці</b> — видно, що саме не спрацював обрахунок. У Плану той самий вузол означає ще й можливу втрату локальних даних, тому там є «відновити з копії», а тут ні</dd>
+    <dt>Вихід</dt><dd>«Спробувати ще раз» і «перевірте відповіді» — список під помилкою, кожна з дією «Змінити». Тупика немає</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Підсумок відповідей»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Ваші відповіді</h1>
+    <p>План не порахувався</p>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-e">
+      <h2 id="h-e">Не вдалося порахувати план</h2>
+      <p class="lead">Ваші відповіді на місці — вони нижче, і ми їх не втратили. Не спрацював
+      сам обрахунок. Він виконується на цьому пристрої, тож нічого нікуди не надсилалось.</p>
+
+      <article>
+        <h3>Спробуйте ще раз</h3>
+        <p>Найчастіше цього досить.</p>
+        <button type="button">Спробувати ще раз</button>
+      </article>
+
+      <article>
+        <h3>Або перевірте відповіді</h3>
+        <p>Якщо якась відповідь виглядає дивно — виправте її, і ми порахуємо заново.
+        Список нижче.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-a">
+      <h2 id="h-a">Ваші відповіді</h2>
+      <article>
+        <h3>Скільки вам років</h3>
+        <p class="answer">36</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+      <article>
+        <h3>Ви курите зараз або курили раніше</h3>
+        <p class="answer">Кинула</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+      <article>
+        <h3>Коли востаннє робили цитологію</h3>
+        <p class="answer">Березень 2026</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+  </main>
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html">План</a></li>
+      <li><a href="summary.html" aria-current="page">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Зони і головна дія кожної</h2>
+
+  <div class="wf-sticker"><b>«Ваші відповіді на місці»</b>
+    <span class="act">не злякатися, що все пропало</span>
+    <span class="why">Перше, що треба сказати: помилка обрахунку не дорівнює втраті даних. Без цього рядка людина читає найгірший сценарій.</span></div>
+
+  <div class="wf-sticker"><b>Відповіді лишаються на екрані</b>
+    <span class="act">переконатися очима, а не повірити на слово</span>
+    <span class="why">Твердження «дані на місці» без самих даних коштує рівно нічого. Тому список під помилкою, а не замість нього.</span></div>
+
+  <div class="wf-sticker"><b>«Спробувати ще раз»</b>
+    <span class="act">повторити обрахунок</span>
+    <span class="why">Дія тут-таки, тому кнопка. <a href="../sitemap.md#дерево">Дерево екранів називає цей стан саме так</a>.</span></div>
+
+  <div class="wf-sticker"><b>«Перевірте відповіді»</b>
+    <span class="act">полагодити причину, а не симптом</span>
+    <span class="why">Другий вихід на випадок, коли повтор не допомагає: можливо, справа в самій відповіді. Кожен рядок нижче має «Змінити».</span></div>
+
+  <div class="wf-sticker"><b>«Відновити з копії» тут немає</b>
+    <span class="act">не пропонувати зайвого</span>
+    <span class="why">На відміну від <a href="plan-error.html">помилки Плану</a>: там дані могли зникнути, тут вони перед очима. Пропонувати відновлення означало б натякати на втрату, якої немає.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

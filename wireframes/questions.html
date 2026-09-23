@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Питання</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Питання — базовий стан</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <span class="here" aria-current="page">базовий</span>
+  <a href="questions-error.html">помилка</a>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/questions.html</code></dd>
+    <dt>Екран</dt><dd>«Питання (візард, одне на екран)» — <a href="../sitemap.md#дерево">sitemap, група «Розповісти про себе»</a></dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#main-job">MAIN</a> · <a href="../research/jtbd.md#r1--зрозуміти-логіку-а-не-отримати-відповідь">R1</a> — «розуміти, від чого залежить потреба саме в моєму випадку» · <a href="../research/jtbd.md#s1--щоб-зі-мною-говорили-як-з-людиною-яка-розуміє">S1</a> — тон</dd>
+    <dt>Стан</dt><dd>Базовий. За <a href="_screens.md#стани">таблицею</a> у Питань є лише один стан — <b>помилка</b>: порожнього не буває (питання є завжди), завантаження немає (розгалуження рахується миттєво), успіху немає (кінець веде в Підсумок)</dd>
+    <dt>Місце у flow</dt><dd>Після Входу. Несе стан автозбереження; єдиний вихід раніше кінця — «кинула на середині» → відновлення → назад сюди. <a href="../flows.md#main--розуміти-що-з-призначеного-справді-про-мене">Тут живе північна зірка</a></dd>
+    <dt>Чого тут немає</dt><dd>Таб-бара (навігація з'являється з Планом) і сторінки <code>questions-resume.html</code> — стан відновлення в <a href="_screens.md#стани">таблиці чотирьох станів</a> не значиться, тому окремо не малювався</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px; таб-бара тут немає, тож під контент лишається <b>726 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Питання»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <p class="step">Блок 2 з 5 · спосіб життя</p>
+    <p class="progress" aria-hidden="true"><span style="width:38%"></span></p>
+    <h1>Питання 7 з 19</h1>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-q">
+      <h2 id="h-q">Ви курите зараз або курили раніше?</h2>
+      <p class="lead">Куріння впливає на те, які скринінги вам потрібні й з якого віку.
+      Якщо кинули — теж має значення, тому такий варіант окремо.</p>
+
+      <form>
+        <fieldset>
+          <legend class="sr-legend">Оберіть один варіант</legend>
+          <p class="opt"><input type="radio" id="o1" name="smoke"><label for="o1">Курю зараз</label></p>
+          <p class="opt"><input type="radio" id="o2" name="smoke"><label for="o2">Кинула</label></p>
+          <p class="opt"><input type="radio" id="o3" name="smoke" checked><label for="o3">Ніколи не курила</label></p>
+          <p class="opt"><input type="radio" id="o4" name="smoke"><label for="o4">Не знаю, як це рахувати</label></p>
+        </fieldset>
+        <div class="qnav">
+          <a class="btnlink" href="questions.html">Назад</a>
+          <button type="button">Далі</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p class="local">Відповіді зберігаються тільки на цьому пристрої. Ми їх не бачимо
+    й нікуди не надсилаємо.</p>
+  </footer>
+
+  </div>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Зони і головна дія кожної</h2>
+
+  <div class="wf-sticker"><b>Прогрес: блок і номер</b>
+    <span class="act">знати, скільки ще лишилось</span>
+    <span class="why">Ціна входу назвала себе ще на Вході — 15–25 питань. Тут вона підтверджується щокроку: номер питання плюс блок, бо «7 з 19» без назви блоку не каже, про що далі.</span></div>
+
+  <div class="wf-sticker"><b>Одне питання на екран</b>
+    <span class="act">відповісти, не гублячись</span>
+    <span class="why">Патерн узятий з <a href="../research/research.md#вхід-як-людина-проходить-опитувальник">дослідження</a>: візард замість довгої форми. Довга форма показує всю ціну одразу й відлякує.</span></div>
+
+  <div class="wf-sticker"><b>Пояснення під питанням</b>
+    <span class="act">зрозуміти, навіщо це питають</span>
+    <span class="why"><a href="../research/jtbd.md#r1--зрозуміти-логіку-а-не-отримати-відповідь">R1</a>: глибина анкети виправдана рівно настільки, наскільки з неї виростає підстава. Один рядок «навіщо» — найдешевший спосіб це показати.</span></div>
+
+  <div class="wf-sticker"><b>Варіант «Не знаю»</b>
+    <span class="act">не вигадувати відповідь</span>
+    <span class="why">Це <a href="../sitemap.md#що-тут-стан-а-не-екран">значення поля, а не окремий крок</a>. Без нього людина вгадує, і план рахується з вигаданих даних.</span></div>
+
+  <div class="wf-sticker"><b>Підпис про локальність</b>
+    <span class="act">довіряти на двадцятому питанні так само, як на першому</span>
+    <span class="why">Стоїть на <b>кожному</b> кроці — це <a href="../sitemap.md#глобальне--видно-завжди">механізм, який замінив собою окремий екран про приватність</a>. Окремий екран читають ті, хто вже довіряє.</span></div>
+
+  <div class="wf-sticker"><b>«Назад» і «Далі»</b>
+    <span class="act">виправити попередню відповідь</span>
+    <span class="why">Перехід назад — посилання, дія «Далі» — кнопка. Автозбереження тримає прогрес, тож повернення нічого не коштує.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

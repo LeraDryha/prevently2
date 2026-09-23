@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Підсумок відповідей</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Підсумок відповідей — базовий стан</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <span class="here" aria-current="page">базовий</span>
+  <a href="summary-error.html">помилка</a>
+  <a href="summary-loading.html">завантаження</a>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/summary.html</code></dd>
+    <dt>Екран</dt><dd>«Підсумок відповідей» — <a href="../sitemap.md#дерево">sitemap, група «Розповісти про себе»</a>. У меню той самий екран називається «Мої відповіді» — <a href="../sitemap.md#неточність-у-назвах">одна сутність, дві назви для двох контекстів</a></dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#r4a--не-починати-шлях-спочатку">R4a</a> — «спиратися на те, що вже зробила, щоб не починати шлях спочатку» · <a href="../research/jtbd.md#main-job">MAIN</a></dd>
+    <dt>Стан</dt><dd>Базовий. За <a href="_screens.md#стани">таблицею</a> тут є помилка й завантаження; порожнього немає (сюди не потрапити без заповненого анамнезу), успіху немає (успіх — це План)</dd>
+    <dt>Місце у flow</dt><dd>Після завершеного опитувальника; з нього — loading обрахунку й розгалуження «локальні дані на місці?» (<a href="../flows.md#main--розуміти-що-з-призначеного-справді-про-мене">рішення 3 MAIN</a>)</dd>
+    <dt>Чому екран існує</dt><dd><a href="../sitemap.md#дерево">Без нього візард конфліктує з вимогою редагувати окрему відповідь</a></dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Підсумок відповідей»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Ваші відповіді</h1>
+    <p>Від цього порахований план. Змінилось життя — змініть відповідь, і план
+    перерахується.</p>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-b1">
+      <h2 id="h-b1">Вік і демографія</h2>
+      <article>
+        <h3>Скільки вам років</h3>
+        <p class="answer">36</p>
+        <p class="derived">Дало у плані: <b>2 пункти</b> — цитологія, тиск</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-b2">
+      <h2 id="h-b2">Спосіб життя</h2>
+      <article>
+        <h3>Ви курите зараз або курили раніше</h3>
+        <p class="answer">Кинула</p>
+        <p class="derived">Дало у плані: <b>1 невключений пункт</b> — низькодозова КТ легень,
+        з умовою «з 50 років при стажі 20 пачко-років»</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+      <article>
+        <h3>Алкоголь</h3>
+        <p class="answer">Рідко, кілька разів на рік</p>
+        <p class="derived">Дало у плані: <b>нічого</b> — і це теж результат</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-b4">
+      <h2 id="h-b4">Сімейна історія</h2>
+      <article>
+        <h3>Рак грудей у мами, сестри або доньки</h3>
+        <p class="answer">Ні</p>
+        <p class="derived">Дало у плані: <b>1 невключений пункт</b> — мамографія,
+        з умовою «з 40 років»</p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-b5">
+      <h2 id="h-b5">Акушерсько-гінекологічний анамнез</h2>
+      <article>
+        <h3>Коли востаннє робили цитологію</h3>
+        <p class="answer">Березень 2026</p>
+        <p class="derived">Дало у плані: наступна дата — <b>до березня 2028</b></p>
+        <a class="btnlink" href="questions.html">Змінити</a>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-go">
+      <h2 id="h-go">Готово</h2>
+      <p class="lead">Ми порахуємо план на цьому пристрої. Це кілька секунд.</p>
+      <a class="btnlink" href="plan.html">Показати план</a>
+    </section>
+
+  </main>
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html">План</a></li>
+      <li><a href="summary.html" aria-current="page">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Зони і головна дія кожної</h2>
+
+  <div class="wf-sticker"><b>«Від цього порахований план»</b>
+    <span class="act">зрозуміти, що це не профіль, а причина</span>
+    <span class="why">Формулювання навмисне: «Мої відповіді» — <a href="../sitemap.md#глобальна-навігація--три-пункти">не налаштування профілю</a>, а те, від чого рахується план. Без цієї рамки пункт меню читається як анкета, яку заповнив і забув.</span></div>
+
+  <div class="wf-sticker"><b>Відповіді згруповані по блоках</b>
+    <span class="act">знайти саме ту, що змінилась</span>
+    <span class="why">Ті самі п’ять блоків, що в опитувальнику. Порядок не міняємо — шукати доводиться там, де відповідала.</span></div>
+
+  <div class="wf-sticker"><b>«Дало у плані: …»</b>
+    <span class="act">побачити, що кожне питання чогось варте</span>
+    <span class="why">Зворотний бік атрибуції з Підстави й <a href="../sitemap.md#три-тупики-знайдені-flows">закритий третій тупик flows</a>: раніше зв’язок «відповідь → пункт» ішов тільки в один бік.</span></div>
+
+  <div class="wf-sticker"><b>«Дало у плані: нічого»</b>
+    <span class="act">не подумати, що питання було зайве</span>
+    <span class="why">Рядок, який легко пропустити й дорого втратити. Відповідь, що нічого не породила, — теж результат; сховати її означало б приховати, що ми питали марно.</span></div>
+
+  <div class="wf-sticker"><b>«Змінити» біля кожної</b>
+    <span class="act">виправити одну відповідь, а не проходити все заново</span>
+    <span class="why">Це і є <a href="../research/jtbd.md#r4a--не-починати-шлях-спочатку">R4a</a>. Перехід, а не дія, тому посилання.</span></div>
+
+  <div class="wf-sticker"><b>«Показати план»</b>
+    <span class="act">перейти до результату</span>
+    <span class="why">Кінець потоку, тому дія стоїть тут, а не в меню. Попередження «кілька секунд» — чесний натяк на стан завантаження, який іде далі.</span></div>
+
+  <div class="wf-sticker"><b>Таб-бар: активні «Мої відповіді»</b>
+    <span class="act">повернутися в План будь-коли</span>
+    <span class="why">На цьому екрані навігація вже є: він доступний із меню при поверненні, а не лише у першому проході візарда.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Пошук — порожній</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Пошук обстеження — порожній стан</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="search.html">успіх</a>
+  <span class="here" aria-current="page">порожній</span>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/search-empty.html</code></dd>
+    <dt>Екран</dt><dd>«Пошук обстеження» — <a href="../sitemap.md#дерево">sitemap</a></dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#main-job">MAIN</a> (✓⚠) · <a href="../research/jtbd.md#e1--перестати-відчувати-що-на-мені-заробляють">E1</a></dd>
+    <dt>Стан</dt><dd><b>Порожній.</b> <a href="../sitemap.md#що-тут-стан-а-не-екран">«Немає збігу за назвою: введена з помилкою або її немає в наших даних»</a> — дослівно з sitemap. Веде в третій вердикт «не оцінювали» плюс пропозицію додати власний пункт</dd>
+    <dt>Чому це не помилка</dt><dd>Нічого не зламалось: ми просто не оцінювали це обстеження. Порожньо тут — <b>нормальний результат сценарію</b>, і подавати його як збій означало б натякати, що щось мало знайтися</dd>
+    <dt>Вихід</dt><dd>«Додати як свій пункт» · спробувати іншу форму назви · «Повернутись до плану». Тупика немає — і саме тут його <a href="../flows.md#що-flows-знайшли">не мало бути найбільше</a>: це та точка, де продукт раніше мовчав</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Пошук обстеження»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Знайти обстеження</h1>
+    <p>Вам щось призначили, а в плані цього немає? Введіть назву з папірця.</p>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-f">
+      <h2 id="h-f">Пошук за назвою</h2>
+      <form role="search">
+        <label for="q">Назва обстеження</label>
+        <input type="search" id="q" name="q" value="ліпідограма розширена">
+        <button type="button">Знайти</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="h-none">
+      <h2 id="h-none">Збігу за назвою немає</h2>
+      <article>
+        <p class="verdict">Ми не оцінюємо це обстеження для чекапів</p>
+        <p>Воно поза межами скринінгу — ми не розглядали його для планів профілактики,
+        тому й вердикту в нас немає.</p>
+        <p class="warn"><b>Це не означає ні «треба», ні «не треба».</b> Сказати
+        «розглянули і не включили» про те, чого ми не розглядали, було б вигаданим
+        вердиктом — тому ми цього не кажемо.</p>
+      </article>
+      <p class="lead">Можливо, назва введена інакше, ніж у нас: спробуйте коротшу
+      або іншу форму слова.</p>
+    </section>
+
+    <section aria-labelledby="h-add">
+      <h2 id="h-add">Це призначив лікар?</h2>
+      <p class="lead">Додайте до списку, щоб усе було в одному місці. Пункт стане
+      у секцію «Додано вами»: без нашого вердикту, без джерела й без слова
+      «рекомендовано» — він ваш, не наш.</p>
+      <button type="button">Додати як свій пункт</button>
+      <p class="lead"><a href="plan.html">Повернутись до плану</a></p>
+    </section>
+
+  </main>
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html" aria-current="page">План</a></li>
+      <li><a href="summary.html">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Зони і головна дія кожної</h2>
+
+  <div class="wf-sticker"><b>Запит лишається в полі</b>
+    <span class="act">бачити, що саме не знайшлось</span>
+    <span class="why">Очистити поле після невдалого пошуку означало б змусити набирати заново й приховати, що ми шукали.</span></div>
+
+  <div class="wf-sticker"><b>«Ми не оцінюємо це для чекапів»</b>
+    <span class="act">отримати відповідь, а не порожнечу</span>
+    <span class="why">Третій із <a href="../CLAUDE.md#правила-роботи-з-медичним-контентом">трьох станів відповіді</a>. Він існує саме для того, щоб не сказати «розглянули і не включили» про те, чого ми не розглядали.</span></div>
+
+  <div class="wf-sticker"><b>«Ні "треба", ні "не треба"»</b>
+    <span class="act">не прочитати межу як вердикт</span>
+    <span class="why">Найважливіший рядок екрана. Без нього мовчання читається як схвалення або як заборона — а ми не кажемо ні того, ні іншого.</span></div>
+
+  <div class="wf-sticker"><b>Підказка про форму назви</b>
+    <span class="act">спробувати ще раз</span>
+    <span class="why">Порожній стан <a href="../sitemap.md#що-тут-стан-а-не-екран">має дві причини</a>: назви немає в наших даних або її ввели інакше. Друга лагодиться самою людиною, тому про неї кажемо.</span></div>
+
+  <div class="wf-sticker"><b>«Додати як свій пункт»</b>
+    <span class="act">зберегти призначене, не отримавши вердикту</span>
+    <span class="why">Ворота спрацювали: вона побачила межу, аж потім може додати. Формулювання «він ваш, не наш» готує до того, як пункт виглядатиме в Плані.</span></div>
+
+  <div class="wf-sticker"><b>Це не стан помилки</b>
+    <span class="act">не думати, що щось зламалось</span>
+    <span class="why">Ні кнопки «спробувати ще раз», ні тону збою. Порожньо — нормальний результат сценарію, а не відмова системи.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

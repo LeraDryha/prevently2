@@ -171,6 +171,42 @@ body {
   color: #999999;
 }
 
+/* --- Елементи окремих екранів --- */
+
+/* Вхід */
+.logo-slot {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 10px 18px;
+  border: 1px dashed #aaaaaa;
+  font-size: 12px;
+  color: #888888;
+}
+
+/* Питання: прогрес і варіанти відповіді */
+.step { margin: 0 0 6px; font-size: 12px; color: #666666; }
+.progress { display: block; height: 4px; background: #e6e6e6; margin: 0 0 10px; }
+.progress span { display: block; height: 100%; background: #999999; }
+.sr-legend { font-size: 12px; color: #666666; padding: 0; }
+fieldset { border: 0; margin: 0 0 14px; padding: 0; }
+.opt { margin: 0 0 2px; padding: 9px 10px; border: 1px solid #cccccc; font-size: 13px; }
+.opt label { padding-left: 6px; }
+.qnav { display: flex; gap: 10px; align-items: center; }
+
+/* Підсумок відповідей */
+.answer { font-size: 14px; margin: 0 0 6px; }
+.derived { font-size: 12px; color: #666666; border-left: 3px solid #cccccc; padding-left: 8px; margin: 0 0 10px; }
+
+/* Пошук обстеження */
+form[role="search"] label { display: block; font-size: 12px; color: #666666; margin-bottom: 4px; }
+form[role="search"] input {
+  font: inherit; font-size: 14px; width: 100%;
+  padding: 9px 10px; border: 1px solid #888888; background: #ffffff;
+  margin-bottom: 8px;
+}
+.verdict { font-size: 14px; font-weight: 700; margin: 0 0 8px; }
+.warn { border: 1px solid #999999; padding: 9px 10px; font-size: 13px; margin: 0; }
+
 /* --- Заглушки стану завантаження --- */
 
 .skeleton { display: flex; flex-direction: column; gap: 8px; }
