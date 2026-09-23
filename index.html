@@ -66,6 +66,8 @@
   .wftree .soon{color:#c3bcc0}
   .wftree ul{list-style:none; margin:1px 0 6px 12px; padding:0 0 0 10px; border-left:1px solid var(--line)}
   .wftree ul a, .wftree ul .soon{font-size:12.5px; padding:4px 9px}
+  .wftree .grp{display:block; padding:12px 10px 4px; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--dim)}
 
   main{margin-left:var(--sidebar); padding:0 40px 80px}
   .inner{max-width:880px; margin:0 auto}
@@ -280,6 +282,23 @@
     <li><a href="#wireframes" data-wf="wireframes/search.html#embed">Пошук обстеження</a>
       <ul>
         <li><a href="#wireframes" data-wf="wireframes/search-empty.html#embed">порожній</a></li>
+      </ul></li>
+    <li><a href="#wireframes" data-wf="wireframes/mark-done.html#embed">Позначити пройденим</a>
+      <ul>
+        <li><a href="#wireframes" data-wf="wireframes/mark-done-error.html#embed">помилка</a></li>
+      </ul></li>
+    <li><a href="#wireframes" data-wf="wireframes/history.html#embed">Історія проходжень</a>
+      <ul>
+        <li><a href="#wireframes" data-wf="wireframes/history-empty.html#embed">порожній</a></li>
+        <li><a href="#wireframes" data-wf="wireframes/history-error.html#embed">помилка</a></li>
+        <li><a href="#wireframes" data-wf="wireframes/history-loading.html#embed">завантаження</a></li>
+      </ul></li>
+    <li><a href="#wireframes" data-wf="wireframes/about.html#embed">Про підхід</a></li>
+    <li class="deep"><span class="grp">Глибокі дії</span>
+      <ul>
+        <li><a href="#wireframes" data-wf="wireframes/restore.html#embed">Копія</a>
+          <ul><li><a href="#wireframes" data-wf="wireframes/restore-error.html#embed">помилка</a></li></ul></li>
+        <li><a href="#wireframes" data-wf="wireframes/delete-data.html#embed">Почати заново</a></li>
       </ul></li>
   </ul>
 </aside>
@@ -1075,7 +1094,7 @@
 <div class="view" id="v-wireframes">
   <header class="top"><p class="eyebrow">Розділ 02 · Вайрфрейми</p><h1>Схеми екранів</h1>
     <p class="lede">Структура екранів опитувальника й плану до візуального оформлення. Сіре, без кольору й типографіки: макет має доводити, що на екрані є і що чому підпорядковане, — не те, що він гарний.</p>
-    <div class="meta"><span class="chip">5 екранів у замовленні</span><span class="chip">15 сторінок зі станами</span><span class="chip">усі 15 намальовано</span><span class="chip">Телефон 390&times;844</span></div>
+    <div class="meta"><span class="chip">усі екрани sitemap</span><span class="chip">25 сторінок зі станами</span><span class="chip">усі намальовані</span><span class="chip">Телефон 390&times;844</span></div>
   </header>
   <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/README.md" target="_blank" rel="noopener">wireframes/README.md</a> <span class="ext">↗</span></p>
 
@@ -1083,10 +1102,10 @@
     <h2>Макети</h2>
     <p class="sub">Відкриваються прямо тут: перехід між екранами — у другому сайдбарі ліворуч. Усередині рамки телефона лише продукт, без жодного підпису — інакше неможливо подивитись на екран очима людини, яка ніяких анотацій не бачить. Зони підписані стікерами <strong>поруч</strong> з макетом.</p>
     <div class="cards">
-      <div class="card"><span class="lbl">Готово · 15 сторінок</span><p class="h">Усі п’ять екранів головного flow</p>
-        <p>Вхід · Питання · Підсумок відповідей · План · Пошук обстеження, кожен зі своїми станами з <a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/_screens.md" target="_blank" rel="noopener">таблиці замовлення</a>. Перемикаються в сайдбарі ліворуч.</p></div>
-      <div class="card"><span class="lbl">Три стани поза таблицею</span><p class="h">Алерт · короткий план · відновлення</p>
-        <p>Алерт тривожного симптому над планом — безпекова межа без job’а. Короткий план для 18–25 — основний випадок для П3, і свідомо <b>не</b> порожній стан. Відновлення незавершеного опитувальника — те, що робить автозбереження видимим.</p></div>
+      <div class="card"><span class="lbl">Головний flow · 15 сторінок</span><p class="h">Вхід · Питання · Підсумок · План · Пошук</p>
+        <p>П’ять екранів зі станами з <a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/_screens.md" target="_blank" rel="noopener">таблиці замовлення</a>, плюс три стани поза нею: алерт тривожного симптому, короткий план для 18–25 і відновлення незавершеного опитувальника.</p></div>
+      <div class="card"><span class="lbl">Решта sitemap · 10 сторінок</span><p class="h">Позначити пройденим · Історія · Про підхід · глибокі дії</p>
+        <p>Усе, що лишалось у дереві екранів, разом зі станами. Чотири екрани sitemap свідомо <b>не</b> малювались: приватність окремим екраном і освітні сторінки вже <b>видалені</b> рішенням дерева, політика приватності живе секцією в «Про підхід», профіль близької людини — backlog v2.</p></div>
     </div>
 
     <div class="wfembed">

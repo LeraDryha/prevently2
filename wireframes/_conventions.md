@@ -101,8 +101,20 @@
 | [Підсумок відповідей](_screens.md#3--підсумок-відповідей) | `summary.html` | `summary-loading.html` · `summary-error.html` |
 | [План](_screens.md#4--план) | `plan.html` | `plan-empty.html` · `plan-error.html` · `plan-loading.html` · `plan-alert.html` · `plan-short.html` |
 | [Пошук обстеження](_screens.md#5--пошук-обстеження) | `search.html` | `search-empty.html` |
+| Позначити пройденим | `mark-done.html` | `mark-done-error.html` |
+| Історія проходжень | `history.html` | `history-empty.html` · `history-error.html` · `history-loading.html` |
+| Про підхід | `about.html` | станів немає |
+| Експорт / імпорт копії | `restore.html` | `restore-error.html` |
+| Почати заново, видалити дані | `delete-data.html` | станів немає |
 
-**Разом 15 сторінок екранів** плюс спільний `_wireframe.css`. Намальовано **всі 15**. Окремого `index.html`
+**Разом 25 сторінок** плюс спільний `_wireframe.css`. Намальовано **всі 25**: п'ять
+екранів головного flow зі станами (15) і решта дерева sitemap зі своїми станами (10).
+
+**Чотирьох екранів sitemap тут немає свідомо** — не тому, що не дійшли руки, а тому,
+що [дерево вже ухвалило вердикт](../sitemap.md#екрани-сироти-1): «Приватність і дані
+на пристрої» та «Освітні сторінки» **видалені**, «Політика приватності й умови» живе
+секцією всередині `about.html`, «Профіль близької людини» — backlog v2. Намалювати їх
+означало б відновити те, що дерево свідомо прибрало. Окремого `index.html`
 у папці немає й не потрібно: перелік екранів — це
 [підменю робочого простору](../index.html#wireframes).
 

@@ -24,7 +24,7 @@
 
 ## Стан на 23.09.2026
 
-Намальовано всі 15 сторінок — усі п'ять екранів головного flow зі станами з
+Намальовано всі 25 сторінок — усе дерево екранів sitemap зі станами з
 [таблиці](_screens.md#стани):
 
 | Екран | Базова | Стани |
@@ -34,6 +34,11 @@
 | Підсумок відповідей | [`summary.html`](summary.html) | [`-loading`](summary-loading.html) · [`-error`](summary-error.html) |
 | План | [`plan.html`](plan.html) | [`-empty`](plan-empty.html) · [`-error`](plan-error.html) · [`-loading`](plan-loading.html) · [`-alert`](plan-alert.html) · [`-short`](plan-short.html) |
 | Пошук обстеження | [`search.html`](search.html) | [`-empty`](search-empty.html) |
+| Позначити пройденим | [`mark-done.html`](mark-done.html) | [`-error`](mark-done-error.html) |
+| Історія проходжень | [`history.html`](history.html) | [`-empty`](history-empty.html) · [`-error`](history-error.html) · [`-loading`](history-loading.html) |
+| Про підхід | [`about.html`](about.html) | станів немає |
+| Експорт / імпорт копії | [`restore.html`](restore.html) | [`-error`](restore-error.html) |
+| Почати заново | [`delete-data.html`](delete-data.html) | станів немає |
 
 Три з них — стани **поза** таблицею чотирьох, і кожен існує зі своєї причини:
 [`plan-alert.html`](plan-alert.html) — безпекова межа, у якої немає й не буде job'а;

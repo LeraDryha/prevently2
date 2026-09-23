@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: Історія проходжень — завантаження</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>Історія проходжень — стан завантаження</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="history.html">базовий</a>
+  <a href="history-empty.html">порожній</a>
+  <span class="here" aria-current="page">завантаження</span>
+  <a href="history-error.html">помилка</a>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/history-loading.html</code></dd>
+    <dt>Екран</dt><dd>«Історія проходжень» — <a href="../sitemap.md#дерево">sitemap.md, група «Тримати план живим у часі»</a>. Об'єкт: <a href="../sitemap.md#5--відмітка-про-проходження">Відмітка про проходження</a></dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#r4a--не-починати-шлях-спочатку">R4a</a> — «коли я знову дійшла до лікаря, я хочу спиратися на те, що вже зробила, щоб не починати шлях спочатку» · <a href="../research/jtbd.md#r5--зрозуміти-що-зі-мною-відбувається-за-цифрами">R5</a>, половина «безперервність»</dd>
+    <dt>Стан</dt><dd><b>Завантаження.</b> Обрахунок історії: відмітки читаються з пристрою й групуються. <a href="../sitemap.md#що-тут-стан-а-не-екран">Дрібне, окремої логіки не додає</a> — дзеркально до <code>plan-loading.html</code> і <code>summary-loading.html</code></dd>
+    <dt>Місце у flow</dt><dd>Окремого вузла в <a href="../flows.md#r4a--не-починати-шлях-спочатку">R4a</a> немає: стан живе всередині ребра <code>d5 → hist</code>, перед рішенням <code>d6</code> «Є хоч одна відмітка?». Підтверджений <a href="../ia.html">зібраною сторінкою IA</a>: «Стани: empty до першої відмітки · loading · error»</dd>
+    <dt>Переходи</dt><dd>Стан минущий, кнопок у ньому немає, тож виходи стоять тут. Далі — одне з трьох: <a href="history.html">історія</a>, якщо відмітки є; <a href="history-empty.html">порожній стан</a>, якщо жодної; <a href="history-error.html">помилка</a>, якщо відмітки не прочитались. Перші дві гілки — це рішення <code>d6</code>, третя — його обрив</dd>
+    <dt>Неактивні дії</dt><dd>Немає: дій на екрані не існує взагалі, поки історія читається — змінювати нічого. Таб-бар лишається робочим і не блокується</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «Історія проходжень»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Історія проходжень</h1>
+    <p>Збираємо те, що ви позначили пройденим…</p>
+  </header>
+
+  <main aria-busy="true">
+
+    <section aria-labelledby="h-list">
+      <h2 id="h-list">Пройдене</h2>
+      <p class="lead">Найновіше буде вгорі.</p>
+
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:58%"></span>
+        <span class="sk" style="width:42%"></span>
+        <span class="sk" style="width:88%"></span>
+        <span class="sk" style="width:64%"></span>
+      </article>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:66%"></span>
+        <span class="sk" style="width:42%"></span>
+        <span class="sk" style="width:76%"></span>
+      </article>
+      <article class="skeleton" aria-hidden="true">
+        <span class="sk" style="width:50%"></span>
+        <span class="sk" style="width:38%"></span>
+        <span class="sk" style="width:92%"></span>
+        <span class="sk" style="width:64%"></span>
+      </article>
+    </section>
+
+    <section aria-labelledby="h-limits">
+      <h2 id="h-limits">Чого в цьому списку немає і не буде</h2>
+      <p class="lead">Цей блок не залежить від обрахунку, тому стоїть тут одразу.</p>
+      <p>Ми не відкриваємо вміст ваших файлів. Продукт не витягує з них жодного
+      значення, не будує графіків у часі, не порівнює з референсами і ніколи
+      не каже «добре» чи «погано». Прочитати результат може лікар — разом із вами.</p>
+    </section>
+
+    <p class="sr-note">Читаємо відмітки з вашого пристрою. Це кілька секунд. Самі
+    прикріплені файли ми при цьому не відкриваємо — тільки їхні назви й дати.</p>
+
+  </main>
+
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html" aria-current="page">План</a></li>
+      <li><a href="summary.html">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Що показує цей стан</h2>
+
+  <div class="wf-sticker"><b>Однієї секції замість років</b>
+    <span class="act">не побачити груп, яких може не виявитись</span>
+    <span class="why">Роки в базовому стані беруться з даних, і намалювати їх наперед означало б пообіцяти історію, довжини якої ми ще не знаємо. Заголовки груп з’являються разом із відмітками.</span></div>
+
+  <div class="wf-sticker"><b>Заглушки формою повторюють картку</b>
+    <span class="act">упізнати майбутній вміст, а не «сірі смуги»</span>
+    <span class="why">Назва, дата, перерахована наступна, рядок файлу. Середня картка без четвертого рядка: <a href="../sitemap.md#13--вкладення-до-відмітки">вкладень буває нуль або більше</a>, і рівні заглушки обіцяли б файл до кожної відмітки.</span></div>
+
+  <div class="wf-sticker"><b>Три заглушки, не десять</b>
+    <span class="act">не отримати обіцянки довгої історії</span>
+    <span class="why">Частота цього екрана — <a href="../sitemap.md#глобальна-навігація--три-пункти">двічі на рік</a>, тож типова історія коротка. Довга стрічка заглушок читалась би як «у вас тут багато» ще до того, як з’явиться бодай щось.</span></div>
+
+  <div class="wf-sticker"><b>Межа показана одразу, без заглушки</b>
+    <span class="act">прочитати те, що не залежить від даних</span>
+    <span class="why">Блок «чого тут немає» однаковий у всіх станах, бо це <a href="../CLAUDE.md#правила-роботи-з-медичним-контентом">межа продукту, а не вміст</a>. Ховати незмінне за заглушкою — малювати очікування там, де його немає.</span></div>
+
+  <div class="wf-sticker"><b>«Файли ми не відкриваємо»</b>
+    <span class="act">зрозуміти, що саме зараз читається</span>
+    <span class="why">Читаються назви, розміри й дати, а не вміст. Момент очікування — найкраще місце сказати це буквально: <a href="../sitemap.md#13--вкладення-до-відмітки">відсутність парсера тримає нас поза інтерпретацією структурно</a>.</span></div>
+
+  <div class="wf-sticker"><b>aria-busy, а не спінер</b>
+    <span class="act">дати зрозуміти стан і без зору</span>
+    <span class="why"><code>&lt;main aria-busy="true"&gt;</code>, заглушки приховані від зчитувача. <a href="../CLAUDE.md#дефолти-ухвалені-без-окремого-обговорення">WCAG 2.2 AA</a> починається в каркасі, а не на етапі дизайну.</span></div>
+
+  <div class="wf-sticker"><b>Виходи — у службовій шапці</b>
+    <span class="act">побачити обидві гілки розвилки одразу</span>
+    <span class="why">У самому стані дій немає й не треба: <a href="_conventions.md#6--посилання-між-екранами">для минущих станів виходи стоять рядком «Переходи»</a>. Тут їх три, бо рішення <code>d6</code> розгалужується ще й у помилку.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>
