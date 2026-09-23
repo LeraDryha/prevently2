@@ -16,6 +16,15 @@ body {
   line-height: 1.45;
 }
 
+/* --- Режим вбудовування: plan.html#embed ---
+   Сторінку відкривають в iframe із робочого простору. Показуємо тільки телефон:
+   службова шапка й анотації там зайві, бо контекст дає сама сторінка навколо. */
+
+#embed:target { padding: 0; }
+#embed:target .wf-meta,
+#embed:target .wf-notes { display: none; }
+#embed:target .wf-stage { justify-content: center; max-width: none; }
+
 /* --- Службова обгортка: не частина екрана --- */
 
 .wf-meta {
