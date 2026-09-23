@@ -21,8 +21,7 @@ body {
    службова шапка й анотації там зайві, бо контекст дає сама сторінка навколо. */
 
 #embed:target { padding: 0; }
-#embed:target .wf-meta,
-#embed:target .wf-notes { display: none; }
+#embed:target .wf-meta { display: none; }
 #embed:target .wf-stage { justify-content: center; max-width: none; }
 
 /* --- Службова обгортка: не частина екрана --- */
@@ -141,17 +140,6 @@ body {
   background: #ffffff;
   padding: 0;
 }
-
-/* --- Анотації: поруч з екраном, не в ньому --- */
-
-.wf-notes { flex: 1 1 320px; min-width: 300px; }
-.wf-notes h2 { font-size: 15px; margin: 0 0 12px; }
-.wf-notes ol { margin: 0; padding-left: 22px; }
-.wf-notes li { margin-bottom: 16px; font-size: 13px; }
-.wf-notes b { display: block; }
-.wf-notes .act { color: #555555; }
-.wf-notes .act::before { content: "Головна дія: "; color: #888888; }
-.wf-notes .why { display: block; color: #777777; margin-top: 2px; }
 
 /* --- Екран --- */
 

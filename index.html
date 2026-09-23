@@ -10,7 +10,7 @@
     --text:#1b1719; --muted:#6d636a; --dim:#9a9198;
     --primary:#C15182; --primary-dark:#a3416d; --primary-soft:#fbeef4; --primary-line:#f0cfdf;
     --amber:#b0703a; --red:#b4453f; --green:#2f7d5f;
-    --sidebar:264px; --radius:10px;
+    --sidebar:264px; --wfnav:228px; --radius:10px;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -50,6 +50,23 @@
   #scrim{display:none; position:fixed; inset:0; background:rgba(27,23,25,.35); z-index:99}
 
   /* ---------- content ---------- */
+  /* ---------- другий сайдбар: екрани вайрфреймів ---------- */
+  #wfnav{display:none; inset:0 auto 0 var(--sidebar); width:var(--wfnav); z-index:99}
+  body.has-wfnav #wfnav{display:block}
+  body.has-wfnav main{margin-left:calc(var(--sidebar) + var(--wfnav))}
+  #wfnav .ttl{padding:0 20px 14px; margin:0; border-bottom:1px solid var(--line-soft);
+    font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); font-weight:600}
+  .wftree{list-style:none; margin:14px 0 0; padding:0 12px}
+  .wftree li{margin-bottom:1px}
+  .wftree a, .wftree .soon{display:block; padding:6px 10px; border-radius:8px;
+    font-size:14px; text-decoration:none; line-height:1.3}
+  .wftree a{color:var(--muted)}
+  .wftree a:hover{background:var(--page); color:var(--text)}
+  .wftree a.on{background:var(--primary-soft); color:var(--primary-dark); font-weight:600}
+  .wftree .soon{color:#c3bcc0}
+  .wftree ul{list-style:none; margin:1px 0 6px 12px; padding:0 0 0 10px; border-left:1px solid var(--line)}
+  .wftree ul a, .wftree ul .soon{font-size:12.5px; padding:4px 9px}
+
   main{margin-left:var(--sidebar); padding:0 40px 80px}
   .inner{max-width:880px; margin:0 auto}
   .view{display:none} .view.active{display:block}
@@ -179,6 +196,10 @@
     aside.open{transform:none; box-shadow:0 0 40px rgba(27,23,25,.18)}
     #burger{display:block} #scrim.show{display:block}
     main{margin-left:0; padding:70px 20px 60px}
+    #wfnav{position:static; transform:none; inset:auto; width:auto; overflow:visible;
+      border-right:0; border-bottom:1px solid var(--line); padding:70px 20px 16px}
+    body.has-wfnav main{margin-left:0; padding-top:24px}
+    .wftree{padding:0}
   }
 </style>
 </head>
@@ -224,25 +245,7 @@
         </ul>
       </li>
       <li><a href="ia.html" class="done"><span class="dot"></span>Інформаційна архітектура</a></li>
-      <li>
-        <a href="#wireframes" data-v="wireframes" class="wip"><span class="dot"></span>Вайрфрейми</a>
-        <ul class="subnav" id="sub-wireframes">
-          <li><span class="soon">Вхід</span></li>
-          <li><span class="soon">Питання</span>
-            <ul><li><span class="soon">помилка</span></li><li><span class="soon">відновлення</span></li></ul></li>
-          <li><span class="soon">Підсумок відповідей</span>
-            <ul><li><span class="soon">завантаження</span></li><li><span class="soon">помилка</span></li></ul></li>
-          <li><a href="#wireframes" class="on" data-wf="wireframes/plan.html#embed">План</a>
-            <ul>
-              <li><span class="soon">завантаження</span></li>
-              <li><span class="soon">помилка</span></li>
-              <li><span class="soon">алерт</span></li>
-              <li><span class="soon">короткий</span></li>
-            </ul></li>
-          <li><span class="soon">Пошук обстеження</span>
-            <ul><li><span class="soon">порожній</span></li></ul></li>
-        </ul>
-      </li>
+      <li><a href="#wireframes" data-v="wireframes" class="wip"><span class="dot"></span>Вайрфрейми</a></li>
       <li><a href="#concept" data-v="concept"><span class="dot"></span>Концепція</a></li>
       <li><a href="#tokens" data-v="tokens"><span class="dot"></span>Токени</a></li>
       <li><a href="#components" data-v="components"><span class="dot"></span>Компоненти</a></li>
@@ -250,6 +253,34 @@
       <li><a href="#handoff" data-v="handoff"><span class="dot"></span>Передача в розробку</a></li>
     </ul>
   </nav>
+</aside>
+
+<aside id="wfnav" aria-label="Екрани вайрфреймів">
+  <p class="ttl">Екрани</p>
+  <ul class="wftree">
+    <li><span class="soon">Вхід</span></li>
+    <li><span class="soon">Питання</span>
+      <ul>
+        <li><span class="soon">помилка</span></li>
+        <li><span class="soon">відновлення</span></li>
+      </ul></li>
+    <li><span class="soon">Підсумок відповідей</span>
+      <ul>
+        <li><span class="soon">завантаження</span></li>
+        <li><span class="soon">помилка</span></li>
+      </ul></li>
+    <li><a href="#wireframes" class="on" data-wf="wireframes/plan.html#embed">План</a>
+      <ul>
+        <li><span class="soon">завантаження</span></li>
+        <li><span class="soon">помилка</span></li>
+        <li><span class="soon">алерт</span></li>
+        <li><span class="soon">короткий</span></li>
+      </ul></li>
+    <li><span class="soon">Пошук обстеження</span>
+      <ul>
+        <li><span class="soon">порожній</span></li>
+      </ul></li>
+  </ul>
 </aside>
 
 <main>
@@ -1049,7 +1080,7 @@
 
   <section class="block">
     <h2>Макети</h2>
-    <p class="sub">Відкриваються прямо тут. Анотації зон живуть поруч із макетом, а не в ньому — інакше неможливо подивитись на екран очима людини, яка ніяких підписів не бачить.</p>
+    <p class="sub">Відкриваються прямо тут: перехід між екранами — у другому сайдбарі ліворуч. Усередині рамки телефона лише продукт, без жодного підпису — інакше неможливо подивитись на екран очима людини, яка ніяких анотацій не бачить. Розбір зон іде нижче, окремим блоком.</p>
     <div class="cards">
       <div class="card"><span class="lbl">Готово · базовий стан</span><p class="h">План</p>
         <p>Головний екран продукту: звідси primary-персона починає головний job, і тут-таки він закривається. Чотири секції, три стани пункту, підстава з джерелом під розкриттям. Він же — стан «успіх».</p></div>
@@ -1059,7 +1090,56 @@
 
     <div class="wfembed">
       <iframe src="wireframes/plan.html#embed" title="Вайрфрейм екрана «План» у мокапі телефону" loading="lazy"></iframe>
-      <p class="cap"><span><strong>План</strong> — прокрутіть усередині телефона. Пунктир унизу — межа першого екрана: усе нижче треба догортати.</span></p>
+      <p class="cap"><span><strong>План</strong> — прокрутіть усередині телефона. Пунктир — межа першого екрана: усе нижче треба догортати. Розбір зон і те, що показав мокап, — нижче на цій сторінці.</span></p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Що закриває цей екран</h2>
+    <p class="sub">Персона — П1 Перевіряльниця, 36 років, куріння в анамнезі. Сценарій — повернення, не перший візит.</p>
+    <div class="box">
+      <p class="t">Відрізок MAIN: від вузла «План» до «успіх»</p>
+      <p>«Є ризик-орієнтовані пункти?» → секція «Розглянули і не включили» → «знайшла те, що їй призначили?» → <strong>підстава невключення видима одразу</strong> → <strong>спокій за обидві половини</strong>. Гілка «ні» останнього питання виходить у Пошук обстеження. Базовий стан цього екрана і є станом «успіх»: окремої сторінки «вийшло» в Плану немає, бо головна робота закривається тут-таки.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Зони екрана і головна дія кожної</h2>
+    <p class="sub">Зверху вниз, у тому порядку, в якому вони стоять у макеті. Зон поза деревом sitemap немає.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Зона</th><th>Головна дія</th><th>Чому вона така</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Шапка «Ваш чекап»</strong></td><td>Зорієнтувати: це її план, порахований з її відповідей, і коли саме</td>
+            <td>Дата перерахунку — поле сутності «План»: без неї зміна плану після оновлення настанов виглядатиме як самовільна</td></tr>
+        <tr><td><strong>Глобальна навігація</strong></td><td>Перейти в «Мої відповіді» або «Про підхід»</td>
+            <td>З'являється разом із Планом: на Вході й у Питаннях її немає. Три пункти, не чотири — «Історія» і «Пошук» лишаються контекстними</td></tr>
+        <tr><td><strong>Базовий шар</strong></td><td>Прочитати те, що показано всім, — і побачити, що джерело тут інше</td>
+            <td>Завдяки цій зоні план ніколи не буває порожнім. Джерела двох шарів не змішувати, тому підпис про джерело стоїть у самій секції</td></tr>
+        <tr><td><strong>Ризик-орієнтовані</strong></td><td>Розгорнути джерело під підставою</td>
+            <td>Підстава вкладена в картку, не схована: атрибуція до її відповідей плюс словесний рівень певності. Під розкриттям — тільки джерело з грейдом</td></tr>
+        <tr><td><strong>Розглянули і не включили</strong></td><td>Розгорнути секцію — і знайти в ній те, що їй призначили</td>
+            <td>Тут закривається головна робота. Секція за замовчуванням згорнута, бо саме подія розгортання — метрика; на макеті відкрита, бо це стан успіху</td></tr>
+        <tr><td><strong>«З'явиться у вашому плані»</strong></td><td>Дізнатися, коли це стане про неї</td>
+            <td>Поле сутності «Невключений пункт». Воно перетворює відсутність на знання і тримає нас на боці «додаємо знання», а не «забираємо належне»</td></tr>
+        <tr><td><strong>«Не знайшли те, що шукали?» — двічі</strong></td><td>Перейти в Пошук обстеження</td>
+            <td>Єдиний вхід у Пошук: із меню його немає, бо це перетворило б відповідь на запит у гортання каталогу. Він же — обов'язкові ворота до «Додано вами»</td></tr>
+        <tr><td><strong>Додано вами</strong></td><td>Побачити з першого погляду, що ця секція не наша</td>
+            <td>Ні підстави, ні джерела, ні рівня доказовості. Пунктирна рамка й підпис «Додали ви» — щоб план візуально не благословляв те, чого ми не оцінювали</td></tr>
+        <tr><td><strong>Підвал: дисклеймер і PDF</strong></td><td>Завантажити PDF, щоб узяти до лікаря</td>
+            <td>Дисклеймер обов'язковий і на екрані, і в PDF. Сам PDF — не диференціатор: цю роботу ринок уже закриває</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2>Стани пунктів, показані на макеті</h2>
+    <div class="cards">
+      <div class="card"><span class="lbl">Прострочено</span><p class="h">Огляд у гінеколога</p>
+        <p>Третій стан, а не варіант «не пройдено»: він і є причина, чому людина взагалі повертається.</p></div>
+      <div class="card"><span class="lbl">Пройдено з датою</span><p class="h">Стоматолог і ТТГ</p>
+        <p>Дія змінюється на «Змінити відмітку».</p></div>
+      <div class="card"><span class="lbl">Не позначено</span><p class="h">Цитологія і тиск</p>
+        <p>Стан за замовчуванням для щойно порахованого плану.</p></div>
     </div>
   </section>
 
@@ -1168,6 +1248,7 @@
     });
     if(!found){ return show('overview'); }
     links.forEach(function(a){ a.classList.toggle('active', a.dataset.v === name); });
+    document.body.classList.toggle('has-wfnav', name === 'wireframes');
     document.querySelectorAll('.subnav').forEach(function(u){
       u.classList.toggle('show', u.id === 'sub-' + name);
     });
@@ -1192,19 +1273,21 @@
   document.querySelectorAll('.subnav a').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
-      var wf = a.dataset.wf;
-      if(wf){
-        var frame = document.querySelector('.wfembed iframe');
-        if(frame){ frame.setAttribute('src', wf); }
-        a.closest('.subnav').querySelectorAll('a').forEach(function(x){ x.classList.remove('on'); });
-        a.classList.add('on');
-        show('wireframes'); closeNav();
-        var box = document.querySelector('.wfembed');
-        if(box){ box.scrollIntoView({behavior:'smooth', block:'start'}); }
-        return;
-      }
       var id = a.getAttribute('href').slice(1);
       show(a.closest('.subnav').id.replace('sub-',''), id); closeNav();
+    });
+  });
+
+  document.querySelectorAll('.wftree a[data-wf]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      var frame = document.querySelector('.wfembed iframe');
+      if(frame){ frame.setAttribute('src', a.dataset.wf); }
+      document.querySelectorAll('.wftree a').forEach(function(x){ x.classList.remove('on'); });
+      a.classList.add('on');
+      show('wireframes'); closeNav();
+      var box = document.querySelector('.wfembed');
+      if(box){ box.scrollIntoView({behavior:'smooth', block:'start'}); }
     });
   });
 
