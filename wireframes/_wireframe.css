@@ -20,7 +20,7 @@ body {
    Сторінку відкривають в iframe із робочого простору. Показуємо тільки телефон:
    службова шапка й анотації там зайві, бо контекст дає сама сторінка навколо. */
 
-#embed:target { padding: 0; }
+#embed:target { padding: 16px; }
 #embed:target .wf-meta { display: none; }
 #embed:target .wf-stage { justify-content: center; max-width: none; }
 
@@ -64,9 +64,37 @@ body {
 .wf-phone-screen {
   position: relative;
   width: 390px;
+  height: 844px;            /* реальний екран, а не «високий телефон» */
   border-radius: 28px;
   overflow: hidden;
   background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Область, у якій гортається продукт: 844 мінус системний рядок,
+   смуга браузера й індикатор унизу. Те, що не вміщається, треба догортати —
+   рівно як на справжньому телефоні. */
+.wf-viewport {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* Індикатор унизу — частина пристрою */
+.wf-home {
+  flex: 0 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border-top: 1px solid #eeeeee;
+}
+.wf-home::after {
+  content: "";
+  width: 134px; height: 4px;
+  border-radius: 2px;
+  background: #bbbbbb;
 }
 
 /* Динамічний острівець — форма пристрою, не елемент інтерфейсу */
@@ -81,6 +109,7 @@ body {
 
 /* Системний рядок телефона: не наш інтерфейс */
 .wf-status {
+  flex: 0 0 44px;
   height: 44px;
   display: flex;
   align-items: center;
@@ -98,6 +127,7 @@ body {
 
 /* Адресний рядок браузера: продукт відкривають у браузері, і ця смуга не наша */
 .wf-browser {
+  flex: 0 0 50px;
   height: 50px;
   display: flex;
   align-items: center;
@@ -113,24 +143,34 @@ body {
   background: #ffffff;
 }
 
-/* Межа першого екрана: 844px від верху фізичного екрана.
-   Нижче — те, до чого треба догортати. */
-.wf-fold {
-  position: absolute;
-  left: 0; right: 0;
-  top: 844px;
-  border-top: 1px dashed #888888;
-  z-index: 2;
-  pointer-events: none;
+/* --- Стікери: інформація про зони, поруч з макетом --- */
+
+.wf-notes {
+  flex: 1 1 300px;
+  min-width: 280px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.wf-fold::after {
-  content: "";
-  position: absolute;
-  left: 50%; bottom: 7px; transform: translateX(-50%);
-  width: 134px; height: 4px;
-  border-radius: 2px;
-  background: #bbbbbb;
+.wf-notes h2 {
+  margin: 0 0 2px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #888888;
+  font-weight: 600;
 }
+.wf-sticker {
+  border: 1px solid #cccccc;
+  border-left: 3px solid #999999;
+  background: #f7f7f7;
+  padding: 9px 11px;
+}
+.wf-sticker b { display: block; font-size: 12.5px; margin-bottom: 3px; }
+.wf-sticker .act { display: block; font-size: 12px; color: #444444; }
+.wf-sticker .act::before { content: "→ "; color: #888888; }
+.wf-sticker .why { display: block; font-size: 11.5px; color: #777777; margin-top: 4px; }
 
 /* --- Екран: усередині лише продукт --- */
 
