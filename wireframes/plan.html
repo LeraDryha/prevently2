@@ -17,6 +17,7 @@
     <dt>Персона</dt><dd>П1 Перевіряльниця, 36 років, куріння в анамнезі. Повернення, не перший візит</dd>
     <dt>Який крок MAIN</dt><dd>Від вузла <code>plan</code> до <code>okMain</code>: «є ризик-орієнтовані пункти?» → секція «Розглянули і не включили» → «знайшла те, що їй призначили?» → <b>підстава невключення видима одразу</b> → <b>успіх: спокій за обидві половини</b>. Гілка «ні» останнього питання виходить у Пошук обстеження</dd>
     <dt>Чого тут немає</dt><dd>Алерта тривожного симптому (окрема сторінка <code>plan-alert.html</code>), станів loading і error, короткого плану</dd>
+    <dt>Навігація</dt><dd>Дерево ліворуч — службове, однакове на кожній сторінці вайрфрейму. Структура з <a href="../sitemap.md">sitemap.md</a> (шість груп наміру) і <a href="_screens.md">_screens.md</a> (які стани реальні). Канонічний сніпет для копіювання — <code>wireframes/_nav.html</code></dd>
     <dt>Вбудовування</dt><dd><code>plan.html#embed</code> — та сама сторінка без цієї шапки й без анотацій, тільки телефон. Так вона вставлена в <a href="../index.html#wireframes">робочий простір</a></dd>
     <dt>Мокап</dt><dd>Телефон 390&times;844. Корпус, системний рядок і адресна смуга браузера — <b>службові</b>, не наш інтерфейс: вони тут, щоб було видно, скільки місця нам справді лишається. Пунктир — <b>межа першого екрана</b>: усе нижче треба догортати</dd>
     <dt>Розмітка дій</dt><dd>За <a href="_conventions.md">конвенціями</a>: <code>&lt;button&gt;</code> — дія тут-таки («Завантажити PDF»), <code>&lt;a&gt;</code> — перехід на інший екран («Позначити пройденим» → <code>mark-done.html</code>, «Знайти обстеження за назвою» → <code>search.html</code>). Ці сторінки ще не намальовані, тож посилання поки ведуть у нікуди</dd>
@@ -24,6 +25,79 @@
 </div>
 
 <div class="wf-stage">
+
+<nav class="wf-tree" aria-label="Структура вайрфреймів">
+  <p class="tt">Вайрфрейми</p>
+
+  <ul class="t1">
+    <li class="grp"><span class="gname">Довіритися перше, ніж розповідати про себе</span>
+      <ul class="t2">
+        <li><span class="scr soon">Вхід <code>entry.html</code></span>
+          <ul class="t3"><li class="note">станів немає — один макет</li></ul>
+        </li>
+      </ul>
+    </li>
+
+    <li class="grp"><span class="gname">Розповісти про себе</span>
+      <ul class="t2">
+        <li><span class="scr soon">Питання <code>questions.html</code></span>
+          <ul class="t3">
+            <li><span class="st soon">помилка · сховище недоступне <code>questions-error.html</code></span></li>
+            <li><span class="st soon">відновлення опитувальника <code>questions-resume.html</code></span></li>
+          </ul>
+        </li>
+        <li><span class="scr soon">Підсумок відповідей <code>summary.html</code></span>
+          <ul class="t3">
+            <li><span class="st soon">завантаження · обрахунок плану <code>summary-loading.html</code></span></li>
+            <li><span class="st soon">помилка <code>summary-error.html</code></span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li class="grp"><span class="gname">Дізнатися, що з цього справді про мене</span>
+      <ul class="t2">
+        <li><a class="scr here" href="plan.html" aria-current="page">План <code>plan.html</code></a>
+          <ul class="t3">
+            <li><span class="st soon">завантаження · перерахунок <code>plan-loading.html</code></span></li>
+            <li><span class="st soon">помилка <code>plan-error.html</code></span></li>
+            <li><span class="st soon">алерт тривожного симптому <code>plan-alert.html</code></span></li>
+            <li><span class="st soon">короткий план <code>plan-short.html</code></span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li class="grp"><span class="gname">Знайти те, що призначили</span>
+      <ul class="t2">
+        <li><span class="scr soon">Пошук обстеження <code>search.html</code></span>
+          <ul class="t3">
+            <li><span class="st soon">порожній · немає збігу за назвою <code>search-empty.html</code></span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li class="grp out"><span class="gname">Тримати план живим у часі</span>
+      <ul class="t2">
+        <li><span class="scr out">Позначити пройденим</span></li>
+        <li><span class="scr out">Історія проходжень</span></li>
+      </ul>
+    </li>
+
+    <li class="grp out"><span class="gname">Перевірити нас так само, як лікаря</span>
+      <ul class="t2">
+        <li><span class="scr out">Про підхід</span></li>
+      </ul>
+    </li>
+  </ul>
+
+  <p class="lg">
+    <span><b>жирним</b> — поточна сторінка</span>
+    <span>сірим — у замовленні, ще не намальовано</span>
+    <span>курсивом — поза замовленням, крок 8</span>
+  </p>
+</nav>
 
 <div class="wf-phone">
 <div class="wf-phone-screen">
