@@ -19,7 +19,7 @@
     -webkit-font-smoothing:antialiased}
 
   /* ---------- sidebar ---------- */
-  aside{position:fixed; inset:0 auto 0 0; width:var(--sidebar); background:var(--surface);
+  #sidebar, #wfnav{position:fixed; inset:0 auto 0 0; width:var(--sidebar); background:var(--surface);
     border-right:1px solid var(--line); padding:26px 0; overflow-y:auto; z-index:100}
   .brand{padding:0 22px 20px; border-bottom:1px solid var(--line-soft); margin-bottom:16px}
   .brand .name{font-size:19px; font-weight:700; letter-spacing:-.01em; color:var(--primary); margin:0}
@@ -131,6 +131,39 @@
   .badge.none{background:#f2eff0; color:var(--dim)}
   .badge.wip{background:#f7efe7; color:var(--amber)}
 
+  /* Робоча область макета: дерево ліворуч (окремий сайдбар), телефон, пояснення */
+  .wfwork{display:flex; gap:28px; align-items:flex-start; padding-top:4px}
+  body.has-wfnav main{padding-bottom:20px}
+  .wfwork-phone{flex:0 0 462px; position:sticky; top:16px}
+  .wfwork-phone iframe{display:block; width:462px; height:884px; border:1px solid var(--line);
+    border-radius:var(--radius); background:var(--surface)}
+  .wfwork-phone .cap{margin:8px 2px 0; font-size:12.5px; color:var(--muted); max-width:462px}
+  /* Власний скрол: інакше кожен екран міняє висоту сторінки, і браузер
+     смикає прокручування під людиною при кожному перемиканні макета. */
+  .wfwork-notes{flex:1 1 320px; min-width:300px; padding:2px 4px 0 0;
+    position:sticky; top:16px; max-height:calc(100vh - 36px); overflow-y:auto}
+  .wfn-title{margin:0 0 4px; font-size:19px; letter-spacing:-.01em}
+  .wfn-states{margin:0 0 16px; font-size:12.5px; color:var(--dim)}
+  .wfn-states a{margin-right:10px}
+  .wfn-states .here{margin-right:10px; font-weight:650; color:var(--text)}
+  .wfn-key{margin:0 0 18px; padding:0; display:grid; grid-template-columns:auto 1fr; gap:4px 14px; font-size:13px}
+  .wfn-key dt{color:var(--dim)}
+  .wfn-key dd{margin:0}
+  .wfn-h{margin:20px 0 10px; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--dim); font-weight:600}
+  .wfn-card{border:1px solid var(--line); border-left:3px solid var(--primary-line);
+    border-radius:8px; padding:10px 12px; margin-bottom:9px; background:var(--surface)}
+  .wfn-card b{display:block; font-size:13.5px; margin-bottom:3px}
+  .wfn-card .act{display:block; font-size:13px; color:var(--muted)}
+  .wfn-card .why{display:block; font-size:12.5px; color:var(--dim); margin-top:5px}
+  .wfn-load{color:var(--dim); font-size:13px}
+  .wfn-more{margin-top:16px; font-size:12.5px}
+  .wfn-more summary{cursor:pointer; color:var(--muted)}
+  @media(max-width:1500px){
+    .wfwork{flex-wrap:wrap}
+    .wfwork-phone{position:static}
+    .wfwork-notes{flex:1 1 100%; position:static; max-height:none; overflow:visible}
+  }
   .wfembed{margin-top:22px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface)}
   .wfembed iframe{display:block; width:100%; height:1110px; border:0; background:var(--surface)}
   .wfembed .cap{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline;
@@ -194,8 +227,8 @@
   td .ev{display:block; font-size:12px; color:var(--dim); margin-top:3px; line-height:1.4}
 
   @media (max-width:900px){
-    aside{transform:translateX(-100%); transition:transform .22s ease; width:280px}
-    aside.open{transform:none; box-shadow:0 0 40px rgba(27,23,25,.18)}
+    #sidebar{transform:translateX(-100%); transition:transform .22s ease; width:280px}
+    #sidebar.open{transform:none; box-shadow:0 0 40px rgba(27,23,25,.18)}
     #burger{display:block} #scrim.show{display:block}
     main{margin-left:0; padding:70px 20px 60px}
     #wfnav{position:static; transform:none; inset:auto; width:auto; overflow:visible;
@@ -247,7 +280,13 @@
         </ul>
       </li>
       <li><a href="ia.html" class="done"><span class="dot"></span>Інформаційна архітектура</a></li>
-      <li><a href="#wireframes" data-v="wireframes" class="wip"><span class="dot"></span>Вайрфрейми</a></li>
+      <li>
+        <a href="#wireframes" data-v="wireframes" class="wip"><span class="dot"></span>Вайрфрейми</a>
+        <ul class="subnav" id="sub-wireframes">
+          <li><a href="#wireframes" data-v="wireframes">Макет</a></li>
+          <li><a href="#wf-about" data-v="wf-about">Про макети</a></li>
+        </ul>
+      </li>
       <li><a href="#concept" data-v="concept"><span class="dot"></span>Концепція</a></li>
       <li><a href="#tokens" data-v="tokens"><span class="dot"></span>Токени</a></li>
       <li><a href="#components" data-v="components"><span class="dot"></span>Компоненти</a></li>
@@ -1092,7 +1131,19 @@
 
 <!-- ============ ВАЙРФРЕЙМИ ============ -->
 <div class="view" id="v-wireframes">
-  <header class="top"><p class="eyebrow">Розділ 02 · Вайрфрейми</p><h1>Схеми екранів</h1>
+  <div class="wfwork">
+    <div class="wfwork-phone">
+      <iframe id="wfframe" src="wireframes/plan.html#embed" title="Макет екрана" loading="lazy"></iframe>
+      <p class="cap"><span>Телефон 390&times;844 у натуральний розмір — контент гортається всередині екрана. Перехід між екранами і станами — у дереві ліворуч.</span></p>
+    </div>
+    <aside class="wfwork-notes" id="wfnotes" aria-live="polite">
+      <p class="wfn-load">Обираємо екран…</p>
+    </aside>
+  </div>
+</div>
+
+<div class="view" id="v-wf-about">
+  <header class="top"><p class="eyebrow">Розділ 02 · Вайрфрейми</p><h1>Про макети</h1>
     <p class="lede">Структура екранів опитувальника й плану до візуального оформлення. Сіре, без кольору й типографіки: макет має доводити, що на екрані є і що чому підпорядковане, — не те, що він гарний.</p>
     <div class="meta"><span class="chip">усі екрани sitemap</span><span class="chip">25 сторінок зі станами</span><span class="chip">усі намальовані</span><span class="chip">Телефон 390&times;844</span></div>
   </header>
@@ -1106,32 +1157,6 @@
         <p>П’ять екранів зі станами з <a href="https://github.com/LeraDryha/prevently2/blob/main/wireframes/_screens.md" target="_blank" rel="noopener">таблиці замовлення</a>, плюс три стани поза нею: алерт тривожного симптому, короткий план для 18–25 і відновлення незавершеного опитувальника.</p></div>
       <div class="card"><span class="lbl">Решта sitemap · 10 сторінок</span><p class="h">Позначити пройденим · Історія · Про підхід · глибокі дії</p>
         <p>Усе, що лишалось у дереві екранів, разом зі станами. Чотири екрани sitemap свідомо <b>не</b> малювались: приватність окремим екраном і освітні сторінки вже <b>видалені</b> рішенням дерева, політика приватності живе секцією в «Про підхід», профіль близької людини — backlog v2.</p></div>
-    </div>
-
-    <div class="wfembed">
-      <iframe src="wireframes/plan.html#embed" title="Вайрфрейм екрана «План» у мокапі телефону" loading="lazy"></iframe>
-      <p class="cap"><span><strong>План</strong> — телефон у натуральний розмір 390&times;844: контент гортається всередині екрана, точно як на пристрої. Смуга над «Ваш чекап» — адресний рядок браузера, не наш інтерфейс. Зони підписані стікерами праворуч.</span></p>
-    </div>
-  </section>
-
-  <section class="block">
-    <h2>Що закриває цей екран</h2>
-    <p class="sub">Персона — П1 Перевіряльниця, 36 років, куріння в анамнезі. Сценарій — повернення, не перший візит.</p>
-    <div class="box">
-      <p class="t">Відрізок MAIN: від вузла «План» до «успіх»</p>
-      <p>«Є ризик-орієнтовані пункти?» → секція «Розглянули і не включили» → «знайшла те, що їй призначили?» → <strong>підстава невключення видима одразу</strong> → <strong>спокій за обидві половини</strong>. Гілка «ні» останнього питання виходить у Пошук обстеження. Базовий стан цього екрана і є станом «успіх»: окремої сторінки «вийшло» в Плану немає, бо головна робота закривається тут-таки.</p>
-    </div>
-  </section>
-
-  <section class="block">
-    <h2>Стани пунктів, показані на макеті</h2>
-    <div class="cards">
-      <div class="card"><span class="lbl">Прострочено</span><p class="h">Огляд у гінеколога</p>
-        <p>Третій стан, а не варіант «не пройдено»: він і є причина, чому людина взагалі повертається.</p></div>
-      <div class="card"><span class="lbl">Пройдено з датою</span><p class="h">Стоматолог і ТТГ</p>
-        <p>Дія змінюється на «Змінити відмітку».</p></div>
-      <div class="card"><span class="lbl">Не позначено</span><p class="h">Цитологія і тиск</p>
-        <p>Стан за замовчуванням для щойно порахованого плану.</p></div>
     </div>
   </section>
 
@@ -1232,6 +1257,8 @@
   var scrim = document.getElementById('scrim');
 
   function show(name, scrollTo){
+    var already = document.getElementById('v-' + name);
+    already = already && already.classList.contains('active');
     var found = false;
     views.forEach(function(v){
       var on = v.id === 'v' + '-' + name;
@@ -1241,13 +1268,23 @@
     if(!found){ return show('overview'); }
     links.forEach(function(a){ a.classList.toggle('active', a.dataset.v === name); });
     document.body.classList.toggle('has-wfnav', name === 'wireframes');
+    document.querySelectorAll('.subnav a[data-v]').forEach(function(a){
+      a.classList.toggle('on', a.dataset.v === name);
+    });
+    var subKey = (name === 'wf-about') ? 'wireframes' : name;
     document.querySelectorAll('.subnav').forEach(function(u){
-      u.classList.toggle('show', u.id === 'sub-' + name);
+      u.classList.toggle('show', u.id === 'sub-' + subKey);
+    });
+    links.forEach(function(a){
+      if(a.dataset.v === 'wireframes') a.classList.toggle('active', subKey === 'wireframes');
     });
     if(scrollTo){
       var t = document.getElementById(scrollTo);
       if(t){ t.scrollIntoView({behavior:'smooth', block:'start'}); return; }
     }
+    // Розділ уже відкритий — людина просто перемкнула макет.
+    // Скидати прокручування тут означає смикати сторінку під нею.
+    if(already) return;
     window.scrollTo({top:0, behavior:'auto'});
   }
 
@@ -1265,21 +1302,76 @@
   document.querySelectorAll('.subnav a').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
+      if(a.dataset.v){
+        history.replaceState(null, '', '#' + a.dataset.v);
+        show(a.dataset.v); closeNav(); return;
+      }
       var id = a.getAttribute('href').slice(1);
       show(a.closest('.subnav').id.replace('sub-',''), id); closeNav();
     });
   });
 
+  var KEEP = ['Стан','Job','Персона','Місце у flow','Який крок MAIN','Переходи'];
+
+  function renderNotes(src){
+    var box = document.getElementById('wfnotes');
+    if(!box) return;
+    fetch(src.split('#')[0]).then(function(r){ return r.text(); }).then(function(html){
+      var doc = new DOMParser().parseFromString(html, 'text/html');
+      var meta = doc.querySelector('.wf-meta');
+      var out = '';
+      var h1 = meta && meta.querySelector('h1');
+      if(h1) out += '<p class="wfn-title">' + h1.textContent + '</p>';
+      var st = meta && meta.querySelector('.wf-states');
+      if(st) out += '<p class="wfn-states">' + st.innerHTML.replace(/<span class="lbl">.*?<\/span>/,'') + '</p>';
+      var rows = meta ? meta.querySelectorAll('dt') : [];
+      var keep = '', rest = '';
+      rows.forEach(function(dt){
+        var dd = dt.nextElementSibling;
+        if(!dd) return;
+        var pair = '<dt>' + dt.textContent + '</dt><dd>' + dd.innerHTML + '</dd>';
+        (KEEP.indexOf(dt.textContent.trim()) >= 0 ? keep += pair : rest += pair);
+      });
+      if(keep) out += '<dl class="wfn-key">' + keep + '</dl>';
+      var notes = doc.querySelector('.wf-notes');
+      if(notes){
+        notes.querySelectorAll('h2').forEach(function(h){
+          h.outerHTML = '<p class="wfn-h">' + h.textContent + '</p>';
+        });
+        notes.querySelectorAll('.wf-sticker').forEach(function(d){ d.className = 'wfn-card'; });
+        out += notes.innerHTML;
+      }
+      if(rest) out += '<details class="wfn-more"><summary>Решта службових полів</summary>' +
+                      '<dl class="wfn-key">' + rest + '</dl></details>';
+      box.innerHTML = out;
+      box.querySelectorAll('a[href$=".html"]').forEach(function(x){
+        var href = x.getAttribute('href');
+        if(href.indexOf('/') < 0 && href.indexOf(':') < 0){
+          x.addEventListener('click', function(ev){
+            ev.preventDefault(); openWf('wireframes/' + href + '#embed');
+          });
+        } else if(href.indexOf('../') === 0){
+          x.setAttribute('href', href.replace('../',''));
+        }
+      });
+    }).catch(function(){ box.innerHTML = '<p class="wfn-load">Пояснення не завантажились</p>'; });
+  }
+
+  function openWf(src){
+    var frame = document.getElementById('wfframe');
+    if(frame && frame.getAttribute('src') !== src) frame.setAttribute('src', src);
+    var file = src.split('/').pop().split('#')[0];
+    document.querySelectorAll('.wftree a[data-wf]').forEach(function(x){
+      x.classList.toggle('on', x.dataset.wf.indexOf('/' + file + '#') >= 0);
+    });
+    renderNotes(src);
+  }
+
   document.querySelectorAll('.wftree a[data-wf]').forEach(function(a){
     a.addEventListener('click', function(e){
       e.preventDefault();
-      var frame = document.querySelector('.wfembed iframe');
-      if(frame){ frame.setAttribute('src', a.dataset.wf); }
-      document.querySelectorAll('.wftree a').forEach(function(x){ x.classList.remove('on'); });
-      a.classList.add('on');
       show('wireframes'); closeNav();
-      var box = document.querySelector('.wfembed');
-      if(box){ box.scrollIntoView({behavior:'smooth', block:'start'}); }
+      openWf(a.dataset.wf);
     });
   });
 
@@ -1288,6 +1380,8 @@
     scrim.classList.toggle('show', sidebar.classList.contains('open'));
   });
   scrim.addEventListener('click', closeNav);
+
+  renderNotes('wireframes/plan.html');
 
   var h = (location.hash || '#overview').slice(1);
   var deep = h.indexOf('r-') === 0 ? 'research' : (h.indexOf('p-') === 0 ? 'people' : null);
