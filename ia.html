@@ -176,10 +176,10 @@
   а не нейтральним фактом.</p>
   <div class="meta">
     <span class="chip">8 екранів</span>
-    <span class="chip">13 сутностей</span>
+    <span class="chip">14 сутностей</span>
     <span class="chip">8 стовпців із 13 несуть роботу</span>
     <span class="chip">1 тап до main job на поверненні</span>
-    <span class="chip">оновлено 23.09.2026</span>
+    <span class="chip">оновлено 26.09.2026</span>
   </div>
 </header>
 
@@ -462,13 +462,23 @@
     d3 -->|ні| sErr(["Error: запис не зберігся"])
     sErr --> sUnsaved(["Стан: видима позначка «не збережено», відмітку можна повторити"])
     sUnsaved --> mark
-    sMarked --> okMark(("Успіх: шлях не починається спочатку"))
+    sMarked --> d7{"Прикріпити файл результату?"}
+    d7 -->|так| sFile(["Стан: файл на пристрої, відкривається на вимогу, ми його не парсимо"])
+    d7 -->|ні| okMark(("Успіх: шлях не починається спочатку"))
+    sFile --> okAll(("Успіх: усе в одному місці"))
     summary --> d4{"Є відповідь, яка більше не правдива?"}
     d4 -->|так| quiz["Питання"]
     d4 -->|ні| dead3{{"Тупик: життя змінилось, а питання під це немає"}}
     quiz --> sRecalc2(["Стан: перерахунок без повного переопитування"])
     sRecalc2 --> okEdit(("Успіх: план наздогнав життя"))
-    plan --> d5{"Хоче побачити, що вже зроблено?"}
+    plan --> d8{"Лікар призначив те, чого в плані немає?"}
+    d8 -->|так| search["Пошук обстеження"]
+    d8 -->|ні| d5{"Хоче побачити, що вже зроблено?"}
+    search --> sStates(["Стан: один із трьох вердиктів — у плані / не включили у ваш чекап / не оцінювали"])
+    sStates --> d9{"Це призначив лікар?"}
+    d9 -->|так| own[["Секція: Додано вами"]]
+    d9 -->|ні| okAnswered(("Успіх: питання закрите без додавання"))
+    own --> okOwn(("Успіх: усе разом, і вердикт видно"))
     d5 -->|так| hist["Історія проходжень"]
     d5 -->|ні| okPlan(("Успіх: далі живе з планом"))
     hist --> d6{"Є хоч одна відмітка?"}
@@ -483,13 +493,13 @@
     classDef ok fill:#e2f1e4,stroke:#2e7d32,color:#12301a
     classDef dead fill:#fae6e6,stroke:#c62828,color:#3d1414
     class start trig
-    class plan,summary,mark,quiz,hist screen
+    class plan,summary,mark,quiz,hist,search screen
     class card section
-    class sRecalc,sRecalc2,sMarked,sErr,sEmpty,sApprox,sRound,sUnsaved state
-    class okMark,okEdit,okPlan,okHist ok
+    class sRecalc,sRecalc2,sMarked,sErr,sEmpty,sApprox,sRound,sUnsaved,sFile,sStates state
+    class okMark,okEdit,okPlan,okHist,okAll,okOwn,okAnswered ok
     class dead3 dead
-    linkStyle 2,6,11,17,22,25 stroke:#2e7d32,stroke-width:2px
-    linkStyle 3,7,12,18,23,26 stroke:#c62828,stroke-width:2px</pre></div>
+    linkStyle 2,6,11,16,20,25,29,32,35 stroke:#2e7d32,stroke-width:2px
+    linkStyle 3,7,12,17,21,26,30,33,36 stroke:#c62828,stroke-width:2px</pre></div>
 </div>
 <div class="flow">
 <h3 id="f-r1"><span class="fc">R1</span> Зрозуміти логіку, а не отримати відповідь</h3>

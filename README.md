@@ -64,11 +64,11 @@ Primary — «Перевіряльниця»: 40,5% жінок з України
 
 | Папка або файл | Що всередині | Стан |
 |---|---|---|
-| [`research/`](research/) | [`research.md`](research/research.md) — аудиторія, конкуренти, медичні джерела, висновки. [`personas.md`](research/personas.md) — чотири персони на даних опитування (362) та 5 інтерв'ю. [`jtbd.md`](research/jtbd.md) — main job, related, emotional і social + матриця робіт і персон. [`screens/`](research/screens/) — референси | 🟡 каркас |
-| [`sitemap.md`](sitemap.md) | Інформаційна архітектура: 11 сутностей продукту з job'ом на кожну, дерево з 8 екранів, навігаційна модель із підрахунком тапів до main job, матриця трасування job×екран із підсвіченими сиротами | 🟢 готово |
+| [`research/`](research/) | [`research.md`](research/research.md) — аудиторія, конкуренти, медичні джерела, висновки. [`personas.md`](research/personas.md) — чотири персони на даних опитування (362) та 5 інтерв'ю. [`jtbd.md`](research/jtbd.md) — main job, related, emotional і social + матриця робіт і персон. [`screens/`](research/screens/) — 33 референси | 🟢 готово |
+| [`sitemap.md`](sitemap.md) | Інформаційна архітектура: 14 сутностей продукту з job'ом на кожну, дерево з 8 екранів, навігаційна модель із підрахунком тапів до main job, матриця трасування job×екран із підсвіченими сиротами | 🟢 готово |
 | [`flows.md`](flows.md) | Чотири user flow у Mermaid — MAIN, E1, R4a, R1. Не лише happy-path: empty, loading, error окремими вузлами, обидва кінці — успіх і тупики | 🟢 готово |
 | [`ia.html`](ia.html) | Та сама ІА сторінкою: дерево з job'ами, діаграми, матриця. Розділ «Інформаційна архітектура» на [prevently2.vercel.app](https://prevently2.vercel.app) | 🟢 готово |
-| [`wireframes/`](wireframes/) | **25 сторінок** — усе дерево екранів sitemap зі станами, у сірому, телефон 390×844 зі скролом усередині. [`_screens.md`](wireframes/_screens.md) — що малюємо, [`_conventions.md`](wireframes/_conventions.md) — як, [`_critique.md`](wireframes/_critique.md) — що знайшла перевірка | 🟢 готово |
+| [`wireframes/`](wireframes/) | **26 сторінок** — усе дерево екранів sitemap зі станами і PDF для лікаря, у сірому, телефон 390×844 зі скролом усередині. [`_screens.md`](wireframes/_screens.md) — що малюємо, [`_conventions.md`](wireframes/_conventions.md) — як, [`_critique.md`](wireframes/_critique.md) — що знайшла перевірка | 🟢 готово |
 | [`concept/`](concept/) | Візуальний напрям: мудборди, пошук стилю, обґрунтування | ⚪ порожньо |
 | [`tokens/`](tokens/) | Кольори, типографіка, відступи, радіуси — JSON як джерело правди | ⚪ порожньо |
 | [`components/`](components/) | Специфікації компонентів: стани, поведінка, доступність | ⚪ порожньо |
@@ -104,8 +104,9 @@ PDF формується на пристрої. Аналітика — без к
 
 ## Статус
 
-Ранній етап. Стек застосунку: Next.js, TypeScript, Tailwind. Mobile-first,
-далі адаптив до десктопу. Інтерфейс українською.
+Ранній етап. Цей репозиторій — навчальний прогін продукту в межах курсу; продакшн-версія
+Prevently живе нативно в App Store і Google Play. Формат тут — **мобільний веб**: Next.js,
+TypeScript, Tailwind, mobile-first, далі адаптив до десктопу. Інтерфейс українською.
 
 ## Застереження
 
