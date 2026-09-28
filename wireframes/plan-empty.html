@@ -12,6 +12,9 @@
   <h1>План — порожній стан</h1>
   <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
   <a href="plan.html">базовий</a>
+  <a href="plan-card.html">картка</a>
+  <a href="plan-schedule.html">запланувати</a>
+  <a href="plan-filter.html">фільтр</a>
   <span class="here" aria-current="page">порожній</span>
   <a href="plan-error.html">помилка</a>
   <a href="plan-loading.html">завантаження</a>
@@ -23,10 +26,9 @@
     <dt>Екран</dt><dd>«План» — <a href="_screens.md">_screens.md, екран 4</a></dd>
     <dt>Job</dt><dd><a href="../research/jtbd.md#main-job">MAIN</a> — «коли мені призначили більше, ніж я вважаю потрібним… щоб піти спокійною і за те, що зробила, і за те, чого не робила» · <a href="../research/jtbd.md#e1--перестати-відчувати-що-на-мені-заробляють">E1</a> — «відчувати, що мене не використовують»</dd>
     <dt>Стан</dt><dd><b>Порожній.</b> Порожній <b>від дій</b>, не від вмісту: усі пункти позначені пройденими, і зараз робити нічого не треба. <a href="_screens.md">_screens.md</a> досі каже, що в Плану empty-стану немає, — і це правда про <b>вміст</b>: <a href="../CLAUDE.md#структура-плану">базовий шар є завжди</a>. Цей стан не суперечить йому, а уточнює</dd>
-    <dt>Персона</dt><dd>П1 Перевіряльниця, 36 років. Повернення через рік після того, як усе пройшла</dd>
+    <dt>Персона</dt><dd>П1 Перевіряльниця, 36 років. 23 вересня 2026, після відміток 14 вересня: усе актуальне пройдено — <a href="_conventions.md#дані-персони-в-макетах">дані персони</a></dd>
     <dt>Вихід</dt><dd>Не глухий кут: три виходи в секції «Що можна зробити зараз» — Пошук обстеження (<code>d8</code> у <a href="../flows.md#r4a--не-починати-шлях-спочатку">R4a</a>), Історія проходжень (<code>d5</code> там же) і PDF</dd>
     <dt>Переходи</dt><dd>Убік: <a href="search.html">Пошук обстеження</a> — якщо лікар щось призначив. Назад до заповненого: <a href="plan.html">План</a>, щойно з’явиться що робити. Змінити життя → <a href="summary.html">Мої відповіді</a> Документ: <a href="pdf.html">PDF плану</a> — «Завантажити PDF», маршрут із <a href="../sitemap.md#глибина-до-main-job">sitemap</a></dd>
-    <dt>Неактивні дії</dt><dd>Дії, що ведуть на ще не намальовані екрани («Позначити пройденим», «Історія проходжень», «Про підхід», «Відновити з копії»), показані сірим і не клікабельні: <a href="_conventions.md#4--файли-й-іменування">посилання ставимо тільки на наявні сторінки</a></dd>
     <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
     <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
   </dl>
@@ -71,36 +73,82 @@
     </section>
 
     <section aria-labelledby="h-base">
-      <h2 id="h-base">Базовий шар</h2>
-      <p class="lead">Показано всім жінкам незалежно від ризиків.</p>
-      <article>
-        <h3>Огляд у гінеколога</h3>
-        <p class="when">Раз на рік · наступний — до вересня 2027</p>
-        <p class="state">Стан: пройдено 14 вересня 2026</p>
-        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      <h2 id="h-base">Базовий шар <span class="layer-src">показано всім · ACOG, стоматологічні настанови</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у гінеколога</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">раз на рік · наступний до вересня 2027</span>
+          </summary>
+          <div class="full">
+            <p>Щорічна розмова про те, що змінилось: цикл, контрацепція, скарги.</p>
+            <p class="when">Раз на рік · пройдено 14 вересня 2026</p>
+            <p><span class="cost">Безкоштовно за програмою медичних гарантій</span></p>
+            <div class="row actions">
+              <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+              <a class="btnlink" href="plan-schedule.html">Запланувати</a>
+            </div>
+          </div>
+        </details>
       </article>
-      <article>
-        <h3>Огляд у стоматолога</h3>
-        <p class="when">Раз на рік · наступний — до березня 2027</p>
-        <p class="state">Стан: пройдено 12 березня 2026</p>
-        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у стоматолога</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">раз на рік · наступний до березня 2027</span>
+          </summary>
+          <div class="full">
+            <p>Профілактичний огляд і чистка. Потрібен, навіть коли нічого не болить.</p>
+            <p class="when">Раз на рік · пройдено 12 березня 2026</p>
+            <p><span class="cost">Платно</span></p>
+            <div class="row actions">
+              <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+              <a class="btnlink" href="plan-schedule.html">Запланувати</a>
+            </div>
+          </div>
+        </details>
       </article>
     </section>
 
     <section aria-labelledby="h-risk">
-      <h2 id="h-risk">Ризик-орієнтовані скринінги</h2>
-      <p class="lead">Залежать від віку, анамнезу й факторів ризику.</p>
-      <article>
-        <h3>Цитологія з ВПЛ-тестом</h3>
-        <p class="when">Раз на 5 років · наступна — до березня 2028</p>
-        <p class="state">Стан: пройдено навесні 2023 — приблизна дата</p>
-        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      <h2 id="h-risk">Ризик-орієнтовані скринінги <span class="layer-src">за віком і анамнезом · USPSTF, з рівнем доказовості</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Цитологія з ВПЛ-тестом</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">раз на 5 років · наступна до березня 2028</span>
+          </summary>
+          <div class="full">
+            <p>Мазок із шийки матки. Шукає зміни клітин до того, як вони стануть проблемою.</p>
+            <p class="when">Раз на 5 років · пройдено навесні 2023 — приблизна дата</p>
+            <p><span class="cost">Безкоштовно за програмою медичних гарантій</span></p>
+            <div class="row actions">
+              <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+              <a class="btnlink" href="plan-schedule.html">Запланувати</a>
+            </div>
+          </div>
+        </details>
       </article>
-      <article>
-        <h3>Вимірювання артеріального тиску</h3>
-        <p class="when">Раз на 3–5 років · наступне — до вересня 2029</p>
-        <p class="state">Стан: пройдено 14 вересня 2026, на огляді в гінеколога</p>
-        <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Вимірювання тиску</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">раз на 3–5 років · наступне до вересня 2029</span>
+          </summary>
+          <div class="full">
+            <p>Кілька хвилин на прийомі або вдома тонометром.</p>
+            <p class="when">Раз на 3–5 років · пройдено 14 вересня 2026, на огляді в гінеколога</p>
+            <p><span class="cost">Безкоштовно за програмою медичних гарантій</span></p>
+            <div class="row actions">
+              <a class="btnlink" href="mark-done.html">Змінити відмітку</a>
+              <a class="btnlink" href="plan-schedule.html">Запланувати</a>
+            </div>
+          </div>
+        </details>
       </article>
     </section>
 
@@ -156,9 +204,13 @@
     <span class="act">дізнатися, коли знову щось буде</span>
     <span class="why">Без неї «нічого не треба» читається як «продукт більше не потрібен». Дата порахована від її ж відмітки — це і є механіка R4a.</span></div>
 
-  <div class="wf-sticker"><b>Секції лишаються на місці</b>
+  <div class="wf-sticker"><b>Шари лишаються на місці</b>
     <span class="act">побачити, що план не зник</span>
-    <span class="why">Ті самі чотири зони, що в стані «успіх». Пункти нікуди не поділись — у них інший стан і інша дія: «Змінити відмітку» замість «Позначити пройденим».</span></div>
+    <span class="why">Ті самі шари й ті самі мініатюри, що в базовому стані. Пункти нікуди не поділись — у них інший стан і інша дія: «Змінити відмітку» замість «Позначити пройденим».</span></div>
+
+  <div class="wf-sticker"><b>Смуги лічильників немає</b>
+    <span class="act">не шукати, що відфільтровано</span>
+    <span class="why">Стан у всіх пунктів один — «пройдено», тож фільтрувати нічого. <a href="plan.html">Смуга</a> з'являється, коли станів щонайменше два, і зникає, коли лишається один.</span></div>
 
   <div class="wf-sticker"><b>«Що можна зробити зараз»</b>
     <span class="act">вийти в Пошук, Історію або PDF</span>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дослідження: компактний План</title>
+<link rel="stylesheet" href="../_wireframe.css">
+<style>
+/* ── Полотно, як у Фігмі: кадри з назвами на сірому тлі ── */
+body { background: #e6e6e6; padding: 40px 40px 80px; }
+.canvas-head { max-width: 1480px; margin: 0 auto 32px; }
+.canvas-head h1 { margin: 0 0 6px; font-size: 22px; }
+.canvas-head p { margin: 0 0 4px; font-size: 13px; color: #555555; max-width: 900px; }
+.board { display: flex; flex-wrap: wrap; gap: 56px 40px; max-width: 1480px; margin: 0 auto; align-items: flex-start; }
+.frame { margin: 0; flex: 0 0 444px; }
+.frame-name { font-size: 12px; font-weight: 600; color: #444444; margin: 0 0 10px; }
+.frame-notes { margin: 14px 4px 0; font-size: 12.5px; color: #333333; line-height: 1.5; }
+.frame-notes p { margin: 0 0 8px; }
+.frame .wf-phone { margin: 0 16px; }
+iframe.was { display: block; width: 444px; height: 900px; border: 0; }
+
+/* ── Пункт 1: відступи. Правильні селектори + сітка кратна 4 ── */
+.wf-scroll > header { padding: 20px 20px 16px; border-bottom: 1px solid #cccccc; }
+.wf-scroll > header h1 { margin: 0 0 4px; font-size: 22px; }
+.wf-scroll > header p { margin: 0; font-size: 12px; color: #666666; }
+.wf-scroll > main > section { padding: 20px; border-bottom: 1px solid #cccccc; }
+.wf-scroll > main > section h2 { margin: 0 0 10px; }
+.src-inline { display: block; font-size: 11px; font-weight: 400; color: #777777; margin-top: 2px; }
+.wf-scroll > main > section .lead { margin: 0 0 12px; }
+.wf-scroll > footer { padding: 20px; background: #f7f7f7; }
+
+/* ── Пункт 5: смуга лічильників — вона ж фільтр ── */
+.strip { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.strip button { font-size: 12px; padding: 6px 10px; background: #ffffff; border: 1px solid #999999; }
+.strip button[aria-pressed="true"] { background: #333333; color: #ffffff; border-color: #333333; }
+
+/* ── Пункт 2: мініатюра картки ── */
+.mini { border: 1px solid #cccccc; padding: 0; margin: 0 0 8px; background: #ffffff; }
+.mini > details { border: 0; margin: 0; padding: 0; }
+.mini > details > summary {
+  list-style: none; cursor: pointer;
+  display: grid; grid-template-columns: 1fr auto; gap: 2px 12px;
+  padding: 12px 14px; font-size: inherit; color: inherit;
+}
+.mini > details > summary::-webkit-details-marker { display: none; }
+.mini .name { margin: 0; font-size: 14px; }
+.mini .meta { grid-column: 1; font-size: 12px; color: #666666; }
+.mini .status { grid-column: 2; grid-row: 1 / 3; align-self: center; font-size: 11px; border: 1px solid #999999; padding: 3px 8px; color: #444444; white-space: nowrap; }
+.mini .status.urgent { border: 2px solid #333333; font-weight: 700; color: #222222; }
+.mini > details[open] > summary { border-bottom: 1px solid #dddddd; }
+.mini .full { padding: 12px 14px 14px; }
+.mini .full p { font-size: 13px; margin: 0 0 8px; }
+.mini .full details { border-top: 1px solid #eeeeee; }
+.mini.not-ours { border-style: dashed; }
+.actions { margin-top: 14px; }
+.btnlink.small { font-size: 12px; padding: 5px 10px; }
+.mini-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 14px; }
+.row.pad { padding: 0 14px 12px; }
+
+/* ── Пункт 4: варіанти швидких дій, як сторінка компонентів у Фігмі ── */
+.panel { background: #ffffff; border: 1px solid #999999; padding: 20px; margin: 0 16px; width: 412px; box-sizing: border-box; }
+.variant { padding: 0 0 18px; margin: 0 0 18px; border-bottom: 1px dashed #cccccc; }
+.variant:last-child { border-bottom: 0; margin-bottom: 0; }
+.v-tag { font-size: 12px; font-weight: 700; margin: 0 0 8px; }
+.v-verdict { font-size: 12px; color: #555555; margin: 8px 0 0; }
+.swiped .mini-row { padding-right: 0; }
+.swipe-acts { display: flex; }
+.swipe-acts span { font-size: 11px; padding: 18px 10px; background: #dddddd; border-left: 1px solid #bbbbbb; }
+
+/* ── Пункт 3: шторка поверх плану ── */
+.wf-viewport { position: relative; }
+.veil { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: flex-end; z-index: 3; }
+dialog.sheet { position: static; margin: 0; width: 100%; max-width: none; border: 0; border-top: 1px solid #999999; padding: 20px 20px 24px; background: #ffffff; }
+dialog.sheet h2 { font-size: 16px; margin: 0 0 14px; }
+dialog.sheet label { display: block; font-size: 12px; color: #666666; margin-bottom: 4px; }
+dialog.sheet input { font: inherit; font-size: 14px; width: 100%; padding: 9px 10px; border: 1px solid #888888; background: #ffffff; margin-bottom: 10px; accent-color: #777777; }
+dialog.sheet p { font-size: 12.5px; color: #555555; margin: 0 0 14px; }
+
+.measure { max-width: 1480px; margin: 48px auto 0; background: #ffffff; border: 1px solid #999999; padding: 20px 24px; font-size: 13px; }
+.measure table { border-collapse: collapse; margin-top: 8px; }
+.measure td, .measure th { border: 1px solid #cccccc; padding: 6px 10px; text-align: left; }
+</style>
+</head>
+<body>
+
+<header class="canvas-head">
+  <h1>Дослідження: компактний План</h1>
+  <p>Полотно брейншторму 28.09.2026, не макет із набору: у папці <code>_explore/</code>, у дерево робочого простору не входить. <b>Реалізовано того ж дня</b> — <a href="../plan.html">План</a>, <a href="../plan-card.html">картка</a>, <a href="../plan-schedule.html">запланувати</a>, <a href="../plan-filter.html">фільтр</a>. Заміри внизу — з полотна; у наборі секція «не включили» стоїть на 625 px, а не 631: підпис у шапці довший.</p>
+  <p>Шість кадрів відповідають п'яти питанням: відступи (1), мініатюри (2), розгорнута картка з діями (3–4), швидкі дії на мініатюрі (5), навігація за станом (6).</p>
+</header>
+
+<main class="board">
+  <figure class="frame" id="f1">
+    <figcaption class="frame-name">1 · Було — План до 28.09.2026</figcaption>
+<iframe class="was" src="plan-before.html#embed" title="План до мініатюр"></iframe>
+    <div class="frame-notes"><p><b>Відступи зникли</b> на всіх 26 сторінках: після таб-бара шапка, секції й підвал опинились у <code>.wf-scroll</code>, а стилі чіплялись до них як до прямих нащадків <code>.wf-device</code>. Текст притиснутий до краю, заголовок — дефолтного розміру.</p>
+<p>Картки великі: «Розглянули і не включили» — на <b>1687 px</b>, це 2,5 екрана вниз.</p></div>
+  </figure>
+  <figure class="frame" id="f2">
+    <figcaption class="frame-name">2 · Мініатюри</figcaption>
+<div class="wf-phone">
+<div class="wf-phone-screen">
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true"><span>9:41</span><span class="bars"><i></i><i></i><i></i></span></div>
+  <div class="wf-browser" aria-hidden="true"><span class="urlbar">адресний рядок браузера · домен ще не обрано</span></div>
+  <div class="wf-viewport">
+<section class="wf-device" aria-label="План, мініатюри">
+  <div class="wf-scroll">
+  <header>
+    <h1>Ваш чекап</h1>
+    <p>Оновлено 23 вересня 2026 · порахований за вашими відповідями</p>
+    <div class="strip" role="group" aria-label="Показати пункти">
+      <button type="button" aria-pressed="true">Усі · 4</button>
+      <button type="button" aria-pressed="false">Зараз · 2</button>
+      <button type="button" aria-pressed="false">Пройдено · 2</button>
+    </div>
+  </header>
+  <main>
+    <section aria-labelledby="hb">
+      <h2 id="hb">Базовий шар <span class="src-inline">показано всім · ACOG, стоматологія</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у гінеколога</h3>
+            <span class="status urgent">прострочено</span>
+            <span class="meta">щороку · був до 14 червня 2026</span>
+          </summary>
+        </details>
+      </article>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у стоматолога</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">щороку · 12.03.2026 → до березня 2027</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+    <section aria-labelledby="hr">
+      <h2 id="hr">Ризик-орієнтовані <span class="src-inline">за віком і анамнезом · USPSTF</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Вимірювання тиску</h3>
+            <span class="status urgent">не вимірювали</span>
+            <span class="meta">раз на 3–5 років; з 40 — щороку</span>
+          </summary>
+        </details>
+      </article>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Цитологія з ВПЛ-тестом</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">раз на 5 років · весна 2023 → до березня 2028</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+    <section aria-labelledby="hx">
+      <details class="sect-inclusion">
+        <summary>
+          <h2 id="hx">Розглянули і не включили у ваш чекап — 3</h2>
+          <span class="hint">Мамографія, УЗД малого таза, КТ легень — чому не зараз і коли стане про вас</span>
+        </summary>
+      </details>
+    </section>
+    <section aria-labelledby="ho">
+      <h2 id="ho">Додано вами</h2>
+      <article class="mini not-ours">
+        <details>
+          <summary>
+            <h3 class="name">ТТГ</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">ваш пункт · 20.03.2026 · «раз на рік — так сказала лікарка»</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+  </main>
+  </div>
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="../plan.html" aria-current="page">План</a></li>
+      <li><a href="../summary.html">Мої відповіді</a></li>
+      <li><a href="../about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+    <div class="frame-notes"><p>Картка згорнута в два рядки: <b>що</b> і <b>коли</b>, стан праворуч. Уся картка — <code>&lt;details&gt;</code>, як уже зроблено з секцією «не включили»: розкриття живе в розмітці, без скрипта.</p>
+<p>Порядок усередині шару — від термінового: прострочено → не вимірювали → заплановано → пройдено.</p>
+<p><b>Головне:</b> «Розглянули і не включили» піднімається з 1687 px на <b>631</b> — на перший екран. Знахідка «головна робота за 2,5 екрана» закривається без зміни порядку секцій.</p></div>
+  </figure>
+  <figure class="frame" id="f3">
+    <figcaption class="frame-name">3 · Розгорнута картка</figcaption>
+<div class="wf-phone">
+<div class="wf-phone-screen">
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true"><span>9:41</span><span class="bars"><i></i><i></i><i></i></span></div>
+  <div class="wf-browser" aria-hidden="true"><span class="urlbar">адресний рядок браузера · домен ще не обрано</span></div>
+  <div class="wf-viewport">
+<section class="wf-device" aria-label="План, розгорнута картка">
+  <div class="wf-scroll">
+  <header>
+    <h1>Ваш чекап</h1>
+    <p>Оновлено 23 вересня 2026 · порахований за вашими відповідями</p>
+    <div class="strip" role="group" aria-label="Показати пункти">
+      <button type="button" aria-pressed="true">Усі · 4</button>
+      <button type="button" aria-pressed="false">Зараз · 2</button>
+      <button type="button" aria-pressed="false">Пройдено · 2</button>
+    </div>
+  </header>
+  <main>
+    <section aria-labelledby="hb">
+      <h2 id="hb">Базовий шар <span class="src-inline">показано всім · ACOG, стоматологія</span></h2>
+      <article class="mini">
+        <details open>
+          <summary>
+            <h3 class="name">Огляд у гінеколога</h3>
+            <span class="status urgent">прострочено</span>
+            <span class="meta">щороку · був до 14 червня 2026</span>
+          </summary>
+          <div class="full">
+            <p>Щорічна розмова про те, що змінилось: цикл, контрацепція, скарги. Це не те
+            саме, що скринінг — окремі обстеження призначають за потреби.</p>
+            <p class="when">Раз на рік · востаннє 14 червня 2025</p>
+            <p><span class="cost">Безкоштовно за програмою медичних гарантій</span></p>
+            <div class="basis">
+              <p>Рекомендовано всім жінкам вашого віку. Не залежить від ваших відповідей —
+              це базовий шар.</p>
+            </div>
+            <details>
+              <summary>Джерело</summary>
+              <p class="src">ACOG, Well-Woman Visit · переглянуто 2024
+              <span class="unverified">[не вивірено рецензентом]</span></p>
+            </details>
+            <div class="row actions">
+              <a class="btnlink primary" href="../mark-done.html">Позначити пройденим</a>
+              <a class="btnlink" href="#f4">Запланувати</a>
+            </div>
+          </div>
+        </details>
+      </article>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у стоматолога</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">щороку · 12.03.2026 → до березня 2027</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+    <section aria-labelledby="hr">
+      <h2 id="hr">Ризик-орієнтовані <span class="src-inline">за віком і анамнезом · USPSTF</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Вимірювання тиску</h3>
+            <span class="status urgent">не вимірювали</span>
+            <span class="meta">раз на 3–5 років; з 40 — щороку</span>
+          </summary>
+        </details>
+      </article>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Цитологія з ВПЛ-тестом</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">раз на 5 років · весна 2023 → до березня 2028</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+    <section aria-labelledby="hx">
+      <details class="sect-inclusion">
+        <summary>
+          <h2 id="hx">Розглянули і не включили у ваш чекап — 3</h2>
+          <span class="hint">Мамографія, УЗД малого таза, КТ легень — чому не зараз і коли стане про вас</span>
+        </summary>
+      </details>
+    </section>
+    <section aria-labelledby="ho">
+      <h2 id="ho">Додано вами</h2>
+      <article class="mini not-ours">
+        <details>
+          <summary>
+            <h3 class="name">ТТГ</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">ваш пункт · 20.03.2026 · «раз на рік — так сказала лікарка»</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+  </main>
+  </div>
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="../plan.html" aria-current="page">План</a></li>
+      <li><a href="../summary.html">Мої відповіді</a></li>
+      <li><a href="../about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+    <div class="frame-notes"><p>Тап розкриває картку на місці — акордеон, а не новий екран: <a href="../../sitemap.md#що-тут-стан-а-не-екран">sitemap</a> вже вирішив, що «картка пункту — розкриття всередині Плану».</p>
+<p>Дві дії внизу: <b>«Позначити пройденим»</b> веде на наявний екран; <b>«Запланувати»</b> — нова.</p>
+<p>Альтернатива — нижня шторка. Вона ховає решту плану; акордеон лишає контекст видимим.</p></div>
+  </figure>
+  <figure class="frame" id="f4">
+    <figcaption class="frame-name">4 · Запланувати</figcaption>
+<div class="wf-phone">
+<div class="wf-phone-screen">
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true"><span>9:41</span><span class="bars"><i></i><i></i><i></i></span></div>
+  <div class="wf-browser" aria-hidden="true"><span class="urlbar">адресний рядок браузера · домен ще не обрано</span></div>
+  <div class="wf-viewport">
+<section class="wf-device" aria-label="План, шторка «Запланувати»">
+  <div class="wf-scroll">
+  <header>
+    <h1>Ваш чекап</h1>
+    <p>Оновлено 23 вересня 2026 · порахований за вашими відповідями</p>
+    <div class="strip" role="group" aria-label="Показати пункти">
+      <button type="button" aria-pressed="true">Усі · 4</button>
+      <button type="button" aria-pressed="false">Зараз · 2</button>
+      <button type="button" aria-pressed="false">Пройдено · 2</button>
+    </div>
+  </header>
+  <main>
+    <section aria-labelledby="hb">
+      <h2 id="hb">Базовий шар <span class="src-inline">показано всім · ACOG, стоматологія</span></h2>
+      <article class="mini">
+        <details open>
+          <summary>
+            <h3 class="name">Огляд у гінеколога</h3>
+            <span class="status urgent">прострочено</span>
+            <span class="meta">щороку · був до 14 червня 2026</span>
+          </summary>
+          <div class="full">
+            <p>Щорічна розмова про те, що змінилось: цикл, контрацепція, скарги. Це не те
+            саме, що скринінг — окремі обстеження призначають за потреби.</p>
+            <p class="when">Раз на рік · востаннє 14 червня 2025</p>
+            <p><span class="cost">Безкоштовно за програмою медичних гарантій</span></p>
+            <div class="basis">
+              <p>Рекомендовано всім жінкам вашого віку. Не залежить від ваших відповідей —
+              це базовий шар.</p>
+            </div>
+            <details>
+              <summary>Джерело</summary>
+              <p class="src">ACOG, Well-Woman Visit · переглянуто 2024
+              <span class="unverified">[не вивірено рецензентом]</span></p>
+            </details>
+            <div class="row actions">
+              <a class="btnlink primary" href="../mark-done.html">Позначити пройденим</a>
+              <a class="btnlink" href="#f4">Запланувати</a>
+            </div>
+          </div>
+        </details>
+      </article>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у стоматолога</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">щороку · 12.03.2026 → до березня 2027</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+    <section aria-labelledby="hr">
+      <h2 id="hr">Ризик-орієнтовані <span class="src-inline">за віком і анамнезом · USPSTF</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Вимірювання тиску</h3>
+            <span class="status urgent">не вимірювали</span>
+            <span class="meta">раз на 3–5 років; з 40 — щороку</span>
+          </summary>
+        </details>
+      </article>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Цитологія з ВПЛ-тестом</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">раз на 5 років · весна 2023 → до березня 2028</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+    <section aria-labelledby="hx">
+      <details class="sect-inclusion">
+        <summary>
+          <h2 id="hx">Розглянули і не включили у ваш чекап — 3</h2>
+          <span class="hint">Мамографія, УЗД малого таза, КТ легень — чому не зараз і коли стане про вас</span>
+        </summary>
+      </details>
+    </section>
+    <section aria-labelledby="ho">
+      <h2 id="ho">Додано вами</h2>
+      <article class="mini not-ours">
+        <details>
+          <summary>
+            <h3 class="name">ТТГ</h3>
+            <span class="status">пройдено</span>
+            <span class="meta">ваш пункт · 20.03.2026 · «раз на рік — так сказала лікарка»</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+  </main>
+  </div>
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="../plan.html" aria-current="page">План</a></li>
+      <li><a href="../summary.html">Мої відповіді</a></li>
+      <li><a href="../about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+</section>
+  <div class="veil" aria-hidden="false">
+    <dialog class="sheet" open aria-labelledby="sh">
+      <h2 id="sh">Запланувати огляд у гінеколога</h2>
+      <form>
+        <label for="d1">Коли плануєте піти?</label>
+        <input type="date" id="d1" value="2026-10-15">
+        <p class="lead">Додамо подію у ваш календар — нагадає він, а не ми. Ваші дані не
+        залишають цей пристрій, тож надіслати нагадування нам нікуди.</p>
+        <div class="row">
+          <a class="btnlink primary" href="#f6">Додати в календар</a>
+          <button type="button" class="secondary">Скасувати</button>
+        </div>
+      </form>
+    </dialog>
+  </div>
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+    <div class="frame-notes"><p>Нагадування в MVP <a href="../../CLAUDE.md#ключові-рішення">немає свідомо</a>: дані лише на пристрої, слати нікуди. Але <b>файл календаря <code>.ics</code></b> генерується на клієнті й нікуди не йде — це той самий шлях, що бриф відклав на v2.</p>
+<p>Нагадує її календар, не ми, — і текст каже це прямо.</p></div>
+  </figure>
+  <figure class="frame" id="f5">
+    <figcaption class="frame-name">5 · Швидкі дії на мініатюрі — варіанти</figcaption>
+<div class="panel">
+    <section class="variant">
+      <p class="v-tag">А · Без дій — уся картка тапається</p>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у гінеколога</h3>
+            <span class="status urgent">прострочено</span>
+            <span class="meta">щороку · був до 14 червня 2026</span>
+          </summary>
+        </details>
+      </article>
+      <p class="v-verdict">Рекомендую. Картка відповідає на «що і коли», дія — на один тап глибше.</p>
+    </section>
+    <section class="variant">
+      <p class="v-tag">Б · Одна дія — лише коли пункт «горить»</p>
+      <article class="mini">
+        <div class="mini-row">
+          <div><h3 class="name">Огляд у гінеколога</h3><span class="meta">щороку · був до 14 червня 2026</span></div>
+          <a class="btnlink small" href="../mark-done.html">Позначити</a>
+        </div>
+      </article>
+      <p class="v-verdict">Можливо. «Позначити» тільки на простроченому й невідміченому; на решті — нічого.</p>
+    </section>
+    <section class="variant">
+      <p class="v-tag">В · Дві дії на кожній картці</p>
+      <article class="mini">
+        <div class="mini-row">
+          <div><h3 class="name">Огляд у гінеколога</h3><span class="meta">щороку · був до 14 червня 2026</span></div>
+        </div>
+        <div class="row pad"><a class="btnlink small" href="../mark-done.html">Позначити</a><a class="btnlink small" href="#f4">Запланувати</a></div>
+      </article>
+      <p class="v-verdict">Не рекомендую. Чотири пункти — вісім кнопок, і дії перекрикують підставу, заради якої план існує.</p>
+    </section>
+    <section class="variant">
+      <p class="v-tag">Г · Свайп відкриває дії</p>
+      <article class="mini swiped">
+        <div class="mini-row">
+          <div><h3 class="name">Огляд у гінеко…</h3><span class="meta">щороку · був до 14.06.2026</span></div>
+          <span class="swipe-acts"><span>Позначити</span><span>План</span></span>
+        </div>
+      </article>
+      <p class="v-verdict">Не рекомендую. Жест невидимий, і його не повторити без пальця — проти WCAG 2.2.</p>
+    </section>
+</div>
+    <div class="frame-notes"><p>Позначити пройденим — це не один тап: потрібна дата, можливо файл. Тож «швидка» дія все одно відкриває екран <code>mark-done</code> — економія один тап на дію, яка трапляється двічі на рік.</p></div>
+  </figure>
+  <figure class="frame" id="f6">
+    <figcaption class="frame-name">6 · Навігація за станом</figcaption>
+<div class="wf-phone">
+<div class="wf-phone-screen">
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true"><span>9:41</span><span class="bars"><i></i><i></i><i></i></span></div>
+  <div class="wf-browser" aria-hidden="true"><span class="urlbar">адресний рядок браузера · домен ще не обрано</span></div>
+  <div class="wf-viewport">
+<section class="wf-device" aria-label="План, фільтр «Заплановано»">
+  <div class="wf-scroll">
+  <header>
+    <h1>Ваш чекап</h1>
+    <p>Оновлено 23 вересня 2026 · порахований за вашими відповідями</p>
+    <div class="strip" role="group" aria-label="Показати пункти">
+      <button type="button" aria-pressed="false">Усі · 4</button>
+      <button type="button" aria-pressed="false">Зараз · 1</button>
+      <button type="button" aria-pressed="true">Заплановано · 1</button>
+      <button type="button" aria-pressed="false">Пройдено · 2</button>
+    </div>
+  </header>
+  <main>
+    <section aria-labelledby="hb">
+      <h2 id="hb">Базовий шар <span class="src-inline">показано всім · ACOG, стоматологія</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у гінеколога</h3>
+            <span class="status">заплановано</span>
+            <span class="meta">щороку · 15 жовтня 2026, у вашому календарі</span>
+          </summary>
+        </details>
+      </article>
+    </section>
+    <section aria-labelledby="hh">
+      <p class="lead">Пройдене раніше, з датами й файлами результатів —
+      <a href="../history.html">в Історії проходжень</a>.</p>
+    </section>
+  </main>
+  </div>
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="../plan.html" aria-current="page">План</a></li>
+      <li><a href="../summary.html">Мої відповіді</a></li>
+      <li><a href="../about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+</div>
+</div>
+    <div class="frame-notes"><p>«Рекомендоване», «заплановане» і «пройдене» — <b>не три сутності, а стани однієї</b>: пункту плану. Пройдений пункт не зникає — у нього просто наступна дата.</p>
+<p>Тому не новий таб, а смуга лічильників угорі — вона ж фільтр. Минуле з датами й файлами лишається в Історії.</p></div>
+  </figure>
+</main>
+
+<section class="measure" id="measure">
+  <h2>Заміри</h2>
+  <p>Той самий План тієї самої жінки, телефон 390&times;844, під контент — 670 px.</p>
+  <table>
+    <thead><tr><th>Що міряємо</th><th>Зараз</th><th>Мініатюри</th></tr></thead>
+    <tbody>
+      <tr><td>Уся сторінка Плану</td><td>3093 px — 4,6 екрана</td><td>907 px — 1,4 екрана</td></tr>
+      <tr><td>«Розглянули і не включили» — де починається</td><td>1687 px — 2,5 екрана вниз</td><td><b>631 px — на першому екрані</b></td></tr>
+      <tr><td>Висота однієї картки пункту</td><td>320–380 px</td><td>66 px</td></tr>
+      <tr><td>Скільки пунктів видно на першому екрані</td><td>1,5</td><td>4 з 4</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

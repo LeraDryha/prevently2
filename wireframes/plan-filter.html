@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вайрфрейм: План — фільтр «Заплановано»</title>
+<link rel="stylesheet" href="_wireframe.css">
+</head>
+<body id="embed">
+
+<div class="wf-meta">
+  <h1>План — фільтр «Заплановано»</h1>
+  <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
+  <a href="plan.html">базовий</a>
+  <a href="plan-card.html">картка</a>
+  <a href="plan-schedule.html">запланувати</a>
+  <span class="here" aria-current="page">фільтр</span>
+  <a href="plan-empty.html">порожній</a>
+  <a href="plan-error.html">помилка</a>
+  <a href="plan-loading.html">завантаження</a>
+  <a href="plan-alert.html">алерт</a>
+  <a href="plan-short.html">короткий</a>
+  </p>
+  <dl>
+    <dt>Файл</dt><dd><code>wireframes/plan-filter.html</code></dd>
+    <dt>Екран</dt><dd>«План» — <a href="_screens.md">_screens.md, екран 4</a>. Фільтр — стан Плану: ті самі секції, лише без пунктів, що не підходять</dd>
+    <dt>Job</dt><dd><a href="../research/jtbd.md#r4a--не-починати-шлях-спочатку">R4a</a> · <a href="../research/jtbd.md#r4b--помітити-зміну-вчасно">R4b</a> — побачити, що вже заплановано і на коли</dd>
+    <dt>Стан</dt><dd><b>Фільтр «Заплановано».</b> Одразу після «Додати в календар»: смуга отримала новий лічильник, «Зараз» зменшився на один, і План сам перемкнувся на «Заплановано», щоб показати, куди подівся пункт. Інакше у фільтрі «Зараз» він зник би з-під пальця</dd>
+    <dt>Персона</dt><dd>П1, 36 років. Огляд у гінеколога заплановано на 15 жовтня 2026 — <a href="_conventions.md#дані-персони-в-макетах">дані персони</a></dd>
+    <dt>Місце у flow</dt><dd>Успіх <code>okSched</code> у <a href="../flows.md#r4a--не-починати-шлях-спочатку">R4a</a>: «нагадає її календар, не ми»</dd>
+    <dt>Переходи</dt><dd>Сюди: «Додати в календар» у <a href="plan-schedule.html">шторці</a> або тап по «Заплановано» на смузі. Назад до всього плану — «Усі» на тій самій смузі (<a href="plan.html">базовий стан</a>). Звідси: <a href="history.html">Історія проходжень</a> і <a href="pdf.html">PDF</a> із підвалу</dd>
+    <dt>Розмітка дій</dt><dd>Лічильники — <code>&lt;button aria-pressed&gt;</code>: фільтр — дія тут-таки. Рядок «Показано 1 з 5» каже, що решта схована, а не зникла</dd>
+    <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
+    <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
+  </dl>
+</div>
+
+<div class="wf-stage">
+
+<div class="wf-phone">
+<div class="wf-phone-screen">
+
+  <div class="wf-notch" aria-hidden="true"></div>
+  <div class="wf-status" aria-hidden="true">
+    <span>9:41</span>
+    <span class="bars"><i></i><i></i><i></i></span>
+  </div>
+  <div class="wf-browser" aria-hidden="true">
+    <span class="urlbar">адресний рядок браузера · домен ще не обрано</span>
+  </div>
+  <div class="wf-viewport">
+
+<section class="wf-device" aria-label="Вайрфрейм екрана «План»">
+
+  <div class="wf-scroll">
+
+  <header>
+    <h1>Ваш чекап</h1>
+    <p>Оновлено 23 вересня 2026 · порахований за вашими відповідями</p>
+    <div class="strip" role="group" aria-label="Показати пункти за станом">
+      <button type="button" aria-pressed="false">Усі · 5</button>
+      <button type="button" aria-pressed="false">Зараз · 1</button>
+      <button type="button" aria-pressed="true">Заплановано · 1</button>
+      <button type="button" aria-pressed="false">Пройдено · 3</button>
+    </div>
+    <p class="filter-note">Показано 1 з 5. Решта пунктів і «Розглянули і не включили» — під «Усі»</p>
+  </header>
+
+  <main>
+
+    <section aria-labelledby="h-base">
+      <h2 id="h-base">Базовий шар <span class="layer-src">показано всім · ACOG, стоматологічні настанови</span></h2>
+      <article class="mini">
+        <details>
+          <summary>
+            <h3 class="name">Огляд у гінеколога</h3>
+            <span class="status">заплановано</span>
+            <span class="meta">раз на рік · 15 жовтня 2026, у вашому календарі</span>
+          </summary>
+          <div class="full">
+            <p>Щорічна розмова про те, що змінилось: цикл, контрацепція, скарги. Це не те
+            саме, що скринінг — окремі обстеження призначають за потреби.</p>
+            <p class="when">Раз на рік · востаннє 14 червня 2025 · заплановано на 15 жовтня 2026</p>
+            <p><span class="cost">Безкоштовно за програмою медичних гарантій</span></p>
+            <div class="basis">
+              <p>Рекомендовано всім жінкам вашого віку. Не залежить від ваших відповідей —
+              це базовий шар.</p>
+              <p class="conf">Доказова база: настанова професійної спільноти, не скринінгова
+              рекомендація з рівнем доказовості.</p>
+            </div>
+            <details>
+              <summary>Джерело</summary>
+              <p class="src">ACOG, Well-Woman Visit · рівень доказовості не застосовується ·
+              переглянуто 2024 <span class="unverified">[не вивірено рецензентом]</span></p>
+            </details>
+            <div class="row actions">
+              <a class="btnlink" href="mark-done.html">Позначити пройденим</a>
+              <a class="btnlink" href="plan-schedule.html">Змінити дату</a>
+            </div>
+          </div>
+        </details>
+      </article>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Prevently — інформаційно-освітній продукт, а не медичний виріб. Це не діагноз
+    і не призначення. Остаточні рішення про обстеження ухвалює лікар разом із вами.</p>
+    <div class="row">
+      <a class="btnlink" href="pdf.html">Завантажити PDF</a>
+      <a class="btnlink" href="history.html">Історія проходжень</a>
+    </div>
+  </footer>
+
+  </div>
+
+  <nav aria-label="Основна навігація">
+    <ul>
+      <li><a href="plan.html" aria-current="page">План</a></li>
+      <li><a href="summary.html">Мої відповіді</a></li>
+      <li><a href="about.html">Про підхід</a></li>
+    </ul>
+  </nav>
+
+</section>
+
+  </div>
+  <div class="wf-home" aria-hidden="true"></div>
+
+</div>
+</div>
+
+<aside class="wf-notes">
+  <h2>Що показує цей стан</h2>
+
+  <div class="wf-sticker"><b>Новий лічильник</b>
+    <span class="act">побачити, що запланованого стало одне</span>
+    <span class="why">«Заплановано · 1» з'явилось разом із першою датою — до того його не було. Нульових лічильників смуга не показує: чотири кнопки з «0» були б шумом у плані, який має бути коротким.</span></div>
+
+  <div class="wf-sticker"><b>Фільтр перемкнувся сам — один раз</b>
+    <span class="act">переконатися, що дата збереглася</span>
+    <span class="why">Це і є підтвердження: пункт видно з датою, а не в спливному повідомленні, яке зникне. Затверджено власницею 28.09.2026; чи не дезорієнтує — перевірити на коридорному тесті.</span></div>
+
+  <div class="wf-sticker"><b>Шар лишився шаром</b>
+    <span class="act">бачити, звідки пункт, навіть у фільтрі</span>
+    <span class="why">Фільтр ховає пункти, а не секції-джерела: заголовок «Базовий шар» із джерелом на місці. <a href="../CLAUDE.md#структура-плану">Шари не змішуються</a> і тут.</span></div>
+
+  <div class="wf-sticker"><b>«Показано 1 з 5»</b>
+    <span class="act">не подумати, що план зменшився</span>
+    <span class="why">Особливо важливо для «Розглянули і не включили»: у фільтрі цієї секції немає, бо в її пунктів немає стану. Рядок каже, де вона, — половина продукту не може зникнути мовчки.</span></div>
+
+  <div class="wf-sticker"><b>«Пройдено» — не Історія</b>
+    <span class="act">розрізнити «стан зараз» і «усе, що було»</span>
+    <span class="why">Фільтр «Пройдено» показує пункти плану, у яких остання відмітка ще в строку. <a href="history.html">Історія</a> — журнал усіх відміток із файлами результатів, за роками. Тому вихід в Історію — у підвалі, а не ще одним лічильником.</span></div>
+</aside>
+
+</div>
+
+</body>
+</html>

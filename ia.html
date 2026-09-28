@@ -179,7 +179,7 @@
     <span class="chip">14 сутностей</span>
     <span class="chip">8 стовпців із 13 несуть роботу</span>
     <span class="chip">1 тап до main job на поверненні</span>
-    <span class="chip">оновлено 26.09.2026</span>
+    <span class="chip">оновлено 28.09.2026</span>
   </div>
 </header>
 
@@ -448,11 +448,11 @@
 <div class="mwrap"><pre class="mermaid">flowchart TD
     start("Пройшла обстеження або змінились обставини")
     start --> plan["План"]
-    plan --> d1{"Треба позначити пройдене?"}
+    plan --> d1{"Прийшла щось зробити з пунктом?"}
     d1 -->|так| card[["Картка пункту"]]
     d1 -->|ні| summary["Підсумок відповідей"]
-    card --> mark["Позначити пройденим"]
-    mark --> d2{"Памʼятає дату проходження?"}
+    card --> d10{"Уже пройшла?"}
+    mark["Позначити пройденим"] --> d2{"Памʼятає дату проходження?"}
     d2 -->|так| sRecalc(["Стан: наступна дата перерахована від реальної"])
     d2 -->|ні| sApprox(["Стан: приблизна дата, місяць або сезон"])
     sApprox --> sRound(["Стан: консервативний перерахунок від найранішої межі"])
@@ -485,6 +485,10 @@
     d6 -->|так| okHist(("Успіх: видно, на що спиратися"))
     d6 -->|ні| sEmpty(["Empty: тут з'явиться позначене — поверніться сюди після першої відмітки в Плані"])
     sEmpty --> plan
+    d10 -->|так| mark
+    d10 -->|ні| sSheet(["Стан: шторка «Запланувати» — дата й назва події"])
+    sSheet --> sIcs(["Стан: файл .ics на пристрої, подію й нагадування веде її календар"])
+    sIcs --> okSched(("Успіх: нагадає її календар, не ми"))
 
     classDef trig fill:#f7f7f7,stroke:#888,color:#222
     classDef screen fill:#e8eefa,stroke:#3b5b8c,color:#12233d
@@ -495,11 +499,11 @@
     class start trig
     class plan,summary,mark,quiz,hist,search screen
     class card section
-    class sRecalc,sRecalc2,sMarked,sErr,sEmpty,sApprox,sRound,sUnsaved,sFile,sStates state
-    class okMark,okEdit,okPlan,okHist,okAll,okOwn,okAnswered ok
+    class sRecalc,sRecalc2,sMarked,sErr,sEmpty,sApprox,sRound,sUnsaved,sFile,sStates,sSheet,sIcs state
+    class okMark,okEdit,okPlan,okHist,okAll,okOwn,okAnswered,okSched ok
     class dead3 dead
-    linkStyle 2,6,11,16,20,25,29,32,35 stroke:#2e7d32,stroke-width:2px
-    linkStyle 3,7,12,17,21,26,30,33,36 stroke:#c62828,stroke-width:2px</pre></div>
+    linkStyle 2,6,11,16,20,25,29,32,35,38 stroke:#2e7d32,stroke-width:2px
+    linkStyle 3,7,12,17,21,26,30,33,36,39 stroke:#c62828,stroke-width:2px</pre></div>
 </div>
 <div class="flow">
 <h3 id="f-r1"><span class="fc">R1</span> Зрозуміти логіку, а не отримати відповідь</h3>
@@ -641,11 +645,11 @@
 <td class="n oc"></td>
 <td class="n oc"></td>
 </tr>
-<tr class="orow"><td><b>R4b</b> Помітити зміну вчасно</td>
+<tr class=""><td><b>R4b</b> Помітити зміну вчасно</td>
 <td class="n"></td>
 <td class="n"></td>
 <td class="n"></td>
-<td class="n"></td>
+<td class="n"><span class="tick part" title="часткове покриття">✓⚠</span></td>
 <td class="n"></td>
 <td class="n"></td>
 <td class="n"></td>
@@ -732,9 +736,9 @@
 <td class="n oc"></td>
 </tr>
 </tbody></table></div>
-  <p class="sub" style="margin-top:14px">Рожевим підсвічені <b>сироти</b>: п’ять стовпців без жодного ✓
-  і один рядок без носія. <b>8 стовпців із 13</b> несуть роботу, <b>10 рядків з 11</b> мають носія —
-  R5 перестав бути порожнім 17.09.2026, стовпець «Пошук» додано 18.09.2026, а стовпець
+  <p class="sub" style="margin-top:14px">Рожевим підсвічені <b>сироти</b>: п’ять стовпців без жодного ✓.
+  Рядків без носія більше немає. <b>8 стовпців із 13</b> несуть роботу, <b>11 рядків з 11</b> мають носія —
+  R5 перестав бути порожнім 17.09.2026, R4b — 28.09.2026, стовпець «Пошук» додано 18.09.2026, а стовпець
   «Тривожний симптом» вийшов із матриці 23.09.2026: він перестав бути екраном.</p>
   <div class="cards">
     <div class="card"><span class="lbl">Вийшов із матриці</span><p class="h">Тривожний симптом</p>
@@ -742,9 +746,10 @@
       продукт пропонує скринінг жінці з кров’янистими виділеннями в постменопаузі. Рішення власниці
       23.09.2026 зняло суперечність не тим, що знайшло job, а тим, що прибрало екран: тепер це
       алерт <b>над</b> Планом, а не крок візарда. Перевіряється запобіжником, не покриттям.</p></div>
-    <div class="card"><span class="lbl">Рядок-сирота</span><p class="h">R4b · Помітити зміну вчасно</p>
-      <p>Нагадувань у MVP немає — дані лише на пристрої, слати нікуди. Роботу виконують гугл-календар,
-      сезон і випадковий тригер, тобто не ми.</p></div>
+    <div class="card"><span class="lbl">Закрито частково 28.09.2026</span><p class="h">R4b · Помітити зміну вчасно</p>
+      <p>Власних нагадувань немає — дані лише на пристрої, слати нікуди. Але «Запланувати» кладе візит
+      у її календар файлом <code>.ics</code>, зробленим на пристрої, — туди, де Р4 і так робить відмітки.
+      Не закрито: помітити, що з віком з’явився новий пункт.</p></div>
     <div class="card"><span class="lbl">Закрито наполовину</span><p class="h">R5 · Що означають цифри</p>
       <p>«Безперервність» — усе в одному місці — виконується з 17.09.2026. «Розшифровка значень»
       не виконується й не буде: той, хто прийшов за тлумаченням, усе одно піде ні з чим, і краще,

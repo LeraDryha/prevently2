@@ -273,7 +273,7 @@ fieldset { border: 0; margin: 0 0 14px; padding: 0; }
 .warn { border: 1px solid #999999; padding: 9px 10px; font-size: 13px; margin: 0; }
 
 /* Алерт тривожного симптому: стоїть над планом і має бути важчим за нього */
-.wf-scroll > main > section.alert {
+.wf-device > main > section.alert {
   border-bottom: 3px solid #666666;
   background: #f2f2f2;
 }
@@ -285,7 +285,7 @@ fieldset { border: 0; margin: 0 0 14px; padding: 0; }
 .skeleton { display: flex; flex-direction: column; gap: 8px; }
 .skeleton .sk { display: block; height: 11px; background: #e6e6e6; }
 .skeleton .sk:first-child { height: 14px; background: #d8d8d8; }
-.sr-note { font-size: 12px; color: #777777; padding: 0 20px 20px; margin: 0; }
+.sr-note { font-size: 12px; color: #777777; padding: 0 16px 16px; margin: 0; }
 
 /* --- Документ (PDF): аркуш A4, 595×842 pt — одиниці самого PDF ---
    Не екран телефона, а друга форма Плану. Тому без корпусу й таб-бара. */
@@ -366,15 +366,11 @@ fieldset { border: 0; margin: 0 0 14px; padding: 0; }
   flex-direction: column;
 }
 
-/* --- Екран ---
-   Шапка, вміст і підвал лежать у .wf-scroll, а не прямо в .wf-device: з 23.09.2026
-   гортається тільки продукт, а таб-бар стоїть на місці. Селектори мають іти від
-   .wf-scroll — інакше відступи зникають на всіх сторінках разом (так і сталось
-   до 28.09.2026). Поле екрана — 20 px з кожного боку, ритм кратний 4. */
+/* --- Екран --- */
 
-.wf-scroll > header { padding: 20px 20px 16px; border-bottom: 1px solid #cccccc; }
-.wf-scroll > header h1 { margin: 0 0 4px; font-size: 22px; }
-.wf-scroll > header p { margin: 0; font-size: 12px; color: #666666; }
+.wf-device > header { padding: 16px; border-bottom: 1px solid #cccccc; }
+.wf-device > header h1 { margin: 0 0 4px; font-size: 19px; }
+.wf-device > header p { margin: 0; font-size: 12px; color: #666666; }
 
 /* Нижній таб-бар: прибитий до низу екрана, з-під нього гортається контент */
 .wf-device > nav {
@@ -394,9 +390,9 @@ fieldset { border: 0; margin: 0 0 14px; padding: 0; }
 .wf-device > nav li:last-child a { border-right: 0; }
 .wf-device > nav a[aria-current] { background: #e4e4e4; font-weight: 700; }
 
-.wf-scroll > main { padding: 0; }
-.wf-scroll > main > section { padding: 20px; border-bottom: 1px solid #cccccc; }
-.wf-device h2 { margin: 0 0 8px; font-size: 15px; }
+.wf-device > main { padding: 0; }
+.wf-device > main > section { padding: 16px; border-bottom: 1px solid #cccccc; }
+.wf-device h2 { margin: 0 0 6px; font-size: 15px; }
 .wf-device .lead { margin: 0 0 14px; font-size: 12px; color: #666666; }
 
 article {
@@ -430,59 +426,6 @@ details .src { font-size: 12px; color: #555555; margin: 8px 0 0; }
 
 .not-ours { border-style: dashed; }
 .not-ours .mark { font-size: 12px; color: #666666; margin: 0 0 8px; }
-
-/* --- План: мініатюри, смуга лічильників, шторка (28.09.2026) --- */
-
-/* Джерело шару — у самому заголовку секції, а не абзацом під ним:
-   шари не змішуються, і це видно навіть тоді, коли всі картки згорнуті */
-.layer-src { display: block; margin-top: 2px; font-size: 11px; font-weight: 400; color: #777777; }
-
-/* Смуга лічильників — вона ж фільтр. Нульові лічильники не показуємо;
-   коли стан у плані один, смуги немає зовсім — фільтрувати нічого */
-.strip { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.strip button { font-size: 12px; padding: 6px 8px; background: #ffffff; border: 1px solid #999999; }
-.strip button[aria-pressed="true"] { background: #333333; color: #ffffff; border-color: #333333; }
-.wf-scroll > header p.filter-note { margin-top: 8px; }
-
-/* Мініатюра пункту плану: уся картка — <details>, згорнута до «що · коли · стан».
-   Розкриття живе в розмітці, як і в секції «не включили» */
-article.mini { padding: 0; margin: 0 0 8px; background: #ffffff; }
-article.mini:last-of-type { margin-bottom: 0; }
-.mini > details { border: 0; margin: 0; padding: 0; }
-.mini > details > summary {
-  list-style: none; cursor: pointer;
-  display: grid; grid-template-columns: 1fr auto; gap: 2px 12px;
-  padding: 12px 14px; font-size: inherit; color: inherit;
-}
-.mini > details > summary::-webkit-details-marker { display: none; }
-.mini > details[open] > summary { border-bottom: 1px solid #dddddd; }
-.mini .name { grid-column: 1; margin: 0; font-size: 14px; }
-.mini .meta { grid-column: 1; font-size: 12px; color: #666666; }
-.mini .status {
-  grid-column: 2; grid-row: 1 / 3; align-self: center;
-  font-size: 11px; color: #444444; white-space: nowrap;
-  border: 1px solid #999999; padding: 3px 8px;
-}
-/* Треба зробити зараз: вага товщиною, не кольором і не словом-тривогою */
-.mini .status.due { border: 2px solid #333333; font-weight: 700; color: #222222; }
-.mini .full { padding: 12px 14px 14px; }
-.mini .full details { border-top-color: #eeeeee; }
-.actions { margin-top: 14px; }
-
-/* Шторка поверх екрана: затінення накриває і вміст, і таб-бар */
-.wf-device { position: relative; }
-.veil {
-  position: absolute; inset: 0; z-index: 3;
-  display: flex; align-items: flex-end;
-  background: rgba(0, 0, 0, .35);
-}
-dialog.sheet {
-  position: static; margin: 0; width: 100%; max-width: none;
-  border: 0; border-top: 1px solid #999999;
-  padding: 20px 20px 24px; background: #ffffff; color: #333333;
-}
-dialog.sheet h2 { font-size: 16px; margin: 0 0 16px; }
-dialog.sheet .lead { margin: 4px 0 16px; }
 
 .gate { margin: 14px 0 0; font-size: 13px; }
 .gate p { margin: 0 0 6px; }
@@ -525,5 +468,5 @@ button.secondary { background: #ffffff; }
   text-decoration: none;
 }
 
-.wf-scroll > footer { padding: 20px; background: #f7f7f7; }
-.wf-scroll > footer p { margin: 0 0 12px; font-size: 12px; color: #555555; }
+.wf-device > footer { padding: 16px; background: #f7f7f7; }
+.wf-device > footer p { margin: 0 0 12px; font-size: 12px; color: #555555; }
