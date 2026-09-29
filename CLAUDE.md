@@ -365,12 +365,16 @@ _Рішення власниці 28.09.2026: «вчасно» в задачу **
 застосунку. Опис папок і поточний стан кожної — у [README.md](README.md), він
 працює як живий індекс і оновлюється разом зі змістом.
 
-`research/` · `wireframes/` · `concept/` · `tokens/` · `components/` ·
+`research/` · `ia/` · `wireframes/` · `concept/` · `tokens/` · `components/` ·
 `design-system/` · `handoff/`
 
-У корені — живі документи: [`sitemap.md`](ia/sitemap.md), [`flows.md`](ia/flows.md),
-[`voice.md`](design-system/tone-of-voice/voice.md), [`microcopy.md`](design-system/tone-of-voice/microcopy.md), [`index.html`](index.html)
-та [`ia.html`](ia/ia.html).
+У корені — лише бриф (цей файл і покажчик [`AGENTS.md`](AGENTS.md)), [`README.md`](README.md)
+і робочий простір [`index.html`](index.html): Vercel віддає його як головну сторінку.
+Інформаційна архітектура — у [`ia/`](ia/): [`sitemap.md`](ia/sitemap.md),
+[`flows.md`](ia/flows.md), [`ia.html`](ia/ia.html). Голос і весь текст інтерфейсу — у
+[`design-system/tone-of-voice/`](design-system/tone-of-voice/): [`voice.md`](design-system/tone-of-voice/voice.md),
+[`microcopy.md`](design-system/tone-of-voice/microcopy.md). Старі адреси файлів на сайті
+ведуть на нові через [`vercel.json`](vercel.json).
 
 Стек із таблиці рішень (Next.js + TypeScript + Tailwind) стосується майбутнього
 застосунку — код з'явиться в репозиторії пізніше.

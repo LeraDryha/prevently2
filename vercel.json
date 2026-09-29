@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    { "source": "/ia.html", "destination": "/ia/ia.html", "permanent": true },
+    { "source": "/sitemap.md", "destination": "/ia/sitemap.md", "permanent": true },
+    { "source": "/flows.md", "destination": "/ia/flows.md", "permanent": true },
+    { "source": "/voice.md", "destination": "/design-system/tone-of-voice/voice.md", "permanent": true },
+    { "source": "/microcopy.md", "destination": "/design-system/tone-of-voice/microcopy.md", "permanent": true }
+  ]
+}
