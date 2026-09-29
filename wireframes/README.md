@@ -31,7 +31,7 @@
 
 ## Стан на 28.09.2026
 
-Намальовано всі 29 сторінок — усе дерево екранів sitemap зі станами з
+Намальовано всі 30 сторінок — усе дерево екранів sitemap зі станами з
 [таблиці](_screens.md#стани) і документ PDF:
 
 | Екран | Базова | Стани |
@@ -41,21 +41,23 @@
 | Підсумок відповідей | [`summary.html`](summary.html) | [`-loading`](summary-loading.html) · [`-error`](summary-error.html) |
 | План | [`plan.html`](plan.html) | [`-card`](plan-card.html) · [`-schedule`](plan-schedule.html) · [`-filter`](plan-filter.html) · [`-empty`](plan-empty.html) · [`-error`](plan-error.html) · [`-loading`](plan-loading.html) · [`-alert`](plan-alert.html) · [`-short`](plan-short.html) |
 | Пошук обстеження | [`search.html`](search.html) | [`-empty`](search-empty.html) |
-| Позначити пройденим | [`mark-done.html`](mark-done.html) | [`-error`](mark-done-error.html) |
+| Позначити пройденим | [`mark-done.html`](mark-done.html) | [`-error`](mark-done-error.html) · [`-edit`](mark-done-edit.html) |
 | Історія проходжень | [`history.html`](history.html) | [`-empty`](history-empty.html) · [`-error`](history-error.html) · [`-loading`](history-loading.html) |
 | Про підхід | [`about.html`](about.html) | станів немає |
 | Експорт / імпорт копії | [`restore.html`](restore.html) | [`-error`](restore-error.html) |
 | Почати заново | [`delete-data.html`](delete-data.html) | станів немає |
 | PDF плану | [`pdf.html`](pdf.html) — аркуші A4, не телефон | станів немає |
 
-Шість із них — стани **поза** таблицею чотирьох, і кожен існує зі своєї причини:
+Сім із них — стани **поза** таблицею чотирьох, і кожен існує зі своєї причини:
 [`plan-alert.html`](plan-alert.html) — безпекова межа, у якої немає й не буде job'а;
 [`plan-short.html`](plan-short.html) — основний випадок для
 [П3](../research/personas.md#п3--перше-коло), і свідомо **не** порожній стан;
 [`questions-resume.html`](questions-resume.html) — те, що робить автозбереження видимим;
 [`plan-card.html`](plan-card.html), [`plan-schedule.html`](plan-schedule.html) і
 [`plan-filter.html`](plan-filter.html) — те, що вона з Планом робить: розгортає пункт,
-планує візит, звужує план до одного стану (28.09.2026).
+планує візит, звужує план до одного стану (28.09.2026);
+[`mark-done-edit.html`](mark-done-edit.html) — зміна наявної відмітки: заголовок «Змінити відмітку»,
+бо так називається кнопка, з якої сюди приходять ([`voice.md`](../voice.md#заголовок-екрана), 29.09.2026).
 
 **Іменування:** `<назва>.html` для базового екрана, `<назва>-<стан>.html` для кожного
 стану, латиницею — [повний перелік файлів](_conventions.md#4--файли-й-іменування).
