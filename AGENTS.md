@@ -17,8 +17,8 @@
 | Що потрібно | Файл |
 |---|---|
 | Бриф: задача, аудиторія, ключові рішення, межі приватності, правила медичного контенту, метрики | [`CLAUDE.md`](CLAUDE.md) |
-| Сутності, дерево екранів, навігація, матриця трасування | [`sitemap.md`](sitemap.md) |
-| User flows у Mermaid | [`flows.md`](flows.md) |
+| Сутності, дерево екранів, навігація, матриця трасування | [`sitemap.md`](ia/sitemap.md) |
+| User flows у Mermaid | [`flows.md`](ia/flows.md) |
 | Люди й роботи | [`research/personas.md`](research/personas.md) · [`research/jtbd.md`](research/jtbd.md) |
 | Що і як малюємо у вайрфреймах | [`wireframes/_screens.md`](wireframes/_screens.md) · [`wireframes/_conventions.md`](wireframes/_conventions.md) |
 | Стан роботи по розділах | [`README.md`](README.md) · зібрана сторінка [`index.html`](index.html) |
