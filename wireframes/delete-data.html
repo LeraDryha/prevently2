@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вайрфрейм: Почати заново, видалити дані — підтвердження</title>
 <link rel="stylesheet" href="_wireframe.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..900&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap">
+<link rel="stylesheet" href="../concept/tokens.css">
+<link rel="stylesheet" href="_nizhna.css">
 </head>
 <body id="embed">
 
@@ -63,7 +68,7 @@
         <li><b>прикріплені файли результатів</b> — фото й PDF у твоїх відмітках</li>
         <li>твої пункти — обстеження, які ти додала до списку сама</li>
       </ul>
-      <p class="warn">Повернути це ми не зможемо: сервера з твоїми даними в нас немає.
+      <p class="warn" data-tone="warning">Повернути це ми не зможемо: сервера з твоїми даними в нас немає.
       Після видалення від них лишиться тільки файл копії, якщо ти його зберегла.</p>
     </section>
 
@@ -91,7 +96,7 @@
           for="confirm">Я розумію: відповіді, план, відмітки, прикріплені файли й мої
           пункти зникнуть із цього пристрою назавжди</label></p>
         </fieldset>
-        <button class="secondary" type="button">Видалити всі дані</button>
+        <button class="secondary" type="button" data-icon="trash-bin-minimalistic">Видалити всі дані</button>
       </form>
       <p class="lead">Після видалення відкриється перший екран — так, наче ти тут
       уперше. Якщо план знадобиться ще раз, доведеться пройти опитувальник заново —
@@ -144,7 +149,7 @@
 
   <div class="wf-sticker"><b>Скасування — вище за підтвердження</b>
     <span class="act">вийти без наслідків</span>
-    <span class="why">Sitemap називає скасування <a href="../ia/sitemap.md#глибокі-дії">дефолтним виходом</a>, тому воно стоїть першим і має власну зону з заголовком. У сірому каркасі це єдиний доступний спосіб зробити його помітнішим: різниці ваги між <code>.btnlink</code> і <code>button.secondary</code> немає.</span></div>
+    <span class="why">Sitemap називає скасування <a href="../ia/sitemap.md#глибокі-дії">дефолтним виходом</a>, тому воно стоїть першим і має власну зону з заголовком. У сірому каркасі це єдиний доступний спосіб зробити його помітнішим: різниці ваги між <code>.btnlink</code> і <code>button.secondary</code> немає. У «Ніжній» скасування — основна, рожева кнопка, а «Видалити всі дані» — нейтральна, з кошиком.</span></div>
 
   <div class="wf-sticker"><b>Чекбокс перед кнопкою</b>
     <span class="act">підтвердити окремою дією, а не одним дотиком</span>

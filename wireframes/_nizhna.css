@@ -1,10 +1,11 @@
-/* Напрям «Ніжна» поверх каркаса — для plan.html і history.html та їхніх станів
-   -empty, -error, -loading.
+/* Напрям «Ніжна» поверх каркаса — для всіх 30 сторінок wireframes/ (з 08.10.2026;
+   до того — лише План і Пройдене).
    Підключається після _wireframe.css і ../concept/tokens.css. Кожне значення — токен:
    кольори, шрифти, радіуси, відступи, тіні, лінії й іконки беруться тільки звідти.
-   Текст і розмітка сторінок — від каркаса; щоб CSS знав, яке обстеження і в якому
-   стані, мініатюра плану й картка відмітки несуть data-exam і data-state.
-   Решта макетів лишається сірою.
+   Текст і розмітка сторінок — від каркаса. Гачки для стилю — атрибути, не текст:
+   data-exam і data-state — яке обстеження і в якому стані; data-tone="warning" —
+   попередження; data-verdict — стан відповіді пошуку; data-file — прикріплений файл;
+   data-icon — іконка дії, коли вона не та, що дає адреса; клас primary — головна дія.
    Шрифти Nunito й Nunito Sans підключає сама сторінка посиланням у <head>.
    Вибір напряму — concept/concept.md → «Обрано: Ніжна», стенд — concept/concept.html. */
 
@@ -127,7 +128,7 @@
   line-height: var(--leading-small);
   color: var(--color-text-muted);
 }
-.wf-scroll > main > section > p:not(.lead) {
+.wf-scroll > main > section > p:not([class]) {
   margin: 0 0 var(--space-3);
   padding: 0 var(--space-1);
   font-size: var(--text-15);
@@ -221,7 +222,7 @@
 }
 
 /* Знак розкриття — у мініатюрі, у «не включили» і в джерелі: кругла кнопка зі стрілкою */
-.wf-device :is(.mini > details, .sect-inclusion, .full > details, .sect-inclusion article > details) > summary::after {
+.wf-device :is(.mini > details, .sect-inclusion, .full > details, main article:not(.mini) > details, main section > details:not(.sect-inclusion)) > summary::after {
   content: "";
   flex: none;
   width: var(--size-icon-lg);
@@ -287,7 +288,7 @@
    Та сама будова, що в мініатюрі плану: значок, назва, позначка «пройдено» з галочкою;
    далі — тіло на всю ширину під розділювачем, як у розгорнутій мініатюрі */
 .wf-device main article[data-exam]:not(.mini) { padding-top: var(--space-3); }
-.wf-device main article[data-exam]:not(.mini) > :is(h3, .when, .mark:first-child) {
+.wf-device main article[data-exam]:not(.mini) > :is(h3, h3 + .when, .mark:first-child) {
   margin-left: calc(var(--size-badge) + var(--space-3));
 }
 .wf-device main article[data-exam]:not(.mini) > .mark:first-child { margin-bottom: var(--space-hair); }
@@ -366,7 +367,8 @@
 }
 .wf-device .file > .file-preview { grid-row: span 3; }
 .wf-device .file-preview,
-.wf-device main article .state[data-file]::before {
+.wf-device main article .state[data-file]::before,
+.wf-device main article[data-file]::before {
   display: block;
   width: var(--size-badge);
   height: auto;
@@ -414,7 +416,7 @@
 .wf-device .file-view > p { margin: 0 0 var(--space-4); font-weight: var(--weight-bold); }
 .wf-device .file-view button.secondary[popovertargetaction="hide"]::before { content: none; }
 /* «Прикріплені файли — 2»: підпис над кількома файлами без блоку .file */
-.wf-device main article > p:not(.condition):has(> b:only-child) {
+.wf-device main article[data-exam] > p:not(.condition, .state):has(> b:only-child) {
   margin: var(--space-3) 0 var(--space-1);
   padding-top: var(--space-3);
   border-top: var(--border-hair) solid var(--color-divider);
@@ -427,8 +429,8 @@
   border-top: var(--border-hair) solid var(--color-divider);
 }
 .wf-device .full :is(.when, p:has(> .cost), .basis),
-.wf-device :is(.full, .sect-inclusion article) > details,
-.wf-device .sect-inclusion article > .condition {
+.wf-device :is(.full, main article:not(.mini)) > details,
+.wf-device main article:not(.mini) > :is(.condition, .derived) {
   position: relative;
   min-height: calc(var(--size-icon-chip) + 2 * var(--space-3));
   margin: 0;
@@ -438,10 +440,10 @@
 }
 .wf-device .full :is(.when, p:has(> .cost), .basis)::before,
 .wf-device .full :is(.when, p:has(> .cost), .basis)::after,
-.wf-device :is(.full, .sect-inclusion article) > details::before,
-.wf-device :is(.full, .sect-inclusion article) > details::after,
-.wf-device .sect-inclusion article > .condition::before,
-.wf-device .sect-inclusion article > .condition::after {
+.wf-device :is(.full, main article:not(.mini)) > details::before,
+.wf-device :is(.full, main article:not(.mini)) > details::after,
+.wf-device main article:not(.mini) > :is(.condition, .derived)::before,
+.wf-device main article:not(.mini) > :is(.condition, .derived)::after {
   content: "";
   position: absolute;
   top: var(--space-3);
@@ -450,14 +452,14 @@
   height: var(--size-icon-chip);
 }
 .wf-device .full :is(.when, p:has(> .cost), .basis)::before,
-.wf-device :is(.full, .sect-inclusion article) > details::before,
-.wf-device .sect-inclusion article > .condition::before {
+.wf-device :is(.full, main article:not(.mini)) > details::before,
+.wf-device main article:not(.mini) > :is(.condition, .derived)::before {
   border-radius: var(--radius-round);
   background: var(--badge-pink-bg);
 }
 .wf-device .full :is(.when, p:has(> .cost), .basis)::after,
-.wf-device :is(.full, .sect-inclusion article) > details::after,
-.wf-device .sect-inclusion article > .condition::after {
+.wf-device :is(.full, main article:not(.mini)) > details::after,
+.wf-device main article:not(.mini) > :is(.condition, .derived)::after {
   background: var(--color-primary);
   -webkit-mask: var(--fact-icon) center / var(--size-icon-sm) no-repeat;
   mask: var(--fact-icon) center / var(--size-icon-sm) no-repeat;
@@ -465,8 +467,9 @@
 .wf-device .full .when { --fact-icon: var(--icon-calendar); }
 .wf-device .full p:has(> .cost) { --fact-icon: var(--icon-wallet-money); }
 .wf-device .full .basis { --fact-icon: var(--icon-user-heart); }
-.wf-device :is(.full, .sect-inclusion article) > details { --fact-icon: var(--icon-document-text); }
-.wf-device .sect-inclusion article > .condition { --fact-icon: var(--icon-calendar-mark); }
+.wf-device :is(.full, main article:not(.mini)) > details { --fact-icon: var(--icon-document-text); }
+.wf-device main article:not(.mini) > .condition { --fact-icon: var(--icon-calendar-mark); }
+.wf-device main article:not(.mini) > .derived { --fact-icon: var(--icon-clipboard-list); }
 
 .wf-device .full .cost {
   display: inline;
@@ -486,7 +489,7 @@
 }
 
 /* Джерело: розкривається на місці; «не вивірено» — пунктирна мітка */
-.wf-device :is(.full, .sect-inclusion article) > details > summary {
+.wf-device :is(.full, main article:not(.mini)) > details > summary {
   display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
   min-height: var(--size-tap);
   margin-top: calc((var(--size-icon-chip) - var(--size-tap)) / 2);
@@ -494,7 +497,7 @@
   font: var(--weight-bold) var(--text-15)/var(--leading-snug) var(--font-text);
   list-style: none;
 }
-.wf-device :is(.full, .sect-inclusion article) > details > summary::-webkit-details-marker { display: none; }
+.wf-device :is(.full, main article:not(.mini)) > details > summary::-webkit-details-marker { display: none; }
 .wf-device details .src {
   margin: var(--space-1) 0 0;
   font-size: var(--text-14);
@@ -562,7 +565,7 @@
 .wf-device .full :is(.when, p:has(> .cost)) > b:first-child,
 .wf-device .basis > p:first-child > b:first-child,
 .wf-device .file > b,
-.wf-device main article > p:not(.condition) > b:only-child {
+.wf-device main article[data-exam] > p:not(.condition, .state) > b:only-child {
   display: block;
   margin-bottom: var(--space-1);
   font: var(--weight-bold) var(--text-12)/var(--leading-snug) var(--font-display);
@@ -584,8 +587,10 @@
 }
 
 /* Кнопка дії. Іконку дає місце, куди вона веде: одна адреса — одна іконка.
-   Кнопка дії на місці (button.secondary — «Відкрити файл») виглядає як другорядна */
-.wf-device :is(.btnlink, button.secondary) {
+   Де дія інша, ніж адреса («Назад» і «Скасувати» ведуть туди ж, куди й інші), —
+   data-icon на самій кнопці; data-icon="none" — без іконки.
+   Кнопка дії на місці (<button> — «Відкрити файл», «Зберегти копію») виглядає так само */
+.wf-device :is(.btnlink, main button) {
   display: inline-flex; align-items: center; gap: var(--space-2);
   min-height: var(--size-tap);
   padding: var(--space-2) var(--space-4);
@@ -599,9 +604,9 @@
   cursor: pointer;
   transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
-.wf-device :is(.btnlink, button.secondary):hover { background: var(--color-primary-soft); }
-.wf-device :is(.btnlink, button.secondary):active { background: var(--color-primary-soft-pressed); }
-.wf-device :is(.btnlink, button.secondary)::before {
+.wf-device :is(.btnlink, main button):hover { background: var(--color-primary-soft); }
+.wf-device :is(.btnlink, main button):active { background: var(--color-primary-soft-pressed); }
+.wf-device :is(.btnlink, main button)::before {
   content: "";
   flex: none;
   width: var(--size-icon-sm);
@@ -612,7 +617,9 @@
 }
 .wf-device .btnlink:not([href="mark-done.html"], [href="mark-done-edit.html"], [href="plan-schedule.html"],
   [href="search.html"], [href="pdf.html"], [href="history.html"], [href="plan.html"],
-  [href="restore.html"], [href="questions.html"])::before { content: none; }
+  [href="restore.html"], [href="questions.html"], [href="summary.html"], [href="about.html"],
+  [href="delete-data.html"], [href="plan-filter.html"], [data-icon])::before { content: none; }
+.wf-device main button:not([popovertarget], [data-icon])::before { content: none; }
 .wf-device .btnlink[href="mark-done.html"]      { --btn-icon: var(--icon-check-square); }
 .wf-device .btnlink[href="mark-done-edit.html"] { --btn-icon: var(--icon-pen); }
 .wf-device .btnlink[href="plan-schedule.html"]  { --btn-icon: var(--icon-calendar-add); }
@@ -622,20 +629,39 @@
 .wf-device .btnlink[href="plan.html"]           { --btn-icon: var(--icon-clipboard-list); }
 .wf-device .btnlink[href="restore.html"]        { --btn-icon: var(--icon-folder-open); }
 .wf-device .btnlink[href="questions.html"]      { --btn-icon: var(--icon-notebook-minimalistic); }
-.wf-device button.secondary                     { --btn-icon: var(--icon-document-text); }
+.wf-device .btnlink[href="summary.html"]        { --btn-icon: var(--icon-notebook-minimalistic); }
+.wf-device .btnlink[href="about.html"]          { --btn-icon: var(--icon-info-circle); }
+.wf-device .btnlink[href="delete-data.html"]    { --btn-icon: var(--icon-trash-bin-minimalistic); }
+.wf-device .btnlink[href="plan-filter.html"]    { --btn-icon: var(--icon-calendar-add); }
+.wf-device button[popovertarget]                { --btn-icon: var(--icon-document-text); }
+.wf-device :is(.btnlink, button)[data-icon="arrow-left"]             { --btn-icon: var(--icon-arrow-left); }
+.wf-device :is(.btnlink, button)[data-icon="arrow-right"]            { --btn-icon: var(--icon-arrow-right); }
+.wf-device :is(.btnlink, button)[data-icon="check-square"]           { --btn-icon: var(--icon-check-square); }
+.wf-device :is(.btnlink, button)[data-icon="pen"]                    { --btn-icon: var(--icon-pen); }
+.wf-device :is(.btnlink, button)[data-icon="restart"]                { --btn-icon: var(--icon-restart); }
+.wf-device :is(.btnlink, button)[data-icon="magnifer"]               { --btn-icon: var(--icon-magnifer); }
+.wf-device :is(.btnlink, button)[data-icon="clipboard-add"]          { --btn-icon: var(--icon-clipboard-add); }
+.wf-device :is(.btnlink, button)[data-icon="download-minimalistic"]  { --btn-icon: var(--icon-download-minimalistic); }
+.wf-device :is(.btnlink, button)[data-icon="upload-minimalistic"]    { --btn-icon: var(--icon-upload-minimalistic); }
+.wf-device :is(.btnlink, button)[data-icon="trash-bin-minimalistic"] { --btn-icon: var(--icon-trash-bin-minimalistic); }
+.wf-device :is(.btnlink, button)[data-icon="none"]::before           { content: none; }
 /* «Спробувати ще раз» — перший крок на екрані помилки, куди б він не вів */
 .wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink { --btn-icon: var(--icon-restart); }
 
-/* Основна — головна дія картки: позначити пройденим, спробувати ще раз */
+/* Основна — головна дія екрана чи картки: позначити пройденим, спробувати ще раз,
+   далі, зберегти. Одна на картку чи на екран; у розмітці — клас primary */
 .wf-device .btnlink[href="mark-done.html"],
+.wf-device :is(.btnlink, main button).primary,
 .wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink {
   background: var(--color-primary-strong);
   border-color: var(--color-primary-strong);
   color: var(--color-on-primary);
 }
 .wf-device .btnlink[href="mark-done.html"]:hover,
+.wf-device :is(.btnlink, main button).primary:hover,
 .wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink:hover { background: var(--color-primary-strong); box-shadow: var(--shadow-raised); }
 .wf-device .btnlink[href="mark-done.html"]:active,
+.wf-device :is(.btnlink, main button).primary:active,
 .wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink:active {
   background: var(--color-primary-pressed);
   border-color: var(--color-primary-pressed);
@@ -763,6 +789,472 @@
   mask: var(--icon-hourglass) center / contain no-repeat;
 }
 .wf-device .sr-note::before { margin-top: var(--space-hair); }
+/* У секції (Мої відповіді — рахуємо план) — під карткою, на відступі тексту секції */
+.wf-scroll > main > section > .sr-note { padding: 0 var(--space-1); }
+
+/* ── Знак продукту: Вхід і PDF ───────────────────────────────────
+   Місце під лого — не сіра плашка, а пастельне коло з іконкою, як значок обстеження.
+   Слово «лого» лишається в розмітці, але не видне */
+
+.wf-scroll > header:has(.logo-slot) { padding-top: var(--space-8); }
+.wf-device .logo-slot,
+.wf-doc .logo-slot {
+  position: relative;
+  display: block;
+  width: var(--size-badge);
+  height: var(--size-badge);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-round);
+  background: var(--badge-pink-bg);
+  text-indent: 100%;
+  white-space: nowrap;
+  color: transparent;
+}
+.wf-device .logo-slot::after,
+.wf-doc .logo-slot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  -webkit-mask: var(--icon-hand-heart) center / var(--size-icon-badge) no-repeat;
+  mask: var(--icon-hand-heart) center / var(--size-icon-badge) no-repeat;
+}
+
+/* ── Питання: крок, прогрес, лічильник ───────────────────────────
+   Головне на екрані — саме питання, тому «Питання 7 з 19» дрібніше за нього */
+
+.wf-device .step {
+  margin: 0 0 var(--space-2);
+  font: var(--weight-bold) var(--text-13)/var(--leading-snug) var(--font-text);
+  color: var(--color-text-muted);
+}
+.wf-device .progress {
+  height: var(--space-2);
+  margin: 0 0 var(--space-4);
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft-pressed);
+}
+.wf-device .progress span { border-radius: inherit; background: var(--color-primary-strong); }
+.wf-scroll > main > section > .progress { margin: var(--space-1) var(--space-1) var(--space-4); }
+.wf-scroll > header:has(.progress) h1 {
+  margin: 0;
+  font: var(--weight-heavy) var(--text-17)/var(--leading-snug) var(--font-display);
+}
+.wf-device [aria-labelledby="h-q"] > h2 {
+  margin-bottom: var(--space-2);
+  font-size: var(--text-28);
+  line-height: var(--leading-tight);
+}
+
+/* ── Поля форм ───────────────────────────────────────────────── */
+
+.wf-device fieldset { margin: 0 0 var(--space-4); }
+.wf-device :is(.sr-legend, label) {
+  display: block;
+  margin: 0 0 var(--space-2);
+  padding: 0 var(--space-1);
+  font: var(--weight-bold) var(--text-13)/var(--leading-snug) var(--font-text);
+  color: var(--color-text-muted);
+}
+
+/* Варіант відповіді: уся картка — ціль дотику, вибраний — рожевий */
+.wf-device .opt:has(> input:is([type="radio"], [type="checkbox"])) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: calc(var(--size-tap) + var(--space-3));
+  margin: 0 0 var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-strong) solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  transition: background-color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+.wf-device .opt > input:is([type="radio"], [type="checkbox"]) {
+  flex: none;
+  width: var(--size-icon);
+  height: var(--size-icon);
+  margin: 0;
+  accent-color: var(--color-primary-strong);
+}
+.wf-device .opt > input:is([type="radio"], [type="checkbox"]) + label {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  font: var(--weight-semibold) var(--text-15)/var(--leading-snug) var(--font-text);
+  color: var(--color-text);
+  cursor: pointer;
+}
+.wf-device .opt > input:is([type="radio"], [type="checkbox"]) + label::after { content: ""; position: absolute; inset: 0; }
+.wf-device .opt:has(> input:checked) { border-color: var(--color-primary-strong); background: var(--color-primary-soft); }
+.wf-device .opt:has(> input:focus-visible) { outline: var(--border-focus) solid var(--color-focus); outline-offset: var(--border-focus); }
+
+/* Поле, що стоїть у варіанті-обгортці (дата, місяць, пора року, файл), — просто поле */
+.wf-device .opt:not(:has(> input:is([type="radio"], [type="checkbox"]))) {
+  position: relative;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  border: 0;
+  font-size: var(--text-15);
+}
+
+.wf-device :is(input[type="text"], input[type="search"], input[type="date"], input[type="month"], select, textarea) {
+  min-height: calc(var(--size-tap) + var(--space-1));
+  margin: 0 0 var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-strong) solid var(--color-border-input);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font: var(--weight-regular) var(--text-15)/var(--leading-snug) var(--font-text);
+  accent-color: var(--color-primary-strong);
+}
+.wf-device .opt > :is(input, select):last-child { margin-bottom: 0; }
+.wf-device :is(input, select, textarea):focus-visible {
+  border-color: var(--color-primary-strong);
+  outline: var(--border-focus) solid var(--color-focus);
+  outline-offset: var(--border-focus);
+}
+/* Стрілка списку — та сама кругла, що розкриває картку */
+.wf-device select { padding-right: calc(var(--space-4) + var(--size-icon-lg) + var(--space-2)); background-image: none; }
+.wf-device .opt:has(> select)::after {
+  content: "";
+  position: absolute;
+  right: var(--space-3);
+  bottom: calc((var(--size-tap) + var(--space-1) - var(--size-icon-lg)) / 2);
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  background: var(--color-text-muted);
+  -webkit-mask: var(--icon-round-alt-arrow-down) center / contain no-repeat;
+  mask: var(--icon-round-alt-arrow-down) center / contain no-repeat;
+  pointer-events: none;
+}
+/* Вибір файлу: пунктирне поле, кнопка всередині — як другорядна */
+.wf-device input[type="file"] {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-2);
+  border: var(--border-strong) dashed var(--color-border-input);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font: var(--weight-regular) var(--text-14)/var(--leading-snug) var(--font-text);
+}
+.wf-device input[type="file"]::file-selector-button {
+  min-height: var(--size-tap);
+  margin-right: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-strong) solid var(--color-primary-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-primary-text);
+  font: var(--weight-bold) var(--text-15)/var(--leading-tight) var(--font-text);
+  cursor: pointer;
+}
+.wf-device form > p:has(> :is(label, input[type="file"])) { margin: 0; }
+
+/* Пошук: поле й кнопка в один ряд, кнопка одного зросту з полем */
+.wf-device form[role="search"] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--space-2);
+  align-items: center;
+}
+.wf-device form[role="search"] label { grid-column: 1 / -1; }
+.wf-device form[role="search"] input { margin: 0; }
+.wf-device form[role="search"] button { min-height: calc(var(--size-tap) + var(--space-1)); }
+
+/* Назад · Далі, Зберегти · Скасувати: головна дія забирає решту рядка */
+.wf-device .qnav { flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+.wf-device .qnav > .primary { flex: 1 1 auto; justify-content: center; }
+/* «Далі» — іконка після слова: стрілка показує, куди йдемо */
+.wf-device [data-icon="arrow-right"]::before { order: 1; }
+.wf-scroll > main > section > :is(.row, .qnav) { margin-left: var(--space-1); margin-right: var(--space-1); }
+.wf-device main :is(.btnlink, button) { white-space: normal; text-align: left; }
+/* Кнопки форми — кожна своїм рядком, як і в картці */
+.wf-device main form:not([role="search"]) > :is(.btnlink, button) { display: flex; width: fit-content; }
+.wf-device main form:not([role="search"]) > :is(.btnlink, button) + :is(.btnlink, button) { margin-top: var(--space-2); }
+/* Що йде в секції після картки, форми чи кнопки, — з відступом, а не впритул */
+.wf-scroll > main > section > :is(article, form, .btnlink, button, .row, .qnav) + :is(p, .btnlink) { margin-top: var(--space-4); }
+.wf-device :is(.row, .qnav) > :is(.btnlink, button) { white-space: nowrap; }
+
+/* Дія, що стирає її дані (файл, усі дані), — нейтральна: темний текст і кошик,
+   без бренду й без червоного. Червоний носить лише тривожний симптом */
+.wf-device :is(.btnlink[href="delete-data.html"], button[data-icon="trash-bin-minimalistic"]) {
+  border-color: var(--color-border-input);
+  color: var(--color-text);
+}
+.wf-device :is(.btnlink[href="delete-data.html"], button[data-icon="trash-bin-minimalistic"]):hover { background: var(--color-surface-soft); }
+
+/* ── Підказка й попередження ─────────────────────────────────────
+   Підказка — сірий значок «і». Попередження (data-tone="warning") — помаранчевий,
+   колір «треба дії», як «прострочено». Помилка, що не загрожує її даним, — підказка */
+
+.wf-device .warn {
+  position: relative;
+  min-height: calc(var(--size-icon-chip) + 2 * var(--space-4));
+  margin: 0 0 var(--space-3);
+  padding: var(--space-4) var(--space-4) var(--space-4) calc(var(--space-4) + var(--size-icon-chip) + var(--space-3));
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text);
+}
+.wf-device .warn::before,
+.wf-device .warn::after {
+  content: "";
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  width: var(--size-icon-chip);
+  height: var(--size-icon-chip);
+}
+.wf-device .warn::before { border-radius: var(--radius-round); background: var(--warn-bg, var(--badge-grey-bg)); }
+.wf-device .warn::after {
+  background: var(--warn-fg, var(--color-text-muted));
+  -webkit-mask: var(--warn-icon, var(--icon-info-circle)) center / var(--size-icon-sm) no-repeat;
+  mask: var(--warn-icon, var(--icon-info-circle)) center / var(--size-icon-sm) no-repeat;
+}
+.wf-device .warn[data-tone="warning"] { --warn-bg: var(--color-overdue-bg); --warn-fg: var(--color-overdue); --warn-icon: var(--icon-danger-circle); }
+/* У картці — рядком під лінією, без власної картки */
+.wf-device main article .warn {
+  min-height: calc(var(--size-icon-chip) + 2 * var(--space-3));
+  margin: 0;
+  padding: var(--space-3) 0 0 calc(var(--size-icon-chip) + var(--space-3));
+  border-top: var(--border-hair) solid var(--color-divider);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.wf-device main article .warn::before,
+.wf-device main article .warn::after { top: var(--space-3); left: 0; }
+
+/* Обіцянка «тільки на цьому пристрої»: стоїть на кожному кроці опитувальника */
+.wf-scroll :is(main > section, footer) > p.local {
+  display: grid;
+  grid-template-columns: var(--size-icon-sm) minmax(0, 1fr);
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding: 0 var(--space-1);
+  border: 0;
+  font-size: var(--text-13);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+.wf-scroll > footer > p.local { padding: 0; }
+.wf-scroll :is(main > section, footer) > p.local::before {
+  content: "";
+  height: var(--size-icon-sm);
+  background: var(--color-primary);
+  -webkit-mask: var(--icon-shield-check) center / contain no-repeat;
+  mask: var(--icon-shield-check) center / contain no-repeat;
+}
+
+/* Перелік у секції: «що потрапляє в копію», «що зникне» */
+.wf-scroll > main > section > ul {
+  margin: 0 0 var(--space-4);
+  padding: 0 var(--space-1) 0 var(--space-6);
+  font-size: var(--text-15);
+  line-height: var(--leading-body);
+}
+.wf-scroll > main > section > ul li { margin-bottom: var(--space-1); }
+.wf-scroll > main > section > ul li::marker { color: var(--color-primary); }
+
+/* Посилання в тексті */
+.wf-device main p a { font-weight: var(--weight-bold); text-underline-offset: var(--underline-offset); }
+
+/* ── Розкривний блок і пояснення просто в секції ─────────────────
+   «Як ми рахуємо від приблизної дати», «Політика приватності»: картка, що розкривається */
+
+.wf-device main section > details:not(.sect-inclusion) {
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.wf-device main section > details:not(.sect-inclusion) > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  min-height: var(--size-tap);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  font: var(--weight-bold) var(--text-15)/var(--leading-snug) var(--font-text);
+  list-style: none;
+  cursor: pointer;
+}
+.wf-device main section > details:not(.sect-inclusion) > summary::-webkit-details-marker { display: none; }
+.wf-device main section > details:not(.sect-inclusion) > .src { margin: 0; padding: 0 var(--space-4) var(--space-4); }
+.wf-scroll > main > section > .basis {
+  margin: 0 0 var(--space-3);
+  padding: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.wf-scroll > main > section > .basis > p:first-child { margin: 0; font-size: var(--text-15); line-height: var(--leading-body); }
+/* Пояснення в картці (Про підхід): примітка під лінією */
+.wf-device main article > .basis { margin: var(--space-3) 0 0; padding: 0; border: 0; }
+.wf-device main article > .basis > .conf:first-child { margin-top: 0; }
+
+/* ── Мої відповіді: питання, відповідь, що вона дала в плані ─────
+   Відповідь — її дані, тому підкреслена кольором; «Дало у плані» — рядок факту */
+
+.wf-device .answer {
+  display: inline-block;
+  margin: var(--space-1) 0 var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-text);
+  font: var(--weight-bold) var(--text-15)/var(--leading-snug) var(--font-text);
+}
+.wf-device main article > .answer + .btnlink { margin-top: 0; }
+.wf-device main article > .derived {
+  margin: 0;
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text);
+}
+
+/* ── Пошук: стан відповіді ───────────────────────────────────────
+   Три стани не змішуються: «розглянули і не включили» — рожевий значок переліку,
+   «не оцінюємо» — сірий, без кольору: вердикту немає */
+
+.wf-device .verdict {
+  position: relative;
+  min-height: var(--size-icon-chip);
+  margin: 0 0 var(--space-3);
+  padding: var(--space-1) 0 0 calc(var(--size-icon-chip) + var(--space-3));
+  font: var(--weight-heavy) var(--text-17)/var(--leading-snug) var(--font-display);
+  color: var(--color-text);
+}
+.wf-device .verdict::before,
+.wf-device .verdict::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--size-icon-chip);
+  height: var(--size-icon-chip);
+}
+.wf-device .verdict::before { border-radius: var(--radius-round); background: var(--verdict-bg); }
+.wf-device .verdict::after {
+  background: var(--verdict-fg);
+  -webkit-mask: var(--verdict-icon) center / var(--size-icon-sm) no-repeat;
+  mask: var(--verdict-icon) center / var(--size-icon-sm) no-repeat;
+}
+.wf-device [data-verdict="excluded"]     { --verdict-bg: var(--badge-pink-bg); --verdict-fg: var(--color-primary);    --verdict-icon: var(--icon-checklist-minimalistic); }
+.wf-device [data-verdict="not-assessed"] { --verdict-bg: var(--badge-grey-bg); --verdict-fg: var(--color-text-muted); --verdict-icon: var(--icon-minus-circle); }
+
+/* ── Алерт тривожного симптому ───────────────────────────────────
+   Єдине місце продукту, де живе червоний, і єдине з насиченою смугою: вона
+   важча за будь-що в плані під нею. Текст під смугою — на білому, звичайним кольором */
+
+.wf-scroll > main > section.alert {
+  margin: var(--space-4) var(--space-4) 0;
+  padding: 0 var(--space-4) var(--space-4);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.wf-device .alert h2 {
+  position: relative;
+  margin: 0 calc(-1 * var(--space-4)) var(--space-4);
+  padding: var(--space-4) var(--space-4) var(--space-4) calc(var(--space-4) + var(--size-icon-lg) + var(--space-3));
+  background: var(--color-error);
+  color: var(--color-on-primary);
+  font: var(--weight-heavy) var(--text-20)/var(--leading-snug) var(--font-display);
+}
+.wf-device .alert h2::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-4) + (var(--text-20) * var(--leading-snug) - var(--size-icon-lg)) / 2);
+  left: var(--space-4);
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  background: currentColor;
+  -webkit-mask: var(--icon-danger-triangle) center / contain no-repeat;
+  mask: var(--icon-danger-triangle) center / contain no-repeat;
+}
+.wf-device .alert p {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-15);
+  line-height: var(--leading-body);
+  color: var(--color-text);
+}
+.wf-device .alert p:last-child { margin-bottom: 0; }
+
+/* ── Шторка «Запланувати» ────────────────────────────────────────
+   Знизу екрана, з ручкою, як аркуш у застосунку; затінення — те саме, що під вікном файлу */
+
+.wf-device .veil { background: var(--color-scrim); }
+.wf-device dialog.sheet {
+  padding: var(--space-3) var(--space-5) var(--space-6);
+  border: 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-text);
+  font: var(--weight-regular) var(--text-15)/var(--leading-body) var(--font-text);
+}
+.wf-device dialog.sheet::before {
+  content: "";
+  display: block;
+  width: var(--space-10);
+  height: var(--space-1);
+  margin: 0 auto var(--space-4);
+  border-radius: var(--radius-pill);
+  background: var(--color-border);
+}
+.wf-device dialog.sheet h2 { margin: 0 0 var(--space-4); padding: 0; }
+.wf-device dialog.sheet :is(.lead, label) { padding: 0; }
+.wf-device dialog.sheet .lead { margin: 0 0 var(--space-4); }
+.wf-device dialog.sheet input { margin-bottom: var(--space-4); }
+
+/* ── Картка обстеження поза Планом і Пройденим ───────────────────
+   «Що позначаємо», «з 21 року — цитологія»: назва поруч зі значком, опис — під ними */
+
+.wf-device main article[data-exam]:not(.mini) > h3:not(:has(+ .when)) {
+  display: flex;
+  align-items: center;
+  min-height: var(--size-badge);
+  margin-bottom: var(--space-3);
+}
+
+/* Файл, вибраний для відмітки: мініатюра аркуша зліва, як у Пройденому */
+.wf-device main article[data-file] { padding-left: calc(var(--space-4) + var(--size-badge) + var(--space-3)); }
+.wf-device main article[data-file]::before {
+  content: "";
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+}
+.wf-device main article[data-file] > h3 {
+  font: var(--weight-bold) var(--text-15)/var(--leading-snug) var(--font-text);
+  overflow-wrap: anywhere;
+}
+.wf-device main article[data-file] > p {
+  margin-bottom: var(--space-2);
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+
+/* Перший пункт, що з'явиться з віком (короткий план): значок обстеження без стану */
+.wf-device [aria-labelledby="h-when"] article[data-exam] > p:not([class]) { margin-bottom: var(--space-3); }
 
 /* ── Підвал і нижнє меню ─────────────────────────────────────── */
 
@@ -809,10 +1301,41 @@
   font-weight: var(--weight-heavy);
 }
 
+/* ── PDF плану: аркуш для лікаря ─────────────────────────────────
+   Друга форма Плану, тож той самий знак, шрифти й лінії. Але це папір: білий аркуш
+   без градієнта, колір — лише в заголовках і шапці таблиць, щоб вийшло й на ч/б
+   принтері. Розміри тексту — пункти самого PDF із каркаса, їх не чіпаємо */
+
+.wf-page {
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+  color: var(--color-text);
+  font-family: var(--font-text);
+}
+.wf-doc .doc-head { border-bottom: var(--border-strong) solid var(--color-primary-border); }
+.wf-doc .logo-slot { width: var(--size-icon-chip); height: var(--size-icon-chip); margin-bottom: var(--space-2); }
+.wf-doc .logo-slot::after { -webkit-mask-size: var(--size-icon-sm); mask-size: var(--size-icon-sm); }
+.wf-doc :is(h1, h2) { font-family: var(--font-display); font-weight: var(--weight-heavy); color: var(--color-text); }
+.wf-doc :is(.doc-sub, .doc-note, .doc-facts dt, .doc-table caption, .doc-foot) { color: var(--color-text-muted); }
+.wf-doc .doc-table :is(th, td) { border-color: var(--color-divider); }
+.wf-doc .doc-table thead th {
+  background: var(--color-primary-soft);
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-weight: var(--weight-heavy);
+}
+.wf-doc .doc-table.not-ours { border: 0; }
+.wf-doc .doc-table.not-ours :is(th, td) { border-color: var(--color-border-dashed); }
+.wf-doc .doc-table.not-ours thead th { background: var(--badge-grey-bg); }
+.wf-doc .doc-foot { border-top-color: var(--color-divider); }
+
 @media (prefers-reduced-motion: reduce) {
   .wf-device details::details-content,
   .wf-device summary::after,
-  .wf-device :is(.btnlink, button.secondary),
-  .wf-device .strip button { transition: none; }
+  .wf-device :is(.btnlink, main button),
+  .wf-device .strip button,
+  .wf-device .opt { transition: none; }
   .wf-device .skeleton .sk { animation: none; }
 }

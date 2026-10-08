@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вайрфрейм: Позначити пройденим — зміна відмітки</title>
 <link rel="stylesheet" href="_wireframe.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..900&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap">
+<link rel="stylesheet" href="../concept/tokens.css">
+<link rel="stylesheet" href="_nizhna.css">
 </head>
 <body id="embed">
 
@@ -60,7 +65,7 @@
     <section aria-labelledby="h-what">
       <h2 id="h-what">Що позначаємо</h2>
 
-      <article>
+      <article data-exam="gyn" data-state="overdue">
         <h3>Огляд у гінеколога</h3>
         <p>Розмова раз на рік про те, що змінилось: цикл, контрацепція, скарги. Це не те
         саме, що скринінг — окремі обстеження призначають за потреби. Це розмова, а не
@@ -141,13 +146,18 @@
       <p class="opt"><label for="f">Вибрати файл — PDF або фото</label>
         <input type="file" id="f" name="f" form="mark-form" accept=".pdf,image/*"></p>
 
-      <article>
+      <article data-file="pdf">
         <h3>висновок-огляд-2025-06.pdf</h3>
         <p>210 КБ · додано 15 червня 2025 · лежить на цьому пристрої</p>
         <p>Якщо видалиш файл, він зникне з цього пристрою, і повернути його можна буде
         лише з копії.</p>
-        <button type="button">Відкрити файл</button>
-        <button type="button" class="secondary">Видалити файл</button>
+        <button type="button" class="secondary" popovertarget="file-edit">Відкрити файл</button>
+        <div popover id="file-edit" class="file-view">
+          <span class="file-preview">прев’ю файлу</span>
+          <p>висновок-огляд-2025-06.pdf</p>
+          <button type="button" class="secondary" popovertarget="file-edit" popovertargetaction="hide">Закрити</button>
+        </div>
+        <button type="button" class="secondary" data-icon="trash-bin-minimalistic">Видалити файл</button>
       </article>
 
       <p class="warn">Файл лишається тільки на цьому пристрої. Ми його <b>не розшифровуємо</b>: не
@@ -161,8 +171,8 @@
       <p class="lead">Відмітку в Пройденому буде змінено, а план перерахується від указаної
       дати.</p>
       <div class="qnav">
-        <a class="btnlink" href="plan.html">Зберегти відмітку</a>
-        <a class="btnlink" href="plan.html">Скасувати</a>
+        <a class="btnlink primary" href="plan.html" data-icon="check-square">Зберегти відмітку</a>
+        <a class="btnlink" href="plan.html" data-icon="none">Скасувати</a>
       </div>
     </section>
 

@@ -81,11 +81,11 @@ Primary — «Перевіряльниця»: 40,5% жінок з України
 Чому саме так — [`concept.md`](concept/concept.md), як виглядає — стенд
 [`concept.html`](concept/concept.html).
 
-- **Значення живуть в одному місці** — [`tokens.css`](concept/tokens.css). Контраст 35 пар
+- **Значення живуть в одному місці** — [`tokens.css`](concept/tokens.css). Контраст 41 пари
   «текст / фон» рахує [`contrast.py`](concept/contrast.py), іконки в токени пише
-  [`icons.py`](concept/icons.py).
-- **У кольорі вже План і Пройдене** з усіма станами — шар
-  [`_nizhna.css`](wireframes/_nizhna.css) поверх сірого каркаса. Решта макетів сіра.
+  [`icons.py`](concept/icons.py), стенд збирає [`stand.py`](concept/stand.py).
+- **У кольорі всі 30 макетів** разом із PDF — шар [`_nizhna.css`](wireframes/_nizhna.css)
+  поверх сірого каркаса.
 - **Колір — для стану:** червоний лише в алерті тривожного симптому, помаранчевий — у
   «прострочено» й попередженнях, помилка без загрози даним — нейтральна.
 - **08.10.2026** сторінки звірено з `concept.md` і проведено аудит доступності: 31 проблему
@@ -102,7 +102,7 @@ Primary — «Перевіряльниця»: 40,5% жінок з України
 | [`ia/sitemap.md`](ia/sitemap.md) | Інформаційна архітектура: 14 сутностей продукту з job'ом на кожну, дерево з 8 екранів, навігаційна модель із підрахунком тапів до main job, матриця трасування job×екран із підсвіченими сиротами | 🟢 готово |
 | [`ia/flows.md`](ia/flows.md) | Чотири user flow у Mermaid — MAIN, E1, R4a, R1. Не лише happy-path: empty, loading, error окремими вузлами, обидва кінці — успіх і тупики | 🟢 готово |
 | [`ia/ia.html`](ia/ia.html) | Та сама ІА сторінкою: дерево з job'ами, діаграми, матриця. Розділ «Інформаційна архітектура» на [prevently2.vercel.app](https://prevently2.vercel.app) | 🟢 готово |
-| [`wireframes/`](wireframes/) | **30 сторінок** — усе дерево екранів sitemap зі станами і PDF для лікаря, телефон 390×844 зі скролом усередині. Сірі, крім Плану й Пройденого зі станами — ті вже в кольорі «Ніжної». [`_screens.md`](wireframes/_screens.md) — що малюємо, [`_conventions.md`](wireframes/_conventions.md) — як, [`_critique.md`](wireframes/_critique.md) — що знайшла перевірка | 🟢 готово |
+| [`wireframes/`](wireframes/) | **30 сторінок** — усе дерево екранів sitemap зі станами і PDF для лікаря, телефон 390×844 зі скролом усередині. Каркас сірий, поверх нього на всіх сторінках — шар «Ніжної». [`_screens.md`](wireframes/_screens.md) — що малюємо, [`_conventions.md`](wireframes/_conventions.md) — як, [`_critique.md`](wireframes/_critique.md) — що знайшла перевірка | 🟢 готово |
 | [`concept/`](concept/) | Візуальний напрям. [`concept.md`](concept/concept.md) — смак дизайнерки, п'ять атрибутів (кожен із рядком даних і прийомом) і рішення 06.10.2026: без гумору, межа проти кремового фону, колір лише підкреслює важливе, ілюстрації розміром з іконку. [`references.md`](concept/references.md) — референси з Mobbin із вимірами: основа Clue, прийоми з Ada, Flo, Zocdoc, My BMW, Alan. Напрями — чотири раунди: [`directions.html`](concept/directions.html) (раунд 5, ніша впізнавана), [`directions-round4.html`](concept/directions-round4.html), [`directions-round3.html`](concept/directions-round3.html), [`directions-round2.html`](concept/directions-round2.html); **обрано «Ніжну»**: стенд [`concept.html`](concept/concept.html), токени [`tokens.css`](concept/tokens.css), контраст [`contrast.py`](concept/contrast.py), іконки [`icons.py`](concept/icons.py); на екранах — [`_nizhna.css`](wireframes/_nizhna.css) | 🟢 готово |
 | [`tokens/`](tokens/) | Кольори, типографіка, відступи, радіуси — JSON як джерело правди | ⚪ порожньо |
 | [`components/`](components/) | Специфікації компонентів: стани, поведінка, доступність | ⚪ порожньо |

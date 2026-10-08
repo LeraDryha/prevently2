@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вайрфрейм: Пошук обстеження</title>
 <link rel="stylesheet" href="_wireframe.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..900&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap">
+<link rel="stylesheet" href="../concept/tokens.css">
+<link rel="stylesheet" href="_nizhna.css">
 </head>
 <body id="embed">
 
@@ -59,14 +64,14 @@
       <form role="search">
         <label for="q">Назва обстеження</label>
         <input type="search" id="q" name="q" value="мамографія">
-        <button type="button">Знайти</button>
+        <button type="button" class="primary" data-icon="magnifer">Знайти</button>
       </form>
     </section>
 
     <section aria-labelledby="h-r">
       <h2 id="h-r">Мамографія</h2>
       <article>
-        <p class="verdict">Розглянули і не включили <b>у твій чекап</b></p>
+        <p class="verdict" data-verdict="excluded">Розглянули і не включили <b>у твій чекап</b></p>
         <p>Мамографію не рекомендують до 40 років без обтяженої сімейної історії.
         За твоїми відповідями раку грудей у мами, сестри чи доньки не було.</p>
         <p class="condition"><b>З’явиться у твоєму плані:</b> з 40 років, раз на 2 роки.
@@ -86,7 +91,7 @@
       особисто, у лікаря могли бути підстави, яких ми не бачимо. Додай до списку, щоб усе
       було в одному місці. Вона стане в секцію «Твої пункти»: без нашого вердикту й без
       джерела, бо це не наша рекомендація.</p>
-      <a class="btnlink" href="plan.html">Додати до списку</a>
+      <a class="btnlink" href="plan.html" data-icon="clipboard-add">Додати до списку</a>
       <p class="lead"><a href="plan.html">Повернутися до плану</a></p>
     </section>
 

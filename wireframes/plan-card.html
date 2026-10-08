@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вайрфрейм: План — картка розгорнута</title>
 <link rel="stylesheet" href="_wireframe.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..900&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap">
+<link rel="stylesheet" href="../concept/tokens.css">
+<link rel="stylesheet" href="_nizhna.css">
 </head>
 <body id="embed">
 
@@ -68,7 +73,7 @@
 
     <section aria-labelledby="h-base">
       <h2 id="h-base">Базовий шар <span class="layer-src">показано всім · ACOG, стоматологічні настанови</span></h2>
-      <article class="mini">
+      <article class="mini" data-exam="gyn" data-state="overdue">
         <details open>
           <summary>
             <h3 class="name">Огляд у гінеколога</h3>
@@ -99,7 +104,7 @@
           </div>
         </details>
       </article>
-      <article class="mini">
+      <article class="mini" data-exam="dent" data-state="done">
         <details>
           <summary>
             <h3 class="name">Огляд у стоматолога</h3>
@@ -131,7 +136,7 @@
 
     <section aria-labelledby="h-risk">
       <h2 id="h-risk">Ризик-орієнтовані скринінги <span class="layer-src">за віком і анамнезом · USPSTF, з рівнем доказовості</span></h2>
-      <article class="mini">
+      <article class="mini" data-exam="bp" data-state="none">
         <details>
           <summary>
             <h3 class="name">Вимірювання тиску</h3>
@@ -160,7 +165,7 @@
           </div>
         </details>
       </article>
-      <article class="mini">
+      <article class="mini" data-exam="cyto" data-state="done">
         <details>
           <summary>
             <h3 class="name">Цитологія з ВПЛ-тестом</h3>
@@ -254,7 +259,7 @@
       <h2 id="h-own">Твої пункти</h2>
       <p class="lead">Ми їх не оцінювали: джерела, рівня доказовості й слова «рекомендовано»
       тут немає. Ми тримаємо їх поруч, щоб усе було в одному місці.</p>
-      <article class="mini not-ours">
+      <article class="mini not-ours" data-exam="own" data-state="done">
         <details>
           <summary>
             <h3 class="name">ТТГ</h3>

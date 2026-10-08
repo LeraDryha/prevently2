@@ -51,7 +51,7 @@ body {
 .wf-meta .wf-title { margin: 0 0 4px; font-size: 20px; font-weight: 700; }
 .wf-meta dl { margin: 12px 0 0; display: grid; grid-template-columns: 160px 1fr; gap: 4px 16px; }
 .wf-meta dt { color: #666666; font-size: 13px; }
-.wf-meta dd { margin: 0; font-size: 13px; }
+.wf-meta dd { margin: 0; min-width: 0; overflow-wrap: anywhere; font-size: 13px; }
 .wf-meta code { background: #f2f2f2; padding: 1px 4px; }
 
 .wf-stage {
@@ -430,7 +430,7 @@ article .state { font-size: 12px; color: #555555; margin: 8px 0 8px; }
 details { border-top: 1px solid #dddddd; margin-top: 10px; padding-top: 8px; }
 details > summary { font-size: 12px; color: #555555; cursor: pointer; }
 details .src { font-size: 12px; color: #555555; margin: 8px 0 0; }
-.unverified { color: #888888; }
+.unverified { color: #666666; }
 
 .sect-inclusion > summary { list-style: none; }
 .sect-inclusion > summary::-webkit-details-marker { display: none; }

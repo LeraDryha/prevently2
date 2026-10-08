@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вайрфрейм: Пошук — порожній</title>
 <link rel="stylesheet" href="_wireframe.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..900&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap">
+<link rel="stylesheet" href="../concept/tokens.css">
+<link rel="stylesheet" href="_nizhna.css">
 </head>
 <body id="embed">
 
@@ -58,14 +63,14 @@
       <form role="search">
         <label for="q">Назва обстеження</label>
         <input type="search" id="q" name="q" value="ліпідограма розширена">
-        <button type="button">Знайти</button>
+        <button type="button" class="primary" data-icon="magnifer">Знайти</button>
       </form>
     </section>
 
     <section aria-labelledby="h-none">
       <h2 id="h-none">Ліпідограма розширена</h2>
       <article>
-        <p class="verdict">Ми не оцінюємо це обстеження для чекапів</p>
+        <p class="verdict" data-verdict="not-assessed">Ми не оцінюємо це обстеження для чекапів</p>
         <p>Воно поза межами скринінгу — ми його не розглядали, тому й вердикту в нас
         немає.</p>
         <p class="warn"><b>Це не означає ні «треба», ні «не треба».</b> Рішення про нього
@@ -80,7 +85,7 @@
       <h2 id="h-add">Це призначив лікар?</h2>
       <p class="lead">Додай до списку, щоб усе було в одному місці. Пункт стане в секцію
       «Твої пункти»: без нашого вердикту, без джерела й без слова «рекомендовано».</p>
-      <a class="btnlink" href="plan.html">Додати до списку</a>
+      <a class="btnlink" href="plan.html" data-icon="clipboard-add">Додати до списку</a>
       <p class="lead"><a href="plan.html">Повернутися до плану</a></p>
     </section>
 

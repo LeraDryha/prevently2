@@ -29,13 +29,13 @@ PAIRS = [
     ('--color-primary-text', '--color-surface', 'text', 'Другорядна кнопка, посилання'),
     ('--color-primary-text', '--color-primary-soft', 'text', 'Другорядна кнопка під курсором'),
     ('--color-primary-text', '--color-primary-soft-pressed', 'text', 'Другорядна кнопка натиснута'),
-    ('--color-text', '--color-primary-soft', 'text', 'Кнопка фільтра під курсором'),
+    ('--color-text', '--color-primary-soft', 'text', 'Кнопка фільтра під курсором, вибраний варіант відповіді'),
     ('--color-primary-strong', '--color-surface', 'text', 'Активна вкладка нижнього меню'),
     ('--color-overdue-text', '--color-overdue-bg', 'text', 'Мітка «прострочено»'),
     ('--color-neutral-state-text', '--color-surface', 'text', 'Мітки «не позначено», «заплановано», «пройдено»'),
     ('--color-success-text', '--color-success-bg', 'text', 'Повідомлення про успіх'),
     ('--color-error-text', '--color-error-bg', 'text', 'Помилка, алерт тривожного симптому'),
-    ('--color-on-primary', '--color-error', 'text', 'Кнопка в алерті'),
+    ('--color-on-primary', '--color-error', 'text', 'Смуга алерту тривожного симптому: заголовок і значок'),
     ('--color-primary', '--color-surface', 'graphic', 'Іконка в розгорнутій картці'),
     ('--color-primary', '--badge-pink-bg', 'graphic', 'Іконка факту в колі, значок «план не порахувався»'),
     ('--color-neutral-state', '--color-surface', 'graphic', 'Іконка «не позначено», «заплановано»'),
@@ -51,6 +51,12 @@ PAIRS = [
     ('--color-text-muted', '--color-surface-soft', 'text', 'Адресний рядок браузера в макеті екрана'),
     ('--color-text-muted', '--color-primary-soft', 'text', 'Підпис на місці прев’ю файлу'),
     ('--color-primary', '--color-primary-soft', 'graphic', 'Іконка документа на місці прев’ю файлу'),
+    ('--color-border-input', '--color-surface', 'graphic', 'Рамка поля вводу, кнопка «Видалити»'),
+    ('--color-border-input', '--color-page', 'graphic', 'Рамка поля вводу на фоні екрана'),
+    ('--color-primary-strong', '--color-primary-soft', 'graphic', 'Рамка й позначка вибраного варіанта відповіді'),
+    ('--color-primary-strong', '--color-primary-soft-pressed', 'graphic', 'Заповнена частина прогресу опитувальника'),
+    ('--color-primary', '--color-page', 'graphic', 'Щит біля обіцянки «тільки на цьому пристрої»'),
+    ('--color-primary-text', '--color-page', 'text', 'Посилання в тексті секції на фоні екрана'),
 ]
 THRESHOLD = {'text': 4.5, 'large': 3.0, 'graphic': 3.0}
 
