@@ -287,7 +287,7 @@
           <li><a href="#wf-about" data-v="wf-about">Про макети</a></li>
         </ul>
       </li>
-      <li><a href="#concept" data-v="concept"><span class="dot"></span>Концепція</a></li>
+      <li><a href="#concept" data-v="concept" class="wip"><span class="dot"></span>Концепція</a></li>
       <li><a href="#tokens" data-v="tokens"><span class="dot"></span>Токени</a></li>
       <li><a href="#components" data-v="components"><span class="dot"></span>Компоненти</a></li>
       <li><a href="#design-system" data-v="design-system" class="wip"><span class="dot"></span>Дизайн-система</a></li>
@@ -378,10 +378,10 @@
         <tr><td><strong>Люди і роботи</strong></td><td>Опитування на 362 відповіді, 5 інтерв'ю, 4 персони, JTBD-матриця</td><td><span class="badge done">зроблено</span></td></tr>
         <tr><td><strong>Інформаційна архітектура</strong></td><td>14 сутностей, дерево з 8 екранів, навігація, чотири flow, матриця «job × екран»</td><td><span class="badge done">зроблено</span></td></tr>
         <tr><td><strong>Вайрфрейми</strong></td><td>30 сторінок: усе дерево екранів зі станами, телефон 390×844, і PDF для лікаря. З 28.09 — мініатюри пунктів, фільтр за станом і «Запланувати»</td><td><span class="badge done">зроблено</span></td></tr>
-        <tr><td>Концепція</td><td>Візуальний напрям, тон, ключові екрани</td><td><span class="badge none">не почато</span></td></tr>
+        <tr><td><strong>Концепція</strong></td><td>Смак дизайнерки, п’ять атрибутів із даних і референси з Mobbin із вимірами. Екранів у кольорі ще немає</td><td><span class="badge wip">частково</span></td></tr>
         <tr><td>Токени</td><td>Кольори, типографіка, відступи</td><td><span class="badge none">не почато</span></td></tr>
         <tr><td>Компоненти</td><td>Картка рекомендації, крок опитувальника, плашки</td><td><span class="badge none">не почато</span></td></tr>
-        <tr><td><strong>Дизайн-система</strong></td><td>Голос продукту готовий: п’ять принципів, словник і 689 рядків тексту з 30 макетів. Правила складання, стани й доступність — ще ні</td><td><span class="badge wip">частково</span></td></tr>
+        <tr><td><strong>Дизайн-система</strong></td><td>Голос продукту готовий: п’ять принципів, словник і 693 рядки тексту з 30 макетів. Правила складання, стани й доступність — ще ні</td><td><span class="badge wip">частково</span></td></tr>
         <tr><td>Передача в розробку</td><td>Специфікації, формат правила рекомендації</td><td><span class="badge none">не почато</span></td></tr>
       </tbody>
     </table></div>
@@ -1195,28 +1195,94 @@
   <section class="block">
     <h2>Що знайшов мокап телефону</h2>
     <div class="box warm">
-      <p class="t">Головна робота лежала за два з половиною прогортування — тепер на краю першого екрана</p>
+      <p class="t">Головна робота лежала за два з половиною прогортування — у каркасі стала на краю першого екрана</p>
       <p>Телефон у натуральний розмір показав те, чого не видно на плоскій рамці: у перший екран поміщалися <strong>тільки шапка і початок базового шару</strong> — тобто те, що показано всім і залежить від жінки найменше. З 844&nbsp;px екрана системний рядок і смуга браузера забирають 94, нижній таб-бар — ще 56; на контент лишається <strong>670</strong>.</p>
     </div>
     <div class="scroll"><table>
-      <thead><tr><th>Секція</th><th>До 26.09 · великі картки</th><th>З 28.09 · мініатюри</th></tr></thead>
+      <thead><tr><th>Секція</th><th>До 26.09 · великі картки</th><th>З 28.09 · мініатюри</th><th>З 08.10 · «Ніжна»</th></tr></thead>
       <tbody>
-        <tr><td>Базовий шар</td><td>152 px · видно одразу</td><td>151 px · видно одразу</td></tr>
-        <tr><td>Ризик-орієнтовані скринінги</td><td>934 px · 1,4 екрана</td><td>379 px · видно одразу</td></tr>
-        <tr><td><strong>Розглянули і не включили</strong></td><td>1687 px · <strong>2,5 екрана</strong></td><td><strong>625 px · край першого</strong></td></tr>
-        <tr><td>Додано вами</td><td>2601 px · 3,9 екрана</td><td>1664 px · 2,5 екрана</td></tr>
+        <tr><td>Базовий шар</td><td>152 px · видно одразу</td><td>151 px · видно одразу</td><td>144 px · видно одразу</td></tr>
+        <tr><td>Ризик-орієнтовані скринінги</td><td>934 px · 1,4 екрана</td><td>379 px · видно одразу</td><td>449 px · видно одразу</td></tr>
+        <tr><td><strong>Розглянули і не включили</strong></td><td>1687 px · <strong>2,5 екрана</strong></td><td><strong>625 px · край першого</strong></td><td><strong>754 px · 1,1 екрана</strong></td></tr>
+        <tr><td>Додано вами</td><td>2601 px · 3,9 екрана</td><td>1664 px · 2,5 екрана</td><td>2198 px · 3,3 екрана</td></tr>
       </tbody>
     </table></div>
-    <p class="sub">Обидва стовпці — з розгорнутою секцією «не включили», як у стані успіху; згорнута, вона підтягує «Додано вами» до 784&nbsp;px. <strong>Порядок секцій не змінено</strong> — він іде з дерева sitemap. Змінилась картка пункту: згорнута до «що · коли · стан», 66–83&nbsp;px замість 320–380; опис, вартість, підстава, джерело й дії — під тапом. Невключені пункти мініатюрами <strong>не</strong> стали: їхня підстава і є змістом, інакше головна робота коштувала б четвертий тап. Чесно про межу: 625 із 670 — заголовок секції визирає з-під таб-бара, і щоб тапнути, треба трохи прогорнути.</p>
+    <p class="sub">Усі стовпці — з розгорнутою секцією «не включили», як у стані успіху; згорнута, вона підтягує «Додано вами» до 784&nbsp;px у каркасі й до 935&nbsp;px у «Ніжній». <strong>Порядок секцій не змінено</strong> — він іде з дерева sitemap. Змінилась картка пункту: згорнута до «що · коли · стан», 66–83&nbsp;px замість 320–380; опис, вартість, підстава, джерело й дії — під тапом. Невключені пункти мініатюрами <strong>не</strong> стали: їхня підстава і є змістом, інакше головна робота коштувала б четвертий тап. Чесно про межу: 625 із 670 — заголовок секції визирає з-під таб-бара, і щоб тапнути, треба трохи прогорнути. <strong>З 08.10.2026, у стилі «Ніжна»,</strong> мініатюра вища — 103–111&nbsp;px: значок, назва 17&nbsp;px і стан окремим рядком. Секція починається на 754&nbsp;px, одразу за краєм першого екрана. Це прийнято: весь план в один екран не вміщується.</p>
   </section>
 </div>
 
 <div class="view" id="v-concept">
   <header class="top"><p class="eyebrow">Розділ 03 · Концепція</p><h1>Візуальний напрям</h1>
-    <p class="lede">Тон, настрій, ключові екрани в кольорі.</p></header>
-  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/concept/README.md" target="_blank" rel="noopener">concept/README.md</a> <span class="ext">↗</span></p>
-  <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
-    <p>З брифу відомо: тепла, людяна подача — м'які кольори, менш «медично». Головний конфлікт, який доведеться вирішити тут: теплота не має послаблювати доказовість.</p></div>
+    <p class="lede">Смак, атрибути й референси, з яких складеться вигляд продукту. Екранів у кольорі ще немає: першими будуть План і Пройдене.</p>
+    <div class="meta"><span class="chip">п’ять атрибутів</span><span class="chip">основа — Clue</span><span class="chip">референси з Mobbin</span><span class="chip">6 жовтня 2026</span></div>
+  </header>
+  <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/concept/README.md" target="_blank" rel="noopener">concept/README.md</a> <span class="ext">↗</span> · <a href="https://github.com/LeraDryha/prevently2/blob/main/concept/concept.md" target="_blank" rel="noopener">concept.md</a> <span class="ext">↗</span> · <a href="https://github.com/LeraDryha/prevently2/blob/main/concept/references.md" target="_blank" rel="noopener">references.md</a> <span class="ext">↗</span></p>
+
+  <section class="block">
+    <h2>Смак дизайнерки</h2>
+    <p class="sub">Записано зі слів дизайнерки. Кожен атрибут нижче звірено зі смаком, і жоден йому не суперечить.</p>
+    <div class="cards">
+      <div class="card"><span class="lbl">Подобається</span><p class="h">monobank · Airbnb · Apple Music · Apple Health</p>
+        <p>monobank має характер і не схожий на банк. Airbnb концентрує увагу на потрібному, а ілюстровані бейджики допомагають сканувати. Apple Music — дизайн і нативність. Apple Health — великі картки, де колір підкреслює важливе.</p></div>
+      <div class="card"><span class="lbl">Не хочу</span><p class="h">Три речі</p>
+        <p>Кремовий фон із теракотою — перше, що видає AI на слово «затишний». Сірі плашки замість фото. Екрани без іконок.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>П’ять атрибутів</h2>
+    <p class="sub">Пари протилежностей. Кожна випливає з рядка даних і спирається на прийом, на який можна показати пальцем. Повністю, з цитатами й посиланнями, — у <a href="https://github.com/LeraDryha/prevently2/blob/main/concept/concept.md#атрибути" target="_blank" rel="noopener">concept.md</a> <span class="ext">↗</span>.</p>
+    <div class="cards">
+      <div class="card"><span class="lbl">Пара 1 · дані й бриф</span><p class="h">Спокійний — не тривожний</p>
+        <p>«Лабораторія продає, лікар — теж сторона». Досвід пізнього виявлення хвороби інтересу не підвищує. Прийом — Apple Health: картка біла, колір лише на важливому, 2,1% екрана.</p></div>
+      <div class="card"><span class="lbl">Пара 2 · дані; іконки — здогадка</span><p class="h">Сканується — не читається як стаття</p>
+        <p>«Самій розбиратися надто дорого» (Р3). Секція «Розглянули і не включили» лежала за 2,5 екрана. Прийом — лінійна іконка біля кожного пункту, як у зручностях Airbnb.</p></div>
+      <div class="card"><span class="lbl">Пара 3 · дані; форма — [?]</span><p class="h">Підписаний — не анонімний</p>
+        <p>«Довіра — від конкретних фактів» (Р1); 55,5% обирають клініку за порадою людей. Прийом — бейдж джерела в мініатюрі, як «Guest favorite» в Airbnb, і позначка на фото рецензента, як у Flo.</p></div>
+      <div class="card"><span class="lbl">Пара 4 · дані</span><p class="h">Як застосунок — не як сайт</p>
+        <p>82,1% хочуть мобільний додаток, чек-лист у браузері — 6,9%. Прийом — великий заголовок екрана зліва, картки з радіусом ≈26 pt, нижній таб-бар, як в Apple Health.</p></div>
+      <div class="card"><span class="lbl">Пара 5 · бриф; характер — смак</span><p class="h">З характером — не лабораторія</p>
+        <p>«Звучатимемо як ДІЛА — вона піде»; медична мова відлякує. Прийом — ілюстрація розміром з іконку біля обстеження і свій акцент: не лікарняний синій і не теракота.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Що вирішено 6 жовтня</h2>
+    <p class="sub">Чотири місця, де дані й смак розходилися. Рішення власниці.</p>
+    <div class="cards">
+      <div class="card"><span class="lbl">Тон</span><p class="h">Гумору немає</p>
+        <p>Говоримо тепло, як з рівною, — принцип 5 голосу. Характер несе лише візуальна мова: колір, іконки, шрифт.</p></div>
+      <div class="card"><span class="lbl">Фон</span><p class="h">#FFFEFA лишається — і не стає кремовим</p>
+        <p>Межа: синій канал не нижчий за 245 і відстає від червоного щонайбільше на 5. #FFFEFA стоїть рівно на межі, кремовий #FFFDD0 відстає на 47. Теракоти немає.</p></div>
+      <div class="card"><span class="lbl">Колір</span><p class="h">Підкреслює важливе</p>
+        <p>Картка велика й нейтральна, колір — лише на тому, що в ній важливе. Насичений колір — тільки в алерті тривожного симптому.</p></div>
+      <div class="card"><span class="lbl">Ілюстрації</span><p class="h">Розміром з іконку</p>
+        <p>Великих ілюстрацій і обкладинок поки не включаємо.</p></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Референси</h2>
+    <p class="sub">Сервіси з research.md, які є на Mobbin, і три екрани за запитом «список профілактичних оглядів». Значення виміряно зі знімків, радіуси — з похибкою ±1–2 pt. Повністю — у <a href="https://github.com/LeraDryha/prevently2/blob/main/concept/references.md" target="_blank" rel="noopener">references.md</a> <span class="ext">↗</span>.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Звідки</th><th>Що беремо</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Clue</strong> — основа</td><td>Фон #FFFEFA, текст #363432. Картка з рамкою 1 pt і радіусом ≈12 pt, панель без рамки ≈16 pt. Колір — 4–7% екрана, і майже весь у даних</td></tr>
+        <tr><td><strong>Ada</strong></td><td>Ризик окремим рядком абсолютним числом. Алерт — смуга над результатами, єдине місце насиченого кольору</td></tr>
+        <tr><td><strong>Flo</strong></td><td>Позначка перевірки на аватарі рецензента, а не біля тексту</td></tr>
+        <tr><td><strong>Zocdoc</strong></td><td>Назва настанови — перші слова пояснення</td></tr>
+        <tr><td><strong>My BMW</strong></td><td>«Коли» — другим рядком; колір має лише один стан</td></tr>
+        <tr><td><strong>Alan</strong></td><td>Файл — рядок під відміткою: мініатюра, назва, дата додавання</td></tr>
+        <tr><td><strong>Superpower</strong> — антиреференс</td><td>Нічого. Значення пофарбовані за нормою — це тлумачення, а магазин стоїть у таб-барі</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="block">
+    <h2>Решта розділу</h2>
+    <div class="empty"><span class="ic">◻︎</span><h3>Ще не почато</h3>
+      <p>Ключові екрани в кольорі — План і Пройдене. Акцентний колір теж ще не обрано: бірюзовий Clue дає з фоном 4,3:1, для тексту його треба затемнити.</p></div>
+  </section>
 </div>
 
 <div class="view" id="v-tokens">
@@ -1239,7 +1305,7 @@
 <div class="view" id="v-design-system">
   <header class="top"><p class="eyebrow">Розділ 06 · Дизайн-система</p><h1>Правила складання</h1>
     <p class="lede">Як компоненти поєднуються, стани, доступність — і як продукт говорить. Заповнено поки тільки останнє: голос продукту.</p>
-    <div class="meta"><span class="chip">голос продукту</span><span class="chip">5 принципів</span><span class="chip">689 рядків тексту</span><span class="chip">30 макетів на «ти»</span><span class="chip">29 вересня 2026</span></div>
+    <div class="meta"><span class="chip">голос продукту</span><span class="chip">5 принципів</span><span class="chip">693 рядки тексту</span><span class="chip">30 макетів на «ти»</span><span class="chip">29 вересня 2026</span></div>
   </header>
   <p class="src">Джерело розділу: <a href="https://github.com/LeraDryha/prevently2/blob/main/design-system/README.md" target="_blank" rel="noopener">design-system/README.md</a> <span class="ext">↗</span> · <a href="https://github.com/LeraDryha/prevently2/blob/main/design-system/tone-of-voice/README.md" target="_blank" rel="noopener">tone-of-voice/README.md</a> <span class="ext">↗</span></p>
 
@@ -1252,7 +1318,7 @@
         <tr><td><a href="https://github.com/LeraDryha/prevently2/blob/main/design-system/tone-of-voice/voice.md" target="_blank" rel="noopener"><strong>voice.md</strong> <span class="ext">↗</span></a></td>
             <td><strong>Правила.</strong> П’ять принципів — кожен із рядка в даних про людей або з мови конкурентів. Словник: одне поняття — одне слово, звертання на «ти», англіцизми. Заборонене. Правила мікрокопі за типами елементів: кнопка, заголовок, питання, порожній стан, помилка, завантаження, успіх, небезпечна дія</td></tr>
         <tr><td><a href="https://github.com/LeraDryha/prevently2/blob/main/design-system/tone-of-voice/microcopy.md" target="_blank" rel="noopener"><strong>microcopy.md</strong> <span class="ext">↗</span></a></td>
-            <td><strong>Увесь текст інтерфейсу.</strong> 689 рядків із 30 макетів: екран, стан, зона, «було» й «стало», тип. Джерело правди для тексту продукту: змінили текст у макеті — змінили рядок тут у тому самому коміті</td></tr>
+            <td><strong>Увесь текст інтерфейсу.</strong> 693 рядки з 30 макетів: екран, стан, зона, «було» й «стало», тип. Джерело правди для тексту продукту: змінили текст у макеті — змінили рядок тут у тому самому коміті</td></tr>
       </tbody>
     </table></div>
   </section>
@@ -1378,7 +1444,7 @@
       var doc = new DOMParser().parseFromString(html, 'text/html');
       var meta = doc.querySelector('.wf-meta');
       var out = '';
-      var h1 = meta && meta.querySelector('h1');
+      var h1 = meta && meta.querySelector('.wf-title, h1');
       if(h1) out += '<p class="wfn-title">' + h1.textContent + '</p>';
       var st = meta && meta.querySelector('.wf-states');
       if(st) out += '<p class="wfn-states">' + st.innerHTML.replace(/<span class="lbl">.*?<\/span>/,'') + '</p>';

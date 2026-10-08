@@ -5,11 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вайрфрейм: Історія проходжень — базовий стан</title>
 <link rel="stylesheet" href="_wireframe.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400..900&family=Nunito+Sans:opsz,wght@6..12,400..800&display=swap">
+<link rel="stylesheet" href="../concept/tokens.css">
+<link rel="stylesheet" href="_nizhna.css">
 </head>
 <body id="embed">
 
-<div class="wf-meta">
-  <h1>Історія проходжень — базовий стан</h1>
+<aside class="wf-meta" aria-label="Про макет">
+  <p class="wf-title">Історія проходжень — базовий стан</p>
   <p class="wf-states"><span class="lbl">Стани цього екрана:</span>
   <span class="here" aria-current="page">базовий</span>
   <a href="history-empty.html">порожній</a>
@@ -27,7 +32,7 @@
     <dt>Мокап</dt><dd>Телефон 390&times;844 у натуральний розмір: контент гортається <b>всередині</b> екрана. Системний рядок і адресна смуга браузера забирають 94&nbsp;px, нижній таб-бар — ще 56; на контент лишається <b>670 із 844</b></dd>
     <dt>Де це дивляться</dt><dd>У <a href="../index.html#wireframes">робочому просторі</a>, розділ «Вайрфрейми». Ця сторінка — сам файл макета, окремо її відкривати не треба</dd>
   </dl>
-</div>
+</aside>
 
 <div class="wf-stage">
 
@@ -44,7 +49,7 @@
   </div>
   <div class="wf-viewport">
 
-<section class="wf-device" aria-label="Вайрфрейм екрана «Пройдене»">
+<div class="wf-device">
 
   <div class="wf-scroll">
 
@@ -61,7 +66,7 @@
       на твою вимогу — але не розшифровуємо: не витягуємо значень, не будуємо динаміки
       і не порівнюємо з нормою.</p>
 
-      <article class="not-ours">
+      <article class="not-ours" data-exam="own" data-state="done">
         <p class="mark">Твій пункт · ми його не оцінювали</p>
         <h3>ТТГ</h3>
         <p class="when">Пройдено 20 березня 2026</p>
@@ -71,12 +76,17 @@
           <span class="file-preview">прев’ю файлу</span>
           <b>Прикріплений файл</b>
           аналіз-ттг-2026-03.pdf · 380&nbsp;КБ · додано 20 березня 2026
-          <p class="row"><button type="button" class="secondary">Відкрити файл</button></p>
+          <p class="row"><button type="button" class="secondary" popovertarget="file-ttg">Відкрити файл</button></p>
+          <div popover id="file-ttg" class="file-view">
+            <span class="file-preview">прев’ю файлу</span>
+            <p>аналіз-ттг-2026-03.pdf</p>
+            <button type="button" class="secondary" popovertarget="file-ttg" popovertargetaction="hide">Закрити</button>
+          </div>
         </div>
         <a class="btnlink" href="mark-done-edit.html">Змінити відмітку</a>
       </article>
 
-      <article>
+      <article data-exam="dent" data-state="done">
         <h3>Огляд у стоматолога</h3>
         <p class="when">Пройдено 12 березня 2026</p>
         <p class="state">Наступний — до березня 2027. Дату порахували від цієї відмітки.</p>
@@ -88,7 +98,7 @@
     <section aria-labelledby="h-2025">
       <h2 id="h-2025">2025 рік</h2>
 
-      <article>
+      <article data-exam="gyn" data-state="done" data-next="overdue">
         <h3>Огляд у гінеколога</h3>
         <p class="when">Пройдено 14 червня 2025</p>
         <p class="state">Наступний був до 14 червня 2026 — зараз прострочено.
@@ -97,7 +107,12 @@
           <span class="file-preview">прев’ю файлу</span>
           <b>Прикріплений файл</b>
           висновок-огляд-2025-06.pdf · 210&nbsp;КБ · додано 15 червня 2025
-          <p class="row"><button type="button" class="secondary">Відкрити файл</button></p>
+          <p class="row"><button type="button" class="secondary" popovertarget="file-gyn">Відкрити файл</button></p>
+          <div popover id="file-gyn" class="file-view">
+            <span class="file-preview">прев’ю файлу</span>
+            <p>висновок-огляд-2025-06.pdf</p>
+            <button type="button" class="secondary" popovertarget="file-gyn" popovertargetaction="hide">Закрити</button>
+          </div>
         </div>
         <a class="btnlink" href="mark-done-edit.html">Змінити відмітку</a>
       </article>
@@ -106,17 +121,27 @@
     <section aria-labelledby="h-2023">
       <h2 id="h-2023">2023 рік</h2>
 
-      <article>
+      <article data-exam="cyto" data-state="done">
         <h3>Цитологія з ВПЛ-тестом</h3>
         <p class="when">Пройдено навесні 2023 — приблизна дата, ти вказала сезон</p>
         <p class="state">Наступну дату порахували від 1 березня 2023 — від найранішої
         межі сезону, щоб не відсунути скринінг далі, ніж безпечно
         <span class="unverified">[правило округлення не вивірено рецензентом]</span></p>
         <p><b>Прикріплені файли — 2</b></p>
-        <p class="state">цитологія-висновок-2023.pdf · 640&nbsp;КБ · додано 3 травня 2023</p>
-        <button type="button" class="secondary">Відкрити файл</button>
-        <p class="state">фото-бланка-2023.jpg · 1,8&nbsp;МБ · додано 3 травня 2023</p>
-        <button type="button" class="secondary">Відкрити файл</button>
+        <p class="state" data-file="pdf">цитологія-висновок-2023.pdf · 640&nbsp;КБ · додано 3 травня 2023</p>
+        <button type="button" class="secondary" popovertarget="file-cyto-pdf">Відкрити файл</button>
+        <div popover id="file-cyto-pdf" class="file-view">
+          <span class="file-preview">прев’ю файлу</span>
+          <p>цитологія-висновок-2023.pdf</p>
+          <button type="button" class="secondary" popovertarget="file-cyto-pdf" popovertargetaction="hide">Закрити</button>
+        </div>
+        <p class="state" data-file="jpg">фото-бланка-2023.jpg · 1,8&nbsp;МБ · додано 3 травня 2023</p>
+        <button type="button" class="secondary" popovertarget="file-cyto-jpg">Відкрити файл</button>
+        <div popover id="file-cyto-jpg" class="file-view">
+          <span class="file-preview" data-file="jpg">прев’ю файлу</span>
+          <p>фото-бланка-2023.jpg</p>
+          <button type="button" class="secondary" popovertarget="file-cyto-jpg" popovertargetaction="hide">Закрити</button>
+        </div>
         <a class="btnlink" href="mark-done-edit.html">Змінити відмітку</a>
       </article>
     </section>
@@ -150,7 +175,7 @@
     </ul>
   </nav>
 
-</section>
+</div>
 
   </div>
   <div class="wf-home" aria-hidden="true"></div>

@@ -37,7 +37,7 @@ body {
   gap: 4px 10px;
   align-items: baseline;
 }
-.wf-states .lbl { color: #888888; }
+.wf-states .lbl { color: #666666; }
 .wf-states a { color: #333333; }
 .wf-states .here { font-weight: 700; text-decoration: underline; }
 
@@ -48,7 +48,7 @@ body {
   padding-bottom: 16px;
   border-bottom: 1px solid #cccccc;
 }
-.wf-meta h1 { margin: 0 0 4px; font-size: 20px; }
+.wf-meta .wf-title { margin: 0 0 4px; font-size: 20px; font-weight: 700; }
 .wf-meta dl { margin: 12px 0 0; display: grid; grid-template-columns: 160px 1fr; gap: 4px 16px; }
 .wf-meta dt { color: #666666; font-size: 13px; }
 .wf-meta dd { margin: 0; font-size: 13px; }
@@ -324,6 +324,15 @@ fieldset { border: 0; margin: 0 0 14px; padding: 0; }
 /* У вбудованому вигляді аркуш має влізти в колонку робочого простору */
 #embed:target .wf-doc { zoom: .7; }
 
+/* --- Вузький екран: телефон без корпусу ---
+   Корпус 412 px разом із полями сторінки не вміщається в екран 390 px. На вузькому
+   екрані макет показує сам екран на всю ширину, без рамки й поля. */
+@media (max-width: 444px) {
+  .wf-stage { margin-left: -16px; margin-right: -16px; }
+  .wf-phone { width: auto; padding: 0; border: 0; border-radius: 0; }
+  .wf-phone-screen { border-radius: 0; }
+}
+
 /* --- Стікери: інформація про зони, поруч з макетом --- */
 
 .wf-notes {
@@ -339,7 +348,7 @@ fieldset { border: 0; margin: 0 0 14px; padding: 0; }
   font-size: 11px;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: #888888;
+  color: #666666;
   font-weight: 600;
 }
 .wf-sticker {
@@ -351,7 +360,7 @@ fieldset { border: 0; margin: 0 0 14px; padding: 0; }
 .wf-sticker > b { display: block; font-size: 12.5px; margin-bottom: 3px; }
 .wf-sticker .act { display: block; font-size: 12px; color: #444444; }
 .wf-sticker .act::before { content: "→ "; color: #888888; }
-.wf-sticker .why { display: block; font-size: 11.5px; color: #777777; margin-top: 4px; }
+.wf-sticker .why { display: block; font-size: 11.5px; color: #555555; margin-top: 4px; }
 
 /* --- Екран: усередині лише продукт --- */
 

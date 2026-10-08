@@ -1,0 +1,818 @@
+/* Напрям «Ніжна» поверх каркаса — для plan.html і history.html та їхніх станів
+   -empty, -error, -loading.
+   Підключається після _wireframe.css і ../concept/tokens.css. Кожне значення — токен:
+   кольори, шрифти, радіуси, відступи, тіні, лінії й іконки беруться тільки звідти.
+   Текст і розмітка сторінок — від каркаса; щоб CSS знав, яке обстеження і в якому
+   стані, мініатюра плану й картка відмітки несуть data-exam і data-state.
+   Решта макетів лишається сірою.
+   Шрифти Nunito й Nunito Sans підключає сама сторінка посиланням у <head>.
+   Вибір напряму — concept/concept.md → «Обрано: Ніжна», стенд — concept/concept.html. */
+
+/* ── Пристрій: службовий корпус, не наш інтерфейс ─────────────── */
+
+.wf-phone {
+  width: auto;
+  padding: var(--space-3);
+  border: 0;
+  border-radius: var(--radius-device);
+  background: var(--stand-device);
+  box-shadow: var(--shadow-device);
+}
+.wf-phone-screen {
+  border-radius: var(--radius-screen);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: var(--weight-regular) var(--text-15)/var(--leading-body) var(--font-text);
+}
+.wf-notch { background: var(--stand-device); border-radius: var(--radius-pill); }
+.wf-status {
+  padding: 0 var(--space-8);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: var(--weight-bold) var(--text-15)/var(--leading-tight) var(--font-text);
+}
+.wf-status .bars { gap: var(--space-hair); }
+.wf-status .bars i { background: currentColor; border-radius: var(--radius-xs); }
+.wf-browser {
+  padding: 0 var(--space-3);
+  background: var(--color-surface);
+  border-bottom: var(--border-hair) solid var(--color-divider);
+}
+.wf-browser .urlbar {
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-soft);
+  color: var(--color-text-muted);
+  font: var(--weight-regular) var(--text-12)/var(--leading-snug) var(--font-text);
+}
+.wf-home { background: var(--color-surface); border-top: 0; }
+.wf-home::after { background: var(--color-text); border-radius: var(--radius-pill); }
+
+/* Вузький екран: корпус разом із полями сторінки не вміщається — показуємо сам екран.
+   Межа медіазапиту — ширина корпусу з полями; змінну в медіазапит підставити не можна */
+@media (max-width: 445px) {
+  .wf-phone { padding: 0; border-radius: 0; background: none; box-shadow: none; }
+  .wf-phone-screen { border-radius: 0; }
+}
+
+/* ── Екран ───────────────────────────────────────────────────── */
+
+.wf-device { background: var(--color-surface); interpolate-size: allow-keywords; }
+.wf-scroll {
+  background: var(--gradient-page);
+  background-color: var(--color-page);
+  background-repeat: no-repeat;
+  scrollbar-width: none;
+}
+.wf-scroll::-webkit-scrollbar { display: none; }
+.wf-device a { color: var(--color-primary-text); }
+.wf-device p { text-wrap: pretty; }
+.wf-device :is(h1, h2, h3) { text-wrap: balance; }
+.wf-device :is(a, button, summary):focus-visible {
+  outline: var(--border-focus) solid var(--color-focus);
+  outline-offset: var(--border-focus);
+}
+
+/* Шапка: великий заголовок, дата перерахунку, смуга-фільтр */
+.wf-scroll > header { padding: var(--space-3) var(--space-5) var(--space-2); border-bottom: 0; }
+.wf-scroll > header h1 {
+  margin: 0 0 var(--space-1);
+  font: var(--weight-heavy) var(--text-34)/var(--leading-tight) var(--font-display);
+  color: var(--color-text);
+}
+.wf-scroll > header p {
+  margin: 0;
+  font-size: var(--text-13);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+
+.wf-device .strip { gap: var(--space-2); margin-top: var(--space-3); }
+.wf-device .strip button {
+  min-height: var(--size-tap);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-hair) solid var(--color-primary-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: var(--weight-bold) var(--text-13)/var(--leading-tight) var(--font-text);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+.wf-device .strip button:hover { background: var(--color-primary-soft); }
+.wf-device .strip button[aria-pressed="true"] {
+  background: var(--color-primary-strong);
+  border-color: var(--color-primary-strong);
+  color: var(--color-on-primary);
+}
+
+/* Секції: заголовок на фоні екрана, картки під ним */
+.wf-scroll > main { padding: 0; }
+.wf-scroll > main > section { padding: var(--space-5) var(--space-4) 0; border-bottom: 0; }
+.wf-device h2 {
+  margin: 0 0 var(--space-3);
+  padding: 0 var(--space-1);
+  font: var(--weight-heavy) var(--text-20)/var(--leading-snug) var(--font-display);
+  color: var(--color-text);
+}
+.wf-device .layer-src {
+  margin-top: var(--space-hair);
+  font: var(--weight-regular) var(--text-14)/var(--leading-small) var(--font-text);
+  color: var(--color-text-muted);
+}
+.wf-device .lead {
+  margin: 0 0 var(--space-3);
+  padding: 0 var(--space-1);
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+.wf-scroll > main > section > p:not(.lead) {
+  margin: 0 0 var(--space-3);
+  padding: 0 var(--space-1);
+  font-size: var(--text-15);
+  line-height: var(--leading-body);
+  color: var(--color-text);
+}
+.wf-scroll > main > section > .btnlink { margin-left: var(--space-1); }
+
+/* ── Картка: будь-який <article> на екрані ───────────────────── */
+
+.wf-device main article {
+  position: relative;
+  margin: 0 0 var(--space-3);
+  padding: var(--space-4);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.wf-device main article:last-of-type { margin-bottom: 0; }
+.wf-device main article h3 {
+  margin: 0 0 var(--space-1);
+  font: var(--weight-heavy) var(--text-17)/var(--leading-snug) var(--font-display);
+  color: var(--color-text);
+}
+.wf-device main article p {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-15);
+  line-height: var(--leading-body);
+}
+.wf-device main article p:last-child { margin-bottom: 0; }
+
+/* Значок у колі: обстеження (мініатюра плану й картка відмітки), найближча дата, заглушка.
+   ::before — пастельне коло, ::after — іконка, вирізана маскою з токена */
+.wf-device article[data-exam]::before,
+.wf-device article[data-exam]::after,
+.wf-device [aria-labelledby="h-done"] article::before,
+.wf-device [aria-labelledby="h-done"] article::after,
+.wf-device section:not([aria-labelledby="h-excl"]) > article.skeleton::before {
+  content: "";
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-4);
+  width: var(--size-badge);
+  height: var(--size-badge);
+  pointer-events: none;
+}
+.wf-device article[data-exam]::before,
+.wf-device [aria-labelledby="h-done"] article::before {
+  border-radius: var(--radius-round);
+  background: var(--badge-bg);
+}
+.wf-device article[data-exam]::after,
+.wf-device [aria-labelledby="h-done"] article::after {
+  background: var(--badge-fg);
+  -webkit-mask: var(--badge-icon) center / var(--size-icon-badge) no-repeat;
+  mask: var(--badge-icon) center / var(--size-icon-badge) no-repeat;
+}
+.wf-device [data-exam="gyn"]  { --badge-bg: var(--badge-pink-bg);  --badge-fg: var(--badge-pink-fg);  --badge-icon: var(--icon-stethoscope); }
+.wf-device [data-exam="dent"] { --badge-bg: var(--badge-peach-bg); --badge-fg: var(--badge-peach-fg); --badge-icon: var(--icon-smile-circle); }
+.wf-device [data-exam="bp"]   { --badge-bg: var(--badge-lilac-bg); --badge-fg: var(--badge-lilac-fg); --badge-icon: var(--icon-heart-pulse); }
+.wf-device [data-exam="cyto"] { --badge-bg: var(--badge-mint-bg);  --badge-fg: var(--badge-mint-fg);  --badge-icon: var(--icon-test-tube); }
+.wf-device [data-exam="own"]  { --badge-bg: var(--badge-grey-bg);  --badge-fg: var(--badge-grey-fg);  --badge-icon: var(--icon-notes); }
+.wf-device [aria-labelledby="h-done"] article {
+  --badge-bg: var(--badge-peach-bg); --badge-fg: var(--badge-peach-fg); --badge-icon: var(--icon-calendar-mark);
+  padding-left: calc(var(--space-4) + var(--size-badge) + var(--space-3));
+  min-height: calc(var(--size-badge) + 2 * var(--space-3));
+}
+
+/* ── Мініатюра пункту плану ──────────────────────────────────── */
+
+.wf-device article.mini { padding: 0; }
+.wf-device .mini > details > summary {
+  grid-template-columns: minmax(0, 1fr) var(--size-icon-lg);
+  gap: var(--space-1) var(--space-3);
+  min-height: calc(var(--size-badge) + 2 * var(--space-3));
+  padding: var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + var(--size-badge) + var(--space-3));
+  border-radius: var(--radius-lg);
+}
+.wf-device .mini > details[open] > summary { border-bottom: 0; }
+.wf-device .mini .name {
+  grid-column: 1; grid-row: 1;
+  margin: 0;
+  font: var(--weight-heavy) var(--text-17)/var(--leading-snug) var(--font-display);
+}
+.wf-device .mini .meta {
+  grid-column: 1; grid-row: 2;
+  font-size: var(--text-13);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+
+/* Знак розкриття — у мініатюрі, у «не включили» і в джерелі: кругла кнопка зі стрілкою */
+.wf-device :is(.mini > details, .sect-inclusion, .full > details, .sect-inclusion article > details) > summary::after {
+  content: "";
+  flex: none;
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  background: var(--color-text-muted);
+  -webkit-mask: var(--icon-round-alt-arrow-down) center / contain no-repeat;
+  mask: var(--icon-round-alt-arrow-down) center / contain no-repeat;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.wf-device :is(.mini > details, .sect-inclusion) > summary::after { grid-column: 2; grid-row: 1; }
+.wf-device details[open] > summary::after { transform: rotate(180deg); }
+
+/* Позначка стану: іконка й слово. Те, що треба зробити зараз (.due), — у капсулі,
+   як і в лічильнику «Зараз»; колір і тло — лише в «прострочено» */
+.wf-device .mini .status,
+.wf-device .mini .status.due {
+  grid-column: 1; grid-row: 3;
+  justify-self: start; align-self: start;
+  display: inline-flex; align-items: center; gap: var(--space-1);
+  margin-top: var(--space-1);
+  padding: 0;
+  border: 0;
+  color: var(--color-neutral-state-text);
+  font: var(--weight-bold) var(--text-13)/var(--leading-tight) var(--font-text);
+}
+.wf-device .mini .status::before {
+  content: "";
+  width: var(--size-icon-xs);
+  height: var(--size-icon-xs);
+  background: var(--state-fg);
+  -webkit-mask: var(--state-icon) center / contain no-repeat;
+  mask: var(--state-icon) center / contain no-repeat;
+}
+.wf-device [data-state="overdue"]   { --state-fg: var(--color-overdue);       --state-icon: var(--icon-danger-circle); }
+.wf-device [data-state="none"]      { --state-fg: var(--color-neutral-state); --state-icon: var(--icon-clock-circle); }
+.wf-device [data-state="scheduled"] { --state-fg: var(--color-neutral-state); --state-icon: var(--icon-calendar-mark); }
+.wf-device [data-state="done"]      { --state-fg: var(--color-success);       --state-icon: var(--icon-check-circle); }
+.wf-device .mini .status.due {
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-hair) solid var(--color-border);
+  border-radius: var(--radius-pill);
+}
+.wf-device .mini[data-state="overdue"] .status {
+  border-color: var(--color-overdue-bg);
+  background: var(--color-overdue-bg);
+  color: var(--color-overdue-text);
+}
+
+/* Твій пункт: пунктир і сірий значок — це не наша рекомендація */
+.wf-device main article.not-ours {
+  box-shadow: none;
+  outline: var(--border-strong) dashed var(--color-border-dashed);
+  outline-offset: calc(-1 * var(--border-strong));
+}
+.wf-device .not-ours .mark {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+
+/* ── Картка відмітки в Пройденому ────────────────────────────────
+   Та сама будова, що в мініатюрі плану: значок, назва, позначка «пройдено» з галочкою;
+   далі — тіло на всю ширину під розділювачем, як у розгорнутій мініатюрі */
+.wf-device main article[data-exam]:not(.mini) { padding-top: var(--space-3); }
+.wf-device main article[data-exam]:not(.mini) > :is(h3, .when, .mark:first-child) {
+  margin-left: calc(var(--size-badge) + var(--space-3));
+}
+.wf-device main article[data-exam]:not(.mini) > .mark:first-child { margin-bottom: var(--space-hair); }
+.wf-device main article[data-exam]:not(.mini) > .when {
+  display: grid;
+  grid-template-columns: var(--size-icon-xs) minmax(0, 1fr);
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+  color: var(--color-neutral-state-text);
+  font: var(--weight-bold) var(--text-13)/var(--leading-small) var(--font-text);
+}
+.wf-device main article[data-exam]:not(.mini) > .when::before {
+  content: "";
+  height: var(--size-icon-xs);
+  margin-top: var(--space-hair);
+  background: var(--state-fg);
+  -webkit-mask: var(--state-icon) center / contain no-repeat;
+  mask: var(--state-icon) center / contain no-repeat;
+}
+.wf-device main article[data-exam]:not(.mini) > .when + * {
+  padding-top: var(--space-3);
+  border-top: var(--border-hair) solid var(--color-divider);
+}
+.wf-device main article .state {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-15);
+  line-height: var(--leading-body);
+  color: var(--color-text);
+}
+.wf-device main article .state[data-file] {
+  display: grid;
+  grid-template-columns: var(--size-icon-chip) minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: center;
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+
+/* 10 · «зараз прострочено» в Пройденому — той самий знак, що в «прострочено» плану */
+.wf-device main article[data-next="overdue"] > .when + .state {
+  display: grid;
+  grid-template-columns: var(--size-icon-xs) minmax(0, 1fr);
+  gap: var(--space-2);
+}
+.wf-device main article[data-next="overdue"] > .when + .state::before {
+  content: "";
+  height: var(--size-icon-xs);
+  margin-top: calc((var(--text-15) * var(--leading-body) - var(--size-icon-xs)) / 2);
+  background: var(--color-overdue);
+  -webkit-mask: var(--icon-danger-circle) center / contain no-repeat;
+  mask: var(--icon-danger-circle) center / contain no-repeat;
+}
+
+/* 12 · твій пункт у Пройденому: назва, під нею «твій пункт», далі позначка — як у плані */
+.wf-device main article.not-ours[data-exam] { display: flex; flex-direction: column; }
+.wf-device main article.not-ours[data-exam] > h3 { order: -2; margin-bottom: var(--space-hair); }
+.wf-device main article.not-ours[data-exam] > .mark:first-child { order: -1; margin-bottom: var(--space-1); }
+.wf-device main article.not-ours[data-exam] > .file { margin-top: var(--space-1); }
+.wf-device main article.not-ours[data-exam] > .btnlink { margin-top: 0; }
+
+/* Прикріплений файл: мініатюра документа зліва — аркуш із заголовком і рядками тексту,
+   намальований токенами. Підпис «прев'ю файлу» лишається для зчитувача */
+.wf-device .file {
+  display: grid;
+  grid-template-columns: var(--size-badge) minmax(0, 1fr);
+  column-gap: var(--space-3);
+  align-items: start;
+  margin: var(--space-3) 0;
+  padding: var(--space-3) 0 0;
+  border: 0;
+  border-top: var(--border-hair) solid var(--color-divider);
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+.wf-device .file > .file-preview { grid-row: span 3; }
+.wf-device .file-preview,
+.wf-device main article .state[data-file]::before {
+  display: block;
+  width: var(--size-badge);
+  height: auto;
+  aspect-ratio: var(--ratio-a4);
+  margin: 0;
+  overflow: hidden;
+  border: var(--border-hair) solid var(--color-divider);
+  border-radius: var(--radius-xs);
+  background:
+    linear-gradient(var(--color-primary-border), var(--color-primary-border)) var(--space-1) var(--space-2) / 50% var(--space-1) no-repeat,
+    repeating-linear-gradient(to bottom, var(--color-divider) 0 var(--space-hair), transparent var(--space-hair) var(--space-2)) var(--space-1) var(--space-5) / calc(100% - 2 * var(--space-1)) calc(100% - var(--space-6)) no-repeat,
+    var(--color-surface);
+  box-shadow: var(--shadow-card);
+  text-indent: 100%;
+  white-space: nowrap;
+  color: transparent;
+}
+.wf-device main article .state[data-file]::before { content: ""; width: var(--size-icon-chip); }
+/* Фото бланка: той самий аркуш, сфотографований на персиковому тлі */
+.wf-device .file-preview[data-file="jpg"],
+.wf-device main article .state[data-file="jpg"]::before {
+  background:
+    linear-gradient(var(--color-primary-border), var(--color-primary-border)) 30% 25% / 40% var(--space-1) no-repeat,
+    repeating-linear-gradient(to bottom, var(--color-divider) 0 var(--space-hair), transparent var(--space-hair) var(--space-2)) 50% 70% / 56% 40% no-repeat,
+    linear-gradient(var(--color-surface), var(--color-surface)) center / 70% 80% no-repeat,
+    var(--color-accent);
+}
+.wf-device .file .row { margin: var(--space-3) 0 0; }
+
+/* «Відкрити файл»: файл відкривається тут-таки, на цьому пристрої, — вікно поверх екрана */
+.wf-device .file-view {
+  width: var(--size-dialog);
+  max-width: calc(100vw - 2 * var(--space-4));
+  margin: auto;
+  padding: var(--space-5);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-text);
+  font: var(--weight-regular) var(--text-15)/var(--leading-body) var(--font-text);
+}
+.wf-device .file-view::backdrop { background: var(--color-scrim); }
+.wf-device .file-view .file-preview { width: 100%; margin-bottom: var(--space-3); }
+.wf-device .file-view > p { margin: 0 0 var(--space-4); font-weight: var(--weight-bold); }
+.wf-device .file-view button.secondary[popovertargetaction="hide"]::before { content: none; }
+/* «Прикріплені файли — 2»: підпис над кількома файлами без блоку .file */
+.wf-device main article > p:not(.condition):has(> b:only-child) {
+  margin: var(--space-3) 0 var(--space-1);
+  padding-top: var(--space-3);
+  border-top: var(--border-hair) solid var(--color-divider);
+}
+
+/* Розгорнута мініатюра: опис і факти з іконками в колі */
+.wf-device .mini .full {
+  margin: 0 var(--space-4);
+  padding: var(--space-3) 0 var(--space-4);
+  border-top: var(--border-hair) solid var(--color-divider);
+}
+.wf-device .full :is(.when, p:has(> .cost), .basis),
+.wf-device :is(.full, .sect-inclusion article) > details,
+.wf-device .sect-inclusion article > .condition {
+  position: relative;
+  min-height: calc(var(--size-icon-chip) + 2 * var(--space-3));
+  margin: 0;
+  padding: var(--space-3) 0 var(--space-3) calc(var(--size-icon-chip) + var(--space-3));
+  border: 0;
+  border-top: var(--border-hair) solid var(--color-divider);
+}
+.wf-device .full :is(.when, p:has(> .cost), .basis)::before,
+.wf-device .full :is(.when, p:has(> .cost), .basis)::after,
+.wf-device :is(.full, .sect-inclusion article) > details::before,
+.wf-device :is(.full, .sect-inclusion article) > details::after,
+.wf-device .sect-inclusion article > .condition::before,
+.wf-device .sect-inclusion article > .condition::after {
+  content: "";
+  position: absolute;
+  top: var(--space-3);
+  left: 0;
+  width: var(--size-icon-chip);
+  height: var(--size-icon-chip);
+}
+.wf-device .full :is(.when, p:has(> .cost), .basis)::before,
+.wf-device :is(.full, .sect-inclusion article) > details::before,
+.wf-device .sect-inclusion article > .condition::before {
+  border-radius: var(--radius-round);
+  background: var(--badge-pink-bg);
+}
+.wf-device .full :is(.when, p:has(> .cost), .basis)::after,
+.wf-device :is(.full, .sect-inclusion article) > details::after,
+.wf-device .sect-inclusion article > .condition::after {
+  background: var(--color-primary);
+  -webkit-mask: var(--fact-icon) center / var(--size-icon-sm) no-repeat;
+  mask: var(--fact-icon) center / var(--size-icon-sm) no-repeat;
+}
+.wf-device .full .when { --fact-icon: var(--icon-calendar); }
+.wf-device .full p:has(> .cost) { --fact-icon: var(--icon-wallet-money); }
+.wf-device .full .basis { --fact-icon: var(--icon-user-heart); }
+.wf-device :is(.full, .sect-inclusion article) > details { --fact-icon: var(--icon-document-text); }
+.wf-device .sect-inclusion article > .condition { --fact-icon: var(--icon-calendar-mark); }
+
+.wf-device .full .cost {
+  display: inline;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: var(--color-text);
+}
+.wf-device .basis p { margin: 0; font-size: var(--text-15); }
+.wf-device .basis .conf {
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: var(--border-hair) solid var(--color-divider);
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+
+/* Джерело: розкривається на місці; «не вивірено» — пунктирна мітка */
+.wf-device :is(.full, .sect-inclusion article) > details > summary {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  min-height: var(--size-tap);
+  margin-top: calc((var(--size-icon-chip) - var(--size-tap)) / 2);
+  color: var(--color-text);
+  font: var(--weight-bold) var(--text-15)/var(--leading-snug) var(--font-text);
+  list-style: none;
+}
+.wf-device :is(.full, .sect-inclusion article) > details > summary::-webkit-details-marker { display: none; }
+.wf-device details .src {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+.wf-device .unverified {
+  display: inline-block;
+  margin-top: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border: var(--border-hair) dashed var(--color-border-dashed);
+  border-radius: var(--radius-pill);
+  font: var(--weight-semibold) var(--text-12)/var(--leading-small) var(--font-text);
+  color: var(--color-text-muted);
+}
+
+.wf-device details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition: block-size var(--duration-fast) var(--ease-out), content-visibility var(--duration-fast) allow-discrete;
+}
+.wf-device details[open]::details-content { block-size: auto; }
+
+/* ── Розглянули і не включили: одна картка, пункти без значків ─ */
+
+.wf-device .sect-inclusion {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.wf-device .sect-inclusion > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--size-icon-lg);
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+}
+.wf-device .sect-inclusion > summary h2 {
+  display: block;
+  grid-column: 1;
+  margin: 0;
+  padding: 0;
+}
+.wf-device .sect-inclusion > summary .hint {
+  grid-column: 1;
+  margin: 0;
+  font-size: var(--text-14);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+.wf-device .sect-inclusion > article {
+  margin: 0 var(--space-4);
+  padding: var(--space-4) 0;
+  border-top: var(--border-hair) solid var(--color-divider);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.wf-device .sect-inclusion > article > p { margin-bottom: var(--space-3); }
+.wf-device .condition b,
+.wf-device .full :is(.when, p:has(> .cost)) > b:first-child,
+.wf-device .basis > p:first-child > b:first-child,
+.wf-device .file > b,
+.wf-device main article > p:not(.condition) > b:only-child {
+  display: block;
+  margin-bottom: var(--space-1);
+  font: var(--weight-bold) var(--text-12)/var(--leading-snug) var(--font-display);
+  color: var(--color-text-label);
+}
+.wf-device .sect-inclusion > .gate { margin: 0 var(--space-4); padding: var(--space-3) 0 var(--space-4); }
+
+/* ── Ворота в Пошук і переходи ───────────────────────────────── */
+
+.wf-device .gate {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) var(--space-1) 0;
+  border-top: var(--border-hair) solid var(--color-divider);
+}
+.wf-device .gate p {
+  margin: 0 0 var(--space-2);
+  font: var(--weight-bold) var(--text-14)/var(--leading-snug) var(--font-text);
+  color: var(--color-text);
+}
+
+/* Кнопка дії. Іконку дає місце, куди вона веде: одна адреса — одна іконка.
+   Кнопка дії на місці (button.secondary — «Відкрити файл») виглядає як другорядна */
+.wf-device :is(.btnlink, button.secondary) {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  min-height: var(--size-tap);
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-strong) solid var(--color-primary-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-primary-text);
+  font: var(--weight-bold) var(--text-15)/var(--leading-tight) var(--font-text);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+.wf-device :is(.btnlink, button.secondary):hover { background: var(--color-primary-soft); }
+.wf-device :is(.btnlink, button.secondary):active { background: var(--color-primary-soft-pressed); }
+.wf-device :is(.btnlink, button.secondary)::before {
+  content: "";
+  flex: none;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  background: currentColor;
+  -webkit-mask: var(--btn-icon) center / contain no-repeat;
+  mask: var(--btn-icon) center / contain no-repeat;
+}
+.wf-device .btnlink:not([href="mark-done.html"], [href="mark-done-edit.html"], [href="plan-schedule.html"],
+  [href="search.html"], [href="pdf.html"], [href="history.html"], [href="plan.html"],
+  [href="restore.html"], [href="questions.html"])::before { content: none; }
+.wf-device .btnlink[href="mark-done.html"]      { --btn-icon: var(--icon-check-square); }
+.wf-device .btnlink[href="mark-done-edit.html"] { --btn-icon: var(--icon-pen); }
+.wf-device .btnlink[href="plan-schedule.html"]  { --btn-icon: var(--icon-calendar-add); }
+.wf-device .btnlink[href="search.html"]         { --btn-icon: var(--icon-magnifer); }
+.wf-device .btnlink[href="pdf.html"]            { --btn-icon: var(--icon-download-minimalistic); }
+.wf-device .btnlink[href="history.html"]        { --btn-icon: var(--icon-history); }
+.wf-device .btnlink[href="plan.html"]           { --btn-icon: var(--icon-clipboard-list); }
+.wf-device .btnlink[href="restore.html"]        { --btn-icon: var(--icon-folder-open); }
+.wf-device .btnlink[href="questions.html"]      { --btn-icon: var(--icon-notebook-minimalistic); }
+.wf-device button.secondary                     { --btn-icon: var(--icon-document-text); }
+/* «Спробувати ще раз» — перший крок на екрані помилки, куди б він не вів */
+.wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink { --btn-icon: var(--icon-restart); }
+
+/* Основна — головна дія картки: позначити пройденим, спробувати ще раз */
+.wf-device .btnlink[href="mark-done.html"],
+.wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink {
+  background: var(--color-primary-strong);
+  border-color: var(--color-primary-strong);
+  color: var(--color-on-primary);
+}
+.wf-device .btnlink[href="mark-done.html"]:hover,
+.wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink:hover { background: var(--color-primary-strong); box-shadow: var(--shadow-raised); }
+.wf-device .btnlink[href="mark-done.html"]:active,
+.wf-device [aria-labelledby="h-err"] > article:first-of-type > .btnlink:active {
+  background: var(--color-primary-pressed);
+  border-color: var(--color-primary-pressed);
+  box-shadow: none;
+}
+.wf-device .row { gap: var(--space-2); }
+.wf-device .actions { margin-top: var(--space-4); }
+/* Дії, що стоять у картці без ряду, — кожна своїм рядком */
+.wf-device main article > :is(.btnlink, button) { display: flex; width: fit-content; }
+.wf-device main article > :is(.btnlink, button):not(:first-child) { margin-top: var(--space-3); }
+.wf-device main article > :is(.btnlink, button, [popover]) + p { margin-top: var(--space-3); }
+
+/* ── Порожній план: найближча дата ───────────────────────────── */
+
+.wf-device [aria-labelledby="h-done"] article .when {
+  padding-top: var(--space-2);
+  border-top: var(--border-hair) solid var(--color-divider);
+  font-size: var(--text-13);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+
+/* ── План чи Пройдене не відкрилися: спокійно, без кольору помилки ─
+   Червоний у продукті носить лише алерт тривожного симптому */
+
+.wf-device [aria-labelledby="h-err"] { position: relative; }
+.wf-device [aria-labelledby="h-err"]::before,
+.wf-device #h-err::before {
+  content: "";
+  position: absolute;
+  top: var(--space-5);
+  left: var(--space-5);
+  width: var(--size-badge);
+  height: var(--size-badge);
+}
+.wf-device [aria-labelledby="h-err"]::before { border-radius: var(--radius-round); background: var(--badge-grey-bg); }
+.wf-device #h-err::before {
+  background: var(--color-text-muted);
+  -webkit-mask: var(--icon-clipboard-remove) center / var(--size-icon-badge) no-repeat;
+  mask: var(--icon-clipboard-remove) center / var(--size-icon-badge) no-repeat;
+}
+.wf-device #h-err { padding-top: calc(var(--size-badge) + var(--space-3)); }
+.wf-device [aria-labelledby="h-err"] article p { color: var(--color-text-muted); }
+
+/* Попередження серед виходів: «поки що не спирайся на дати» — значок кольору «треба дії» */
+.wf-device main article[data-tone="warning"] > h3 {
+  position: relative;
+  min-height: var(--size-icon-chip);
+  padding-left: calc(var(--size-icon-chip) + var(--space-3));
+}
+.wf-device main article[data-tone="warning"] > h3::before,
+.wf-device main article[data-tone="warning"] > h3::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--size-icon-chip);
+  height: var(--size-icon-chip);
+}
+.wf-device main article[data-tone="warning"] > h3::before { border-radius: var(--radius-round); background: var(--color-overdue-bg); }
+.wf-device main article[data-tone="warning"] > h3::after {
+  background: var(--color-overdue);
+  -webkit-mask: var(--icon-danger-circle) center / var(--size-icon-sm) no-repeat;
+  mask: var(--icon-danger-circle) center / var(--size-icon-sm) no-repeat;
+}
+
+/* ── Рахуємо план, читаємо відмітки: заглушки формою картки ──────
+   У плані кольори значків ідуть за справжнім планом; у Пройденому — рівний
+   рожевий: заглушка не обіцяє, які відмітки з'являться */
+
+.wf-device article.skeleton {
+  gap: var(--space-2);
+  justify-content: center;
+  min-height: calc(var(--size-badge) + 2 * var(--space-3));
+  box-shadow: var(--shadow-card);
+}
+.wf-device section:not([aria-labelledby="h-excl"]) > article.skeleton {
+  padding: var(--space-3) var(--space-4) var(--space-3) calc(var(--space-4) + var(--size-badge) + var(--space-3));
+}
+.wf-device article.skeleton::before { border-radius: var(--radius-round); background: var(--sk-badge, var(--badge-pink-bg)); }
+.wf-device [aria-labelledby="h-base"] article.skeleton:nth-of-type(1) { --sk-badge: var(--badge-pink-bg); }
+.wf-device [aria-labelledby="h-base"] article.skeleton:nth-of-type(2) { --sk-badge: var(--badge-peach-bg); }
+.wf-device [aria-labelledby="h-risk"] article.skeleton:nth-of-type(1) { --sk-badge: var(--badge-lilac-bg); }
+.wf-device [aria-labelledby="h-risk"] article.skeleton:nth-of-type(2) { --sk-badge: var(--badge-mint-bg); }
+.wf-device .skeleton .sk {
+  height: var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-primary-soft-pressed);
+  animation: nizhna-pulse var(--duration-pulse) var(--ease-out) infinite alternate;
+}
+.wf-device .skeleton .sk:first-child { height: var(--space-4); background: var(--color-primary-soft-pressed); }
+.wf-device main[aria-busy="true"] > [aria-labelledby="h-excl"] {
+  margin: var(--space-5) var(--space-4) 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+.wf-device main[aria-busy="true"] > [aria-labelledby="h-excl"] h2 { padding: 0; }
+.wf-device main[aria-busy="true"] > [aria-labelledby="h-excl"] article.skeleton {
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+@keyframes nizhna-pulse {
+  from { background-color: var(--color-primary-soft-pressed); }
+  to { background-color: var(--color-primary-soft); }
+}
+.wf-device .sr-note {
+  display: flex; align-items: flex-start; gap: var(--space-2);
+  padding: var(--space-5) var(--space-5) 0;
+  font-size: var(--text-13);
+  line-height: var(--leading-small);
+  color: var(--color-text-muted);
+}
+.wf-device .sr-note::before {
+  content: "";
+  flex: none;
+  width: var(--size-icon-sm);
+  height: var(--size-icon-sm);
+  background: currentColor;
+  -webkit-mask: var(--icon-hourglass) center / contain no-repeat;
+  mask: var(--icon-hourglass) center / contain no-repeat;
+}
+.wf-device .sr-note::before { margin-top: var(--space-hair); }
+
+/* ── Підвал і нижнє меню ─────────────────────────────────────── */
+
+.wf-scroll > footer {
+  margin: var(--space-6) var(--space-4) 0;
+  padding: var(--space-4) var(--space-1) var(--space-6);
+  border-top: var(--border-hair) solid var(--color-divider);
+  background: none;
+}
+.wf-scroll > footer p {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-12);
+  line-height: var(--leading-body);
+  color: var(--color-text-muted);
+}
+.wf-scroll > footer p:last-child { margin-bottom: 0; }
+
+.wf-device > nav {
+  flex: 0 0 var(--size-tabbar);
+  background: var(--color-surface);
+  border-top: var(--border-hair) solid var(--color-divider);
+}
+.wf-device > nav a {
+  flex-direction: column; gap: var(--space-1);
+  padding: 0 var(--space-1);
+  border-right: 0;
+  color: var(--color-text-muted);
+  font: var(--weight-semibold) var(--text-12)/var(--leading-tight) var(--font-text);
+}
+.wf-device > nav a::before {
+  content: "";
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+  background: currentColor;
+  -webkit-mask: var(--nav-icon) center / contain no-repeat;
+  mask: var(--nav-icon) center / contain no-repeat;
+}
+.wf-device > nav a[href="plan.html"]    { --nav-icon: var(--icon-clipboard-list); }
+.wf-device > nav a[href="summary.html"] { --nav-icon: var(--icon-notebook-minimalistic); }
+.wf-device > nav a[href="about.html"]   { --nav-icon: var(--icon-info-circle); }
+.wf-device > nav a[aria-current] {
+  background: none;
+  color: var(--color-primary-strong);
+  font-weight: var(--weight-heavy);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-device details::details-content,
+  .wf-device summary::after,
+  .wf-device :is(.btnlink, button.secondary),
+  .wf-device .strip button { transition: none; }
+  .wf-device .skeleton .sk { animation: none; }
+}
