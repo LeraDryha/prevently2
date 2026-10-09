@@ -135,18 +135,29 @@
      Пояснень поруч немає (рішення 09.10.2026): вони лишаються в самих файлах макетів
      і в «Про макети». Телефон малює сторінка макета — тут лише рамка без рамки */
   .wfwork{padding-top:22px}
-  body.has-wfnav main{padding-bottom:20px}
-  .wfstates{display:inline-flex; flex-wrap:wrap; gap:2px; margin:0 0 18px; padding:4px;
-    background:#efeaec; border-radius:12px; min-height:44px}
+  body.has-wfnav main{padding-bottom:0}
+  /* Перемикач станів — завжди один рядок фіксованої висоти: хоч два стани, хоч дев'ять,
+     хоч жодного, телефон під ним стоїть на тому самому місці. Не вмістився — гортається вбік */
+  .wfstates{display:flex; flex-wrap:nowrap; gap:2px; width:fit-content; max-width:100%; height:44px;
+    box-sizing:border-box; margin:0 0 18px; padding:4px; overflow-x:auto; scrollbar-width:none;
+    background:#efeaec; border-radius:12px}
+  .wfstates::-webkit-scrollbar{display:none}
+  /* Станів більше, ніж уміщається: край тане — видно, що далі є ще */
+  .wfstates.more{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 36px),transparent);
+    mask-image:linear-gradient(to right,#000 calc(100% - 36px),transparent)}
   .wfstates:empty{visibility:hidden}
-  .wfstates a{display:block; padding:7px 14px; border-radius:9px; font-size:14px; font-weight:550;
-    color:var(--muted); text-decoration:none; line-height:1.3; transition:background .12s,color .12s}
+  .wfstates a{flex:none; display:block; padding:7px 14px; border-radius:9px; font-size:14px; font-weight:550;
+    color:var(--muted); text-decoration:none; line-height:22px; white-space:nowrap; transition:background .12s,color .12s}
   .wfstates a:hover{color:var(--text)}
   .wfstates a[aria-current]{background:var(--surface); color:var(--text);
     box-shadow:0 1px 2px rgba(27,23,25,.08), 0 1px 6px rgba(27,23,25,.06)}
-  .wfwork-phone{display:flex; justify-content:center}
-  /* Рамка ширша й вища за телефон: тінь корпуса має згаснути всередині, інакше видно край рамки */
-  .wfwork-phone iframe{display:block; width:560px; height:990px; max-width:100%; border:0; background:transparent}
+  /* Телефон масштабується під висоту вікна (--wf-s рахує скрипт): весь корпус разом
+     із перемикачем видно без прокручування. Сторінка макета всередині лишається 390×844,
+     зменшується лише картинка. Висота обгортки — зменшена висота рамки, тож під телефоном
+     не лишається порожнього місця */
+  .wfwork-phone{display:flex; justify-content:center; height:calc(950px * var(--wf-s, 1)); overflow:clip}
+  .wfwork-phone iframe{display:block; flex:none; width:560px; height:950px; border:0; background:transparent;
+    transform:scale(var(--wf-s, 1)); transform-origin:top center}
   .wfembed{margin-top:22px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface)}
   .wfembed iframe{display:block; width:100%; height:1110px; border:0; background:var(--surface)}
   .wfembed .cap{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:baseline;
@@ -1356,9 +1367,32 @@
     }
     // Розділ уже відкритий — людина просто перемкнула макет.
     // Скидати прокручування тут означає смикати сторінку під нею.
+    if(name === 'wireframes') fitPhone();
     if(already) return;
     window.scrollTo({top:0, behavior:'auto'});
   }
+
+  // Масштаб телефона: рамка 560×950 з корпусом і тінню має вміститися у вікно під
+  // перемикачем станів. Рахуємо лише від розміру вікна, а не від екрана макета, тож
+  // при переході між екранами й станами телефон не стрибає
+  function fitPhone(){
+    var wrap = document.querySelector('.wfwork-phone');
+    if(!wrap || !wrap.offsetParent) return;
+    var top = wrap.getBoundingClientRect().top + window.scrollY;
+    var byH = (window.innerHeight - top - 8) / 950;
+    var byW = wrap.clientWidth / 470;
+    // На вузькому екрані дерево екранів стоїть над телефоном — там вирішує лише ширина
+    var s = window.innerWidth <= 900 ? Math.min(1, byW) : Math.max(0.5, Math.min(1, byH, byW));
+    document.documentElement.style.setProperty('--wf-s', s.toFixed(3));
+  }
+  function markOverflow(){
+    var bar = document.getElementById('wfstates');
+    if(!bar) return;
+    var more = bar.scrollWidth - bar.clientWidth - bar.scrollLeft > 2;
+    bar.classList.toggle('more', more);
+  }
+  window.addEventListener('resize', function(){ fitPhone(); markOverflow(); });
+  document.getElementById('wfstates').addEventListener('scroll', markOverflow, {passive: true});
 
   function closeNav(){ sidebar.classList.remove('open'); scrim.classList.remove('show'); }
 
@@ -1407,6 +1441,12 @@
       bar.querySelectorAll('a').forEach(function(x){
         x.addEventListener('click', function(e){ e.preventDefault(); openWf(x.dataset.wf); });
       });
+      markOverflow();
+      var cur = bar.querySelector('[aria-current]');
+      if(cur && bar.scrollWidth > bar.clientWidth){
+        var x = cur.getBoundingClientRect().left - bar.getBoundingClientRect().left + bar.scrollLeft;
+        bar.scrollLeft = Math.max(0, x - (bar.clientWidth - cur.offsetWidth) / 2);
+      }
     }).catch(function(){ bar.innerHTML = ''; markTree([file]); });
   }
 
