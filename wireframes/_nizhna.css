@@ -9,43 +9,65 @@
    Шрифти Nunito й Nunito Sans підключає сама сторінка посиланням у <head>.
    Вибір напряму — concept/concept.md → «Обрано: Ніжна», стенд — concept/concept.html. */
 
-/* ── Пристрій: службовий корпус, не наш інтерфейс ─────────────── */
+/* ── Пристрій: службовий корпус, не наш інтерфейс ───────────────
+   iPhone у натуральний розмір: чорна рамка з металевим обідком, «острівець»,
+   бічні кнопки, системний рядок зі зв'язком, Wi-Fi і батареєю. Адресної смуги
+   браузера немає з 09.10.2026 — рішення власниці. Фон екрана починається
+   від самого верху, під системним рядком, як у застосунку */
 
 .wf-phone {
+  position: relative;
   width: auto;
   padding: var(--space-3);
   border: 0;
   border-radius: var(--radius-device);
   background: var(--stand-device);
-  box-shadow: var(--shadow-device);
+  box-shadow: 0 0 0 var(--stand-device-rim-w) var(--stand-device-rim), var(--shadow-device);
+}
+.wf-phone::before,
+.wf-phone::after {
+  content: "";
+  position: absolute;
+  width: var(--stand-button-w);
+  pointer-events: none;
+}
+.wf-phone::before {
+  top: var(--stand-buttons-left-top);
+  left: calc(-1 * (var(--stand-device-rim-w) + var(--stand-button-w)));
+  height: var(--stand-buttons-left-h);
+  border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+  background: var(--stand-buttons-left);
+}
+.wf-phone::after {
+  top: var(--stand-button-right-top);
+  right: calc(-1 * (var(--stand-device-rim-w) + var(--stand-button-w)));
+  height: var(--stand-button-right-h);
+  border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+  background: var(--stand-device-button);
 }
 .wf-phone-screen {
   border-radius: var(--radius-screen);
-  background: var(--color-surface);
+  background: var(--gradient-page);
+  background-color: var(--color-page);
+  background-repeat: no-repeat;
   color: var(--color-text);
   font: var(--weight-regular) var(--text-15)/var(--leading-body) var(--font-text);
 }
-.wf-notch { background: var(--stand-device); border-radius: var(--radius-pill); }
+.wf-notch {
+  top: var(--space-2);
+  width: var(--stand-island-w);
+  height: var(--stand-island-h);
+  background: var(--stand-device);
+  border-radius: var(--radius-pill);
+}
 .wf-status {
-  padding: 0 var(--space-8);
-  background: var(--color-surface);
+  padding: 0 var(--space-8) 0 calc(var(--space-8) + var(--space-3));
+  background: none;
   color: var(--color-text);
   font: var(--weight-bold) var(--text-15)/var(--leading-tight) var(--font-text);
 }
-.wf-status .bars { gap: var(--space-hair); }
-.wf-status .bars i { background: currentColor; border-radius: var(--radius-xs); }
-.wf-browser {
-  padding: 0 var(--space-3);
-  background: var(--color-surface);
-  border-bottom: var(--border-hair) solid var(--color-divider);
-}
-.wf-browser .urlbar {
-  border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--color-surface-soft);
-  color: var(--color-text-muted);
-  font: var(--weight-regular) var(--text-12)/var(--leading-snug) var(--font-text);
-}
+.wf-status .sys { gap: var(--space-1); }
+.wf-status .sys svg { height: var(--space-3); }
 .wf-home { background: var(--color-surface); border-top: 0; }
 .wf-home::after { background: var(--color-text); border-radius: var(--radius-pill); }
 
@@ -53,16 +75,15 @@
    Межа медіазапиту — ширина корпусу з полями; змінну в медіазапит підставити не можна */
 @media (max-width: 445px) {
   .wf-phone { padding: 0; border-radius: 0; background: none; box-shadow: none; }
+  .wf-phone::before, .wf-phone::after { content: none; }
   .wf-phone-screen { border-radius: 0; }
 }
 
 /* ── Екран ───────────────────────────────────────────────────── */
 
-.wf-device { background: var(--color-surface); interpolate-size: allow-keywords; }
+.wf-device { background: none; interpolate-size: allow-keywords; }
 .wf-scroll {
-  background: var(--gradient-page);
-  background-color: var(--color-page);
-  background-repeat: no-repeat;
+  background: none;
   scrollbar-width: none;
 }
 .wf-scroll::-webkit-scrollbar { display: none; }

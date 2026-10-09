@@ -21,7 +21,8 @@ body {
    службова шапка й стікери там зайві — робочий простір показує їх власною
    колонкою праворуч, підтягуючи з цієї ж сторінки. */
 
-#embed:target { padding: 16px; }
+#embed:target { padding: 16px; background: transparent; }
+html:has(#embed:target) { background: transparent; }
 #embed:target .wf-meta,
 #embed:target .wf-notes { display: none; }
 #embed:target .wf-stage { justify-content: center; max-width: none; }
@@ -88,9 +89,10 @@ body {
   flex-direction: column;
 }
 
-/* Область пристрою під продукт: 844 мінус системний рядок, смуга браузера
-   й індикатор унизу = 726px. З них таб-бар забирає ще 56, і на контент
-   лишається 670. Те, що не вміщається, треба догортати — як на телефоні. */
+/* Область пристрою під продукт: 844 мінус системний рядок (44) й індикатор
+   унизу (24) = 776px. З них таб-бар забирає ще 56, і на контент лишається 720.
+   Адресної смуги браузера в макеті немає з 09.10.2026 — рішення власниці.
+   Те, що не вміщається, треба догортати — як на телефоні. */
 .wf-viewport {
   flex: 1 1 auto;
   min-height: 0;
@@ -144,34 +146,9 @@ body {
   color: #666666;
   background: #f2f2f2;
 }
-.wf-status .bars { display: flex; gap: 3px; align-items: flex-end; }
-.wf-status .bars i { display: block; width: 3px; background: #aaaaaa; }
-.wf-status .bars i:nth-child(1) { height: 5px; }
-.wf-status .bars i:nth-child(2) { height: 8px; }
-.wf-status .bars i:nth-child(3) { height: 11px; }
-
-/* Адресний рядок браузера: продукт відкривають у браузері, і ця смуга не наша */
-.wf-browser {
-  flex: 0 0 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  background: #f2f2f2;
-  border-bottom: 1px solid #cccccc;
-}
-.wf-browser .urlbar {
-  flex: 1;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #bbbbbb;
-  border-radius: 15px;
-  background: #ffffff;
-  font-size: 11px;
-  color: #999999;
-}
+/* Зв'язок, Wi-Fi, батарея — значки пристрою, не наші */
+.wf-status .sys { display: flex; gap: 5px; align-items: center; }
+.wf-status .sys svg { display: block; height: 11px; width: auto; fill: currentColor; }
 
 /* --- Елементи окремих екранів --- */
 

@@ -106,6 +106,22 @@
   /* Тільки для стенду: корпус телефона навколо екрана */
   --stand-device: #0A0A0B;
   --stand-device-edge: rgb(255 255 255 / 0.08);
+  /* Тільки для макетів: корпус iPhone у натуральний розмір (екран 390×844) */
+  --stand-device-rim: #3A3A3C;      /* металевий обідок навколо корпуса */
+  --stand-device-button: #2C2C2E;   /* бічні кнопки */
+  --stand-device-rim-w: 2px;
+  --stand-button-w: 3px;
+  --stand-island-w: 122px;          /* «острівець» угорі екрана */
+  --stand-island-h: 34px;
+  /* Ліворуч — кнопка дії й дві гучності, праворуч — живлення */
+  --stand-buttons-left: linear-gradient(to bottom,
+    var(--stand-device-button) 0 32px, transparent 32px 58px,
+    var(--stand-device-button) 58px 122px, transparent 122px 138px,
+    var(--stand-device-button) 138px 202px);
+  --stand-buttons-left-top: 120px;
+  --stand-buttons-left-h: 202px;
+  --stand-button-right-top: 200px;
+  --stand-button-right-h: 102px;
 
   /* Тільки для стенду: розміри макета сторінки concept.html */
   --stand-page: 1240px;         /* ширина сторінки */
